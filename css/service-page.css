@@ -235,11 +235,36 @@ ol.svc-breadcrumb__list,
 }
 
 .svc-what__content {}
-.svc-what__p {
-  font-size: 1rem;
+.svc-what__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lantern);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.svc-what__heading {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text-hi);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+.svc-what__body {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   color: var(--text-mid);
   line-height: 1.85;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
+}
+.svc-what__body:last-child { margin-bottom: 0; }
+.svc-what__p {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  color: var(--text-mid);
+  line-height: 1.85;
+  margin-bottom: 1.4rem;
 }
 .svc-what__p:last-child { margin-bottom: 0; }
 
