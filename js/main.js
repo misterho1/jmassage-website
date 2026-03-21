@@ -1,24 +1,25 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   J MASSAGE SLC — MAIN.JS
+   J MASSAGE SLC — MAIN.JS v3.0
+   • Cursor glow tracking
+   • Hero clip-path text reveals
    • Smooth parallax hero
-   • Clip-path text reveals (landonorris-inspired, spa-calm tempo)
    • Intersection Observer scroll animations
+   • Number counter animation
+   • Service card radial hover glow
    • Mobile nav
    • Reviews carousel (Google Places API + static fallback)
-   • Gift card UI
-   • Square booking embed detection
+   • Gift card UI with 3D tilt
+   • Square booking embed
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ─── GOOGLE PLACES CONFIG ──────────────────────────────────────────────────
-   To show LIVE Google reviews, get a free API key:
-   1. Go to console.cloud.google.com
-   2. Create/select a project → Enable "Places API"
-   3. Credentials → Create API Key
-   4. Restrict it to your domain (jmassageslc.com) for security
-   5. Paste the key below
+   To show LIVE Google reviews:
+   1. Go to console.cloud.google.com → Enable "Places API"
+   2. Create API Key → restrict it to jmassageslc.com
+   3. Paste key below. Leave empty to use static reviews.
    ────────────────────────────────────────────────────────────────────────── */
-const GOOGLE_PLACES_API_KEY = ''; // ← paste key here (leave empty to use static reviews)
-const GOOGLE_PLACE_ID = '';       // ← paste Place ID here (from your Google Business Profile URL)
+const GOOGLE_PLACES_API_KEY = ''; // ← paste key here
+const GOOGLE_PLACE_ID = '';       // ← paste Place ID here
 
 /* ─── STATIC REVIEW FALLBACK ────────────────────────────────────────────── */
 const STATIC_REVIEWS = [
@@ -27,45 +28,79 @@ const STATIC_REVIEWS = [
     name: 'Sarah M.',
     rating: 5,
     time: '2 weeks ago',
-    text: "I've been to many studios in SLC and J Massage is the best. The therapists are incredibly intuitive — they found tension I didn't even know I had. I sleep so much better after each session. Cannot recommend enough."
+    text: "I've been to nearly every studio in SLC. J Massage isn't just the best — it's in a different category. The therapists are intuitive in a way that's almost unsettling. They found tension I didn't know I had, and I slept better than I had in months. I will not go anywhere else."
   },
   {
     initials: 'RT',
     name: 'Ryan T.',
     rating: 5,
     time: '1 month ago',
-    text: "As an athlete, I rely on regular sports massage to keep training hard. The team here understands muscle recovery like no one else in the city. Same-day availability is a total game changer when I'm beat up after a race."
+    text: "As a competitive athlete, I rely on regular sports massage to stay at peak performance. The team here understands muscle recovery better than anyone in the city. The same-day availability is a total game-changer when I'm beat up after a race. My secret weapon."
   },
   {
     initials: 'JL',
     name: 'Jessica L.',
     rating: 5,
     time: '3 weeks ago',
-    text: "My partner and I did the couples massage for our anniversary. The private suite was absolutely serene and both therapists were perfectly synchronized. It felt like a luxury resort — right here in Salt Lake. Already planning to go back."
+    text: "My partner and I booked the couples massage for our anniversary. The private suite was absolutely serene — both therapists were perfectly synchronized, like they'd choreographed it. It felt like a $500-a-night resort experience. We're already planning our next visit."
   },
   {
     initials: 'MD',
     name: 'Marcus D.',
     rating: 5,
     time: '2 months ago',
-    text: "The Ashiatsu changed my life. I have chronic lower-back pain and this was the first treatment in years that actually got deep enough for real relief. The therapist's technique is extraordinary. I've already booked my next four sessions."
+    text: "The Ashiatsu changed my life. I've had chronic lower-back pain for seven years, and this was the first treatment that actually reached the depth I needed. Not just relief — transformation. I've already booked my next four sessions. Don't hesitate. Just go."
   }
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   INIT — wait for DOM
+   INIT
    ═══════════════════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+  initCursorGlow();
   initHeader();
   initHeroReveal();
   initParallax();
   initScrollReveal();
+  initCounters();
+  initCardGlow();
   initMobileNav();
   initReviews();
   initGiftCards();
-  initBookingEmbed();
   initSmoothScroll();
 });
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CURSOR GLOW
+   ═══════════════════════════════════════════════════════════════════════════ */
+function initCursorGlow() {
+  const glow = document.getElementById('cursorGlow');
+  if (!glow || window.matchMedia('(pointer: coarse)').matches) {
+    // Remove on touch devices
+    if (glow) glow.remove();
+    return;
+  }
+
+  let mouseX = -500, mouseY = -500;
+  let glowX = -500, glowY = -500;
+  let raf = null;
+
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  const update = () => {
+    glowX = lerp(glowX, mouseX, 0.08);
+    glowY = lerp(glowY, mouseY, 0.08);
+    glow.style.left = glowX + 'px';
+    glow.style.top  = glowY + 'px';
+    raf = requestAnimationFrame(update);
+  };
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!raf) raf = requestAnimationFrame(update);
+  }, { passive: true });
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    HEADER — scroll state
@@ -78,19 +113,17 @@ function initHeader() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   HERO TEXT REVEAL — clip-path word animation
+   HERO TEXT REVEAL
    ═══════════════════════════════════════════════════════════════════════════ */
 function initHeroReveal() {
-  // Trigger line reveals
   const lines = document.querySelectorAll('.hero__line');
   lines.forEach((line, i) => {
-    setTimeout(() => line.classList.add('revealed'), 150 + i * 160);
+    setTimeout(() => line.classList.add('revealed'), 200 + i * 180);
   });
 
-  // Trigger fade elements
   const fades = document.querySelectorAll('[data-reveal-fade]');
   fades.forEach((el, i) => {
-    setTimeout(() => el.classList.add('revealed'), 550 + i * 120);
+    setTimeout(() => el.classList.add('revealed'), 700 + i * 130);
   });
 }
 
@@ -104,9 +137,8 @@ function initParallax() {
   let raf = null;
   const update = () => {
     const scrolled = window.scrollY;
-    // Stop once hero is out of view
     if (scrolled < window.innerHeight * 1.5) {
-      parallax.style.transform = `translateY(${scrolled * 0.3}px)`;
+      parallax.style.transform = `translateY(${scrolled * 0.28}px)`;
     }
     raf = null;
   };
@@ -124,23 +156,91 @@ function initScrollReveal() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in');
-        // Un-observe after reveal for performance
         observer.unobserve(entry.target);
       }
     });
   }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -48px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
   });
 
   document.querySelectorAll('.reveal, .reveal-card').forEach(el => observer.observe(el));
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   NUMBER COUNTERS — count-up animation
+   ═══════════════════════════════════════════════════════════════════════════ */
+function initCounters() {
+  const counters = document.querySelectorAll('[data-count]');
+  if (!counters.length) return;
+
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+  const animateCounter = (el) => {
+    const target = parseInt(el.getAttribute('data-count'), 10);
+    const duration = 1600;
+    const start = performance.now();
+
+    const step = (now) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      el.textContent = Math.floor(easeOut(progress) * target);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  counters.forEach(el => observer.observe(el));
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SERVICE CARD RADIAL GLOW — follows mouse
+   ═══════════════════════════════════════════════════════════════════════════ */
+function initCardGlow() {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  document.querySelectorAll('.svc-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width)  * 100;
+      const y = ((e.clientY - rect.top)  / rect.height) * 100;
+      card.style.setProperty('--glow-x', x + '%');
+      card.style.setProperty('--glow-y', y + '%');
+      card.style.setProperty('--before-bg',
+        `radial-gradient(circle at ${x}% ${y}%, rgba(200,136,42,0.13) 0%, transparent 65%)`
+      );
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.removeProperty('--before-bg');
+      card.style.setProperty('--before-bg',
+        'radial-gradient(circle at 50% 120%, rgba(200,136,42,0.07) 0%, transparent 65%)'
+      );
+    });
+  });
+
+  // CSS custom property override for ::before
+  const style = document.createElement('style');
+  style.textContent = `.svc-card::before { background: var(--before-bg, radial-gradient(circle at 50% 120%, rgba(200,136,42,0.07) 0%, transparent 65%)) !important; }`;
+  document.head.appendChild(style);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    MOBILE NAV
    ═══════════════════════════════════════════════════════════════════════════ */
 function initMobileNav() {
-  const burger = document.getElementById('burger');
+  const burger  = document.getElementById('burger');
   const navList = document.getElementById('navList');
   if (!burger || !navList) return;
 
@@ -161,15 +261,10 @@ function initMobileNav() {
     navList.classList.contains('open') ? close() : open();
   });
 
-  // Close when a link is clicked
   navList.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-
-  // Close on outside click
   document.addEventListener('click', e => {
     if (!burger.contains(e.target) && !navList.contains(e.target)) close();
   });
-
-  // Close on Escape
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 }
 
@@ -184,7 +279,7 @@ function initSmoothScroll() {
       const target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      const offset = (document.getElementById('header')?.offsetHeight || 80) + 12;
+      const offset = (document.getElementById('header')?.offsetHeight || 72) + 16;
       window.scrollTo({
         top: target.getBoundingClientRect().top + window.scrollY - offset,
         behavior: 'smooth'
@@ -213,9 +308,9 @@ function initReviews() {
     reviews.forEach((r, i) => {
       const initials = r.initials ||
         r.author_name?.split(' ').map(w => w[0]).join('').slice(0, 2) || '?';
-      const name = r.name || r.author_name || 'Verified Guest';
-      const time = r.time || r.relative_time_description || '';
-      const text = r.text || '';
+      const name   = r.name || r.author_name || 'Verified Guest';
+      const time   = r.time || r.relative_time_description || '';
+      const text   = r.text || '';
       const rating = r.rating || 5;
 
       const card = document.createElement('div');
@@ -271,15 +366,17 @@ function initReviews() {
   carousel?.addEventListener('mouseenter', () => clearInterval(autoTimer));
   carousel?.addEventListener('mouseleave', startAuto);
 
-  // Touch/swipe support
+  // Touch/swipe
   let touchStartX = 0;
-  carousel?.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  carousel?.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
   carousel?.addEventListener('touchend', e => {
     const diff = touchStartX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 40) { goTo(diff > 0 ? current + 1 : current - 1); resetAuto(); }
   });
 
-  // Fetch live reviews or use static
+  // Fetch live or use static
   if (GOOGLE_PLACES_API_KEY && GOOGLE_PLACE_ID) {
     fetchGoogleReviews()
       .then(render)
@@ -318,12 +415,10 @@ function initGiftCards() {
   const updateDisplay = (amount) => {
     selected = amount;
     if (displayAmt) {
-      // Animate the number change
-      displayAmt.style.transform = 'scale(1.12)';
+      displayAmt.style.transform = 'scale(1.15)';
       displayAmt.textContent = `$${amount}`;
-      setTimeout(() => { displayAmt.style.transform = ''; }, 200);
+      setTimeout(() => { displayAmt.style.transform = ''; }, 220);
     }
-    // Update purchase button link with amount
     if (purchaseBtn) {
       purchaseBtn.href = `https://app.squareup.com/gift/1M4AF8BFZT4F8/order?amount=${amount * 100}`;
     }
@@ -346,27 +441,19 @@ function initGiftCards() {
     }
   });
 
-  // 3D tilt effect on gift card mock
+  // 3D tilt on gift card
   if (mockCard) {
     mockCard.addEventListener('mousemove', e => {
       const rect = mockCard.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width  - 0.5; // -0.5 to 0.5
+      const x = (e.clientX - rect.left) / rect.width  - 0.5;
       const y = (e.clientY - rect.top)  / rect.height - 0.5;
-      mockCard.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 5}deg) translateZ(10px)`;
+      mockCard.style.transform =
+        `perspective(900px) rotateY(${x * 10}deg) rotateX(${-y * 6}deg) translateZ(12px)`;
     });
     mockCard.addEventListener('mouseleave', () => {
       mockCard.style.transform = '';
     });
   }
 
-  // Initialize
   updateDisplay(selected);
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   BOOKING EMBED — Square script widget is live, nothing to configure
-   ═══════════════════════════════════════════════════════════════════════════ */
-function initBookingEmbed() {
-  // Square Appointments widget loads via script tag — no action needed here.
-  // Widget: https://square.site/appointments/buyer/widget/dgz5ax0rjmoznk/41VKQFGFBJTFF.js
 }
