@@ -505,6 +505,92 @@
     </section>
 
 
+    <!-- Gift Cards -->
+    <section class="gift section" style="background:var(--soot,#1c1a16);">
+      <div class="container gift__grid">
+        <div class="gift__visual reveal">
+          <div class="gift-card-mock" id="giftMock">
+            <div class="gift-card-mock__noise"></div>
+            <div class="gift-card-mock__top">
+              <span class="gift-card-mock__brand">J Massage <em>SLC</em></span>
+              <svg class="gift-card-mock__logo-icon" viewBox="0 0 40 40" fill="none">
+                <path d="M6 20C6 20 11 12 20 12C29 12 34 20 34 20" stroke="rgba(200,136,42,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M6 26C6 26 11 18 20 18C29 18 34 26 34 26" stroke="rgba(200,136,42,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="gift-card-mock__mid">
+              <span class="gift-card-mock__amount" id="giftDisplayAmt">$75</span>
+            </div>
+            <div class="gift-card-mock__btm">
+              <span class="gift-card-mock__tag">GIFT CARD</span>
+              <span class="gift-card-mock__sub">Salt Lake City, UT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gift__form reveal">
+          <span class="section-label">Give Restoration</span>
+          <h2 class="section-title">The Gift That<br><em>Actually Gets Used.</em></h2>
+          <p class="gift__sub">No re-gifting. No regrets. A J Massage SLC gift card is the most thoughtful thing you can give — and the most eagerly redeemed. Delivered instantly by email. Never expires.</p>
+
+          <p class="gift__form-label">Choose an Amount</p>
+          <div class="gift-amounts" id="giftAmounts">
+            <button class="gift-amt" data-amount="50">$50</button>
+            <button class="gift-amt gift-amt--active" data-amount="75">$75</button>
+            <button class="gift-amt" data-amount="100">$100</button>
+            <button class="gift-amt" data-amount="150">$150</button>
+            <button class="gift-amt" data-amount="200">$200</button>
+          </div>
+
+          <div class="gift-custom">
+            <label for="customAmt">Or enter a custom amount</label>
+            <div class="gift-custom__input-wrap">
+              <span>$</span>
+              <input type="number" id="customAmt" placeholder="25 – 500" min="25" max="500" aria-label="Custom gift card amount">
+            </div>
+          </div>
+
+          <a href="https://app.squareup.com/gift/1M4AF8BFZT4F8/order?amount=7500" id="giftPurchaseBtn" target="_blank" rel="noopener" class="btn btn--gold btn--full">
+            Purchase Gift Card
+          </a>
+
+          <p class="gift__legal">Redeemable for any service or add-on. No expiration date. Email delivery in minutes.</p>
+        </div>
+      </div>
+    </section>
+    <script>
+    (function(){
+      var amounts = document.querySelectorAll('#giftAmounts .gift-amt');
+      var display = document.getElementById('giftDisplayAmt');
+      var purchaseBtn = document.getElementById('giftPurchaseBtn');
+      var customInput = document.getElementById('customAmt');
+      var selected = 75;
+      function update(val){
+        selected = val;
+        if(display) display.textContent = '$' + val;
+        if(purchaseBtn) purchaseBtn.href = 'https://app.squareup.com/gift/1M4AF8BFZT4F8/order?amount=' + (val*100);
+      }
+      amounts.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          amounts.forEach(function(b){ b.classList.remove('gift-amt--active'); });
+          btn.classList.add('gift-amt--active');
+          customInput.value = '';
+          update(parseInt(btn.dataset.amount));
+        });
+      });
+      if(customInput){
+        customInput.addEventListener('input', function(){
+          var v = parseInt(customInput.value);
+          if(v >= 25 && v <= 500){
+            amounts.forEach(function(b){ b.classList.remove('gift-amt--active'); });
+            update(v);
+          }
+        });
+      }
+    })();
+    </script>
+
+
     <!-- ═══════════════════════════════════════════════
          RELATED SERVICES
     ═══════════════════════════════════════════════ -->
