@@ -51,25 +51,36 @@
   padding: 5rem 2rem;
 }
 
-/* Breadcrumb */
-.breadcrumb {
+/* Breadcrumb — fixes numbered-list display bug */
+.svc-breadcrumb__list {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  list-style: none;   /* ← removes 1. 2. 3. numbering */
+  padding: 0;
+  margin: 0 0 1.8rem;
   font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-lo);
-  margin-bottom: 1.8rem;
 }
-.breadcrumb a { color: var(--text-lo); transition: color 0.3s; }
-.breadcrumb a:hover { color: var(--lantern); }
-.breadcrumb__sep {
-  font-size: 0.65rem;
+.svc-breadcrumb__list li { display: flex; align-items: center; }
+.svc-breadcrumb__list a {
+  color: var(--text-lo);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.svc-breadcrumb__list a:hover { color: var(--lantern); }
+/* separator › items */
+.svc-breadcrumb__list li[aria-hidden="true"] {
   color: var(--text-dim);
+  font-size: 0.6rem;
+  margin: 0 0.1rem;
 }
-.breadcrumb__current { color: var(--lantern); }
+/* current page */
+.svc-breadcrumb__list li[aria-current="page"] { color: var(--lantern); }
 
 /* Hero eyebrow */
 .svc-hero__eyebrow {
@@ -86,8 +97,9 @@
   background: rgba(200,136,42,0.06);
 }
 
-/* Hero heading */
-.svc-hero__h1 {
+/* Hero heading — .svc-hero__title is the HTML class used; alias kept for safety */
+.svc-hero__h1,
+.svc-hero__title {
   font-family: var(--font-head);
   font-size: clamp(2.8rem, 6vw, 5rem);
   font-weight: 400;
@@ -96,7 +108,8 @@
   margin-bottom: 1.4rem;
   letter-spacing: -0.02em;
 }
-.svc-hero__h1 em {
+.svc-hero__h1 em,
+.svc-hero__title em {
   font-style: italic;
   color: var(--lantern);
 }
@@ -642,17 +655,72 @@
 }
 
 @media (max-width: 768px) {
-  .svc-hero__inner { padding: 4rem 2rem; }
+  .svc-hero__inner { padding: 4rem 1.5rem; }
   .svc-benefits__grid { grid-template-columns: 1fr; }
   .svc-who__grid { grid-template-columns: 1fr; }
   .svc-related__grid { grid-template-columns: 1fr; }
   .svc-pricing__grid { grid-template-columns: 1fr; max-width: 360px; }
   .svc-process__steps { grid-template-columns: 1fr; }
+  /* Larger text on tablet */
+  .svc-hero__title,
+  .svc-hero__h1 { font-size: clamp(2.6rem, 8vw, 4rem); }
+  .svc-hero__intro { font-size: 1.05rem; line-height: 1.8; }
+  .svc-hero__eyebrow { font-size: 0.76rem; }
+  .svc-benefits__title { font-size: 1.2rem; }
+  .svc-benefits__desc { font-size: 0.97rem; line-height: 1.75; }
+  .svc-section-title { font-size: clamp(2rem, 6vw, 3rem); }
+  .svc-section-sub { font-size: 1.02rem; }
+  .price-card__price { font-size: 2.8rem; }
+  .price-card__title { font-size: 1.1rem; }
+  .faq-q { font-size: 1rem; }
+  .faq-a { font-size: 0.97rem; line-height: 1.75; }
 }
 
 @media (max-width: 560px) {
-  .svc-hero__h1 { font-size: 2.4rem; }
+  .svc-hero__h1,
+  .svc-hero__title { font-size: clamp(2.4rem, 10vw, 3.2rem); }
+  .svc-hero__intro { font-size: 1rem; }
   .svc-hero__actions { flex-direction: column; }
   .svc-hero__actions .btn { width: 100%; justify-content: center; }
-  .svc-hero__meta { gap: 0.5rem; }
+  .svc-hero__meta { gap: 0.5rem; flex-wrap: wrap; }
+  .svc-hero__pills { gap: 0.5rem; }
+  .svc-pill { font-size: 0.72rem; padding: 0.35rem 0.85rem; }
+  .svc-section-title { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+  .svc-abstract { aspect-ratio: 4/3; max-height: 280px; }
+  /* Make breadcrumb smaller on phone */
+  .svc-breadcrumb__list { font-size: 0.65rem; }
 }
+
+/* ── Service Photo Panel ── */
+.svc-photo {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  background: var(--char);
+}
+.svc-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.svc-photo:hover img { transform: scale(1.03); }
+.svc-photo__price {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  background: rgba(14,12,10,0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(200,136,42,0.3);
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  color: var(--text-hi);
+}
+.svc-photo__price .svc-abstract__from,
+.svc-photo__price .svc-abstract__unit { font-size: 0.8rem; opacity: 0.7; font-family: 'Jost', sans-serif; }
+.svc-photo__price .svc-abstract__amount { font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--glow); line-height: 1; }

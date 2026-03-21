@@ -160,12 +160,23 @@
       </a>
       <nav class="nav">
         <ul class="nav__list" id="navList">
-          <li><a href="../#services" class="nav__link">Services</a></li>
-          <li><a href="../#about" class="nav__link">About</a></li>
-          <li><a href="../#book" class="nav__link">Book</a></li>
+          <li class="nav__item nav__item--has-dropdown">
+            <a href="../#services" class="nav__link">Services <span class="nav__dropdown-caret">▾</span></a>
+            <ul class="nav__dropdown">
+              <li><a href="./swedish-massage.html">Swedish Massage</a></li>
+              <li><a href="./deep-tissue.html">Deep Tissue</a></li>
+              <li><a href="./sports-massage.html">Sports Massage</a></li>
+              <li><a href="./ashiatsu.html">Ashiatsu</a></li>
+              <li><a href="./couples-massage.html">Couples Massage</a></li>
+              <li><a href="./4-hand-massage.html">4-Hand Massage</a></li>
+            </ul>
+          </li>
+          <li><a href="../#about"   class="nav__link">About</a></li>
+          <li><a href="../#book"    class="nav__link">Book</a></li>
           <li><a href="../#reviews" class="nav__link">Reviews</a></li>
           <li><a href="../gift-cards.html" class="nav__link">Gift Cards</a></li>
-          <li><a href="../#book" class="nav__cta">Book Now</a></li>
+          <li><a href="../faq.html"        class="nav__link">FAQ</a></li>
+          <li><a href="https://square.site/appointments/buyer/widget/dgz5ax0rjmoznk/41VKQFGFBJTFF" target="_blank" rel="noopener" class="nav__cta">Book Now</a></li>
         </ul>
         <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -193,7 +204,7 @@
           </ol>
         </nav>
 
-        <p class="svc-hero__eyebrow">Salt Lake City's Premier Swedish Massage</p>
+        <p class="svc-hero__eyebrow">Let Everything Go.</p>
         <h1 class="svc-hero__title">Swedish Massage in <em>Salt Lake City</em></h1>
 
         <p class="svc-hero__intro">
@@ -226,20 +237,10 @@
     <section class="svc-what">
       <div class="svc-what__grid container">
 
-        <!-- Abstract Visual Panel -->
-        <div class="svc-abstract svc-abstract--swedish" aria-hidden="true">
-          <div class="svc-abstract__ring svc-abstract__ring--1"></div>
-          <div class="svc-abstract__ring svc-abstract__ring--2"></div>
-          <div class="svc-abstract__ring svc-abstract__ring--3"></div>
-          <div class="svc-abstract__icon">
-            <!-- Wave / effleurage stroke SVG icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-              <path d="M10 40 Q22 22 34 40 Q46 58 58 40 Q70 22 80 40" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-              <path d="M10 52 Q22 34 34 52 Q46 70 58 52 Q70 34 80 52" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
-              <path d="M10 28 Q22 10 34 28 Q46 46 58 28 Q70 10 80 28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
-            </svg>
-          </div>
-          <div class="svc-abstract__price">
+        <!-- Service Photo -->
+        <div class="svc-photo">
+          <img src="../images/services/swedish.jpg" alt="Swedish massage therapist performing effleurage strokes on client's back in candlelit luxury spa" loading="lazy" width="640" height="360">
+          <div class="svc-photo__price">
             <span class="svc-abstract__from">from</span>
             <span class="svc-abstract__amount">$55</span>
             <span class="svc-abstract__unit">/ session</span>
