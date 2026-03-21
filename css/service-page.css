@@ -52,6 +52,7 @@
 }
 
 /* Breadcrumb — fixes numbered-list display bug */
+ol.svc-breadcrumb__list,
 .svc-breadcrumb__list {
   display: flex;
   align-items: center;

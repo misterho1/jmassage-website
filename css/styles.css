@@ -260,6 +260,8 @@ button { cursor: pointer; border: none; background: none; }
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  overflow: visible;
+  list-style: none;
 }
 .nav__link {
   font-size: 0.78rem;
