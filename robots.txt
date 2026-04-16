@@ -29,3 +29,7 @@ User-agent: ChatGPT-User
 Allow: /
 
 Sitemap: https://jmassageslc.com/sitemap.xml
+
+# LLM and AI Assistant files
+LLMs: https://jmassageslc.com/llms.txt
+LLMs-Full: https://jmassageslc.com/llms-full.txt
