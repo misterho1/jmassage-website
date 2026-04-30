@@ -174,10 +174,23 @@ function initCounters() {
   const counters = document.querySelectorAll('[data-count]');
   if (!counters.length) return;
 
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 
   const animateCounter = (el) => {
     const target = parseInt(el.getAttribute('data-count'), 10);
+
+    // Reduced-motion: snap to target without animating.
+    if (reducedMotion) {
+      el.textContent = target;
+      return;
+    }
+
+    // Reset to 0 explicitly so the count-up has a visible starting point;
+    // the SSR/no-JS resting state in HTML is the real number, so this only
+    // runs after intersection.
+    el.textContent = '0';
+
     const duration = 1600;
     const start = performance.now();
 
