@@ -471,11 +471,11 @@
                jmassageslc.com because the modal IS the page; only the iframe content
                navigates within itself. -->
           <div class="booking__cta-wrap">
-            <button id="open-booking-modal" type="button" class="booking__cta-btn">
-              <span class="booking__cta-btn-shimmer"></span>
-              <svg class="booking__cta-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            <button id="open-booking-modal" type="button" class="booking__cta-btn" onclick="openBookingModal(event)">
+              <span class="booking__cta-btn-shimmer" style="pointer-events: none;"></span>
+              <svg class="booking__cta-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="pointer-events: none;"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
               Reserve Your Session
-              <svg class="booking__cta-btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+              <svg class="booking__cta-btn-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" style="pointer-events: none;"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
             </button>
             <p class="booking__cta-sub">Opens our live scheduler in an overlay. You stay on this page.</p>
           </div>
@@ -839,31 +839,39 @@
   </div>
 
   <script>
-    (function() {
-      var openBtn = document.getElementById('open-booking-modal');
+    // Booking modal control — exposed as global functions so onclick=
+    // attributes work without dependency on event-listener attachment timing.
+    window.openBookingModal = function(e) {
+      if (e && e.preventDefault) e.preventDefault();
       var modal = document.getElementById('booking-modal');
       var iframe = document.getElementById('booking-iframe');
-      if (!openBtn || !modal || !iframe) return;
+      if (!modal || !iframe) return;
       var srcUrl = 'https://book.squareup.com/appointments/dgz5ax0rjmoznk/location/41VKQFGFBJTFF';
-      function open() {
-        if (!iframe.src || iframe.src === window.location.href) iframe.src = srcUrl;
-        modal.hidden = false;
-        document.body.style.overflow = 'hidden';
-        var first = modal.querySelector('.booking-modal__close');
-        if (first) first.focus();
-      }
-      function close() {
-        modal.hidden = true;
-        document.body.style.overflow = '';
-        // Don't clear iframe.src on close so the user can re-open without losing booking session.
-        openBtn.focus();
-      }
-      openBtn.addEventListener('click', open);
-      modal.querySelectorAll('[data-close]').forEach(function(el) { el.addEventListener('click', close); });
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !modal.hidden) close();
+      if (!iframe.getAttribute('src') || iframe.getAttribute('src') === '') iframe.src = srcUrl;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var first = modal.querySelector('.booking-modal__close');
+      if (first) first.focus();
+    };
+    window.closeBookingModal = function() {
+      var modal = document.getElementById('booking-modal');
+      if (!modal) return;
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      var openBtn = document.getElementById('open-booking-modal');
+      if (openBtn) openBtn.focus();
+    };
+    // Wire backdrop + close button + Escape key
+    document.addEventListener('DOMContentLoaded', function() {
+      var modal = document.getElementById('booking-modal');
+      if (!modal) return;
+      modal.querySelectorAll('[data-close]').forEach(function(el) {
+        el.addEventListener('click', window.closeBookingModal);
       });
-    })();
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !modal.hidden) window.closeBookingModal();
+      });
+    });
   </script>
 </body>
 </html>
