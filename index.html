@@ -464,11 +464,13 @@
             </a>
           </div>
 
-          <!-- Inline Square booking embed (no domain handoff per PRODUCT.md design principle #5: 'Booking friction is enemy #1') -->
+          <!-- Inline Square booking embed (no domain handoff per PRODUCT.md design principle #5).
+               IMPORTANT: app.squareup.com is the iframe-embed URL (in-iframe navigation).
+               square.site is the standalone public page that navigates the parent window. -->
           <div class="booking__embed">
             <iframe
               title="Book your massage at J Massage SLC"
-              src="https://square.site/appointments/buyer/widget/dgz5ax0rjmoznk/41VKQFGFBJTFF"
+              src="https://app.squareup.com/appointments/buyer/widget/dgz5ax0rjmoznk/41VKQFGFBJTFF"
               loading="lazy"
               allow="payment *"
               style="width: 100%; min-height: 820px; border: 1px solid var(--border); background: var(--soot); display: block; border-radius: var(--r);"
