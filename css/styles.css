@@ -675,35 +675,6 @@ button { cursor: pointer; border: none; background: none; }
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
-   MARQUEE STRIP
-════════════════════════════════════════════════════════════════════════════ */
-.marquee {
-  overflow: hidden;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: var(--char);
-  padding: 0.85rem 0;
-}
-.marquee__track {
-  display: flex;
-  gap: 0;
-  white-space: nowrap;
-  animation: marqueeScroll 28s linear infinite;
-}
-.marquee__track span {
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--lantern);
-  padding: 0 0.5rem;
-}
-@keyframes marqueeScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* ════════════════════════════════════════════════════════════════════════════
    BUTTONS
 ════════════════════════════════════════════════════════════════════════════ */
 .btn {
@@ -1084,44 +1055,6 @@ button { cursor: pointer; border: none; background: none; }
   transform: translateX(3px);
 }
 .trust-item svg { width: 18px; height: 18px; color: var(--lantern); flex-shrink: 0; }
-
-/* ════════════════════════════════════════════════════════════════════════════
-   STATS BAR
-════════════════════════════════════════════════════════════════════════════ */
-.stats-bar {
-  background: var(--char);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 3.5rem 0;
-}
-.stats-bar__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--border);
-}
-.stat-item {
-  background: var(--char);
-  padding: 2rem 1.5rem;
-  text-align: center;
-}
-.stat-item__num {
-  display: block;
-  font-family: var(--font-head);
-  font-size: 4rem;
-  font-weight: 600;
-  font-style: italic;
-  color: var(--lantern);
-  line-height: 1;
-  margin-bottom: 0.4rem;
-}
-.stat-item__label {
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-lo);
-}
 
 /* ════════════════════════════════════════════════════════════════════════════
    BOOKING
@@ -1886,7 +1819,6 @@ button { cursor: pointer; border: none; background: none; }
   .about__stat-card { top: 1rem; left: 1rem; }
   .gift__grid { grid-template-columns: 1fr; gap: 3rem; }
   .gift__visual { max-width: 420px; margin: 0 auto; }
-  .stats-bar__grid { grid-template-columns: repeat(2, 1fr); }
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .footer__brand { grid-column: 1 / -1; }
 }
@@ -1900,16 +1832,12 @@ button { cursor: pointer; border: none; background: none; }
   body { font-size: 1.05rem; line-height: 1.75; }
   .services__grid { grid-template-columns: 1fr; }
   .location__grid { grid-template-columns: 1fr; }
-  .stats-bar__grid { grid-template-columns: repeat(2, 1fr); }
   /* Section titles bigger on mobile */
   .section-title { font-size: clamp(2.2rem, 8vw, 3.5rem); }
   .section-sub { font-size: 1.05rem; }
   /* Service cards */
   .svc-card__name { font-size: 1.35rem; }
   .svc-card__desc { font-size: 0.97rem; }
-  /* Stats */
-  .stat-item__num { font-size: clamp(2.4rem, 8vw, 3.2rem); }
-  .stat-item__label { font-size: 0.85rem; }
 }
 
 @media (max-width: 560px) {
@@ -1924,7 +1852,6 @@ button { cursor: pointer; border: none; background: none; }
   .review-card__quote { font-size: 1.05rem; line-height: 1.7; }
   .gift__grid { gap: 2.5rem; }
   .trust-grid { grid-template-columns: 1fr; }
-  .stats-bar__grid { grid-template-columns: 1fr 1fr; }
   .addons__list { flex-direction: column; }
   .addon-dot { display: none; }
   /* Booking section mobile */
