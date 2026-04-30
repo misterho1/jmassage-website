@@ -14,9 +14,8 @@
   <meta property="og:description" content="The gift that never gets re-gifted. J Massage SLC digital gift cards — any amount, instant delivery, never expires.">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/service-page.css">
 
@@ -95,8 +94,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 80% at 30% 50%, rgba(200,136,42,0.10) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 60% at 80% 20%, rgba(42,56,48,0.18) 0%, transparent 60%);
+        radial-gradient(ellipse 70% 80% at 30% 50%, oklch(48% 0.085 35 / 0.10) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 80% 20%, oklch(28% 0.02 65 / 0.18) 0%, transparent 60%);
       pointer-events: none;
     }
     .gc-hero::after {
@@ -108,8 +107,8 @@
       width: 700px;
       height: 700px;
       border-radius: 50%;
-      border: 1px solid rgba(200,136,42,0.05);
-      box-shadow: 0 0 0 80px rgba(200,136,42,0.025), 0 0 0 160px rgba(200,136,42,0.015);
+      border: 1px solid oklch(48% 0.085 35 / 0.05);
+      box-shadow: 0 0 0 80px oklch(48% 0.085 35 / 0.025), 0 0 0 160px oklch(48% 0.085 35 / 0.015);
       pointer-events: none;
     }
     .gc-hero__inner {
@@ -128,7 +127,7 @@
       padding: 0.4rem 1rem;
       border: 1px solid var(--border-mid);
       border-radius: 40px;
-      background: rgba(200,136,42,0.06);
+      background: oklch(48% 0.085 35 / 0.06);
       margin-bottom: 1.4rem;
     }
     .gc-hero__h1 {
@@ -172,8 +171,8 @@
       margin-bottom: 2rem;
     }
     .gift-card-mock {
-      background: linear-gradient(135deg, #2a2216, #1c1a10, #2e2410, #1a1812);
-      border: 1px solid rgba(200,136,42,0.3);
+      background: linear-gradient(135deg, oklch(89% 0.014 65), oklch(91% 0.014 70), oklch(87% 0.014 65), oklch(91% 0.014 70));
+      border: 1px solid oklch(48% 0.085 35 / 0.3);
       border-radius: var(--r-lg);
       padding: 2.5rem 2.2rem;
       aspect-ratio: 1.586/1;
@@ -182,7 +181,7 @@
       justify-content: space-between;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(200,136,42,0.15);
+      box-shadow: 0 24px 80px oklch(20% 0.015 60 / 0.6), inset 0 1px 0 oklch(48% 0.085 35 / 0.15);
       transition: transform 0.15s ease-out;
       transform-style: preserve-3d;
     }
@@ -190,7 +189,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(105deg, transparent 25%, rgba(200,136,42,0.06) 50%, transparent 75%);
+      background: linear-gradient(105deg, transparent 25%, oklch(48% 0.085 35 / 0.06) 50%, transparent 75%);
       background-size: 200% 100%;
       animation: shimmer 4s linear infinite;
     }
@@ -225,7 +224,7 @@
       font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
       color: var(--lantern); opacity: 0.8;
     }
-    .gift-card-mock__sub { font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(238,228,208,0.35); }
+    .gift-card-mock__sub { font-size: 0.72rem; letter-spacing: 0.1em; color: oklch(35% 0.015 60 / 0.35); }
 
     /* Trust signals below card */
     .gc-trust {
@@ -299,7 +298,7 @@
     .gc-how__step:hover { border-color: var(--border-mid); transform: translateY(-4px); }
     .gc-how__step-num {
       width: 52px; height: 52px; border-radius: 50%;
-      background: rgba(200,136,42,0.12); border: 1px solid var(--border-hi);
+      background: oklch(48% 0.085 35 / 0.12); border: 1px solid var(--border-hi);
       display: grid; place-items: center; margin: 0 auto 1.2rem;
       font-family: var(--font-head); font-size: 1.4rem; font-style: italic; font-weight: 600;
       color: var(--lantern);
@@ -337,7 +336,7 @@
     }
     .gc-cta-band::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 100% at 50% 50%, rgba(200,136,42,0.07) 0%, transparent 70%);
+      background: radial-gradient(ellipse 80% 100% at 50% 50%, oklch(48% 0.085 35 / 0.07) 0%, transparent 70%);
       pointer-events: none;
     }
     .gc-cta-band__inner { position: relative; }
@@ -442,8 +441,8 @@
               <div class="gift-card-mock__top">
                 <span class="gift-card-mock__brand">J Massage <em>SLC</em></span>
                 <svg class="gift-card-mock__logo-icon" viewBox="0 0 40 40" fill="none">
-                  <path d="M6 20C6 20 11 12 20 12C29 12 34 20 34 20" stroke="rgba(200,136,42,0.6)" stroke-width="1.5" stroke-linecap="round"/>
-                  <path d="M6 26C6 26 11 18 20 18C29 18 34 26 34 26" stroke="rgba(200,136,42,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M6 20C6 20 11 12 20 12C29 12 34 20 34 20" stroke="oklch(48% 0.085 35 / 0.6)" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M6 26C6 26 11 18 20 18C29 18 34 26 34 26" stroke="oklch(48% 0.085 35 / 0.6)" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
               </div>
               <div class="gift-card-mock__mid">

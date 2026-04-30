@@ -30,9 +30,8 @@
   <meta name="twitter:description" content="Salt Lake City's most complete massage studio. Six modalities. Licensed therapists. Open every day.">
 
   <!-- ═══ GOOGLE FONTS ════════════════════════════════════════════════════ -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css">
 
@@ -620,16 +619,16 @@
           }
           .about__cv-bg {
             position: absolute; inset: 0;
-            background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(200,136,42,0.10) 0%, transparent 65%),
-              radial-gradient(ellipse 60% 50% at 20% 80%, rgba(42,56,48,0.18) 0%, transparent 60%);
+            background: radial-gradient(ellipse 80% 60% at 50% 30%, oklch(48% 0.085 35 / 0.10) 0%, transparent 65%),
+              radial-gradient(ellipse 60% 50% at 20% 80%, oklch(28% 0.02 65 / 0.18) 0%, transparent 60%);
           }
           .about__cv-ring {
             position: absolute; border-radius: 50%;
-            border: 1px solid rgba(200,136,42,0.08);
+            border: 1px solid oklch(48% 0.085 35 / 0.08);
           }
           .about__cv-ring--1 { width: 280px; height: 280px; top: -80px; right: -80px; }
-          .about__cv-ring--2 { width: 200px; height: 200px; bottom: -60px; left: -60px; border-color: rgba(200,136,42,0.06); }
-          .about__cv-ring--3 { width: 120px; height: 120px; bottom: 40px; right: 30px; border-color: rgba(42,56,48,0.2); }
+          .about__cv-ring--2 { width: 200px; height: 200px; bottom: -60px; left: -60px; border-color: oklch(48% 0.085 35 / 0.06); }
+          .about__cv-ring--3 { width: 120px; height: 120px; bottom: 40px; right: 30px; border-color: oklch(28% 0.02 65 / 0.2); }
           .about__cv-content {
             position: relative; z-index: 1;
             display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
@@ -712,8 +711,8 @@
             <div class="gift-card-mock__top">
               <span class="gift-card-mock__brand">J Massage <em>SLC</em></span>
               <svg class="gift-card-mock__logo-icon" viewBox="0 0 40 40" fill="none">
-                <path d="M6 20C6 20 11 12 20 12C29 12 34 20 34 20" stroke="rgba(200,136,42,0.6)" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M6 26C6 26 11 18 20 18C29 18 34 26 34 26" stroke="rgba(200,136,42,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M6 20C6 20 11 12 20 12C29 12 34 20 34 20" stroke="oklch(48% 0.085 35 / 0.6)" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M6 26C6 26 11 18 20 18C29 18 34 26 34 26" stroke="oklch(48% 0.085 35 / 0.6)" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="gift-card-mock__mid">

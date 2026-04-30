@@ -14,9 +14,8 @@
   <meta property="og:description" content="Everything you need to know about massage therapy at J Massage SLC. Pricing, services, booking, and more.">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 
   <!-- FAQPage Schema — all 28 questions -->
@@ -143,7 +142,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 90% 70% at 50% 60%, rgba(200,136,42,0.08) 0%, transparent 65%);
+      background: radial-gradient(ellipse 90% 70% at 50% 60%, oklch(48% 0.085 35 / 0.08) 0%, transparent 65%);
       pointer-events: none;
     }
     .faq-page-hero::after {
@@ -151,8 +150,8 @@
       position: absolute;
       right: -100px; top: 50%; transform: translateY(-50%);
       width: 600px; height: 600px; border-radius: 50%;
-      border: 1px solid rgba(200,136,42,0.05);
-      box-shadow: 0 0 0 80px rgba(200,136,42,0.02), 0 0 0 160px rgba(200,136,42,0.01);
+      border: 1px solid oklch(48% 0.085 35 / 0.05);
+      box-shadow: 0 0 0 80px oklch(48% 0.085 35 / 0.02), 0 0 0 160px oklch(48% 0.085 35 / 0.01);
       pointer-events: none;
     }
     .faq-page-hero__inner {
@@ -164,7 +163,7 @@
       display: inline-block; font-size: 0.72rem; font-weight: 600;
       letter-spacing: 0.2em; text-transform: uppercase; color: var(--lantern);
       padding: 0.4rem 1rem; border: 1px solid var(--border-mid); border-radius: 40px;
-      background: rgba(200,136,42,0.06); margin-bottom: 1.4rem;
+      background: oklch(48% 0.085 35 / 0.06); margin-bottom: 1.4rem;
     }
     .faq-page-hero__h1 {
       font-family: var(--font-head); font-size: clamp(2.5rem, 5.5vw, 4.2rem);
@@ -262,7 +261,7 @@
     }
     .faq-cta::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 100% at 50% 50%, rgba(200,136,42,0.07) 0%, transparent 70%);
+      background: radial-gradient(ellipse 80% 100% at 50% 50%, oklch(48% 0.085 35 / 0.07) 0%, transparent 70%);
       pointer-events: none;
     }
     .faq-cta__inner { position: relative; }

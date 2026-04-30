@@ -20,9 +20,8 @@
   <meta name="twitter:description" content="Foot reflexology and head spa in Salt Lake City. Available at Elite Spa Utah — our sister location at 1136 S State St. Book online.">
 
   <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="../css/styles.css">
@@ -196,11 +195,11 @@
       padding: 9rem 0 6rem;
       overflow: hidden;
       background:
-        radial-gradient(ellipse 120% 80% at 80% 20%, rgba(200,136,42,0.13) 0%, transparent 55%),
+        radial-gradient(ellipse 120% 80% at 80% 20%, oklch(48% 0.085 35 / 0.13) 0%, transparent 55%),
         radial-gradient(ellipse 80% 60% at 10% 80%, rgba(120,60,20,0.18) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 50% at 50% 110%, rgba(200,136,42,0.07) 0%, transparent 50%),
-        linear-gradient(160deg, #06040200 0%, #0e0a04 30%, #080603 70%, #060402 100%);
-      background-color: #080604;
+        radial-gradient(ellipse 60% 50% at 50% 110%, oklch(48% 0.085 35 / 0.07) 0%, transparent 50%),
+        linear-gradient(160deg, oklch(95% 0.012 75)00 0%, oklch(94% 0.013 75) 30%, oklch(95% 0.012 75) 70%, oklch(95% 0.012 75) 100%);
+      background-color: oklch(95% 0.012 75);
     }
 
     /* Decorative concentric ring — right side */
@@ -213,11 +212,11 @@
       width: 700px;
       height: 700px;
       border-radius: 50%;
-      border: 1px solid rgba(200,136,42,0.07);
+      border: 1px solid oklch(48% 0.085 35 / 0.07);
       box-shadow:
-        0 0 0 60px  rgba(200,136,42,0.04),
-        0 0 0 130px rgba(200,136,42,0.025),
-        0 0 0 220px rgba(200,136,42,0.012);
+        0 0 0 60px  oklch(48% 0.085 35 / 0.04),
+        0 0 0 130px oklch(48% 0.085 35 / 0.025),
+        0 0 0 220px oklch(48% 0.085 35 / 0.012);
       pointer-events: none;
     }
 
@@ -230,7 +229,7 @@
       width: 500px;
       height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(200,136,42,0.08) 0%, transparent 65%);
+      background: radial-gradient(circle, oklch(48% 0.085 35 / 0.08) 0%, transparent 65%);
       pointer-events: none;
     }
 
@@ -238,7 +237,7 @@
     .gold-rule {
       width: 100%;
       height: 1px;
-      background: linear-gradient(to right, transparent 0%, rgba(200,136,42,0.4) 20%, rgba(200,136,42,0.7) 50%, rgba(200,136,42,0.4) 80%, transparent 100%);
+      background: linear-gradient(to right, transparent 0%, oklch(48% 0.085 35 / 0.4) 20%, oklch(48% 0.085 35 / 0.7) 50%, oklch(48% 0.085 35 / 0.4) 80%, transparent 100%);
       margin: 0;
       border: none;
     }
@@ -246,9 +245,9 @@
     /* ── Sister Location Banner ───────────────────── */
     .sister-banner {
       background:
-        linear-gradient(135deg, #120e06 0%, #1e1608 50%, #120e06 100%);
-      border-top: 1px solid rgba(200,136,42,0.35);
-      border-bottom: 1px solid rgba(200,136,42,0.35);
+        linear-gradient(135deg, oklch(93% 0.014 70) 0%, oklch(91% 0.014 70) 50%, oklch(93% 0.014 70) 100%);
+      border-top: 1px solid oklch(48% 0.085 35 / 0.35);
+      border-bottom: 1px solid oklch(48% 0.085 35 / 0.35);
       padding: 3rem 0;
       position: relative;
     }
@@ -256,7 +255,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(200,136,42,0.05) 0%, transparent 70%);
+      background: radial-gradient(ellipse 60% 100% at 50% 50%, oklch(48% 0.085 35 / 0.05) 0%, transparent 70%);
       pointer-events: none;
     }
     .sister-banner__inner {
@@ -270,36 +269,36 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background: rgba(200,136,42,0.12);
-      border: 1.5px solid rgba(200,136,42,0.35);
+      background: oklch(48% 0.085 35 / 0.12);
+      border: 1.5px solid oklch(48% 0.085 35 / 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--ember, #c8882a);
+      color: var(--ember, oklch(48% 0.085 35));
       font-size: 1.75rem;
     }
     .sister-banner__text { flex: 1; min-width: 200px; }
     .sister-banner__label {
-      font-family: 'Jost', sans-serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: .75rem;
       font-weight: 600;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ember, #c8882a);
+      color: var(--ember, oklch(48% 0.085 35));
       margin-bottom: .5rem;
     }
     .sister-banner__heading {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: clamp(1.4rem, 2.5vw, 1.9rem);
       font-weight: 600;
-      color: var(--lantern, #f5e6c8);
+      color: var(--lantern, oklch(20% 0.018 60));
       margin-bottom: .5rem;
       line-height: 1.3;
     }
     .sister-banner__body {
-      font-family: 'Jost', sans-serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: .95rem;
-      color: rgba(245,230,200,0.72);
+      color: oklch(35% 0.015 60 / 0.72);
       line-height: 1.6;
     }
     .sister-banner__actions {
@@ -317,19 +316,19 @@
     /* ── Service Split Cards ──────────────────────── */
     .svc-split {
       padding: 6rem 0;
-      background: var(--timber, #0e0c08);
+      background: var(--timber, oklch(94% 0.013 75));
       position: relative;
     }
     .svc-split::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 20% 50%, rgba(200,136,42,0.04) 0%, transparent 60%);
+      background: radial-gradient(ellipse 70% 60% at 20% 50%, oklch(48% 0.085 35 / 0.04) 0%, transparent 60%);
       pointer-events: none;
     }
     .svc-split + .svc-split {
-      background: #0a0806;
-      border-top: 1px solid rgba(200,136,42,0.12);
+      background: oklch(95% 0.012 75);
+      border-top: 1px solid oklch(48% 0.085 35 / 0.12);
     }
     .svc-split + .svc-split::before {
       background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(180,140,220,0.04) 0%, transparent 60%);
@@ -357,55 +356,55 @@
     }
     .svc-split__visual--foot {
       background:
-        radial-gradient(ellipse at 65% 35%, rgba(200,136,42,0.22) 0%, rgba(14,12,8,0.0) 55%),
+        radial-gradient(ellipse at 65% 35%, oklch(48% 0.085 35 / 0.22) 0%, rgba(14,12,8,0.0) 55%),
         radial-gradient(ellipse at 20% 80%, rgba(120,70,20,0.15) 0%, transparent 50%),
-        linear-gradient(145deg, #0e0b06 0%, #1a1308 50%, #0e0b06 100%);
-      border: 1px solid rgba(200,136,42,0.22);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(200,136,42,0.08);
+        linear-gradient(145deg, oklch(94% 0.013 75) 0%, oklch(92% 0.014 70) 50%, oklch(94% 0.013 75) 100%);
+      border: 1px solid oklch(48% 0.085 35 / 0.22);
+      box-shadow: 0 20px 60px oklch(20% 0.015 60 / 0.5), inset 0 0 0 1px oklch(48% 0.085 35 / 0.08);
     }
     .svc-split__visual--head {
       background:
         radial-gradient(ellipse at 35% 40%, rgba(160,100,220,0.18) 0%, rgba(10,8,14,0.0) 55%),
         radial-gradient(ellipse at 80% 80%, rgba(80,40,120,0.12) 0%, transparent 50%),
-        linear-gradient(145deg, #0a080e 0%, #130a1a 50%, #0a080e 100%);
+        linear-gradient(145deg, oklch(95% 0.012 75) 0%, oklch(93% 0.014 70) 50%, oklch(95% 0.012 75) 100%);
       border: 1px solid rgba(160,100,220,0.2);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(160,100,220,0.06);
+      box-shadow: 0 20px 60px oklch(20% 0.015 60 / 0.5), inset 0 0 0 1px rgba(160,100,220,0.06);
     }
     .svc-split__icon { display: flex; width: 100px; height: 100px; opacity: .4; }
     .svc-split__price-pill {
       position: absolute;
       bottom: 1.25rem;
       right: 1.25rem;
-      background: rgba(200,136,42,0.15);
-      border: 1px solid rgba(200,136,42,0.35);
+      background: oklch(48% 0.085 35 / 0.15);
+      border: 1px solid oklch(48% 0.085 35 / 0.35);
       border-radius: 2rem;
       padding: .4rem 1rem;
-      font-family: 'Jost', sans-serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: .85rem;
       font-weight: 500;
-      color: var(--lantern, #f5e6c8);
+      color: var(--lantern, oklch(20% 0.018 60));
     }
     .svc-split__label {
-      font-family: 'Jost', sans-serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: .75rem;
       font-weight: 600;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ember, #c8882a);
+      color: var(--ember, oklch(48% 0.085 35));
       margin-bottom: .75rem;
     }
     .svc-split__heading {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: clamp(2rem, 3.5vw, 2.8rem);
       font-weight: 600;
-      color: var(--lantern, #f5e6c8);
+      color: var(--lantern, oklch(20% 0.018 60));
       margin-bottom: 1rem;
       line-height: 1.2;
     }
     .svc-split__body {
-      font-family: 'Jost', sans-serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: clamp(1rem, 1.5vw, 1.15rem);
-      color: rgba(245,230,200,0.72);
+      color: oklch(35% 0.015 60 / 0.72);
       line-height: 1.8;
       margin-bottom: 1rem;
     }
@@ -418,16 +417,16 @@
       display: flex;
       align-items: flex-start;
       gap: .75rem;
-      font-family: 'Jost', sans-serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: .98rem;
-      color: rgba(245,230,200,0.78);
+      color: oklch(35% 0.015 60 / 0.78);
       padding: .5rem 0;
-      border-bottom: 1px solid rgba(200,136,42,0.08);
+      border-bottom: 1px solid oklch(48% 0.085 35 / 0.08);
     }
     .svc-split__features li:last-child { border-bottom: none; }
     .svc-split__features li::before {
       content: "✦";
-      color: var(--ember, #c8882a);
+      color: var(--ember, oklch(48% 0.085 35));
       font-size: .65rem;
       margin-top: .3rem;
       flex-shrink: 0;
@@ -436,8 +435,8 @@
     /* ── Visit Sister Location Map Section ─────────── */
     .sister-map {
       padding: 5rem 0;
-      background: #0a0806;
-      border-top: 1px solid rgba(200,136,42,0.12);
+      background: oklch(95% 0.012 75);
+      border-top: 1px solid oklch(48% 0.085 35 / 0.12);
     }
     .sister-map__grid {
       display: grid;
@@ -448,19 +447,19 @@
     @media (max-width: 768px) { .sister-map__grid { grid-template-columns: 1fr; } }
     .sister-map__info { }
     .sister-map__eyebrow {
-      font-family: 'Jost', sans-serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: .75rem;
       font-weight: 600;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ember, #c8882a);
+      color: var(--ember, oklch(48% 0.085 35));
       margin-bottom: .75rem;
     }
     .sister-map__title {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: clamp(2rem, 3.5vw, 3rem);
       font-weight: 600;
-      color: var(--lantern, #f5e6c8);
+      color: var(--lantern, oklch(20% 0.018 60));
       line-height: 1.2;
       margin-bottom: 1.5rem;
     }
@@ -479,32 +478,32 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: rgba(200,136,42,0.1);
-      border: 1px solid rgba(200,136,42,0.25);
+      background: oklch(48% 0.085 35 / 0.1);
+      border: 1px solid oklch(48% 0.085 35 / 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--ember, #c8882a);
+      color: var(--ember, oklch(48% 0.085 35));
       flex-shrink: 0;
       font-size: 1rem;
     }
     .sister-map__detail-text strong {
       display: block;
-      font-family: 'Jost', sans-serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: .9rem;
       font-weight: 600;
-      color: var(--lantern, #f5e6c8);
+      color: var(--lantern, oklch(20% 0.018 60));
       margin-bottom: .2rem;
     }
     .sister-map__detail-text span {
-      font-family: 'Jost', sans-serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: .88rem;
-      color: rgba(245,230,200,0.65);
+      color: oklch(35% 0.015 60 / 0.65);
     }
     .sister-map__frame {
       border-radius: 2px;
       overflow: hidden;
-      border: 1px solid rgba(200,136,42,0.18);
+      border: 1px solid oklch(48% 0.085 35 / 0.18);
       height: 360px;
     }
     .sister-map__frame iframe {
@@ -517,9 +516,9 @@
     /* ── Hero override for this page ──────────────── */
     .svc-hero--foot-head {
       background:
-        radial-gradient(ellipse at 70% 40%, rgba(200,136,42,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 40%, oklch(48% 0.085 35 / 0.12) 0%, transparent 60%),
         radial-gradient(ellipse at 20% 80%, rgba(139,90,180,0.08) 0%, transparent 50%),
-        linear-gradient(160deg, #0e0c08 0%, #1a1208 50%, #0e0c08 100%);
+        linear-gradient(160deg, oklch(94% 0.013 75) 0%, oklch(92% 0.014 70) 50%, oklch(94% 0.013 75) 100%);
       min-height: 88vh;
       display: flex;
       align-items: center;
@@ -531,14 +530,14 @@
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      background: rgba(200,136,42,0.12);
-      border: 1px solid rgba(200,136,42,0.4);
+      background: oklch(48% 0.085 35 / 0.12);
+      border: 1px solid oklch(48% 0.085 35 / 0.4);
       border-radius: 2rem;
       padding: .45rem 1.1rem;
-      font-family: 'Jost', sans-serif;
+      font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
       font-size: .82rem;
       font-weight: 500;
-      color: var(--ember, #c8882a);
+      color: var(--ember, oklch(48% 0.085 35));
       margin-bottom: 1.5rem;
       letter-spacing: .04em;
     }
@@ -546,7 +545,7 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--ember, #c8882a);
+      background: var(--ember, oklch(48% 0.085 35));
       animation: pulse-dot 2s ease-in-out infinite;
     }
     @keyframes pulse-dot {
@@ -611,7 +610,7 @@
       <div class="svc-hero__inner container" style="position:relative;z-index:2;">
 
         <!-- Breadcrumb -->
-        <nav class="svc-breadcrumb" aria-label="Breadcrumb" style="--svc-breadcrumb-color:rgba(245,230,200,0.55);">
+        <nav class="svc-breadcrumb" aria-label="Breadcrumb" style="--svc-breadcrumb-color:oklch(35% 0.015 60 / 0.55);">
           <ol class="svc-breadcrumb__list">
             <li><a href="../index.html">Home</a></li>
             <li aria-hidden="true">›</li>
@@ -631,10 +630,10 @@
         <h1 class="svc-hero__title" style="font-size:clamp(3rem,7vw,5.5rem);line-height:1.05;">Foot Massage &amp; <em>Head Spa</em><br>in Salt Lake City</h1>
 
         <!-- Thin gold rule under title -->
-        <div style="width:80px;height:2px;background:linear-gradient(to right,rgba(200,136,42,0.8),rgba(200,136,42,0.2));margin:1.5rem 0;"></div>
+        <div style="width:80px;height:2px;background:linear-gradient(to right,oklch(48% 0.085 35 / 0.8),oklch(48% 0.085 35 / 0.2));margin:1.5rem 0;"></div>
 
-        <p class="svc-hero__intro" style="font-size:clamp(1.05rem,1.8vw,1.25rem);max-width:640px;text-shadow:0 2px 8px rgba(0,0,0,0.5);backdrop-filter:none;">
-          Foot reflexology and head spa treatments are not offered at our J Massage SLC location — but our sister spa, <strong style="color:var(--lantern,#f5e6c8);font-weight:600;">Elite Spa Utah</strong>, has you completely covered. Located minutes away at 1136 S State St, Elite Spa Utah specializes in exactly these elevated experiences. Five-star service. Same-day availability. One family of spas.
+        <p class="svc-hero__intro" style="font-size:clamp(1.05rem,1.8vw,1.25rem);max-width:640px;text-shadow:0 2px 8px oklch(20% 0.015 60 / 0.5);backdrop-filter:none;">
+          Foot reflexology and head spa treatments are not offered at our J Massage SLC location — but our sister spa, <strong style="color:var(--lantern,oklch(20% 0.018 60));font-weight:600;">Elite Spa Utah</strong>, has you completely covered. Located minutes away at 1136 S State St, Elite Spa Utah specializes in exactly these elevated experiences. Five-star service. Same-day availability. One family of spas.
         </p>
 
         <!-- Meta Pills -->
@@ -652,12 +651,12 @@
         </div>
 
         <!-- Trust line at bottom of hero -->
-        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(200,136,42,0.2);display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;">
-          <span style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(245,230,200,0.55);letter-spacing:.06em;">★★★★★ Elite Spa Utah · 5.0 Rating · 50+ Reviews</span>
-          <span style="color:rgba(200,136,42,0.3);">|</span>
-          <a href="tel:+18018398880" style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(200,136,42,0.75);text-decoration:none;letter-spacing:.04em;">(801) 839-8880</a>
-          <span style="color:rgba(200,136,42,0.3);">|</span>
-          <span style="font-family:'Jost',sans-serif;font-size:.82rem;color:rgba(245,230,200,0.5);">Open Daily · Same-Day Appointments</span>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid oklch(48% 0.085 35 / 0.2);display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;">
+          <span style="font-family:'Switzer',sans-serif;font-size:.82rem;color:oklch(35% 0.015 60 / 0.55);letter-spacing:.06em;">★★★★★ Elite Spa Utah · 5.0 Rating · 50+ Reviews</span>
+          <span style="color:oklch(48% 0.085 35 / 0.3);">|</span>
+          <a href="tel:+18018398880" style="font-family:'Switzer',sans-serif;font-size:.82rem;color:oklch(48% 0.085 35 / 0.75);text-decoration:none;letter-spacing:.04em;">(801) 839-8880</a>
+          <span style="color:oklch(48% 0.085 35 / 0.3);">|</span>
+          <span style="font-family:'Switzer',sans-serif;font-size:.82rem;color:oklch(35% 0.015 60 / 0.5);">Open Daily · Same-Day Appointments</span>
         </div>
 
       </div>
@@ -670,7 +669,7 @@
     ═══════════════════════════════════════════════ -->
     <section class="sister-banner">
       <div class="container">
-        <div class="sister-banner__inner" style="background:rgba(200,136,42,0.04);border:1px solid rgba(200,136,42,0.2);border-radius:4px;padding:2rem 2.5rem;backdrop-filter:blur(4px);">
+        <div class="sister-banner__inner" style="background:oklch(48% 0.085 35 / 0.04);border:1px solid oklch(48% 0.085 35 / 0.2);border-radius:4px;padding:2rem 2.5rem;backdrop-filter:blur(4px);">
 
           <div class="sister-banner__icon" aria-hidden="true" style="width:72px;height:72px;font-size:2rem;">🌿</div>
 
@@ -702,7 +701,7 @@
         <div class="svc-split__grid">
 
           <div class="svc-split__visual svc-split__visual--foot reveal">
-            <svg class="svc-split__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" style="color:var(--ember,#c8882a);">
+            <svg class="svc-split__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" style="color:var(--ember,oklch(48% 0.085 35));">
               <ellipse cx="60" cy="80" rx="28" ry="16" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
               <path d="M38 60 C36 50 38 38 44 32 C48 28 52 28 55 32 C57 35 56 42 55 50" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
               <path d="M55 50 C54 42 54 34 58 30 C61 27 65 28 66 32 C67 36 66 44 65 52" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
@@ -753,7 +752,7 @@
         <div class="svc-split__grid">
 
           <div class="svc-split__visual svc-split__visual--head reveal">
-            <svg class="svc-split__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" style="color:#a070c8;">
+            <svg class="svc-split__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" style="color:oklch(48% 0.085 35);">
               <ellipse cx="60" cy="58" rx="28" ry="34" stroke="currentColor" stroke-width="1.8" opacity="0.5"/>
               <path d="M35 38 C32 28 34 18 40 14 C44 11 52 12 55 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
               <path d="M85 38 C88 28 86 18 80 14 C76 11 68 12 65 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
@@ -789,7 +788,7 @@
               <li>A full nervous system reset — profound, lasting calm</li>
             </ul>
 
-            <a href="https://www.elitespautah.com" target="_blank" rel="noopener" class="btn btn--gold" style="border-color:rgba(139,90,180,0.6);background:rgba(139,90,180,0.1);color:#c8a0e8;">Book Head Spa at Elite Spa Utah →</a>
+            <a href="https://www.elitespautah.com" target="_blank" rel="noopener" class="btn btn--gold" style="border-color:rgba(139,90,180,0.6);background:rgba(139,90,180,0.1);color:oklch(56% 0.085 35);">Book Head Spa at Elite Spa Utah →</a>
           </div>
 
         </div>
@@ -800,8 +799,8 @@
     <!-- ═══════════════════════════════════════════════
          BOOK NOW CTA (mid-page)
     ═══════════════════════════════════════════════ -->
-    <div class="reveal" style="text-align:center;padding:3rem 0;background:#0a0806;border-top:1px solid rgba(200,136,42,0.1);">
-      <p style="font-family:'Jost',sans-serif;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ember,#c8882a);margin-bottom:.75rem;">Available at Our Sister Location</p>
+    <div class="reveal" style="text-align:center;padding:3rem 0;background:oklch(95% 0.012 75);border-top:1px solid oklch(48% 0.085 35 / 0.1);">
+      <p style="font-family:'Switzer',sans-serif;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ember,oklch(48% 0.085 35));margin-bottom:.75rem;">Available at Our Sister Location</p>
       <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" class="btn btn--gold btn--lg">Book Foot Massage at Elite Spa Utah →</a>
       &nbsp;&nbsp;
       <a href="https://www.elitespautah.com" target="_blank" rel="noopener" class="btn btn--ghost btn--lg">Visit Elite Spa Utah</a>
@@ -921,7 +920,7 @@
                 <div class="sister-map__detail-icon">📞</div>
                 <div class="sister-map__detail-text">
                   <strong>Phone</strong>
-                  <span><a href="tel:+18018398880" style="color:var(--ember,#c8882a);">(801) 839-8880</a></span>
+                  <span><a href="tel:+18018398880" style="color:var(--ember,oklch(48% 0.085 35));">(801) 839-8880</a></span>
                 </div>
               </div>
               <div class="sister-map__detail">
@@ -942,7 +941,7 @@
                 <div class="sister-map__detail-icon">🌐</div>
                 <div class="sister-map__detail-text">
                   <strong>Website</strong>
-                  <span><a href="https://www.elitespautah.com" target="_blank" rel="noopener" style="color:var(--ember,#c8882a);">www.elitespautah.com</a></span>
+                  <span><a href="https://www.elitespautah.com" target="_blank" rel="noopener" style="color:var(--ember,oklch(48% 0.085 35));">www.elitespautah.com</a></span>
                 </div>
               </div>
             </div>
@@ -987,7 +986,7 @@
               <span class="faq-item__icon" aria-hidden="true"></span>
             </button>
             <div class="faq-item__answer">
-              <p>J Massage SLC at 677 S 200 W does not currently offer foot massage or head spa services at this location. However, our sister location — Elite Spa Utah at 1136 S State St in downtown Salt Lake City — specializes in exactly these treatments. Both locations share the same commitment to five-star service and therapeutic excellence. You can book directly at <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,#c8882a);">elitespautah.com</a>.</p>
+              <p>J Massage SLC at 677 S 200 W does not currently offer foot massage or head spa services at this location. However, our sister location — Elite Spa Utah at 1136 S State St in downtown Salt Lake City — specializes in exactly these treatments. Both locations share the same commitment to five-star service and therapeutic excellence. You can book directly at <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,oklch(48% 0.085 35));">elitespautah.com</a>.</p>
             </div>
           </li>
 
@@ -1037,7 +1036,7 @@
               <span class="faq-item__icon" aria-hidden="true"></span>
             </button>
             <div class="faq-item__answer">
-              <p>Yes — Elite Spa Utah offers same-day appointments based on availability. Visit <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,#c8882a);">elitespautah.com/foot-reflexology-massage</a> to check availability and book online, or call them directly at <a href="tel:+18018398880" style="color:var(--ember,#c8882a);">(801) 839-8880</a>. Elite Spa Utah is located at 1136 S State St, Salt Lake City — open Monday through Friday 9am–9pm and weekends 9am–8pm.</p>
+              <p>Yes — Elite Spa Utah offers same-day appointments based on availability. Visit <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,oklch(48% 0.085 35));">elitespautah.com/foot-reflexology-massage</a> to check availability and book online, or call them directly at <a href="tel:+18018398880" style="color:var(--ember,oklch(48% 0.085 35));">(801) 839-8880</a>. Elite Spa Utah is located at 1136 S State St, Salt Lake City — open Monday through Friday 9am–9pm and weekends 9am–8pm.</p>
             </div>
           </li>
 
@@ -1074,7 +1073,7 @@
 
 
     <!-- Gift Cards -->
-    <section class="gift section" style="background:var(--soot,#1c1a16);">
+    <section class="gift section" style="background:var(--soot,oklch(91% 0.014 70));">
       <div class="container gift__grid">
         <div class="gift__visual reveal">
           <div class="gift-card-mock" id="giftMock">
@@ -1082,8 +1081,8 @@
             <div class="gift-card-mock__top">
               <span class="gift-card-mock__brand">J Massage <em>SLC</em></span>
               <svg class="gift-card-mock__logo-icon" viewBox="0 0 40 40" fill="none">
-                <path d="M6 20C6 20 11 12 20 12C29 12 34 20 34 20" stroke="rgba(200,136,42,0.6)" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M6 26C6 26 11 18 20 18C29 18 34 26 34 26" stroke="rgba(200,136,42,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M6 20C6 20 11 12 20 12C29 12 34 20 34 20" stroke="oklch(48% 0.085 35 / 0.6)" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M6 26C6 26 11 18 20 18C29 18 34 26 34 26" stroke="oklch(48% 0.085 35 / 0.6)" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="gift-card-mock__mid">
@@ -1160,7 +1159,7 @@
         <div class="svc-section-header reveal">
           <p class="svc-section-label">At J Massage SLC</p>
           <h2 class="svc-section-title">While You're Here — Our Top Treatments</h2>
-          <p style="font-family:'Jost',sans-serif;font-size:1rem;color:rgba(245,230,200,0.6);max-width:580px;margin:0 auto 1rem;">Foot massage and head spa are just down the road at Elite Spa Utah. For everything else — deep tissue, ashiatsu, couples massage, and more — we're your spot.</p>
+          <p style="font-family:'Switzer',sans-serif;font-size:1rem;color:oklch(35% 0.015 60 / 0.6);max-width:580px;margin:0 auto 1rem;">Foot massage and head spa are just down the road at Elite Spa Utah. For everything else — deep tissue, ashiatsu, couples massage, and more — we're your spot.</p>
         </div>
 
         <div class="svc-related__grid">
@@ -1229,11 +1228,11 @@
           <li><a href="4-hand-massage.html">4-Hand Massage</a></li>
           <li><a href="reflexology.html">Reflexology</a></li>
           <li><a href="hot-stone.html">Hot Stone</a></li>
-          <li style="margin-top:.5rem;padding-top:.5rem;border-top:1px solid rgba(200,136,42,0.15);">
-            <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,#c8882a);">Foot Massage → Elite Spa Utah</a>
+          <li style="margin-top:.5rem;padding-top:.5rem;border-top:1px solid oklch(48% 0.085 35 / 0.15);">
+            <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,oklch(48% 0.085 35));">Foot Massage → Elite Spa Utah</a>
           </li>
           <li>
-            <a href="https://www.elitespautah.com" target="_blank" rel="noopener" style="color:var(--ember,#c8882a);">Head Spa → Elite Spa Utah</a>
+            <a href="https://www.elitespautah.com" target="_blank" rel="noopener" style="color:var(--ember,oklch(48% 0.085 35));">Head Spa → Elite Spa Utah</a>
           </li>
         </ul>
       </div>
@@ -1243,8 +1242,8 @@
         <a href="tel:+18012881118">(801) 288-1118</a>
         <p>Open Daily · 10am – 10pm</p>
         <a href="https://square.site/appointments/buyer/widget/dgz5ax0rjmoznk/41VKQFGFBJTFF" target="_blank" rel="noopener" class="btn btn--gold btn--sm">Book at J Massage SLC</a>
-        <p style="margin-top:1.5rem;font-size:.85rem;color:rgba(245,230,200,0.55);">Sister Location:</p>
-        <p style="font-size:.9rem;color:rgba(245,230,200,0.7);">Elite Spa Utah<br>1136 S State St, SLC</p>
+        <p style="margin-top:1.5rem;font-size:.85rem;color:oklch(35% 0.015 60 / 0.55);">Sister Location:</p>
+        <p style="font-size:.9rem;color:oklch(35% 0.015 60 / 0.7);">Elite Spa Utah<br>1136 S State St, SLC</p>
         <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" class="btn btn--ghost btn--sm" style="margin-top:.5rem;">Book Foot Massage</a>
       </div>
     </div>
