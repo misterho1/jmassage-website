@@ -465,14 +465,17 @@
           </div>
 
           <!-- Inline Square booking embed (no domain handoff per PRODUCT.md design principle #5).
-               IMPORTANT: app.squareup.com is the iframe-embed URL (in-iframe navigation).
-               square.site is the standalone public page that navigates the parent window. -->
+               URL: book.squareup.com is Square's current booking domain (square.site/app.squareup.com
+               redirect to it during service selection). Starting the iframe there avoids the redirect.
+               sandbox: explicitly omits allow-top-navigation, so any link inside the widget that
+               targets _top is blocked from navigating the parent window. -->
           <div class="booking__embed">
             <iframe
               title="Book your massage at J Massage SLC"
-              src="https://app.squareup.com/appointments/buyer/widget/dgz5ax0rjmoznk/41VKQFGFBJTFF"
+              src="https://book.squareup.com/appointments/dgz5ax0rjmoznk/location/41VKQFGFBJTFF"
               loading="lazy"
               allow="payment *"
+              sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox"
               style="width: 100%; min-height: 820px; border: 1px solid var(--border); background: var(--soot); display: block; border-radius: var(--r);"
             ></iframe>
             <p class="booking__cta-sub" style="margin-top: 1rem;">
