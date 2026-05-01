@@ -430,22 +430,14 @@ button { cursor: pointer; border: none; background: none; }
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  background: var(--timber);
+  background:
+    linear-gradient(100deg, rgba(245,240,232,0.18) 0%, transparent 48%),
+    url('../images/hero-bg.jpg') right top / cover no-repeat;
 }
 
-/* Hero background: user-provided spa photo (cream tones, hands on towel, stones)
-   Overlay veil on the left ensures near-black text stays crisp over the photo. */
+/* hero__bg div no longer needed — background is on .hero directly */
 .hero__bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    /* Very light left veil — just enough to separate text from photo edge */
-    linear-gradient(100deg,
-      oklch(96% 0.010 75 / 0.15) 0%,
-      transparent 45%),
-    /* Photo: subject (hands + stones) anchored top-right; open space bottom-left */
-    url('../images/hero-bg.jpg') right top / cover no-repeat;
+  display: none;
 }
 /* Subtle grain layer — keeps surface from feeling synthetic */
 .hero__bg::after {
