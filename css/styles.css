@@ -712,11 +712,14 @@ button { cursor: pointer; border: none; background: none; }
   color: var(--text-hi);
   margin-right: 0.15rem;
 }
-.services__chooser-link:hover {
+.services__chooser-link:hover,
+.services__chooser-link:focus-visible {
   color: var(--lantern);
   border-bottom-color: var(--lantern);
+  outline: none;
 }
-.services__chooser-link:hover em {
+.services__chooser-link:hover em,
+.services__chooser-link:focus-visible em {
   color: var(--lantern);
 }
 @media (max-width: 720px) {
@@ -922,9 +925,12 @@ button { cursor: pointer; border: none; background: none; }
   color: var(--text-hi);
   transition: color var(--t), padding-left var(--t);
 }
-.services__more-list a:hover {
+.services__more-list a:hover,
+.services__more-list a:focus-visible {
   color: var(--lantern);
   padding-left: 0.5rem;
+  outline: none;
+  border-bottom-color: var(--lantern);
 }
 .services__more-list em {
   font-style: italic;
@@ -945,7 +951,12 @@ button { cursor: pointer; border: none; background: none; }
   transition: opacity var(--t);
   margin-top: 1rem;
 }
-.services__more-link:hover { opacity: 0.65; }
+.services__more-link:hover,
+.services__more-link:focus-visible {
+  opacity: 0.65;
+  outline: none;
+  background: oklch(48% 0.085 35 / 0.06);
+}
 
 @media (max-width: 720px) {
   .services__more-list { grid-template-columns: 1fr; column-gap: 0; }

@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCursorGlow();
   initHeader();
   initHeroReveal();
-  initParallax();
   initScrollReveal();
   initCounters();
   initCardGlow();
@@ -125,27 +124,6 @@ function initHeroReveal() {
   fades.forEach((el, i) => {
     setTimeout(() => el.classList.add('revealed'), 700 + i * 130);
   });
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   PARALLAX — hero background
-   ═══════════════════════════════════════════════════════════════════════════ */
-function initParallax() {
-  const parallax = document.querySelector('.hero__parallax');
-  if (!parallax || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  let raf = null;
-  const update = () => {
-    const scrolled = window.scrollY;
-    if (scrolled < window.innerHeight * 1.5) {
-      parallax.style.transform = `translateY(${scrolled * 0.28}px)`;
-    }
-    raf = null;
-  };
-
-  window.addEventListener('scroll', () => {
-    if (!raf) raf = requestAnimationFrame(update);
-  }, { passive: true });
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
