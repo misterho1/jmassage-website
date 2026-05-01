@@ -227,9 +227,8 @@
          HERO
     ═══════════════════════════════════════════════════════════════════════ -->
     <section id="hero" class="hero">
-      <div class="hero__parallax" id="heroBg">
-        <img class="hero__bg-img" src="images/hero-bg.jpg" alt="Luxury massage therapy at J Massage SLC, candlelit deep tissue session" loading="eager" fetchpriority="high">
-      </div>
+      <!-- Pure-CSS architectural light wash. No stock spa imagery (PRODUCT.md anti-ref #1, #4). -->
+      <div class="hero__bg" aria-hidden="true"></div>
 
       <div class="hero__content container">
         <div class="hero__live-badge" aria-label="Currently open">
@@ -280,11 +279,9 @@
         <div class="services__grid">
 
           <article class="svc-card reveal-card">
-            <div class="svc-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><path d="M6 20C6 20 11 12 20 12C29 12 34 20 34 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 26C6 26 11 18 20 18C29 18 34 26 34 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6 32C6 32 11 24 20 24C29 24 34 32 34 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".4"/></svg>
-            </div>
+            <span class="svc-card__num" aria-hidden="true">01</span>
             <h3 class="svc-card__name">Swedish Massage</h3>
-            <p class="svc-card__desc">Long, feather-to-firm strokes that melt surface tension, quiet the nervous system, and leave you restored, not just relaxed. The gold standard for stress relief.</p>
+            <p class="svc-card__desc">Long, fluid strokes that ease surface tension and quiet the nervous system. The right call if you've never had a massage before, or if you just want to be left alone for an hour.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$55</strong> / 30 min</span>
               <a href="services/swedish-massage.html" class="svc-card__btn">Learn More →</a>
@@ -292,11 +289,9 @@
           </article>
 
           <article class="svc-card reveal-card">
-            <div class="svc-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="20" r="7" stroke="currentColor" stroke-width="1.5"/><circle cx="20" cy="20" r="2.5" fill="currentColor"/></svg>
-            </div>
+            <span class="svc-card__num" aria-hidden="true">02</span>
             <h3 class="svc-card__name">Deep Tissue</h3>
-            <p class="svc-card__desc">Slow, deliberate pressure that penetrates beyond surface muscle to dismantle chronic tension at its source. Engineered for people who carry their stress in the body.</p>
+            <p class="svc-card__desc">Slow, deliberate pressure that reaches past surface muscle to chronic tension. For knots that have been there for months, an IT band that won't release, shoulders that feel locked.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$55</strong> / 30 min</span>
               <a href="services/deep-tissue.html" class="svc-card__btn">Learn More →</a>
@@ -304,11 +299,9 @@
           </article>
 
           <article class="svc-card reveal-card">
-            <div class="svc-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><path d="M14 28L20 10L26 28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 22h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M12 34h16" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity=".35"/></svg>
-            </div>
+            <span class="svc-card__num" aria-hidden="true">03</span>
             <h3 class="svc-card__name">Sports Massage</h3>
-            <p class="svc-card__desc">Precision therapy for athletes who demand more from their bodies. Accelerate pre-event performance, speed post-event recovery, and prevent the injuries that sideline progress.</p>
+            <p class="svc-card__desc">Pre-event prep, post-event recovery, in-season maintenance. Built for runners, climbers, ski racers, lifters. Tell us your sport and the therapist targets accordingly.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$55</strong> / 30 min</span>
               <a href="services/sports-massage.html" class="svc-card__btn">Learn More →</a>
@@ -316,11 +309,9 @@
           </article>
 
           <article class="svc-card reveal-card">
-            <div class="svc-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><ellipse cx="20" cy="27" rx="10" ry="5" stroke="currentColor" stroke-width="1.5"/><path d="M14 27V18C14 15 17 13 20 13C23 13 26 15 26 18V27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M17 13.5C17 13.5 18 10 20 10C22 10 23 13.5 23 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".5"/></svg>
-            </div>
+            <span class="svc-card__num" aria-hidden="true">04</span>
             <h3 class="svc-card__name">Ashiatsu</h3>
-            <p class="svc-card__desc">A barefoot technique where the therapist's full body weight creates a broad, gravitational depth no hand can match. Transformative for deep-seated chronic pain and fascia release.</p>
+            <p class="svc-card__desc">Barefoot technique. The therapist uses controlled foot pressure for deeper, broader strokes than hands can deliver. Ask for it specifically &mdash; most studios in SLC don't offer it.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$55</strong> / 30 min</span>
               <a href="services/ashiatsu.html" class="svc-card__btn">Learn More →</a>
@@ -328,12 +319,9 @@
           </article>
 
           <article class="svc-card svc-card--featured reveal-card">
-            <span class="svc-card__tag">Most Loved</span>
-            <div class="svc-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><circle cx="13" cy="13" r="4.5" stroke="currentColor" stroke-width="1.5"/><circle cx="27" cy="13" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M5 31v-4a9 9 0 0118 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M17 31v-4a9 9 0 0118 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </div>
+            <span class="svc-card__num" aria-hidden="true">05</span>
             <h3 class="svc-card__name">Couples Massage</h3>
-            <p class="svc-card__desc">Your own private suite. Two world-class therapists, synchronized in intention. Whether celebrating a milestone or simply choosing presence over noise, this is the session you'll talk about for years.</p>
+            <p class="svc-card__desc">Two therapists, two tables, one private suite. Same start time, same finish time. Occasion or no occasion, you don't have to coordinate when you book together.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$160</strong> / 60 min</span>
               <a href="services/couples-massage.html" class="svc-card__btn">Learn More →</a>
@@ -341,11 +329,9 @@
           </article>
 
           <article class="svc-card reveal-card">
-            <div class="svc-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><path d="M9 17C9 17 13 11 18 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M31 17C31 17 27 11 22 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 26C7 26 13 33 20 33C27 33 33 26 33 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 21C7 21 13 28 20 28C27 28 33 21 33 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </div>
+            <span class="svc-card__num" aria-hidden="true">06</span>
             <h3 class="svc-card__name">4-Hand Massage</h3>
-            <p class="svc-card__desc">Two therapists. One synchronized rhythm. Your mind has nowhere to focus, so it surrenders completely. The most profoundly relaxing experience in massage therapy. Unmatched, unrivaled.</p>
+            <p class="svc-card__desc">Two therapists working you simultaneously. The mind can't track both at once, so it stops trying. If you've never had this, the first time is genuinely strange, then better than anything else.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$165</strong> / 60 min</span>
               <a href="services/4-hand-massage.html" class="svc-card__btn">Learn More →</a>

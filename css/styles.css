@@ -420,7 +420,9 @@ button { cursor: pointer; border: none; background: none; }
 .nav__burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 /* ════════════════════════════════════════════════════════════════════════════
-   HERO
+   HERO — Aesop / Loro Piana lane: architectural light wash, no candle imagery
+   PRODUCT.md anti-ref #1 (warm-amber candle wellness-journey cliche) + #4
+   (stock spa photography) drove the removal of the prior photo + flame layers.
 ════════════════════════════════════════════════════════════════════════════ */
 .hero {
   position: relative;
@@ -431,122 +433,39 @@ button { cursor: pointer; border: none; background: none; }
   background: var(--timber);
 }
 
-/* Parallax background */
-.hero__parallax {
-  position: absolute;
-  inset: -15% 0;
-  will-change: transform;
-}
-
-/* Hero photo background */
-.hero__bg-img {
+/* Pure-CSS background: bone wash + soft architectural light pools
+   Reads as daylight in a quiet room, not candlelight. */
+.hero__bg {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  display: block;
+  pointer-events: none;
+  background:
+    /* top-right window light */
+    radial-gradient(ellipse 55% 45% at 82% 8%, oklch(99% 0.005 75) 0%, transparent 65%),
+    /* lower-left soft floor pool — clay-tinted, restrained */
+    radial-gradient(ellipse 60% 50% at 8% 95%, oklch(91% 0.018 50 / 0.55) 0%, transparent 65%),
+    /* mid stone shadow for depth */
+    radial-gradient(ellipse 45% 40% at 65% 75%, oklch(87% 0.014 65 / 0.4) 0%, transparent 60%),
+    /* base wash */
+    linear-gradient(178deg, var(--timber) 0%, oklch(94% 0.013 70) 60%, oklch(92% 0.016 65) 100%);
 }
-/* Dark overlay so text stays legible */
-.hero__parallax::after {
+/* Subtle grain layer — keeps surface from feeling synthetic */
+.hero__bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(to bottom, oklch(20% 0.015 60 / 0.55) 0%, oklch(20% 0.015 60 / 0.35) 40%, oklch(20% 0.015 60 / 0.72) 100%),
-    radial-gradient(ellipse 80% 60% at 50% 50%, transparent 30%, oklch(20% 0.015 60 / 0.4) 100%);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
   pointer-events: none;
-  z-index: 1;
-}
-.hero__content { position: relative; z-index: 2; }
-
-/* CSS-only amber candlelight hero — replaces stock photo */
-.hero__css-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    /* top-right ambient warmth */
-    radial-gradient(ellipse 70% 55% at 78% 15%, oklch(48% 0.085 35 / 0.18) 0%, transparent 60%),
-    /* bottom-left floor glow — main candle source */
-    radial-gradient(ellipse 55% 65% at 15% 90%, oklch(48% 0.085 35 / 0.42) 0%, transparent 55%),
-    /* center-right secondary candle */
-    radial-gradient(ellipse 40% 45% at 68% 70%, oklch(48% 0.085 35 / 0.28) 0%, transparent 50%),
-    /* mid left warm pool */
-    radial-gradient(ellipse 50% 40% at 28% 52%, oklch(48% 0.085 35 / 0.20) 0%, transparent 55%),
-    /* top center subtle glow */
-    radial-gradient(ellipse 80% 30% at 50% 0%, oklch(42% 0.075 35 / 0.12) 0%, transparent 60%),
-    /* deep base gradient — warm charcoal */
-    linear-gradient(170deg, oklch(95% 0.012 75) 0%, oklch(93% 0.014 70) 25%, oklch(92% 0.014 70) 50%, oklch(93% 0.014 70) 75%, oklch(94% 0.013 75) 100%);
-  overflow: hidden;
-}
-/* Animated flicker layers */
-.hero__flame {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  animation: candleFlicker var(--flicker-dur, 6s) ease-in-out infinite alternate;
-  pointer-events: none;
-}
-.hero__flame--1 {
-  width: 420px; height: 520px;
-  left: -80px; bottom: -120px;
-  background: radial-gradient(ellipse, oklch(48% 0.085 35 / 0.32) 0%, oklch(48% 0.085 35 / 0.18) 40%, transparent 75%);
-  --flicker-dur: 5.8s;
-  animation-delay: 0s;
-}
-.hero__flame--2 {
-  width: 340px; height: 380px;
-  right: 5%; bottom: 10%;
-  background: radial-gradient(ellipse, oklch(48% 0.085 35 / 0.22) 0%, oklch(48% 0.085 35 / 0.12) 45%, transparent 75%);
-  --flicker-dur: 7.2s;
-  animation-delay: -2.4s;
-}
-.hero__flame--3 {
-  width: 280px; height: 300px;
-  left: 40%; top: 15%;
-  background: radial-gradient(ellipse, oklch(48% 0.085 35 / 0.12) 0%, transparent 70%);
-  --flicker-dur: 9.1s;
-  animation-delay: -4.1s;
-}
-
-@keyframes candleFlicker {
-  0%   { opacity: 0.85; transform: scale(1)    translateY(0px); }
-  25%  { opacity: 0.95; transform: scale(1.04) translateY(-6px); }
-  50%  { opacity: 0.80; transform: scale(0.97) translateY(4px); }
-  75%  { opacity: 0.92; transform: scale(1.02) translateY(-3px); }
-  100% { opacity: 1.00; transform: scale(0.99) translateY(2px); }
-}
-
-/* Grain + vignette overlay on top of CSS bg */
-.hero__css-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, oklch(20% 0.015 60 / 0.55) 100%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  background-size: auto, 200px 200px;
-  opacity: 0.22;
-  mix-blend-mode: overlay;
-  pointer-events: none;
-}
-
-/* Radial warm glow */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 120% 80% at 60% 80%, oklch(28% 0.02 65 / 0.5), transparent);
-  pointer-events: none;
-  z-index: 1;
 }
 
 .hero__content {
   position: relative;
   z-index: 2;
   padding-bottom: 7rem;
-  padding-top: 7rem;
+  padding-top: 8rem;
   width: 100%;
 }
 
@@ -832,6 +751,24 @@ button { cursor: pointer; border: none; background: none; }
   border-radius: 20px;
 }
 
+/* Aesop catalog-style numeral. Replaces the previous icon SVG on the homepage
+   service grid. The number IS the visual anchor; it earns its scale by giving
+   each modality editorial weight without the over-decoration of icon + name. */
+.svc-card__num {
+  display: block;
+  font-family: var(--font-head);
+  font-size: clamp(3.5rem, 5vw, 5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--lantern);
+  opacity: 0.75;
+  margin-bottom: 1.4rem;
+  font-variant-numeric: lining-nums;
+}
+
+/* Retained for legacy use on service detail pages (services/*.html). */
 .svc-card__icon {
   width: 44px;
   height: 44px;
@@ -1247,22 +1184,37 @@ button { cursor: pointer; border: none; background: none; }
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
-   REVIEWS
+   REVIEWS — Editorial pause: the one dark band on the page. Aesop / Loro Piana
+   convention, breaks the bone rhythm and gives the testimonials photographic
+   contrast. Cards stay light (var(--char)) so they read as light moments inside
+   a dark room, not flat dark-on-dark.
 ════════════════════════════════════════════════════════════════════════════ */
 .reviews {
-  background: var(--timber);
+  background: var(--pool);
+  color: oklch(88% 0.008 70);
   position: relative;
   overflow: hidden;
 }
 .reviews::before {
   content: '';
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
-  height: 60%;
-  background: radial-gradient(ellipse 100% 80% at 50% 100%, oklch(28% 0.02 65 / 0.18), transparent);
+  height: 50%;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, oklch(48% 0.085 35 / 0.10), transparent 70%);
   pointer-events: none;
+}
+
+/* Override section-head colors for legibility on dark band */
+.reviews .section-title {
+  color: oklch(96% 0.008 70);
+}
+.reviews .section-title em {
+  color: var(--glow);
+}
+.reviews .section-sub {
+  color: oklch(75% 0.012 65 / 0.85);
 }
 
 .reviews__stars {
@@ -1273,8 +1225,9 @@ button { cursor: pointer; border: none; background: none; }
   margin-top: 0.75rem;
 }
 .stars { color: var(--star); letter-spacing: 0.1em; }
+.reviews .stars { color: var(--glow); }
 .stars--lg { font-size: 1.3rem; }
-.reviews__platform { font-size: 0.8rem; color: var(--text-lo); }
+.reviews__platform { font-size: 0.8rem; color: oklch(72% 0.012 65 / 0.75); }
 
 /* Carousel */
 .reviews__carousel {
