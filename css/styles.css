@@ -440,15 +440,10 @@ button { cursor: pointer; border: none; background: none; }
   inset: 0;
   pointer-events: none;
   background:
-    /* Left-side text veil — feathers out at ~55% so the photo shows fully on the right */
+    /* Very light left veil — just enough to separate text from photo edge */
     linear-gradient(100deg,
-      oklch(96% 0.010 75 / 0.60) 0%,
-      oklch(96% 0.010 75 / 0.30) 38%,
-      transparent 58%),
-    /* Bottom veil — lifts the cream tone under the title row */
-    linear-gradient(0deg,
-      oklch(95% 0.012 75 / 0.50) 0%,
-      transparent 30%),
+      oklch(96% 0.010 75 / 0.15) 0%,
+      transparent 45%),
     /* Photo: subject (hands + stones) anchored top-right; open space bottom-left */
     url('../images/hero-bg.jpg') right top / cover no-repeat;
 }
