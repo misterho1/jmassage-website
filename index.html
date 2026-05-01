@@ -276,9 +276,19 @@
           <p class="section-sub">Each modality has a Utah-licensed therapist who specializes in it. Pick what your body needs. We have someone trained for it.</p>
         </header>
 
+        <!-- Onboard triage: helps first-time visitors triage 14 modalities by goal.
+             Aesop-style: typographic, restrained, one prompt + 4 routes. -->
+        <nav class="services__chooser reveal" aria-label="Help choosing a modality">
+          <span class="services__chooser-prompt">Not sure which?</span>
+          <a href="#svc-swedish" class="services__chooser-link"><em>First time</em> &middot; Swedish</a>
+          <a href="#svc-deeptissue" class="services__chooser-link"><em>Something won't release</em> &middot; Deep Tissue</a>
+          <a href="#svc-sports" class="services__chooser-link"><em>Training hard</em> &middot; Sports</a>
+          <a href="#svc-ashiatsu" class="services__chooser-link"><em>Try something deeper</em> &middot; Ashiatsu</a>
+        </nav>
+
         <div class="services__grid">
 
-          <article class="svc-card reveal-card">
+          <article id="svc-swedish" class="svc-card reveal-card">
             <span class="svc-card__num" aria-hidden="true">01</span>
             <h3 class="svc-card__name">Swedish Massage</h3>
             <p class="svc-card__desc">Long, fluid strokes that ease surface tension and quiet the nervous system. The right call if you've never had a massage before, or if you just want to be left alone for an hour.</p>
@@ -288,7 +298,7 @@
             </div>
           </article>
 
-          <article class="svc-card reveal-card">
+          <article id="svc-deeptissue" class="svc-card reveal-card">
             <span class="svc-card__num" aria-hidden="true">02</span>
             <h3 class="svc-card__name">Deep Tissue</h3>
             <p class="svc-card__desc">Slow, deliberate pressure that reaches past surface muscle to chronic tension. For knots that have been there for months, an IT band that won't release, shoulders that feel locked.</p>
@@ -298,7 +308,7 @@
             </div>
           </article>
 
-          <article class="svc-card reveal-card">
+          <article id="svc-sports" class="svc-card reveal-card">
             <span class="svc-card__num" aria-hidden="true">03</span>
             <h3 class="svc-card__name">Sports Massage</h3>
             <p class="svc-card__desc">Pre-event prep, post-event recovery, in-season maintenance. Built for runners, climbers, ski racers, lifters. Tell us your sport and the therapist targets accordingly.</p>
@@ -308,7 +318,7 @@
             </div>
           </article>
 
-          <article class="svc-card reveal-card">
+          <article id="svc-ashiatsu" class="svc-card reveal-card">
             <span class="svc-card__num" aria-hidden="true">04</span>
             <h3 class="svc-card__name">Ashiatsu</h3>
             <p class="svc-card__desc">Barefoot technique. The therapist uses controlled foot pressure for deeper, broader strokes than hands can deliver. Ask for it specifically &mdash; most studios in SLC don't offer it.</p>
@@ -318,7 +328,7 @@
             </div>
           </article>
 
-          <article class="svc-card svc-card--featured reveal-card">
+          <article id="svc-couples" class="svc-card svc-card--featured reveal-card">
             <span class="svc-card__num" aria-hidden="true">05</span>
             <h3 class="svc-card__name">Couples Massage</h3>
             <p class="svc-card__desc">Two therapists, two tables, one private suite. Same start time, same finish time. Occasion or no occasion, you don't have to coordinate when you book together.</p>
@@ -328,7 +338,7 @@
             </div>
           </article>
 
-          <article class="svc-card reveal-card">
+          <article id="svc-4hand" class="svc-card reveal-card">
             <span class="svc-card__num" aria-hidden="true">06</span>
             <h3 class="svc-card__name">4-Hand Massage</h3>
             <p class="svc-card__desc">Two therapists working you simultaneously. The mind can't track both at once, so it stops trying. If you've never had this, the first time is genuinely strange, then better than anything else.</p>
@@ -338,6 +348,23 @@
             </div>
           </article>
 
+        </div>
+
+        <!-- Secondary modalities — pricing transparency for the 8 not in the grid above.
+             PRODUCT.md: "Booking friction is enemy #1." Show prices, don't make people click. -->
+        <div class="services__more reveal" aria-label="Additional modalities">
+          <span class="services__more-label">Also offered</span>
+          <ul class="services__more-list">
+            <li><a href="services/shiatsu.html"><span>Shiatsu</span><em>From $80 / 60 min</em></a></li>
+            <li><a href="services/hot-stone.html"><span>Hot Stone</span><em>From $95 / 60 min</em></a></li>
+            <li><a href="services/reflexology.html"><span>Reflexology</span><em>From $55 / 30 min</em></a></li>
+            <li><a href="services/prenatal.html"><span>Prenatal</span><em>From $90 / 60 min</em></a></li>
+            <li><a href="services/thai-massage.html"><span>Thai Massage</span><em>From $85 / 60 min</em></a></li>
+            <li><a href="services/myofascial.html"><span>Myofascial Release</span><em>From $95 / 60 min</em></a></li>
+            <li><a href="services/infrared-sauna.html"><span>Infrared Sauna</span><em>$35 add-on &middot; $45 standalone</em></a></li>
+            <li><a href="services/foot-massage-head-spa.html"><span>Foot Massage &amp; Head Spa</span><em>See details &nearr;</em></a></li>
+          </ul>
+          <a href="pricing.html" class="services__more-link">Full pricing &rarr;</a>
         </div>
 
         <!-- Add-ons strip -->

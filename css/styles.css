@@ -681,6 +681,52 @@ button { cursor: pointer; border: none; background: none; }
   margin-bottom: 3rem;
 }
 
+/* Onboard chooser — typographic triage above the modality grid.
+   Aesop convention: prompt + plain text-link routes, no buttons or pills. */
+.services__chooser {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem 1.8rem;
+  margin: 0 0 3rem;
+  padding: 0 0 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.services__chooser-prompt {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  margin-right: 0.4rem;
+}
+.services__chooser-link {
+  font-size: 0.98rem;
+  color: var(--text-mid);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color var(--t), border-color var(--t);
+}
+.services__chooser-link em {
+  font-style: italic;
+  color: var(--text-hi);
+  margin-right: 0.15rem;
+}
+.services__chooser-link:hover {
+  color: var(--lantern);
+  border-bottom-color: var(--lantern);
+}
+.services__chooser-link:hover em {
+  color: var(--lantern);
+}
+@media (max-width: 720px) {
+  .services__chooser {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+}
+
 /* Service card — no photos, pure CSS luxury */
 .svc-card {
   background: var(--char);
@@ -693,6 +739,8 @@ button { cursor: pointer; border: none; background: none; }
   overflow: hidden;
   transition: border-color var(--t), transform var(--t-slow) var(--ease-out), box-shadow var(--t-slow);
   cursor: default;
+  /* Account for the 72px fixed header when chooser anchor-scrolls to a card */
+  scroll-margin-top: 100px;
 }
 
 /* Radial glow on hover — appears from mouse position via JS or center fallback */
@@ -836,6 +884,71 @@ button { cursor: pointer; border: none; background: none; }
   background: var(--lantern);
   color: var(--timber);
   border-color: var(--lantern);
+}
+
+/* Secondary modalities — Aesop catalog list. Two-column on desktop, single
+   column on mobile. No card chrome; pure typographic price list. */
+.services__more {
+  margin-top: 3.5rem;
+  padding: 2.5rem 0 0;
+  border-top: 1px solid var(--border);
+}
+.services__more-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lantern);
+  margin-bottom: 1.6rem;
+}
+.services__more-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 3rem;
+  row-gap: 0;
+  list-style: none;
+  margin-bottom: 2rem;
+}
+.services__more-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 1rem;
+  color: var(--text-hi);
+  transition: color var(--t), padding-left var(--t);
+}
+.services__more-list a:hover {
+  color: var(--lantern);
+  padding-left: 0.5rem;
+}
+.services__more-list em {
+  font-style: italic;
+  color: var(--text-lo);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.services__more-link {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lantern);
+  border-bottom: 1px solid var(--lantern);
+  padding-bottom: 3px;
+  transition: opacity var(--t);
+  margin-top: 1rem;
+}
+.services__more-link:hover { opacity: 0.65; }
+
+@media (max-width: 720px) {
+  .services__more-list { grid-template-columns: 1fr; column-gap: 0; }
 }
 
 /* Add-ons */
