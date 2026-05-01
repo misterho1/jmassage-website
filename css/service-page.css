@@ -724,20 +724,54 @@ ol.svc-breadcrumb__list,
   overflow: hidden;
   aspect-ratio: 16/10;
   background: var(--char);
+  border: 1px solid var(--border);
 }
-.svc-photo img {
+
+/* Pure-CSS abstract visual replaces the prior stock-spa <img>. PRODUCT.md
+   anti-ref #1 (warm-amber candle wellness-journey cliche) and #4 (stock spa
+   photography) drove the swap. Aesop-style: rings + radial pools + warm
+   gradient base, modality-agnostic so all 14 service pages share one pattern. */
+.svc-photo__visual {
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s ease;
+  background:
+    radial-gradient(ellipse 70% 60% at 25% 25%, oklch(48% 0.085 35 / 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 50% at 80% 80%, oklch(28% 0.02 65 / 0.10) 0%, transparent 65%),
+    linear-gradient(160deg, var(--char) 0%, var(--ember) 55%, var(--soot) 100%);
+  overflow: hidden;
 }
-.svc-photo:hover img { transform: scale(1.03); }
+.svc-photo__visual::before,
+.svc-photo__visual::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.svc-photo__visual::before {
+  width: 380px;
+  height: 380px;
+  top: -110px;
+  right: -110px;
+  border: 1px solid oklch(48% 0.085 35 / 0.12);
+  box-shadow:
+    0 0 0 60px oklch(48% 0.085 35 / 0.04),
+    0 0 0 130px oklch(48% 0.085 35 / 0.025);
+}
+.svc-photo__visual::after {
+  width: 200px;
+  height: 200px;
+  bottom: -60px;
+  left: -60px;
+  border: 1px solid oklch(28% 0.02 65 / 0.18);
+}
+
+/* Price overlay reworked for light visual surface */
 .svc-photo__price {
   position: absolute;
   bottom: 1.25rem;
   left: 1.25rem;
-  background: oklch(20% 0.015 60 / 0.75);
+  background: oklch(95% 0.012 75 / 0.92);
   backdrop-filter: blur(8px);
   border: 1px solid oklch(48% 0.085 35 / 0.3);
   border-radius: 10px;
