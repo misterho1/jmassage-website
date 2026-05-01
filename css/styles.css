@@ -433,21 +433,24 @@ button { cursor: pointer; border: none; background: none; }
   background: var(--timber);
 }
 
-/* Pure-CSS background: bone wash + soft architectural light pools
-   Reads as daylight in a quiet room, not candlelight. */
+/* Hero background: user-provided spa photo (cream tones, hands on towel, stones)
+   Overlay veil on the left ensures near-black text stays crisp over the photo. */
 .hero__bg {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    /* top-right window light */
-    radial-gradient(ellipse 55% 45% at 82% 8%, oklch(99% 0.005 75) 0%, transparent 65%),
-    /* lower-left soft floor pool — clay-tinted, restrained */
-    radial-gradient(ellipse 60% 50% at 8% 95%, oklch(91% 0.018 50 / 0.55) 0%, transparent 65%),
-    /* mid stone shadow for depth */
-    radial-gradient(ellipse 45% 40% at 65% 75%, oklch(87% 0.014 65 / 0.4) 0%, transparent 60%),
-    /* base wash */
-    linear-gradient(178deg, var(--timber) 0%, oklch(94% 0.013 70) 60%, oklch(92% 0.016 65) 100%);
+    /* Left-side text veil — feathers out at ~55% so the photo shows fully on the right */
+    linear-gradient(100deg,
+      oklch(96% 0.010 75 / 0.60) 0%,
+      oklch(96% 0.010 75 / 0.30) 38%,
+      transparent 58%),
+    /* Bottom veil — lifts the cream tone under the title row */
+    linear-gradient(0deg,
+      oklch(95% 0.012 75 / 0.50) 0%,
+      transparent 30%),
+    /* Photo: subject (hands + stones) anchored top-right; open space bottom-left */
+    url('../images/hero-bg.jpg') right top / cover no-repeat;
 }
 /* Subtle grain layer — keeps surface from feeling synthetic */
 .hero__bg::after {
