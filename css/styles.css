@@ -432,7 +432,7 @@ button { cursor: pointer; border: none; background: none; }
   overflow: hidden;
   background:
     linear-gradient(100deg, rgba(245,240,232,0.18) 0%, transparent 48%),
-    url('../images/hero-bg.jpg') right top / cover no-repeat;
+    url('../images/hero-bg-2.jpg') right top / cover no-repeat;
 }
 
 /* hero__bg div no longer needed — background is on .hero directly */
