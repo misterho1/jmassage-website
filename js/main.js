@@ -411,7 +411,7 @@ function initGiftCards() {
       setTimeout(() => { displayAmt.style.transform = ''; }, 220);
     }
     if (purchaseBtn) {
-      purchaseBtn.href = 'https://www.vagaro.com/Users/BusinessWidget.aspx?enc=MMLjhIwJMcwFQhXLL7ifVPbioWk7pbE3hH6uFDYChm26gdj5dG9JvA4rT62hQqZzayOpw8AomZLFoCnQ5D9/sbhobKYHbPJtWtzgE1ybDq7UTxiTjiVnB4oCSowLSZ1ddS6/3xXMBPXNPyYNmL1u/qzjxuZtcq2R7BdC6HOu2VbAXbn+j+2Jl6LQsT8hwCk6AFw1tQNUrqNw52knuQ/YASP5IdlxY0ETCVv9QaDpm27iLIVVsR4x5Y4e0ONybp9DIJawuRCSquUrlrboYHqSR1WwY5Eup3XYs8FqBcDnmQlNJ6QndzIDQqn75c7p2FTfKSlsnbzCpJ/rRxfoRcJmQfgc63ovAJ6LiV06S8B++dXzjnM9pl9vTmZaWfSKUmSjdfnAXOqNBI8jFiaURp9jjbRZOZyFq219yUanaNQ/jjd+c6ZIAD3Q6X9nbAUKjsjRbAcImCC3qY6VxchdahvPO58wpOIiN2qTVCBKlMUI5IevW+K9KFSpKNMAHWLRjkAIrjE5n48/r717FN/LXXNekw==';
+      purchaseBtn.href = 'https://www.vagaro.com/Users/BusinessWidget.aspx?enc=MMLjhIwJMcwFQhXLL7ifVPbioWk7pbE3hH6uFDYChm26gdj5dG9JvA4rT62hQqZzayOpw8AomZLFoCnQ5D9/sbhobKYHbPJtWtzgE1ybDq5ismLtlwioeVnBKcRdu+lo5yaPl9rNb6o8DrlhEGF9L9AYsnouR9OaRs2mkiDjcGLR1vw99L7Vdkf1lzdJaZASjq4L+aPe1YXQtBS/Q59Eo/oHqss7yz4ZKTmK8yYArASnxE7B4c5igEx/NXgHgnUYDWcnSe9WhTT3HXm/nNHNvpV6+LFn266BZykPE+WoOTEADlBMBuNfatJQ17ldHGRZJiFf3PgFJ6AoItYX9eiGyAzKlHySEOYh1Jz+gPcL+5wEDW5ZydjYohz9jlF94yMhulnXXPJqh9yrF2j8ZP9q+Wrw1Gumh07RkHSudjt7PBDafLVlrfwbvYvak9WxYu+KVfameMDwKcqDjPfFW3IieGSpwBk3EjL6+vXaI3GYphDBB7A/HyKRJfTsd7dhoEwnWsu0Oj508LlwRMnX5YfOdvIeIr1vdFrKIeJC8Fa5XHc=';
     }
   };
 
