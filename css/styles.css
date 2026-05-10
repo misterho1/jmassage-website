@@ -12,35 +12,36 @@
    via the tokens (body { background: var(--timber); color: var(--text-hi); }).
    ───────────────────────────────────────────────────────────────────────── */
 :root {
-  /* Backgrounds — warm cream / bone / stone (was deep dark) */
-  --timber:      oklch(95% 0.012 75);          /* warm cream — primary bg */
-  --soot:        oklch(91% 0.014 70);          /* bone — alt bg */
-  --char:        oklch(87% 0.014 65);          /* stone — tertiary bg */
-  --ember:       oklch(93% 0.013 70);          /* hover surface */
-  --pool:        oklch(20% 0.025 60);          /* dark editorial pause moment */
-  --slate:       oklch(28% 0.02 65);           /* secondary dark */
+  /* ── FOXTERRA-INSPIRED PALETTE (warm bone + charcoal + rose accent) ── */
+  /* Backgrounds — warm bone (#F8F7F2 family) */
+  --timber:      oklch(97% 0.005 85);          /* warm bone — primary bg #F8F7F2 */
+  --soot:        oklch(94% 0.008 80);          /* slightly warmer bone — alt bg */
+  --char:        oklch(90% 0.01 75);           /* stone — tertiary bg */
+  --ember:       oklch(95% 0.007 80);          /* hover surface */
+  --pool:        oklch(22% 0 0);               /* near-black dark band */
+  --slate:       oklch(28% 0.005 60);          /* warm dark */
 
-  /* Accent — restrained warm clay/terracotta (was gold; matches Aman/Aesop earth) */
-  --lantern:     oklch(48% 0.085 35);          /* clay terracotta — primary accent */
-  --amber:       oklch(42% 0.075 35);          /* deeper clay */
-  --glow:        oklch(56% 0.085 35);          /* lighter clay for hover */
-  --lantern-dim: oklch(48% 0.085 35 / 0.10);
-  --lantern-mid: oklch(48% 0.085 35 / 0.22);
-  --lantern-hi:  oklch(48% 0.085 35 / 0.45);
+  /* Accent — Foxterra rose / burgundy (#CC3366 family) */
+  --lantern:     oklch(56% 0.18 5);            /* rose — primary accent #CC3366 */
+  --amber:       oklch(48% 0.18 5);            /* deeper rose */
+  --glow:        oklch(64% 0.16 5);            /* lighter rose for hover */
+  --lantern-dim: oklch(56% 0.18 5 / 0.10);
+  --lantern-mid: oklch(56% 0.18 5 / 0.22);
+  --lantern-hi:  oklch(56% 0.18 5 / 0.45);
 
-  /* Text — dark walnut on cream (was light cream on dark) */
-  --text-hi:     oklch(20% 0.018 60);          /* high-contrast: body / headings */
-  --text-mid:    oklch(35% 0.015 60 / 0.85);   /* secondary */
-  --text-lo:     oklch(50% 0.012 65 / 0.72);   /* muted */
-  --text-dim:    oklch(60% 0.01 65 / 0.5);     /* dim */
+  /* Text — charcoal on bone (#333 / #555 / #888) */
+  --text-hi:     oklch(33% 0 0);               /* high-contrast: body/headings #333 */
+  --text-mid:    oklch(45% 0 0 / 0.85);        /* secondary */
+  --text-lo:     oklch(60% 0 0 / 0.72);        /* muted */
+  --text-dim:    oklch(72% 0 0 / 0.5);         /* dim */
 
   /* Borders */
-  --border:      oklch(20% 0.015 60 / 0.08);   /* subtle hairline */
-  --border-mid:  oklch(20% 0.015 60 / 0.18);   /* mid hairline */
-  --border-hi:   oklch(48% 0.085 35 / 0.5);    /* accent hairline */
+  --border:      oklch(33% 0 0 / 0.10);        /* subtle hairline */
+  --border-mid:  oklch(33% 0 0 / 0.20);        /* mid hairline */
+  --border-hi:   oklch(56% 0.18 5 / 0.5);      /* accent hairline (rose) */
 
   /* Stars / rating */
-  --star:        oklch(56% 0.085 35);          /* clay (was gold) */
+  --star:        oklch(56% 0.18 5);            /* rose */
 
   /* Fonts — single-family Switzer (escapes Cormorant Garamond + Jost reflex-reject pair) */
   --font-head:   'Switzer', 'Helvetica Neue', Arial, sans-serif;
@@ -1106,6 +1107,83 @@ button { cursor: pointer; border: none; background: none; }
   transform: translateX(3px);
 }
 .trust-item svg { width: 18px; height: 18px; color: var(--lantern); flex-shrink: 0; }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   BOOK PAGE — embedded Vagaro widget
+════════════════════════════════════════════════════════════════════════════ */
+.book-hero {
+  padding: 9rem 0 3rem;
+  text-align: center;
+  background: var(--timber);
+  border-bottom: 1px solid var(--border);
+}
+.book-hero__crumbs {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-lo);
+  margin-bottom: 1.5rem;
+}
+.book-hero__crumbs a {
+  color: var(--lantern);
+  text-decoration: none;
+}
+.book-hero__crumbs span { opacity: 0.5; margin: 0 0.4rem; }
+.book-hero__title {
+  font-family: var(--font-head);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--text-hi);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+.book-hero__sub {
+  font-size: 1.05rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.book-embed {
+  padding: 3rem 0 6rem;
+  background: var(--timber);
+}
+.book-embed__wrap {
+  max-width: 880px;
+  margin: 0 auto;
+}
+.book-embed__iframe {
+  width: 100%;
+  height: 1100px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: #fff;
+  display: block;
+}
+.book-embed__fallback {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.88rem;
+  color: var(--text-lo);
+}
+.book-embed__fallback a {
+  color: var(--lantern);
+  text-decoration: none;
+  border-bottom: 1px solid var(--lantern-mid);
+  transition: color var(--t), border-color var(--t);
+}
+.book-embed__fallback a:hover {
+  color: var(--glow);
+  border-color: var(--glow);
+}
+
+@media (max-width: 720px) {
+  .book-hero { padding: 7rem 0 2rem; }
+  .book-embed { padding: 2rem 0 4rem; }
+  .book-embed__iframe { height: 1400px; }
+}
 
 /* ════════════════════════════════════════════════════════════════════════════
    BOOKING

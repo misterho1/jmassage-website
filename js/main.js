@@ -411,7 +411,7 @@ function initGiftCards() {
       setTimeout(() => { displayAmt.style.transform = ''; }, 220);
     }
     if (purchaseBtn) {
-      purchaseBtn.href = 'https://www.vagaro.com/Users/BusinessWidget.aspx?enc=MMLjhIwJMcwFQhXLL7ifVHKYuAKWAUhD4G0L9qRXJ5pm+kkiqAWwPdX1XsaeYmPl0JrchjPDG5qHxPdqGpuT5VUkJrVVC/V6OkhN7z9H93qNMF5h1uVTP8pXdABoEFp1t60XkKx1MoGeHQhf0qQlz1BEDE+E54KRIZAo/koOrZ9/aJa3otAborKYlGIAu40RMZCJ1JUFrvQIoF19ov9i69JaQlnxLtiK9D37/X10OsvtylybX4Eg0cJytqTP4qcrcGg0FwhJLH7GY8AfgJGFE23YrLIQPY233qBJ9Z36UnrC0Xee51D7GmpXbU7v6FKFPaaiNa6vBErJ1cqt4V+sJYW4OJAVY5fZylISm49Ax4Ao8a4oNi0xkAt9IFplsE19gwGag56mdydyvMyK4WtLCTWApc2S2egPnwtpT4AG7gi+Fn3VFUSMM1D703Ni963UIlRfEQ8HEvfF2w8buXQbAn2o3/L+Su5QtAwbECxMtx3QUal1GTXga7dwlvVpjEsqSyQqqm0Tjc2evw3uIgXWOA==';
+      purchaseBtn.href = '/book.html';
     }
   };
 
