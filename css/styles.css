@@ -21,13 +21,13 @@
   --pool:        oklch(22% 0 0);               /* near-black dark band */
   --slate:       oklch(28% 0.005 60);          /* warm dark */
 
-  /* Accent — Foxterra rose / burgundy (#CC3366 family) */
-  --lantern:     oklch(56% 0.18 5);            /* rose — primary accent #CC3366 */
-  --amber:       oklch(48% 0.18 5);            /* deeper rose */
-  --glow:        oklch(64% 0.16 5);            /* lighter rose for hover */
-  --lantern-dim: oklch(56% 0.18 5 / 0.10);
-  --lantern-mid: oklch(56% 0.18 5 / 0.22);
-  --lantern-hi:  oklch(56% 0.18 5 / 0.45);
+  /* Accent — warm clay terracotta (Aman/Aesop earthy) — replaces rose */
+  --lantern:     oklch(48% 0.085 35);          /* clay terracotta — primary accent */
+  --amber:       oklch(42% 0.075 35);          /* deeper clay */
+  --glow:        oklch(56% 0.085 35);          /* lighter clay for hover */
+  --lantern-dim: oklch(48% 0.085 35 / 0.10);
+  --lantern-mid: oklch(48% 0.085 35 / 0.22);
+  --lantern-hi:  oklch(48% 0.085 35 / 0.45);
 
   /* Text — charcoal on bone (#333 / #555 / #888) */
   --text-hi:     oklch(33% 0 0);               /* high-contrast: body/headings #333 */
@@ -38,10 +38,10 @@
   /* Borders */
   --border:      oklch(33% 0 0 / 0.10);        /* subtle hairline */
   --border-mid:  oklch(33% 0 0 / 0.20);        /* mid hairline */
-  --border-hi:   oklch(56% 0.18 5 / 0.5);      /* accent hairline (rose) */
+  --border-hi:   oklch(48% 0.085 35 / 0.5);    /* accent hairline (clay) */
 
   /* Stars / rating */
-  --star:        oklch(56% 0.18 5);            /* rose */
+  --star:        oklch(48% 0.085 35);          /* clay */
 
   /* Fonts — Fraunces serif for editorial headings, Switzer sans for body */
   --font-head:   'Fraunces', 'Cormorant Garamond', Georgia, serif;
