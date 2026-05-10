@@ -1275,22 +1275,14 @@ button { cursor: pointer; border: none; background: none; }
 .ed-hero__media { z-index: 0; }
 .ed-hero__scrim {
   z-index: 1;
-  /* Multi-axis scrim:
-     1) Horizontal: heavy dark on the LEFT to mask the AI image's near-white
-        negative space which otherwise blends with the cream page background
-        and reads as a "missing image" gap.
-     2) Vertical: medium dark at top (nav legibility) + heavy dark at bottom
-        (headline contrast). */
-  background:
-    linear-gradient(90deg,
-      rgba(20,20,20,0.85) 0%,
-      rgba(20,20,20,0.60) 28%,
-      rgba(20,20,20,0.20) 60%,
-      rgba(20,20,20,0.10) 100%),
-    linear-gradient(180deg,
-      rgba(20,20,20,0.40) 0%,
-      rgba(20,20,20,0.18) 40%,
-      rgba(20,20,20,0.82) 100%);
+  /* Vertical scrim: medium dark at top for nav legibility, heavy dark at
+     bottom for headline contrast. The new hero image fills its frame
+     edge-to-edge with no white negative space, so the horizontal-darken
+     hack is no longer needed. */
+  background: linear-gradient(180deg,
+    rgba(20,20,20,0.32) 0%,
+    rgba(20,20,20,0.15) 40%,
+    rgba(20,20,20,0.78) 100%);
 }
 .ed-hero__content {
   position: relative;
