@@ -1220,8 +1220,8 @@ button { cursor: pointer; border: none; background: none; }
 /* ── 1. EDITORIAL HERO ───────────────────────────────────────────────────── */
 .ed-hero {
   position: relative;
-  height: 92vh;
-  min-height: 680px;
+  height: 100vh;
+  min-height: 720px;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -1622,8 +1622,8 @@ button { cursor: pointer; border: none; background: none; }
   .ed-about__media { order: -1; aspect-ratio: 16/10; }
 }
 @media (max-width: 640px) {
-  .ed-hero { height: auto; min-height: 0; padding: 9rem 0 4rem; }
-  .ed-hero__content { padding-bottom: 0; }
+  .ed-hero { height: 100vh; min-height: 600px; padding: 0; }
+  .ed-hero__content { padding-bottom: 4rem; padding-top: 8rem; }
   .ed-hero__title { font-size: 2.4rem; }
   .ed-hero__actions { flex-direction: column; }
   .ed-hero .ed-btn { width: 100%; }
