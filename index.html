@@ -30,7 +30,7 @@
   <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css?v=10">
+  <link rel="stylesheet" href="css/styles.css?v=11">
 
   <script type="application/ld+json">
   {
@@ -72,6 +72,7 @@
 </head>
 <body>
 
+  <a href="#main" class="skip-link">Skip to content</a>
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
   <header id="header" class="header">
@@ -115,12 +116,15 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
 
     <!-- 1. EDITORIAL HERO -->
     <section class="ed-hero">
       <div class="ed-hero__media" aria-hidden="true">
-        <img src="images/editorial/hero-room.png" alt="" loading="eager">
+        <picture>
+          <source srcset="images/editorial/hero-room.webp" type="image/webp">
+          <img src="images/editorial/hero-room.png" alt="" loading="eager" width="2752" height="1536">
+        </picture>
         <div class="ed-hero__scrim"></div>
       </div>
       <div class="ed-hero__content container">
@@ -152,11 +156,11 @@
       <div class="container">
         <div class="ed-intro__inner">
           <p class="ed-intro__quote">
-            <em>The body keeps the score</em> — and a good therapist
-            knows where to find it. We are not a luxury. We are a
-            return to baseline.
+            Massage is not a luxury. It is regular maintenance for a body
+            that runs hard, sleeps less than it should, and asks too much
+            of itself.
           </p>
-          <p class="ed-intro__byline">— A note from the studio</p>
+          <p class="ed-intro__byline">A note from the studio</p>
         </div>
       </div>
     </section>
@@ -169,7 +173,7 @@
           <h2 class="ed-section-title">A treatment <em>for every body.</em></h2>
           <p class="ed-section-sub">
             Fourteen modalities, organized into three families. Pick what your
-            body needs — or call and we'll help you choose.
+            body needs, or call and we'll help you choose.
           </p>
         </header>
 
@@ -178,7 +182,10 @@
           <article class="ed-svc">
             <a href="services/swedish-massage.html" class="ed-svc__link">
               <div class="ed-svc__media">
-                <img src="images/editorial/service-body.png" alt="Therapist working on a client's back at J Massage SLC" loading="lazy">
+                <picture>
+                  <source srcset="images/editorial/service-body.webp" type="image/webp">
+                  <img src="images/editorial/service-body.png" alt="Therapist working on a client's back at J Massage SLC" loading="lazy" width="928" height="1152">
+                </picture>
               </div>
               <span class="ed-svc__num">01</span>
               <h3 class="ed-svc__name">Body Massage</h3>
@@ -193,7 +200,10 @@
           <article class="ed-svc">
             <a href="services/foot-massage-head-spa.html" class="ed-svc__link">
               <div class="ed-svc__media">
-                <img src="images/editorial/service-head.png" alt="Head spa and scalp treatment at J Massage SLC" loading="lazy">
+                <picture>
+                  <source srcset="images/editorial/service-head.webp" type="image/webp">
+                  <img src="images/editorial/service-head.png" alt="Head spa and scalp treatment at J Massage SLC" loading="lazy" width="928" height="1152">
+                </picture>
               </div>
               <span class="ed-svc__num">02</span>
               <h3 class="ed-svc__name">Head &amp; Scalp Spa</h3>
@@ -208,7 +218,10 @@
           <article class="ed-svc">
             <a href="services/reflexology.html" class="ed-svc__link">
               <div class="ed-svc__media">
-                <img src="images/editorial/service-foot.png" alt="Foot reflexology at J Massage SLC" loading="lazy">
+                <picture>
+                  <source srcset="images/editorial/service-foot.webp" type="image/webp">
+                  <img src="images/editorial/service-foot.png" alt="Foot reflexology at J Massage SLC" loading="lazy" width="928" height="1152">
+                </picture>
               </div>
               <span class="ed-svc__num">03</span>
               <h3 class="ed-svc__name">Foot &amp; Reflexology</h3>
@@ -232,14 +245,17 @@
     <section class="ed-pair">
       <div class="container ed-pair__grid">
         <div class="ed-pair__media">
-          <img src="images/editorial/service-couples.png" alt="Private couples massage suite at J Massage SLC" loading="lazy">
+          <picture>
+            <source srcset="images/editorial/service-couples.webp" type="image/webp">
+            <img src="images/editorial/service-couples.png" alt="Private couples massage suite at J Massage SLC" loading="lazy" width="1376" height="768">
+          </picture>
         </div>
         <div class="ed-pair__content">
           <span class="ed-eyebrow">Together</span>
           <h2 class="ed-section-title">Two tables.<br><em>One private suite.</em></h2>
           <p class="ed-pair__body">
             Couples massage is the most-requested experience in our studio.
-            Two licensed therapists work in parallel — same start time, same
+            Two licensed therapists work in parallel: same start time, same
             finish, no coordinating logistics. Book it for an occasion, or
             book it for a Tuesday.
           </p>
@@ -277,7 +293,7 @@
             <span class="ed-process__num">02</span>
             <h3 class="ed-process__title">Book a time.</h3>
             <p class="ed-process__body">
-              Online, in seconds. Open every day from 10am to 10pm — same-day
+              Online, in seconds. Open every day from 10am to 10pm. Same-day
               slots are often available. Confirm instantly. Reschedule freely.
             </p>
           </li>
@@ -309,7 +325,7 @@
           </blockquote>
           <p class="ed-quote__cite">
             <span class="ed-quote__stars">★★★★★</span>
-            <span class="ed-quote__name">— A verified Google review</span>
+            <span class="ed-quote__name">A verified Google review</span>
           </p>
           <a href="reviews.html" class="ed-link ed-quote__more">Read all 450+ reviews →</a>
         </div>
@@ -338,7 +354,10 @@
           <a href="about.html" class="ed-btn ed-btn--ghost">More about the studio →</a>
         </div>
         <div class="ed-about__media">
-          <img src="images/editorial/detail-towels.png" alt="Detail of folded linens at J Massage SLC" loading="lazy">
+          <picture>
+            <source srcset="images/editorial/detail-towels.webp" type="image/webp">
+            <img src="images/editorial/detail-towels.png" alt="Detail of folded linens at J Massage SLC" loading="lazy" width="928" height="1152">
+          </picture>
         </div>
       </div>
     </section>

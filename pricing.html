@@ -20,7 +20,7 @@
 
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
   <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=10">
+  <link rel="stylesheet" href="css/styles.css?v=11">
 
   <style>
     .pricing-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 0.92rem; }
@@ -133,6 +133,7 @@
 </head>
 <body>
 
+  <a href="#main" class="skip-link">Skip to content</a>
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
   <header id="header" class="header">
@@ -162,7 +163,7 @@
             </ul>
           </li>
           <li><a href="about.html" class="nav__link">About</a></li>
-          <li><a href="pricing.html" class="nav__link">Pricing</a></li>
+          <li><a href="pricing.html" class="nav__link" aria-current="page">Pricing</a></li>
           <li><a href="reviews.html" class="nav__link">Reviews</a></li>
           <li><a href="gift-cards.html" class="nav__link">Gift Cards</a></li>
           <li><a href="faq.html" class="nav__link">FAQ</a></li>
@@ -176,7 +177,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
 
     <!-- HERO -->
     <section style="padding: 9rem 0 5rem; background: linear-gradient(160deg, var(--soot) 0%, var(--timber) 60%); border-bottom: 1px solid var(--border);">
