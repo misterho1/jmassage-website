@@ -1111,190 +1111,80 @@ button { cursor: pointer; border: none; background: none; }
    BOOKING
 ════════════════════════════════════════════════════════════════════════════ */
 .booking {
-  background: var(--soot);
+  background: var(--pool);
   position: relative;
 }
 .booking::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 100%, oklch(28% 0.02 65 / 0.25), transparent);
-  pointer-events: none;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 48px; height: 1px;
+  background: var(--lantern);
+  opacity: 0.5;
 }
 
-.booking__wrap {
-  background: var(--char);
-  border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  overflow: hidden;
+/* ── Centered CTA ── */
+.booking__cta-center {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.5rem;
-  padding: 3rem 2.5rem 2.75rem;
-  position: relative;
+  gap: 2rem;
 }
 
-/* ── Service quick-pick tiles ── */
-.booking__services {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 0.75rem;
-  width: 100%;
+.booking .section-label {
+  color: oklch(70% 0.012 65 / 0.7);
 }
-.bk-svc {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 1.1rem 0.5rem;
-  background: var(--ember);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  text-decoration: none;
-  color: var(--text-mid);
-  font-size: 0.72rem;
-  font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: background var(--t), border-color var(--t), color var(--t), transform var(--t);
+
+.booking__cta-heading {
+  font-family: var(--font-head);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: oklch(96% 0.008 70);
 }
-.bk-svc:hover {
-  background: oklch(48% 0.085 35 / 0.12);
-  border-color: oklch(48% 0.085 35 / 0.45);
+.booking__cta-heading em {
+  font-style: italic;
   color: var(--glow);
-  transform: translateY(-3px);
-}
-.bk-svc__icon {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--lantern);
-}
-.bk-svc__icon svg {
-  width: 100%;
-  height: 100%;
-}
-.bk-svc__name { font-weight: 500; }
-
-/* ── Primary CTA ── */
-.booking__cta-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
 }
 
-.booking__cta-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1.15rem 2.8rem;
-  background: linear-gradient(135deg, var(--lantern) 0%, oklch(48% 0.085 35) 40%, var(--glow) 100%);
-  color: oklch(94% 0.013 75);
-  font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 4px;
-  overflow: hidden;
-  transition: transform var(--t), box-shadow var(--t), filter var(--t);
-  box-shadow: 0 0 32px oklch(48% 0.085 35 / 0.35), 0 4px 20px oklch(20% 0.015 60 / 0.4);
-}
-.booking__cta-btn:hover {
-  transform: translateY(-2px) scale(1.015);
-  box-shadow: 0 0 48px oklch(56% 0.085 35 / 0.55), 0 8px 28px oklch(20% 0.015 60 / 0.45);
-  filter: brightness(1.08);
-}
-.booking__cta-btn-shimmer {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(110deg,
-    transparent 20%,
-    oklch(20% 0.015 60 / 0.22) 50%,
-    transparent 80%
-  );
-  background-size: 220% 100%;
-  background-position: 200% 0;
-  animation: shimmerBtn 2.8s ease-in-out infinite;
-}
-@keyframes shimmerBtn {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-.booking__cta-btn-icon,
-.booking__cta-btn-arrow {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  position: relative;
-}
-.booking__cta-sub {
-  font-size: 0.8rem;
-  color: var(--text-lo);
-  letter-spacing: 0.03em;
-  font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
+.booking__cta-body {
+  font-size: 1.1rem;
+  color: oklch(72% 0.012 65 / 0.85);
+  line-height: 1.75;
+  max-width: 500px;
 }
 
-/* ── Trust signals row ── */
-.booking__trust {
+.booking__btn-row {
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-  width: 100%;
 }
-.bk-trust-item {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.8rem;
-  color: var(--text-mid);
-  font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif;
+
+/* Ghost button override for dark background */
+.booking .btn--ghost {
+  color: oklch(92% 0.008 70);
+  border-color: oklch(92% 0.008 70 / 0.3);
+}
+.booking .btn--ghost:hover {
+  color: var(--glow);
+  border-color: var(--glow);
+  background: transparent;
+}
+
+.booking__cta-fine {
+  font-size: 0.78rem;
   letter-spacing: 0.03em;
-}
-.bk-trust-icon {
-  color: var(--lantern);
-  font-style: normal;
-}
-.bk-trust-sep {
-  width: 1px;
-  height: 16px;
-  background: var(--border);
+  color: oklch(55% 0.01 65 / 0.65);
 }
 
-/* ── Note ── */
-.booking__note {
-  text-align: center;
-  margin-top: 1.5rem;
-  font-size: 0.88rem;
-  color: var(--text-lo);
-}
-.booking__note a {
-  color: var(--lantern);
-  transition: color var(--t);
-}
-.booking__note a:hover { color: var(--glow); }
-
-/* ── Responsive ── */
-@media (max-width: 820px) {
-  .booking__services { grid-template-columns: repeat(3, 1fr); }
-}
 @media (max-width: 540px) {
-  .booking__wrap { padding: 2rem 1.25rem 2rem; gap: 2rem; }
-  .booking__services { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
-  .bk-svc { padding: 0.85rem 0.3rem; font-size: 0.65rem; }
-  .bk-trust-sep { display: none; }
-  .booking__trust { gap: 0.75rem; }
-  .booking__cta-btn { font-size: 0.92rem; padding: 1rem 1.8rem; }
+  .booking__btn-row { flex-direction: column; width: 100%; }
+  .booking__btn-row .btn { width: 100%; justify-content: center; }
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
