@@ -1254,7 +1254,7 @@ button { cursor: pointer; border: none; background: none; }
   height: 100vh;
   min-height: 720px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;        /* Vertically centered headline */
   overflow: hidden;
   color: var(--timber);
   background: var(--pool);
@@ -1275,19 +1275,23 @@ button { cursor: pointer; border: none; background: none; }
 .ed-hero__media { z-index: 0; }
 .ed-hero__scrim {
   z-index: 1;
-  /* Vertical scrim: medium dark at top for nav legibility, heavy dark at
-     bottom for headline contrast. The new hero image fills its frame
-     edge-to-edge with no white negative space, so the horizontal-darken
-     hack is no longer needed. */
-  background: linear-gradient(180deg,
-    rgba(20,20,20,0.32) 0%,
-    rgba(20,20,20,0.15) 40%,
-    rgba(20,20,20,0.78) 100%);
+  /* Stronger overall darkening for headline legibility, with a centered
+     radial pool of even-darker tone behind the text block. The image
+     stays visible but the text now reads at AAA contrast. */
+  background:
+    radial-gradient(ellipse 65% 55% at 35% 50%,
+      rgba(0,0,0,0.65) 0%,
+      rgba(0,0,0,0.35) 60%,
+      rgba(0,0,0,0.20) 100%),
+    linear-gradient(180deg,
+      rgba(0,0,0,0.45) 0%,
+      rgba(0,0,0,0.40) 50%,
+      rgba(0,0,0,0.55) 100%);
 }
 .ed-hero__content {
   position: relative;
   z-index: 1;
-  padding-bottom: 5rem;
+  padding: 2rem 0;            /* Equal top/bottom — content sits dead center */
   max-width: 880px;
 }
 .ed-hero__eyebrow {
@@ -1662,7 +1666,7 @@ button { cursor: pointer; border: none; background: none; }
 }
 @media (max-width: 640px) {
   .ed-hero { height: 100vh; min-height: 600px; padding: 0; }
-  .ed-hero__content { padding-bottom: 4rem; padding-top: 8rem; }
+  .ed-hero__content { padding: 5rem 0 2rem; }   /* leaves room for fixed header on mobile, content stays vertically centered */
   /* Hero title: tighten line-height + add letter-spacing to keep ~26px @375px
      readable; previous default leading felt cramped on small viewports. */
   .ed-hero__title { font-size: 2.4rem; line-height: 1.08; letter-spacing: -0.018em; }
