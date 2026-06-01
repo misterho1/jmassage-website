@@ -3,3 +3,6 @@
 # into the canonical service page.
 /couples-massage          /services/couples-massage   301
 /couples-massage.html     /services/couples-massage   301
+
+# Force apex (www -> non-www) for consistent canonical host
+https://www.jmassageslc.com/*   https://jmassageslc.com/:splat   301
