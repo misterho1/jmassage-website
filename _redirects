@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects
+# Consolidate the orphaned flat couples URL (was self-canonicalizing to the homepage)
+# into the canonical service page.
+/couples-massage          /services/couples-massage   301
+/couples-massage.html     /services/couples-massage   301
