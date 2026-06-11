@@ -734,15 +734,29 @@
     document.querySelectorAll('.reveal, .reveal-card').forEach(el => io.observe(el));
 
     // FAQ
+    const syncFaqAria = () => {
+      document.querySelectorAll('.faq-item').forEach(i => {
+        const q = i.querySelector('.faq-q');
+        if (q) q.setAttribute('aria-expanded', i.classList.contains('open') ? 'true' : 'false');
+      });
+    };
     document.querySelectorAll('.faq-item').forEach(item => {
-      item.querySelector('.faq-q').addEventListener('click', () => {
+      const q = item.querySelector('.faq-q');
+      q.setAttribute('tabindex', '0');
+      const toggle = () => {
         const isOpen = item.classList.contains('open');
         document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
         if (!isOpen) item.classList.add('open');
+        syncFaqAria();
+      };
+      q.addEventListener('click', toggle);
+      q.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
       });
     });
     const firstFaq = document.querySelector('.faq-item');
     if (firstFaq) firstFaq.classList.add('open');
+    syncFaqAria();
 
     // Gift card UI
     const amtBtns = document.querySelectorAll('.gift-amt');
