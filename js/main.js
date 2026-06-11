@@ -115,6 +115,10 @@ function initHeader() {
    HERO TEXT REVEAL
    ═══════════════════════════════════════════════════════════════════════════ */
 function initHeroReveal() {
+  // motion.js (GSAP) drives the hero when available; this is the fallback.
+  if (window.gsap && window.ScrollTrigger &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
   const lines = document.querySelectorAll('.hero__line');
   lines.forEach((line, i) => {
     setTimeout(() => line.classList.add('revealed'), 200 + i * 180);
@@ -209,21 +213,21 @@ function initCardGlow() {
       card.style.setProperty('--glow-x', x + '%');
       card.style.setProperty('--glow-y', y + '%');
       card.style.setProperty('--before-bg',
-        `radial-gradient(circle at ${x}% ${y}%, rgba(200,136,42,0.13) 0%, transparent 65%)`
+        `radial-gradient(circle at ${x}% ${y}%, var(--glow-strong, rgba(200,136,42,0.13)) 0%, transparent 65%)`
       );
     });
 
     card.addEventListener('mouseleave', () => {
       card.style.removeProperty('--before-bg');
       card.style.setProperty('--before-bg',
-        'radial-gradient(circle at 50% 120%, rgba(200,136,42,0.07) 0%, transparent 65%)'
+        'radial-gradient(circle at 50% 120%, var(--glow-rest, rgba(200,136,42,0.07)) 0%, transparent 65%)'
       );
     });
   });
 
   // CSS custom property override for ::before
   const style = document.createElement('style');
-  style.textContent = `.svc-card::before { background: var(--before-bg, radial-gradient(circle at 50% 120%, rgba(200,136,42,0.07) 0%, transparent 65%)) !important; }`;
+  style.textContent = `.svc-card::before { background: var(--before-bg, radial-gradient(circle at 50% 120%, var(--glow-rest, rgba(200,136,42,0.07)) 0%, transparent 65%)) !important; }`;
   document.head.appendChild(style);
 }
 

@@ -2643,3 +2643,15 @@ button { cursor: pointer; border: none; background: none; }
     border: 0;
   }
 }
+
+/* ─── GSAP MOTION LAYER (2026-06) ─────────────────────────────────────────── */
+:root {
+  --glow-strong: oklch(48% 0.085 35 / 0.13);
+  --glow-rest: oklch(48% 0.085 35 / 0.07);
+}
+/* motion.js owns these transforms while the entrance plays — kills the CSS
+   transition race; .revealed + clearProps restore the class-driven resting state. */
+.gsap-driven .hero__line > span,
+.gsap-driven [data-reveal-fade] { transition: none; }
+/* Parallax images get slight overscale so the drift never exposes edges. */
+img[data-parallax] { scale: 1.12; }
