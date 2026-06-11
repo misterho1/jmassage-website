@@ -2675,3 +2675,19 @@ img[data-parallax] { scale: 1.12; }
 .band-warm .ed-section-label::after { background: oklch(97% 0.005 85 / 0.25); }
 .band-warm .ed-pair__meta { color: oklch(97% 0.005 85 / 0.6); }
 .band-warm .booking__note { color: oklch(97% 0.005 85 / 0.6); }
+
+
+/* ── FEATURED SERVICE HIERARCHY (2026-06 visual elevation) ─────────────── */
+@media (min-width: 821px) {
+  .ed-services__grid {
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: auto;
+    align-items: stretch;
+  }
+  .ed-svc--featured { grid-column: 1 / 8; grid-row: 1 / 3; display: flex; }
+  .ed-svc--featured .ed-svc__link { display: flex; flex-direction: column; width: 100%; }
+  .ed-svc--featured .ed-svc__media { flex: 1; min-height: 480px; aspect-ratio: auto; }
+  .ed-svc--featured .ed-svc__name { font-size: clamp(1.8rem, 2.4vw, 2.6rem); }
+  .ed-svc:not(.ed-svc--featured) { grid-column: 8 / 13; }
+  .ed-svc:not(.ed-svc--featured) .ed-svc__media { aspect-ratio: 16 / 7; }
+}
