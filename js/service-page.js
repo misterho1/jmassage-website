@@ -69,16 +69,16 @@ function initFAQ() {
     if (!q) return;
     q.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
-      // Close all
+      // Close all — both markup patterns (.faq-q legacy, .faq-item__question BEM)
       document.querySelectorAll('.faq-item.open').forEach(i => {
         i.classList.remove('open');
-        const b = i.querySelector('.faq-item__question');
+        const b = i.querySelector('.faq-q, .faq-item__question');
         if (b) b.setAttribute('aria-expanded', 'false');
       });
       // Open clicked (if it was closed)
       if (!isOpen) {
         item.classList.add('open');
-        if (q.classList.contains('faq-item__question')) q.setAttribute('aria-expanded', 'true');
+        q.setAttribute('aria-expanded', 'true');
       }
     });
   });
@@ -86,7 +86,7 @@ function initFAQ() {
   const first = document.querySelector('.faq-item');
   if (first) {
     first.classList.add('open');
-    const b = first.querySelector('.faq-item__question');
+    const b = first.querySelector('.faq-q, .faq-item__question');
     if (b) b.setAttribute('aria-expanded', 'true');
   }
 }

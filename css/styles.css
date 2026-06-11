@@ -765,12 +765,14 @@ button { cursor: pointer; border: none; background: none; }
   scroll-margin-top: 100px;
 }
 
-/* Radial glow on hover — appears from mouse position via JS or center fallback */
+/* Radial glow on hover — appears from mouse position via JS or center fallback.
+   --before-bg is set inline by initCardGlow (main.js); the fallback below is
+   the no-JS resting state. No !important needed — the var wins when present. */
 .svc-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 120%, oklch(48% 0.085 35 / 0.10) 0%, transparent 65%);
+  background: var(--before-bg, radial-gradient(circle at 50% 120%, oklch(48% 0.085 35 / 0.10) 0%, transparent 65%));
   opacity: 0;
   transition: opacity var(--t-slow);
   pointer-events: none;
@@ -803,7 +805,7 @@ button { cursor: pointer; border: none; background: none; }
   border-color: var(--border-mid);
 }
 .svc-card--featured::before {
-  background: radial-gradient(circle at 50% 0%, oklch(48% 0.085 35 / 0.14) 0%, transparent 60%);
+  background: var(--before-bg, radial-gradient(circle at 50% 0%, oklch(48% 0.085 35 / 0.14) 0%, transparent 60%));
   opacity: 1;
 }
 

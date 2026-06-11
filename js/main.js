@@ -225,10 +225,8 @@ function initCardGlow() {
     });
   });
 
-  // CSS custom property override for ::before
-  const style = document.createElement('style');
-  style.textContent = `.svc-card::before { background: var(--before-bg, radial-gradient(circle at 50% 120%, var(--glow-rest, rgba(200,136,42,0.07)) 0%, transparent 65%)) !important; }`;
-  document.head.appendChild(style);
+  // .svc-card::before reads var(--before-bg, <fallback>) directly in
+  // css/styles.css — no injected !important rule needed for the hover var.
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -429,8 +427,8 @@ function initGiftCards() {
   });
 
   customAmt?.addEventListener('input', () => {
-    const val = parseInt(customAmt.value, 10);
-    if (val >= 10 && val <= 500) {
+    const val = Number(customAmt.value);
+    if (Number.isInteger(val) && val >= 10 && val <= 500) {
       amtBtns.forEach(b => b.classList.remove('gift-amt--active'));
       updateDisplay(val);
     }
