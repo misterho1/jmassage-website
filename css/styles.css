@@ -2670,9 +2670,18 @@ img[data-parallax] { scale: 1.12; }
 .band-warm h2, .band-warm h3 { color: var(--timber); }
 .band-warm .ed-section-title em { color: var(--glow); }
 .band-warm p { color: oklch(97% 0.005 85 / 0.82); }
-.band-warm .ed-section-label { color: var(--glow); }
+.band-warm .ed-section-label,
+.band-warm .ed-eyebrow { color: var(--glow); }
 .band-warm .ed-section-label::before,
 .band-warm .ed-section-label::after { background: oklch(97% 0.005 85 / 0.25); }
+.band-warm .ed-btn--ghost {
+  color: var(--timber);
+  border-color: oklch(97% 0.005 85 / 0.35);
+}
+.band-warm .ed-btn--ghost:hover {
+  color: var(--glow);
+  border-color: var(--glow);
+}
 .band-warm .ed-pair__meta { color: oklch(97% 0.005 85 / 0.6); }
 .band-warm .booking__note { color: oklch(97% 0.005 85 / 0.6); }
 
