@@ -309,7 +309,7 @@ function initReviews() {
       const card = document.createElement('div');
       card.className = 'review-card';
       card.innerHTML = `
-        <div class="review-card__stars">${'★'.repeat(rating)}</div>
+        <div class="review-card__stars" role="img" aria-label="${rating} out of 5 stars">${'★'.repeat(rating)}</div>
         <p class="review-card__quote">"${text}"</p>
         <div class="review-card__author">
           <div class="review-card__avatar">${initials}</div>
