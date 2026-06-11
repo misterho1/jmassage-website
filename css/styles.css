@@ -2643,3 +2643,15 @@ button { cursor: pointer; border: none; background: none; }
     border: 0;
   }
 }
+
+/* ─── GSAP MOTION LAYER (2026-06) ─────────────────────────────────────────── */
+:root {
+  --glow-strong: oklch(48% 0.085 35 / 0.13);
+  --glow-rest: oklch(48% 0.085 35 / 0.07);
+}
+/* Masked line reveals — visible by default (no-JS safe); motion.js hides
+   and animates via gsap.from only. */
+.line { display: block; overflow: hidden; }
+.line-inner { display: inline-block; will-change: transform; }
+/* Parallax images get slight overscale so the drift never exposes edges. */
+img[data-parallax] { scale: 1.12; }
