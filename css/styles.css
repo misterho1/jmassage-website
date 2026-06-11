@@ -2659,3 +2659,19 @@ button { cursor: pointer; border: none; background: none; }
 .line-inner { display: inline-block; will-change: transform; }
 /* Parallax images get slight overscale so the drift never exposes edges. */
 img[data-parallax] { scale: 1.12; }
+
+
+/* ── WARM-DARK CONTRAST BANDS (2026-06 visual elevation) ───────────────── */
+.band-warm {
+  background: var(--pool-warm);
+  color: var(--timber);
+}
+.band-warm .ed-section-title,
+.band-warm h2, .band-warm h3 { color: var(--timber); }
+.band-warm .ed-section-title em { color: var(--glow); }
+.band-warm p { color: oklch(97% 0.005 85 / 0.82); }
+.band-warm .ed-section-label { color: var(--glow); }
+.band-warm .ed-section-label::before,
+.band-warm .ed-section-label::after { background: oklch(97% 0.005 85 / 0.25); }
+.band-warm .ed-pair__meta { color: oklch(97% 0.005 85 / 0.6); }
+.band-warm .booking__note { color: oklch(97% 0.005 85 / 0.6); }
