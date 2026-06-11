@@ -415,7 +415,7 @@ function initGiftCards() {
       setTimeout(() => { displayAmt.style.transform = ''; }, 220);
     }
     if (purchaseBtn) {
-      purchaseBtn.href = '/book.html';
+      purchaseBtn.href = '/book';
     }
   };
 
