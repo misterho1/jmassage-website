@@ -42,23 +42,23 @@
 
 ## Pages
 - Homepage: https://jmassageslc.com/
-- About: https://jmassageslc.com/about.html
-- Pricing: https://jmassageslc.com/pricing.html
-- Reviews: https://jmassageslc.com/reviews.html
-- FAQ: https://jmassageslc.com/faq.html
-- Contact: https://jmassageslc.com/contact.html
-- Gift Cards: https://jmassageslc.com/gift-cards.html
-- Swedish Massage: https://jmassageslc.com/services/swedish-massage.html
-- Deep Tissue: https://jmassageslc.com/services/deep-tissue.html
-- Sports Massage: https://jmassageslc.com/services/sports-massage.html
-- Couples Massage: https://jmassageslc.com/services/couples-massage.html
-- 4-Hand Massage: https://jmassageslc.com/services/4-hand-massage.html
-- Ashiatsu: https://jmassageslc.com/services/ashiatsu.html
-- Shiatsu: https://jmassageslc.com/services/shiatsu.html
-- Hot Stone: https://jmassageslc.com/services/hot-stone.html
-- Reflexology: https://jmassageslc.com/services/reflexology.html
-- Prenatal Massage: https://jmassageslc.com/services/prenatal.html
-- Thai Massage: https://jmassageslc.com/services/thai-massage.html
-- Myofascial Release: https://jmassageslc.com/services/myofascial.html
-- Infrared Sauna: https://jmassageslc.com/services/infrared-sauna.html
-- Salt Lake City Location: https://jmassageslc.com/massage-salt-lake-city.html
+- About: https://jmassageslc.com/about
+- Pricing: https://jmassageslc.com/pricing
+- Reviews: https://jmassageslc.com/reviews
+- FAQ: https://jmassageslc.com/faq
+- Contact: https://jmassageslc.com/contact
+- Gift Cards: https://jmassageslc.com/gift-cards
+- Swedish Massage: https://jmassageslc.com/services/swedish-massage
+- Deep Tissue: https://jmassageslc.com/services/deep-tissue
+- Sports Massage: https://jmassageslc.com/services/sports-massage
+- Couples Massage: https://jmassageslc.com/services/couples-massage
+- 4-Hand Massage: https://jmassageslc.com/services/4-hand-massage
+- Ashiatsu: https://jmassageslc.com/services/ashiatsu
+- Shiatsu: https://jmassageslc.com/services/shiatsu
+- Hot Stone: https://jmassageslc.com/services/hot-stone
+- Reflexology: https://jmassageslc.com/services/reflexology
+- Prenatal Massage: https://jmassageslc.com/services/prenatal
+- Thai Massage: https://jmassageslc.com/services/thai-massage
+- Myofascial Release: https://jmassageslc.com/services/myofascial
+- Infrared Sauna: https://jmassageslc.com/services/infrared-sauna
+- Salt Lake City Location: https://jmassageslc.com/massage-salt-lake-city

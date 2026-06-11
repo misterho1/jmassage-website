@@ -6,3 +6,13 @@
 
 # Force apex (www -> non-www) for consistent canonical host
 https://www.jmassageslc.com/*   https://jmassageslc.com/:splat   301
+/about-us.html /about 301
+/contact-us.html /contact 301
+/deep-tissue-massage.html /services/deep-tissue 301
+/shiatsu-massage.html /services/shiatsu 301
+/hot-stone.html /services/hot-stone 301
+/ashiatsu-massage.html /services/ashiatsu 301
+/reflexology.html /services/reflexology 301
+/peace-gardens.html / 301
+/red-butte-garden.html / 301
+/temple-square.html / 301

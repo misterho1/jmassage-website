@@ -14,6 +14,9 @@
   <meta property="og:url" content="https://jmassageslc.com/services/foot-massage-head-spa">
   <meta property="og:title" content="Foot Massage &amp; Head Spa Salt Lake City | Elite Spa Utah">
   <meta property="og:description" content="Luxury foot massage and head spa treatments in Salt Lake City. Available at our sister location, Elite Spa Utah, at 1136 S State St. Book same-day.">
+  <meta property="og:image" content="https://jmassageslc.com/og-image-v4.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="J Massage SLC">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Foot Massage &amp; Head Spa Salt Lake City">
@@ -23,8 +26,10 @@
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet"></noscript>
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="../css/styles.css?v=15">
@@ -113,7 +118,7 @@
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jmassageslc.com/" },
           { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://jmassageslc.com/#services" },
-          { "@type": "ListItem", "position": 3, "name": "Foot Massage & Head Spa", "item": "https://jmassageslc.com/services/foot-massage-head-spa.html" }
+          { "@type": "ListItem", "position": 3, "name": "Foot Massage & Head Spa", "item": "https://jmassageslc.com/services/foot-massage-head-spa" }
         ]
       }
     ]
@@ -562,13 +567,13 @@
   <!-- HEADER -->
   <header id="header" class="header">
     <div class="header__inner container">
-      <a href="../index.html" class="logo">
+      <a href="/" class="logo">
         <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
       </a>
       <nav class="nav">
         <ul class="nav__list" id="navList">
           <li class="nav__item nav__item--dropdown">
-            <a href="../#services" class="nav__link">Services <span class="nav__dropdown-caret">?</span></a>
+            <a href="../#services" class="nav__link">Services <span class="nav__dropdown-caret">›</span></a>
             <ul class="nav__dropdown">
               <li><a href="./swedish-massage.html">Swedish Massage</a></li>
               <li><a href="./deep-tissue.html">Deep Tissue</a></li>
@@ -583,15 +588,15 @@
               <li><a href="./thai-massage.html">Thai Massage</a></li>
               <li><a href="./myofascial.html">Myofascial Release</a></li>
               <li><a href="./infrared-sauna.html">Infrared Sauna</a></li>
-              <li><a href="./foot-massage-head-spa.html">Foot Massage &amp; Head Spa ?</a></li>
+              <li><a href="./foot-massage-head-spa.html">Foot Massage &amp; Head Spa</a></li>
             </ul>
           </li>
-          <li><a href="../about.html" class="nav__link">About</a></li>
-          <li><a href="../pricing.html" class="nav__link">Pricing</a></li>
-          <li><a href="../reviews.html" class="nav__link">Reviews</a></li>
-          <li><a href="../gift-cards.html" class="nav__link">Gift Cards</a></li>
-          <li><a href="../faq.html" class="nav__link">FAQ</a></li>
-          <li><a href="../contact.html" class="nav__link">Contact</a></li>
+          <li><a href="/about" class="nav__link">About</a></li>
+          <li><a href="/pricing" class="nav__link">Pricing</a></li>
+          <li><a href="/reviews" class="nav__link">Reviews</a></li>
+          <li><a href="/gift-cards" class="nav__link">Gift Cards</a></li>
+          <li><a href="/faq" class="nav__link">FAQ</a></li>
+          <li><a href="/contact" class="nav__link">Contact</a></li>
           <li><a href="/book.html" class="nav__cta" data-magnetic>Book Now</a></li>
         </ul>
         <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
@@ -612,10 +617,10 @@
         <!-- Breadcrumb -->
         <nav class="svc-breadcrumb" aria-label="Breadcrumb" style="--svc-breadcrumb-color:oklch(35% 0.015 60 / 0.55);">
           <ol class="svc-breadcrumb__list">
-            <li><a href="../index.html">Home</a></li>
-            <li aria-hidden="true">�</li>
+            <li><a href="/">Home</a></li>
+            <li aria-hidden="true">›</li>
             <li><a href="../#services">Services</a></li>
-            <li aria-hidden="true">�</li>
+            <li aria-hidden="true">›</li>
             <li aria-current="page">Foot Massage &amp; Head Spa</li>
           </ol>
         </nav>
@@ -623,7 +628,7 @@
         <!-- Availability Badge -->
         <div class="availability-badge">
           <span class="availability-badge__dot"></span>
-          Available at Our Sister Location &nbsp;�&nbsp; Elite Spa Utah
+          Available at Our Sister Location &nbsp;•&nbsp; Elite Spa Utah
         </div>
 
         <p class="svc-hero__eyebrow" style="font-size:1.05rem;letter-spacing:.2em;">Luxury Treatments. Salt Lake City.</p>
@@ -641,7 +646,7 @@
           <span class="svc-pill">Elite Spa Utah, Sister Location</span>
           <span class="svc-pill">1136 S State St, SLC</span>
           <span class="svc-pill">Same-Day Available</span>
-          <span class="svc-pill">????? 5.0 Rating</span>
+          <span class="svc-pill">★★★★★ 5.0 Rating</span>
         </div>
 
         <!-- Actions -->
@@ -652,11 +657,11 @@
 
         <!-- Trust line at bottom of hero -->
         <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid oklch(48% 0.085 35 / 0.2);display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;">
-          <span style="font-family:'Switzer',sans-serif;font-size:.82rem;color:oklch(35% 0.015 60 / 0.55);letter-spacing:.06em;">????? Elite Spa Utah � 5.0 Rating � 50+ Reviews</span>
+          <span style="font-family:'Switzer',sans-serif;font-size:.82rem;color:oklch(35% 0.015 60 / 0.55);letter-spacing:.06em;">★★★★★ Elite Spa Utah — 5.0 Rating — 50+ Reviews</span>
           <span style="color:oklch(48% 0.085 35 / 0.3);">|</span>
           <a href="tel:+18018398880" style="font-family:'Switzer',sans-serif;font-size:.82rem;color:oklch(48% 0.085 35 / 0.75);text-decoration:none;letter-spacing:.04em;">(801) 839-8880</a>
           <span style="color:oklch(48% 0.085 35 / 0.3);">|</span>
-          <span style="font-family:'Switzer',sans-serif;font-size:.82rem;color:oklch(35% 0.015 60 / 0.5);">Open Daily � Same-Day Appointments</span>
+          <span style="font-family:'Switzer',sans-serif;font-size:.82rem;color:oklch(35% 0.015 60 / 0.5);">Open Daily — Same-Day Appointments</span>
         </div>
 
       </div>
@@ -927,14 +932,14 @@
                 <div class="sister-map__detail-icon">??</div>
                 <div class="sister-map__detail-text">
                   <strong>Hours</strong>
-                  <span>Mon�Fri 9am�9pm � Sat�Sun 9am�8pm</span>
+                  <span>Mon–Fri 9am–9pm — Sat–Sun 9am–8pm</span>
                 </div>
               </div>
               <div class="sister-map__detail">
                 <div class="sister-map__detail-icon">?</div>
                 <div class="sister-map__detail-text">
                   <strong>Rating</strong>
-                  <span>????? 5.0 � 50+ Google Reviews</span>
+                  <span>★★★★★ 5.0 — 50+ Google Reviews</span>
                 </div>
               </div>
               <div class="sister-map__detail">
@@ -1036,7 +1041,7 @@
               <span class="faq-item__icon" aria-hidden="true"></span>
             </button>
             <div class="faq-item__answer">
-              <p>Yes, Elite Spa Utah offers same-day appointments based on availability. Visit <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,oklch(48% 0.085 35));">elitespautah.com/foot-reflexology-massage</a> to check availability and book online, or call them directly at <a href="tel:+18018398880" style="color:var(--ember,oklch(48% 0.085 35));">(801) 839-8880</a>. Elite Spa Utah is located at 1136 S State St, Salt Lake City, open Monday through Friday 9am�9pm and weekends 9am�8pm.</p>
+              <p>Yes, Elite Spa Utah offers same-day appointments based on availability. Visit <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,oklch(48% 0.085 35));">elitespautah.com/foot-reflexology-massage</a> to check availability and book online, or call them directly at <a href="tel:+18018398880" style="color:var(--ember,oklch(48% 0.085 35));">(801) 839-8880</a>. Elite Spa Utah is located at 1136 S State St, Salt Lake City, open Monday through Friday 9am–9pm and weekends 9am–8pm.</p>
             </div>
           </li>
 
@@ -1071,10 +1076,10 @@
             <a href="../#services" class="btn btn--ghost btn--lg">Our Services at J Massage SLC</a>
           </div>
           <div class="svc-cta-band__trust">
-            <span>Elite Spa Utah � 1136 S State St, SLC</span>
-            <span class="svc-cta-band__divider">�</span>
-            <span>????? 5.0 Rating</span>
-            <span class="svc-cta-band__divider">�</span>
+            <span>Elite Spa Utah — 1136 S State St, SLC</span>
+            <span class="svc-cta-band__divider">•</span>
+            <span>★★★★★ 5.0 Rating</span>
+            <span class="svc-cta-band__divider">•</span>
             <span>(801) 839-8880</span>
           </div>
         </div>
@@ -1122,7 +1127,7 @@
             <label for="customAmt">Or enter a custom amount</label>
             <div class="gift-custom__input-wrap">
               <span>$</span>
-              <input type="number" id="customAmt" placeholder="25 � 500" min="25" max="500" aria-label="Custom gift card amount">
+              <input type="number" id="customAmt" placeholder="25 — 500" min="25" max="500" aria-label="Custom gift card amount">
             </div>
           </div>
           <a href="/book.html" id="giftPurchaseBtn" class="btn btn--gold btn--full">Purchase Gift Card</a>
@@ -1174,7 +1179,7 @@
 
         <div class="svc-related__grid">
 
-          <a href="swedish-massage.html" class="related-card reveal-card">
+          <a href="/services/swedish-massage" class="related-card reveal-card">
             <div class="related-card__visual related-card__visual--swedish" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="none">
                 <path d="M10 30 Q20 15 30 20 Q40 25 50 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
@@ -1186,7 +1191,7 @@
             <span class="related-card__link">Book at J Massage SLC ?</span>
           </a>
 
-          <a href="couples-massage.html" class="related-card reveal-card">
+          <a href="/services/couples-massage" class="related-card reveal-card">
             <div class="related-card__visual related-card__visual--couples" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="none">
                 <circle cx="22" cy="22" r="8" stroke="currentColor" stroke-width="1.8" opacity="0.7"/>
@@ -1200,7 +1205,7 @@
             <span class="related-card__link">Book at J Massage SLC ?</span>
           </a>
 
-          <a href="deep-tissue.html" class="related-card reveal-card">
+          <a href="/services/deep-tissue" class="related-card reveal-card">
             <div class="related-card__visual related-card__visual--deep-tissue" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="none">
                 <path d="M30 10 L30 50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
@@ -1225,19 +1230,19 @@
       <div class="footer__brand">
         <span class="footer__logo">J Massage <em>SLC</em></span>
         <p>Highest-rated massage studio in Salt Lake County. Open every day, 10am to 10pm. Same-day appointments available. Sister location: Elite Spa Utah at 1136 S State St.</p>
-        <div class="footer__rating"><span class="stars">?????</span><span>5.0 � 450+ Google Reviews</span></div>
+        <div class="footer__rating"><span class="stars">★★★★★</span><span>5.0 — 450+ Google Reviews</span></div>
       </div>
       <div class="footer__links">
         <h4>Our Treatments</h4>
         <ul>
-          <li><a href="swedish-massage.html">Swedish Massage</a></li>
-          <li><a href="deep-tissue.html">Deep Tissue</a></li>
-          <li><a href="sports-massage.html">Sports Massage</a></li>
-          <li><a href="ashiatsu.html">Ashiatsu</a></li>
-          <li><a href="couples-massage.html">Couples Massage</a></li>
-          <li><a href="4-hand-massage.html">4-Hand Massage</a></li>
-          <li><a href="reflexology.html">Reflexology</a></li>
-          <li><a href="hot-stone.html">Hot Stone</a></li>
+          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+          <li><a href="/services/sports-massage">Sports Massage</a></li>
+          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+          <li><a href="/services/couples-massage">Couples Massage</a></li>
+          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+          <li><a href="/services/reflexology">Reflexology</a></li>
+          <li><a href="/services/hot-stone">Hot Stone</a></li>
           <li style="margin-top:.5rem;padding-top:.5rem;border-top:1px solid oklch(48% 0.085 35 / 0.15);">
             <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,oklch(48% 0.085 35));">Foot Massage ? Elite Spa Utah</a>
           </li>
@@ -1250,7 +1255,7 @@
         <h4>J Massage SLC</h4>
         <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
         <a href="tel:+18012881118">(801) 288-1118</a>
-        <p>Open Daily � 10am � 10pm</p>
+        <p>Open Daily — 10am — 10pm</p>
         <a href="/book.html" class="btn btn--gold btn--sm">Book at J Massage SLC</a>
         <p style="margin-top:1.5rem;font-size:.85rem;color:oklch(35% 0.015 60 / 0.55);">Sister Location:</p>
         <p style="font-size:.9rem;color:oklch(35% 0.015 60 / 0.7);">Elite Spa Utah<br>1136 S State St, SLC</p>
@@ -1258,7 +1263,7 @@
       </div>
     </div>
     <div class="footer__bottom container">
-      <p>� 2025 J Massage SLC � Sister location: <a href="https://www.elitespautah.com" target="_blank" rel="noopener">Elite Spa Utah</a> � <a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions to J Massage SLC</a></p>
+      <p>© 2026 J Massage SLC — Sister location: <a href="https://www.elitespautah.com" target="_blank" rel="noopener">Elite Spa Utah</a> — <a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions to J Massage SLC</a></p>
     </div>
   </footer>
 

@@ -27,8 +27,10 @@
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet"></noscript>
 
   <link rel="stylesheet" href="css/styles.css?v=15">
 
@@ -52,7 +54,7 @@
       "postalCode": "84101",
       "addressCountry": "US"
     },
-    "geo": {"@type": "GeoCoordinates", "latitude": 40.7565, "longitude": -111.8925},
+    "geo": {"@type": "GeoCoordinates", "latitude": 40.7509, "longitude": -111.9022}, "areaServed": [{"@type": "City", "name": "Salt Lake City", "sameAs": "https://www.wikidata.org/wiki/Q23337"}, {"@type": "AdministrativeArea", "name": "Salt Lake County"}],
     "openingHoursSpecification": [{
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
@@ -77,7 +79,7 @@
 
   <header id="header" class="header">
     <div class="header__inner container">
-      <a href="index.html" class="logo" aria-label="J Massage SLC, home">
+      <a href="/" class="logo" aria-label="J Massage SLC, home">
         <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
       </a>
       <nav class="nav" aria-label="Main navigation">
@@ -85,29 +87,29 @@
           <li class="nav__item nav__item--dropdown">
             <a href="#services" class="nav__link">Services <span class="nav__dropdown-caret">›</span></a>
             <ul class="nav__dropdown">
-              <li><a href="services/swedish-massage.html">Swedish Massage</a></li>
-              <li><a href="services/deep-tissue.html">Deep Tissue</a></li>
-              <li><a href="services/sports-massage.html">Sports Massage</a></li>
-              <li><a href="services/ashiatsu.html">Ashiatsu</a></li>
-              <li><a href="services/couples-massage.html">Couples Massage</a></li>
-              <li><a href="services/4-hand-massage.html">4-Hand Massage</a></li>
-              <li><a href="services/shiatsu.html">Shiatsu</a></li>
-              <li><a href="services/hot-stone.html">Hot Stone</a></li>
-              <li><a href="services/reflexology.html">Reflexology</a></li>
-              <li><a href="services/prenatal.html">Prenatal Massage</a></li>
-              <li><a href="services/thai-massage.html">Thai Massage</a></li>
-              <li><a href="services/myofascial.html">Myofascial Release</a></li>
-              <li><a href="services/infrared-sauna.html">Infrared Sauna</a></li>
-              <li><a href="services/foot-massage-head-spa.html">Foot Massage &amp; Head Spa</a></li>
+              <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+              <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+              <li><a href="/services/sports-massage">Sports Massage</a></li>
+              <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+              <li><a href="/services/couples-massage">Couples Massage</a></li>
+              <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+              <li><a href="/services/shiatsu">Shiatsu</a></li>
+              <li><a href="/services/hot-stone">Hot Stone</a></li>
+              <li><a href="/services/reflexology">Reflexology</a></li>
+              <li><a href="/services/prenatal">Prenatal Massage</a></li>
+              <li><a href="/services/thai-massage">Thai Massage</a></li>
+              <li><a href="/services/myofascial">Myofascial Release</a></li>
+              <li><a href="/services/infrared-sauna">Infrared Sauna</a></li>
+              <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
             </ul>
           </li>
-          <li><a href="about.html" class="nav__link">About</a></li>
-          <li><a href="pricing.html" class="nav__link">Pricing</a></li>
-          <li><a href="reviews.html" class="nav__link">Reviews</a></li>
-          <li><a href="gift-cards.html" class="nav__link">Gift Cards</a></li>
-          <li><a href="faq.html" class="nav__link">FAQ</a></li>
-          <li><a href="contact.html" class="nav__link">Contact</a></li>
-          <li><a href="book.html" class="nav__cta" data-magnetic>Book Now</a></li>
+          <li><a href="/about" class="nav__link">About</a></li>
+          <li><a href="/pricing" class="nav__link">Pricing</a></li>
+          <li><a href="/reviews" class="nav__link">Reviews</a></li>
+          <li><a href="/gift-cards" class="nav__link">Gift Cards</a></li>
+          <li><a href="/faq" class="nav__link">FAQ</a></li>
+          <li><a href="/contact" class="nav__link">Contact</a></li>
+          <li><a href="/book" class="nav__cta" data-magnetic>Book Now</a></li>
         </ul>
         <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -123,7 +125,7 @@
       <div class="ed-hero__media" aria-hidden="true">
         <picture>
           <source srcset="images/editorial/hero-room.webp" type="image/webp">
-          <img src="images/editorial/hero-room.webp" alt="" loading="eager" fetchpriority="high" width="2752" height="1536">
+          <img src="images/editorial/hero-room.webp" alt="Massage room at J Massage SLC, Salt Lake City" loading="eager" fetchpriority="high" width="2752" height="1536">
         </picture>
         <div class="ed-hero__scrim"></div>
       </div>
@@ -138,7 +140,7 @@
           Utah-licensed therapists, open every day from ten to ten.
         </p>
         <div class="ed-hero__actions">
-          <a href="book.html" class="ed-btn ed-btn--filled">Book a Session</a>
+          <a href="/book" class="ed-btn ed-btn--filled">Book a Session</a>
           <a href="#services" class="ed-btn ed-btn--ghost">Explore Treatments</a>
         </div>
         <p class="ed-hero__meta">
@@ -180,7 +182,7 @@
         <div class="ed-services__grid" data-reveal-stagger>
 
           <article class="ed-svc">
-            <a href="services/swedish-massage.html" class="ed-svc__link">
+            <a href="/services/swedish-massage" class="ed-svc__link">
               <div class="ed-svc__media">
                 <picture>
                   <source srcset="images/editorial/service-body.webp" type="image/webp">
@@ -198,7 +200,7 @@
           </article>
 
           <article class="ed-svc">
-            <a href="services/foot-massage-head-spa.html" class="ed-svc__link">
+            <a href="/services/foot-massage-head-spa" class="ed-svc__link">
               <div class="ed-svc__media">
                 <picture>
                   <source srcset="images/editorial/service-head.webp" type="image/webp">
@@ -216,7 +218,7 @@
           </article>
 
           <article class="ed-svc">
-            <a href="services/reflexology.html" class="ed-svc__link">
+            <a href="/services/reflexology" class="ed-svc__link">
               <div class="ed-svc__media">
                 <picture>
                   <source srcset="images/editorial/service-foot.webp" type="image/webp">
@@ -236,7 +238,7 @@
         </div>
 
         <div class="ed-services__more">
-          <a href="pricing.html" class="ed-link">See all 14 modalities &amp; pricing →</a>
+          <a href="/pricing" class="ed-link">See all 14 modalities &amp; pricing →</a>
         </div>
       </div>
     </section>
@@ -265,8 +267,8 @@
             system finally lets go.
           </p>
           <div class="ed-pair__actions">
-            <a href="services/couples-massage.html" class="ed-btn ed-btn--filled">Couples · From $160</a>
-            <a href="services/4-hand-massage.html" class="ed-btn ed-btn--ghost">4-Hand · From $165</a>
+            <a href="/services/couples-massage" class="ed-btn ed-btn--filled">Couples · From $160</a>
+            <a href="/services/4-hand-massage" class="ed-btn ed-btn--ghost">4-Hand · From $165</a>
           </div>
         </div>
       </div>
@@ -308,7 +310,7 @@
         </ol>
 
         <div class="ed-process__cta">
-          <a href="book.html" class="ed-btn ed-btn--filled">Begin →</a>
+          <a href="/book" class="ed-btn ed-btn--filled">Begin →</a>
         </div>
       </div>
     </section>
@@ -327,7 +329,7 @@
             <span class="ed-quote__stars">★★★★★</span>
             <span class="ed-quote__name">A verified Google review</span>
           </p>
-          <a href="reviews.html" class="ed-link ed-quote__more">Read all 450+ reviews →</a>
+          <a href="/reviews" class="ed-link ed-quote__more">Read all 450+ reviews →</a>
         </div>
       </div>
     </section>
@@ -351,7 +353,7 @@
             <div><dt>Therapists</dt><dd>Utah-licensed, modality-specialized</dd></div>
             <div><dt>Reviews</dt><dd>5.0 · 450+ on Google</dd></div>
           </dl>
-          <a href="about.html" class="ed-btn ed-btn--ghost">More about the studio →</a>
+          <a href="/about" class="ed-btn ed-btn--ghost">More about the studio →</a>
         </div>
         <div class="ed-about__media">
           <picture>
@@ -369,7 +371,7 @@
           <h2 class="booking__cta-heading">Ready when you are.</h2>
           <p class="booking__cta-body">Open daily, 10am to 10pm. Same-day appointments available.<br>Book your massage today.</p>
           <div class="booking__btn-row">
-            <a href="book.html" class="booking__btn booking__btn--primary">Schedule Appointment</a>
+            <a href="/book" class="booking__btn booking__btn--primary">Schedule Appointment</a>
             <a href="tel:+18012881118" class="booking__btn booking__btn--secondary">Call +1 (801) 288-1118</a>
           </div>
         </div>
@@ -391,23 +393,23 @@
       <div class="footer__links">
         <h4>Treatments</h4>
         <ul>
-          <li><a href="services/swedish-massage.html">Swedish Massage</a></li>
-          <li><a href="services/deep-tissue.html">Deep Tissue</a></li>
-          <li><a href="services/sports-massage.html">Sports Massage</a></li>
-          <li><a href="services/ashiatsu.html">Ashiatsu</a></li>
-          <li><a href="services/couples-massage.html">Couples Massage</a></li>
-          <li><a href="services/4-hand-massage.html">4-Hand Massage</a></li>
+          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+          <li><a href="/services/sports-massage">Sports Massage</a></li>
+          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+          <li><a href="/services/couples-massage">Couples Massage</a></li>
+          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
         </ul>
       </div>
       <div class="footer__links">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="pricing.html">Pricing</a></li>
-          <li><a href="reviews.html">Reviews</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="gift-cards.html">Gift Cards</a></li>
-          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/reviews">Reviews</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/gift-cards">Gift Cards</a></li>
+          <li><a href="/faq">FAQ</a></li>
         </ul>
       </div>
       <div class="footer__contact">
@@ -415,11 +417,11 @@
         <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
         <a href="tel:+18012881118">(801) 288-1118</a>
         <p>Open Daily &nbsp;·&nbsp; 10am – 10pm</p>
-        <a href="book.html" class="btn btn--gold btn--sm">Book Now</a>
+        <a href="/book" class="btn btn--gold btn--sm">Book Now</a>
       </div>
     </div>
     <div class="footer__bottom container">
-      <p>© 2025 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
+      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
         <a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a>
         &nbsp;·&nbsp;
         <a href="tel:+18012881118">(801) 288-1118</a>

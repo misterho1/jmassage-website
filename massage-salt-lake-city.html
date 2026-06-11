@@ -32,8 +32,10 @@
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet"></noscript>
 
   <link rel="stylesheet" href="css/styles.css?v=15">
 
@@ -64,7 +66,7 @@
       "@type": "GeoCoordinates",
       "latitude": 40.7509,
       "longitude": -111.9022
-    },
+    }, "areaServed": [{"@type": "City", "name": "Salt Lake City", "sameAs": "https://www.wikidata.org/wiki/Q23337"}, {"@type": "AdministrativeArea", "name": "Salt Lake County"}],
     "openingHoursSpecification": [{
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
@@ -144,13 +146,12 @@
         "@type": "ListItem",
         "position": 2,
         "name": "Massage Salt Lake City",
-        "item": "https://jmassageslc.com/massage-salt-lake-city.html"
+        "item": "https://jmassageslc.com/massage-salt-lake-city"
       }
     ]
   }
   </script>
 
-  <!-- Google Analytics 4, Add your GA4 tag here -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
 <!-- Google tag (gtag.js) - G-HR9MP6ENEP -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HR9MP6ENEP"></script>
@@ -249,28 +250,28 @@
   ═══════════════════════════════════════════════════════════════════════════ -->
   <header id="header" class="header">
     <div class="header__inner container">
-      <a href="index.html" class="logo" aria-label="J Massage SLC, home">
+      <a href="/" class="logo" aria-label="J Massage SLC, home">
         <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
       </a>
 
       <nav class="nav" aria-label="Main navigation">
         <ul class="nav__list" id="navList">
           <li class="nav__item nav__item--dropdown">
-            <a href="index.html#services" class="nav__link">Services <span class="nav__dropdown-caret">▾</span></a>
+            <a href="/#services" class="nav__link">Services <span class="nav__dropdown-caret">▾</span></a>
             <ul class="nav__dropdown">
-              <li><a href="services/swedish-massage.html">Swedish Massage</a></li>
-              <li><a href="services/deep-tissue.html">Deep Tissue</a></li>
-              <li><a href="services/sports-massage.html">Sports Massage</a></li>
-              <li><a href="services/ashiatsu.html">Ashiatsu</a></li>
-              <li><a href="services/couples-massage.html">Couples Massage</a></li>
-              <li><a href="services/4-hand-massage.html">4-Hand Massage</a></li>
+              <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+              <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+              <li><a href="/services/sports-massage">Sports Massage</a></li>
+              <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+              <li><a href="/services/couples-massage">Couples Massage</a></li>
+              <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
             </ul>
           </li>
-          <li><a href="about.html"    class="nav__link">About</a></li>
+          <li><a href="/about"    class="nav__link">About</a></li>
           <li><a href="/book.html" class="nav__link">Book</a></li>
-          <li><a href="reviews.html"  class="nav__link">Reviews</a></li>
-          <li><a href="gift-cards.html" class="nav__link">Gift Cards</a></li>
-          <li><a href="faq.html"        class="nav__link">FAQ</a></li>
+          <li><a href="/reviews"  class="nav__link">Reviews</a></li>
+          <li><a href="/gift-cards" class="nav__link">Gift Cards</a></li>
+          <li><a href="/faq"        class="nav__link">FAQ</a></li>
           <li><a href="/book.html" class="nav__cta" data-magnetic>Book Now</a></li>
         </ul>
         <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
@@ -283,7 +284,7 @@
   <!-- Breadcrumb -->
   <nav class="breadcrumb-nav" aria-label="Breadcrumb" style="background:var(--ember);border-bottom:1px solid var(--border);padding:0.65rem 0;">
     <div class="container" style="font-size:0.8rem;color:var(--text-lo);">
-      <a href="index.html" style="color:var(--text-lo);text-decoration:none;">Home</a>
+      <a href="/" style="color:var(--text-lo);text-decoration:none;">Home</a>
       <span style="margin:0 0.5rem;opacity:0.4;">›</span>
       <span style="color:var(--lantern);">Massage Salt Lake City</span>
     </div>
@@ -381,7 +382,7 @@
             <p class="svc-card__desc">Long effleurage strokes that lower cortisol and restore circulation. Salt Lake City's most-booked modality for stress relief.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$55</strong> / 30 min</span>
-              <a href="services/swedish-massage.html" class="svc-card__btn">Learn More →</a>
+              <a href="/services/swedish-massage" class="svc-card__btn">Learn More →</a>
             </div>
           </article>
 
@@ -393,7 +394,7 @@
             <p class="svc-card__desc">Targeted pressure that reaches chronic muscle tension at its source. Ideal for chronic pain, desk workers, and athletes in SLC.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$55</strong> / 30 min</span>
-              <a href="services/deep-tissue.html" class="svc-card__btn">Learn More →</a>
+              <a href="/services/deep-tissue" class="svc-card__btn">Learn More →</a>
             </div>
           </article>
 
@@ -405,7 +406,7 @@
             <p class="svc-card__desc">Pre-event prep and post-event recovery designed for Salt Lake City athletes. Prevent injury, accelerate performance.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$55</strong> / 30 min</span>
-              <a href="services/sports-massage.html" class="svc-card__btn">Learn More →</a>
+              <a href="/services/sports-massage" class="svc-card__btn">Learn More →</a>
             </div>
           </article>
 
@@ -417,7 +418,7 @@
             <p class="svc-card__desc">Barefoot technique delivering broader, deeper strokes than hands can. The only studio in Salt Lake County trained to offer it. Ask for it specifically.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$60</strong> / 30 min</span>
-              <a href="services/ashiatsu.html" class="svc-card__btn">Learn More →</a>
+              <a href="/services/ashiatsu" class="svc-card__btn">Learn More →</a>
             </div>
           </article>
 
@@ -430,7 +431,7 @@
             <p class="svc-card__desc">Private suite, two licensed therapists, side-by-side. Salt Lake City's most romantic massage experience, perfect for anniversaries and date nights.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$170</strong> / 60 min</span>
-              <a href="services/couples-massage.html" class="svc-card__btn">Learn More →</a>
+              <a href="/services/couples-massage" class="svc-card__btn">Learn More →</a>
             </div>
           </article>
 
@@ -442,7 +443,7 @@
             <p class="svc-card__desc">Two therapists working you simultaneously, choreographed in rhythm. The rarest massage available in Utah. The mind stops trying to track it.</p>
             <div class="svc-card__footer">
               <span class="svc-card__price">From <strong>$165</strong> / 60 min</span>
-              <a href="services/4-hand-massage.html" class="svc-card__btn">Learn More →</a>
+              <a href="/services/4-hand-massage" class="svc-card__btn">Learn More →</a>
             </div>
           </article>
 
@@ -511,7 +512,7 @@
           <p class="section-sub">J Massage SLC welcomes clients from every corner of the Salt Lake Valley. Centrally located in downtown SLC, we're easily accessible from all surrounding communities.</p>
         </header>
         <div class="neighborhoods__grid reveal">
-          <a href="massage-salt-lake-city.html" class="neighborhood-chip">
+          <a href="/massage-salt-lake-city" class="neighborhood-chip">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2C5.8 2 4 3.8 4 6c0 2.8 4 8 4 8s4-5.2 4-8c0-2.2-1.8-4-4-4z"/><circle cx="8" cy="6" r="1.5"/></svg>
             Downtown SLC
           </a>
@@ -656,12 +657,12 @@
       <div class="footer__links">
         <h4>Treatments</h4>
         <ul>
-          <li><a href="services/swedish-massage.html">Swedish Massage</a></li>
-          <li><a href="services/deep-tissue.html">Deep Tissue</a></li>
-          <li><a href="services/sports-massage.html">Sports Massage</a></li>
-          <li><a href="services/ashiatsu.html">Ashiatsu</a></li>
-          <li><a href="services/couples-massage.html">Couples Massage</a></li>
-          <li><a href="services/4-hand-massage.html">4-Hand Massage</a></li>
+          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+          <li><a href="/services/sports-massage">Sports Massage</a></li>
+          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+          <li><a href="/services/couples-massage">Couples Massage</a></li>
+          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
         </ul>
       </div>
 
@@ -684,12 +685,12 @@
     </div>
 
     <div class="footer__bottom container">
-      <p>© 2025 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
+      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
         <a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a>
         &nbsp;·&nbsp;
         <a href="tel:+18012881118">(801) 288-1118</a>
         &nbsp;·&nbsp;
-        <a href="massage-salt-lake-city.html">Massage Salt Lake City</a>
+        <a href="/massage-salt-lake-city">Massage Salt Lake City</a>
       </p>
     </div>
   </footer>

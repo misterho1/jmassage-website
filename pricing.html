@@ -19,7 +19,8 @@
   <meta property="og:site_name" content="J Massage SLC">
 
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="css/styles.css?v=15">
 
   <style>
@@ -96,7 +97,7 @@
             "name": "Is there a fee for paying by card at J Massage SLC?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A small card processing fee may apply. Paying with cash has no additional fee. Exact details are confirmed at booking."
+              "text": "A $5 processing fee applies to card payments, cash has no fee."
             }
           },
           {
@@ -120,7 +121,6 @@
     ]
   }
   </script>
-  <!-- Google Analytics 4, Add your GA4 tag here -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
 <!-- Google tag (gtag.js) - G-HR9MP6ENEP -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HR9MP6ENEP"></script>
@@ -139,36 +139,36 @@
 
   <header id="header" class="header">
     <div class="header__inner container">
-      <a href="index.html" class="logo" aria-label="J Massage SLC, home">
+      <a href="/" class="logo" aria-label="J Massage SLC, home">
         <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
       </a>
       <nav class="nav" aria-label="Main navigation">
         <ul class="nav__list" id="navList">
           <li class="nav__item nav__item--dropdown">
-            <a href="index.html#services" class="nav__link">Services <span class="nav__dropdown-caret">?</span></a>
+            <a href="/#services" class="nav__link">Services <span class="nav__dropdown-caret">›</span></a>
             <ul class="nav__dropdown">
-              <li><a href="services/swedish-massage.html">Swedish Massage</a></li>
-              <li><a href="services/deep-tissue.html">Deep Tissue</a></li>
-              <li><a href="services/sports-massage.html">Sports Massage</a></li>
-              <li><a href="services/ashiatsu.html">Ashiatsu</a></li>
-              <li><a href="services/couples-massage.html">Couples Massage</a></li>
-              <li><a href="services/4-hand-massage.html">4-Hand Massage</a></li>
-              <li><a href="services/shiatsu.html">Shiatsu</a></li>
-              <li><a href="services/hot-stone.html">Hot Stone</a></li>
-              <li><a href="services/reflexology.html">Reflexology</a></li>
-              <li><a href="services/prenatal.html">Prenatal Massage</a></li>
-              <li><a href="services/thai-massage.html">Thai Massage</a></li>
-              <li><a href="services/myofascial.html">Myofascial Release</a></li>
-              <li><a href="services/infrared-sauna.html">Infrared Sauna</a></li>
-              <li><a href="services/foot-massage-head-spa.html">Foot Massage &amp; Head Spa ?</a></li>
+              <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+              <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+              <li><a href="/services/sports-massage">Sports Massage</a></li>
+              <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+              <li><a href="/services/couples-massage">Couples Massage</a></li>
+              <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+              <li><a href="/services/shiatsu">Shiatsu</a></li>
+              <li><a href="/services/hot-stone">Hot Stone</a></li>
+              <li><a href="/services/reflexology">Reflexology</a></li>
+              <li><a href="/services/prenatal">Prenatal Massage</a></li>
+              <li><a href="/services/thai-massage">Thai Massage</a></li>
+              <li><a href="/services/myofascial">Myofascial Release</a></li>
+              <li><a href="/services/infrared-sauna">Infrared Sauna</a></li>
+              <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
             </ul>
           </li>
-          <li><a href="about.html" class="nav__link">About</a></li>
-          <li><a href="pricing.html" class="nav__link" aria-current="page">Pricing</a></li>
-          <li><a href="reviews.html" class="nav__link">Reviews</a></li>
-          <li><a href="gift-cards.html" class="nav__link">Gift Cards</a></li>
-          <li><a href="faq.html" class="nav__link">FAQ</a></li>
-          <li><a href="contact.html" class="nav__link">Contact</a></li>
+          <li><a href="/about" class="nav__link">About</a></li>
+          <li><a href="/pricing" class="nav__link" aria-current="page">Pricing</a></li>
+          <li><a href="/reviews" class="nav__link">Reviews</a></li>
+          <li><a href="/gift-cards" class="nav__link">Gift Cards</a></li>
+          <li><a href="/faq" class="nav__link">FAQ</a></li>
+          <li><a href="/contact" class="nav__link">Contact</a></li>
           <li><a href="/book.html" class="nav__cta" data-magnetic>Book Now</a></li>
         </ul>
         <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
@@ -185,7 +185,7 @@
       <div class="container" style="text-align: center; max-width: 800px; margin: 0 auto;">
         <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
           <ol style="list-style: none; display: flex; gap: 0.5rem; justify-content: center; font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.08em;">
-            <li><a href="index.html" style="color: var(--lantern); text-decoration: none;">Home</a></li>
+            <li><a href="/" style="color: var(--lantern); text-decoration: none;">Home</a></li>
             <li style="opacity: 0.4;">›</li>
             <li style="color: var(--text-lo);">Pricing</li>
           </ol>
@@ -372,7 +372,7 @@
             <p style="color: var(--text-lo); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">
               J Massage SLC gift cards are available for any dollar amount or specific service. Perfect for birthdays, anniversaries, holidays, or just because. Never expire.
             </p>
-            <a href="gift-cards.html" class="btn btn--gold">Buy a Gift Card</a>
+            <a href="/gift-cards" class="btn btn--gold">Buy a Gift Card</a>
           </div>
           <div style="background: var(--timber); border: 1px solid var(--border-mid); border-radius: var(--r-lg); padding: 2.5rem; text-align: center; position: relative;">
             <div style="position: absolute; top: -1px; left: 2rem; right: 2rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern), transparent);"></div>
@@ -427,7 +427,7 @@
           <details class="faq-item">
             <summary>Are gift cards available?</summary>
             <div class="faq-body">
-              Yes, J Massage SLC gift cards are available for any dollar amount or for a specific service. They never expire and make a thoughtful gift for any occasion. Visit our <a href="gift-cards.html" style="color: var(--lantern);">gift cards page</a> or call <a href="tel:+18012881118" style="color: var(--lantern);">(801) 288-1118</a> to purchase.
+              Yes, J Massage SLC gift cards are available for any dollar amount or for a specific service. They never expire and make a thoughtful gift for any occasion. Visit our <a href="/gift-cards" style="color: var(--lantern);">gift cards page</a> or call <a href="tel:+18012881118" style="color: var(--lantern);">(801) 288-1118</a> to purchase.
             </div>
           </details>
         </div>
@@ -465,12 +465,12 @@
       <div class="footer__links">
         <h4>Treatments</h4>
         <ul>
-          <li><a href="services/swedish-massage.html">Swedish Massage</a></li>
-          <li><a href="services/deep-tissue.html">Deep Tissue</a></li>
-          <li><a href="services/sports-massage.html">Sports Massage</a></li>
-          <li><a href="services/ashiatsu.html">Ashiatsu</a></li>
-          <li><a href="services/couples-massage.html">Couples Massage</a></li>
-          <li><a href="services/4-hand-massage.html">4-Hand Massage</a></li>
+          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+          <li><a href="/services/sports-massage">Sports Massage</a></li>
+          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+          <li><a href="/services/couples-massage">Couples Massage</a></li>
+          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
         </ul>
       </div>
       <div class="footer__contact">
@@ -484,16 +484,16 @@
       </div>
     </div>
     <div class="footer__bottom container">
-      <p>© 2025 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
+      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
         <a href="https://www.google.com/maps/place/J+Massage+SLC" target="_blank" rel="noopener">Get Directions</a>
         &nbsp;·&nbsp;
         <a href="tel:+18012881118">(801) 288-1118</a>
         &nbsp;·&nbsp;
-        <a href="about.html">About</a>
+        <a href="/about">About</a>
         &nbsp;·&nbsp;
-        <a href="contact.html">Contact</a>
+        <a href="/contact">Contact</a>
         &nbsp;·&nbsp;
-        <a href="pricing.html">Pricing</a>
+        <a href="/pricing">Pricing</a>
       </p>
     </div>
   </footer>

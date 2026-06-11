@@ -19,8 +19,10 @@
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="css/styles.css?v=15">
 
   <!-- Google tag (gtag.js) - G-HR9MP6ENEP -->
@@ -40,37 +42,37 @@
 
   <header id="header" class="header">
     <div class="header__inner container">
-      <a href="index.html" class="logo" aria-label="J Massage SLC, home">
+      <a href="/" class="logo" aria-label="J Massage SLC, home">
         <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
       </a>
       <nav class="nav" aria-label="Main navigation">
         <ul class="nav__list" id="navList">
           <li class="nav__item nav__item--dropdown">
-            <a href="index.html#services" class="nav__link">Services <span class="nav__dropdown-caret">?</span></a>
+            <a href="/#services" class="nav__link">Services <span class="nav__dropdown-caret">›</span></a>
             <ul class="nav__dropdown">
-              <li><a href="services/swedish-massage.html">Swedish Massage</a></li>
-              <li><a href="services/deep-tissue.html">Deep Tissue</a></li>
-              <li><a href="services/sports-massage.html">Sports Massage</a></li>
-              <li><a href="services/ashiatsu.html">Ashiatsu</a></li>
-              <li><a href="services/couples-massage.html">Couples Massage</a></li>
-              <li><a href="services/4-hand-massage.html">4-Hand Massage</a></li>
-              <li><a href="services/shiatsu.html">Shiatsu</a></li>
-              <li><a href="services/hot-stone.html">Hot Stone</a></li>
-              <li><a href="services/reflexology.html">Reflexology</a></li>
-              <li><a href="services/prenatal.html">Prenatal Massage</a></li>
-              <li><a href="services/thai-massage.html">Thai Massage</a></li>
-              <li><a href="services/myofascial.html">Myofascial Release</a></li>
-              <li><a href="services/infrared-sauna.html">Infrared Sauna</a></li>
-              <li><a href="services/foot-massage-head-spa.html">Foot Massage &amp; Head Spa ?</a></li>
+              <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+              <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+              <li><a href="/services/sports-massage">Sports Massage</a></li>
+              <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+              <li><a href="/services/couples-massage">Couples Massage</a></li>
+              <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+              <li><a href="/services/shiatsu">Shiatsu</a></li>
+              <li><a href="/services/hot-stone">Hot Stone</a></li>
+              <li><a href="/services/reflexology">Reflexology</a></li>
+              <li><a href="/services/prenatal">Prenatal Massage</a></li>
+              <li><a href="/services/thai-massage">Thai Massage</a></li>
+              <li><a href="/services/myofascial">Myofascial Release</a></li>
+              <li><a href="/services/infrared-sauna">Infrared Sauna</a></li>
+              <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
             </ul>
           </li>
-          <li><a href="about.html" class="nav__link">About</a></li>
-          <li><a href="pricing.html" class="nav__link">Pricing</a></li>
-          <li><a href="reviews.html" class="nav__link">Reviews</a></li>
-          <li><a href="gift-cards.html" class="nav__link">Gift Cards</a></li>
-          <li><a href="faq.html" class="nav__link">FAQ</a></li>
-          <li><a href="contact.html" class="nav__link">Contact</a></li>
-          <li><a href="book.html" class="nav__cta" aria-current="page">Book Now</a></li>
+          <li><a href="/about" class="nav__link">About</a></li>
+          <li><a href="/pricing" class="nav__link">Pricing</a></li>
+          <li><a href="/reviews" class="nav__link">Reviews</a></li>
+          <li><a href="/gift-cards" class="nav__link">Gift Cards</a></li>
+          <li><a href="/faq" class="nav__link">FAQ</a></li>
+          <li><a href="/contact" class="nav__link">Contact</a></li>
+          <li><a href="/book" class="nav__cta" aria-current="page">Book Now</a></li>
         </ul>
         <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -85,7 +87,7 @@
     <section class="book-hero">
       <div class="container">
         <nav aria-label="Breadcrumb" class="book-hero__crumbs">
-          <a href="index.html">Home</a> <span>›</span> <span>Book</span>
+          <a href="/">Home</a> <span>›</span> <span>Book</span>
         </nav>
         <h1 class="book-hero__title">Book your session.</h1>
         <p class="book-hero__sub">Open daily, 10am to 10pm. Same-day appointments often available.<br>Choose your service, pick a time, confirm instantly.</p>
@@ -125,12 +127,12 @@
       <div class="footer__links">
         <h4>Treatments</h4>
         <ul>
-          <li><a href="services/swedish-massage.html">Swedish Massage</a></li>
-          <li><a href="services/deep-tissue.html">Deep Tissue</a></li>
-          <li><a href="services/sports-massage.html">Sports Massage</a></li>
-          <li><a href="services/ashiatsu.html">Ashiatsu</a></li>
-          <li><a href="services/couples-massage.html">Couples Massage</a></li>
-          <li><a href="services/4-hand-massage.html">4-Hand Massage</a></li>
+          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+          <li><a href="/services/sports-massage">Sports Massage</a></li>
+          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+          <li><a href="/services/couples-massage">Couples Massage</a></li>
+          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
         </ul>
       </div>
       <div class="footer__contact">
@@ -138,11 +140,11 @@
         <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
         <a href="tel:+18012881118">(801) 288-1118</a>
         <p>Open Daily &nbsp;·&nbsp; 10am – 10pm</p>
-        <a href="book.html" class="btn btn--gold btn--sm">Book Now</a>
+        <a href="/book" class="btn btn--gold btn--sm">Book Now</a>
       </div>
     </div>
     <div class="footer__bottom container">
-      <p>© 2025 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
+      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
         <a href="https://www.google.com/maps/place/J+Massage+SLC" target="_blank" rel="noopener">Get Directions</a>
         &nbsp;·&nbsp;
         <a href="tel:+18012881118">(801) 288-1118</a>
