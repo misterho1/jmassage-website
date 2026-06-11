@@ -21,6 +21,10 @@
   --pool:        oklch(22% 0 0);               /* near-black dark band */
   --slate:       oklch(28% 0.005 60);          /* warm dark */
 
+  /* Visual elevation (2026-06) */
+  --type-section: clamp(3rem, 6.5vw, 5.8rem);
+  --pool-warm:   oklch(20% 0.015 60);          /* warm espresso band */
+
   /* Accent — warm clay terracotta (Aman/Aesop earthy) — replaces rose */
   --lantern:     oklch(48% 0.085 35);          /* clay terracotta — primary accent */
   --amber:       oklch(42% 0.075 35);          /* deeper clay */
@@ -1167,10 +1171,10 @@ button { cursor: pointer; border: none; background: none; }
 
 .ed-section-title {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  font-size: var(--type-section);
   font-weight: 400;
   font-variation-settings: "opsz" 96, "SOFT" 50;
-  line-height: 1.06;
+  line-height: 1.02;
   color: var(--text-hi);
   letter-spacing: -0.022em;
   margin-bottom: 1.2rem;
@@ -2655,3 +2659,44 @@ button { cursor: pointer; border: none; background: none; }
 .line-inner { display: inline-block; will-change: transform; }
 /* Parallax images get slight overscale so the drift never exposes edges. */
 img[data-parallax] { scale: 1.12; }
+
+
+/* ── WARM-DARK CONTRAST BANDS (2026-06 visual elevation) ───────────────── */
+.band-warm {
+  background: var(--pool-warm);
+  color: var(--timber);
+}
+.band-warm .ed-section-title,
+.band-warm h2, .band-warm h3 { color: var(--timber); }
+.band-warm .ed-section-title em { color: var(--glow); }
+.band-warm p { color: oklch(97% 0.005 85 / 0.82); }
+.band-warm .ed-section-label,
+.band-warm .ed-eyebrow { color: var(--glow); }
+.band-warm .ed-section-label::before,
+.band-warm .ed-section-label::after { background: oklch(97% 0.005 85 / 0.25); }
+.band-warm .ed-btn--ghost {
+  color: var(--timber);
+  border-color: oklch(97% 0.005 85 / 0.35);
+}
+.band-warm .ed-btn--ghost:hover {
+  color: var(--glow);
+  border-color: var(--glow);
+}
+.band-warm .ed-pair__meta { color: oklch(97% 0.005 85 / 0.6); }
+.band-warm .booking__note { color: oklch(97% 0.005 85 / 0.6); }
+
+
+/* ── FEATURED SERVICE HIERARCHY (2026-06 visual elevation) ─────────────── */
+@media (min-width: 821px) {
+  .ed-services__grid {
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: auto;
+    align-items: stretch;
+  }
+  .ed-svc--featured { grid-column: 1 / 8; grid-row: 1 / 3; display: flex; }
+  .ed-svc--featured .ed-svc__link { display: flex; flex-direction: column; width: 100%; }
+  .ed-svc--featured .ed-svc__media { flex: 1; min-height: 480px; aspect-ratio: auto; }
+  .ed-svc--featured .ed-svc__name { font-size: clamp(1.8rem, 2.4vw, 2.6rem); }
+  .ed-svc:not(.ed-svc--featured) { grid-column: 8 / 13; }
+  .ed-svc:not(.ed-svc--featured) .ed-svc__media { aspect-ratio: 16 / 7; }
+}

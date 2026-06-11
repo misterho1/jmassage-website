@@ -833,3 +833,24 @@ ol.svc-breadcrumb__list,
 @media (max-width: 720px) {
   .svc-banner__media { aspect-ratio: 4/3; }
 }
+
+
+/* ── FAQ (BEM generation — markup introduced by 2026-06-10 SEO pass) ───── */
+.faq-item__question {
+  display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+  width: 100%; padding: 1.4rem 0; cursor: pointer;
+  background: none; border: 0; text-align: left;
+  font-family: var(--font-head); font-size: 1.5rem; font-weight: 400;
+  color: var(--text-hi); transition: color 0.3s;
+}
+.faq-item__question:hover { color: var(--lantern); }
+.faq-item__icon { flex-shrink: 0; color: var(--lantern); opacity: 0.7; transition: transform 0.35s var(--ease-out); }
+.faq-item__icon::before { content: "+"; font-size: 1.6rem; line-height: 1; display: block; }
+.faq-item.open .faq-item__question { color: var(--lantern); }
+.faq-item.open .faq-item__icon { transform: rotate(45deg); opacity: 1; }
+.faq-item__answer { font-size: 1.15rem; color: var(--text-mid); line-height: 1.8; }
+.faq-enhanced .faq-item__answer {
+  max-height: 0; overflow: hidden; padding: 0;
+  transition: max-height 0.45s var(--ease-out), padding 0.3s;
+}
+.faq-enhanced .faq-item.open .faq-item__answer { max-height: 500px; padding-bottom: 1.4rem; }
