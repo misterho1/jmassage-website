@@ -21,6 +21,10 @@
   --pool:        oklch(22% 0 0);               /* near-black dark band */
   --slate:       oklch(28% 0.005 60);          /* warm dark */
 
+  /* Visual elevation (2026-06) */
+  --type-section: clamp(3rem, 6.5vw, 5.8rem);
+  --pool-warm:   oklch(20% 0.015 60);          /* warm espresso band */
+
   /* Accent — warm clay terracotta (Aman/Aesop earthy) — replaces rose */
   --lantern:     oklch(48% 0.085 35);          /* clay terracotta — primary accent */
   --amber:       oklch(42% 0.075 35);          /* deeper clay */
@@ -1167,10 +1171,10 @@ button { cursor: pointer; border: none; background: none; }
 
 .ed-section-title {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  font-size: var(--type-section);
   font-weight: 400;
   font-variation-settings: "opsz" 96, "SOFT" 50;
-  line-height: 1.06;
+  line-height: 1.02;
   color: var(--text-hi);
   letter-spacing: -0.022em;
   margin-bottom: 1.2rem;
