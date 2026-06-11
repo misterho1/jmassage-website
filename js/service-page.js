@@ -62,20 +62,33 @@ function initCounters() {
 
 /* ─── FAQ ACCORDION ──────────────────────────────────────────────────────── */
 function initFAQ() {
+  // JS-gated hiding: without this class, BEM answers stay visible (no-JS fail-safe).
+  document.querySelectorAll('.faq-list').forEach(list => list.classList.add('faq-enhanced'));
   document.querySelectorAll('.faq-item').forEach(item => {
-    const q = item.querySelector('.faq-q');
+    const q = item.querySelector('.faq-q, .faq-item__question');
     if (!q) return;
     q.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
       // Close all
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      document.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        const b = i.querySelector('.faq-item__question');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
       // Open clicked (if it was closed)
-      if (!isOpen) item.classList.add('open');
+      if (!isOpen) {
+        item.classList.add('open');
+        if (q.classList.contains('faq-item__question')) q.setAttribute('aria-expanded', 'true');
+      }
     });
   });
   // Open first by default
   const first = document.querySelector('.faq-item');
-  if (first) first.classList.add('open');
+  if (first) {
+    first.classList.add('open');
+    const b = first.querySelector('.faq-item__question');
+    if (b) b.setAttribute('aria-expanded', 'true');
+  }
 }
 
 /* ─── SMOOTH SCROLL ──────────────────────────────────────────────────────── */
