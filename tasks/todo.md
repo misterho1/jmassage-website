@@ -31,9 +31,17 @@ entity but has NO aggregateRating sibling.
 ## Verification
 - [x] Parse rendered JSON-LD from reviews.html: valid JSON, one business entity,
       aggregateRating present, all 12 reviews nested, required fields on each.
-- [ ] Commit + push to claude/jmassageslc-reviews-schema-cz6iu4.
-- [ ] After deploy, fetch live https://jmassageslc.com/reviews and confirm new
-      markup is in production.
+- [x] Cross-checked: all 12 marked-up reviews map to the 12 visible <article>
+      cards (author + body present), all 5-star. Markup matches visible content.
+- [x] Commit + push to claude/jmassageslc-reviews-schema-cz6iu4.
+- [ ] BLOCKED: After deploy, fetch live https://jmassageslc.com/reviews and
+      confirm new markup is in production.
+      - Cannot verify from this environment: network egress policy returns
+        403 host_not_allowed for jmassageslc.com.
+      - Also pending: fix is on the feature branch; production deploys from the
+        main branch, so it won't be live until the branch is merged + deployed.
+      - Action needed by user: merge the branch (deploy), then re-validate via
+        Google Rich Results Test / GSC URL inspection on /reviews.
 
 ## Result
 - ratingValue: 5.0
