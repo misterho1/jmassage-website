@@ -45,12 +45,26 @@
       "telephone": "+18012881118",
       "url": "https://jmassageslc.com",
       "openingHours": "Mo-Su 10:00-22:00"},
-    "offers": {
-      "@type": "Offer",
-      "price": "165",
-      "priceCurrency": "USD",
-      "description": "60-minute couples massage, pricing per couple"
-    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Couples Massage 60 Min",
+        "price": "165",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "name": "Couples Massage 90 Min",
+        "price": "245",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "name": "Couples Massage 120 Min",
+        "price": "325",
+        "priceCurrency": "USD"
+      }
+    ],
     "serviceType": "Couples Massage",
     "areaServed": {
       "@type": "City",
@@ -314,14 +328,27 @@
           <p class="section-sub">Transparent pricing. No surprises. Just an experience worth every dollar.</p>
         </div>
 
-        <div class="svc-pricing__grid svc-pricing__grid--single">
+        <div class="svc-pricing__grid">
+
+          <div class="price-card">
+            <p class="price-card__label">60 Min</p>
+            <p class="price-card__amount"><sup>$</sup>165</p>
+            <p class="price-card__duration">Both partners, side by side, in your own private suite. Two therapists, two tables, one shared hour.</p>
+            <a href="../#book" class="btn btn--gold price-card__cta">Reserve Your Suite</a>
+          </div>
 
           <div class="price-card price-card--featured">
             <span class="price-card__tag">Most Popular</span>
-            <p class="price-card__label">Couples Session</p>
-            <p class="price-card__amount"><sup>$</sup>165</p>
-            <p class="price-card__duration">60 minutes — per couple</p>
-            <p class="price-card__duration">90 min &amp; 120 min also available</p>
+            <p class="price-card__label">90 Min</p>
+            <p class="price-card__amount"><sup>$</sup>245</p>
+            <p class="price-card__duration">The unhurried version. Longer time on the table together means a deeper release and no glancing at the clock.</p>
+            <a href="../#book" class="btn btn--gold price-card__cta">Reserve Your Suite</a>
+          </div>
+
+          <div class="price-card">
+            <p class="price-card__label">120 Min</p>
+            <p class="price-card__amount"><sup>$</sup>325</p>
+            <p class="price-card__duration">The full two hours, shared. A complete escape for two, with time to settle in and fully let go.</p>
             <a href="../#book" class="btn btn--gold price-card__cta">Reserve Your Suite</a>
           </div>
 

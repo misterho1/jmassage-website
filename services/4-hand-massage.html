@@ -45,12 +45,26 @@
       "telephone": "+18012881118",
       "url": "https://jmassageslc.com",
       "openingHours": "Mo-Su 10:00-22:00"},
-    "offers": {
-      "@type": "Offer",
-      "price": "165",
-      "priceCurrency": "USD",
-      "description": "60-minute 4-hand massage with two synchronized therapists"
-    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "4-Hand Massage 60 Min",
+        "price": "165",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "name": "4-Hand Massage 90 Min",
+        "price": "245",
+        "priceCurrency": "USD"
+      },
+      {
+        "@type": "Offer",
+        "name": "4-Hand Massage 120 Min",
+        "price": "325",
+        "priceCurrency": "USD"
+      }
+    ],
     "serviceType": "4-Hand Massage",
     "areaServed": {
       "@type": "City",
@@ -316,14 +330,27 @@
           <p class="section-sub">One extraordinary experience. Transparent pricing. No surprises.</p>
         </div>
 
-        <div class="svc-pricing__grid svc-pricing__grid--single">
+        <div class="svc-pricing__grid">
+
+          <div class="price-card">
+            <p class="price-card__label">60 Min</p>
+            <p class="price-card__amount"><sup>$</sup>165</p>
+            <p class="price-card__duration">One client, two therapists, four hands in synchronized rhythm. The full bilateral effect in a single focused hour.</p>
+            <a href="../#book" class="btn btn--gold price-card__cta">Book Your Session</a>
+          </div>
 
           <div class="price-card price-card--featured">
-            <span class="price-card__tag">Signature Experience</span>
-            <p class="price-card__label">4-Hand Massage</p>
-            <p class="price-card__amount"><sup>$</sup>165</p>
-            <p class="price-card__duration">60 minutes — two therapists</p>
-            <p class="price-card__duration">One client — complete synchronization</p>
+            <span class="price-card__tag">Most Popular</span>
+            <p class="price-card__label">90 Min</p>
+            <p class="price-card__amount"><sup>$</sup>245</p>
+            <p class="price-card__duration">Extra time lets the two therapists build the wave more slowly. Deeper coverage, head to toe, with nothing rushed.</p>
+            <a href="../#book" class="btn btn--gold price-card__cta">Book Your Session</a>
+          </div>
+
+          <div class="price-card">
+            <p class="price-card__label">120 Min</p>
+            <p class="price-card__amount"><sup>$</sup>325</p>
+            <p class="price-card__duration">The full two hours of four-hand work. Double the coverage, sustained, for the most complete reset we offer.</p>
             <a href="../#book" class="btn btn--gold price-card__cta">Book Your Session</a>
           </div>
 
