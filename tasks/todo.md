@@ -33,6 +33,18 @@ ineligible for rich results.
       all reviews nested with required fields
 - [x] Commit + push to claude/jmassageslc-reviews-schema-brxm9s
 - [ ] After deploy, fetch live /reviews and confirm new markup in production
+      BLOCKED / NOT YET DONE:
+      1. Change is on the feature branch, not the deploy branch (main).
+         Cloudflare Pages serves production from main, so the change must be
+         merged before it reaches https://jmassageslc.com/reviews. (No PR
+         created — was not requested.)
+      2. Outbound fetches to the live domain return HTTP 403 from this
+         sandbox (Cloudflare bot protection blocks curl and WebFetch), so
+         live verification can't be performed from here regardless.
+      To verify after merge+deploy: load https://jmassageslc.com/reviews,
+      view source, confirm the JSON-LD has the aggregateRating block and 12
+      nested Review objects; or run the URL through Google Rich Results Test
+      / re-validate in Search Console.
 
 ## Final values used
 - ratingValue: 5.0
