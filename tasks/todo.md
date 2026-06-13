@@ -46,7 +46,24 @@ ineligible for rich results.
       nested Review objects; or run the URL through Google Rich Results Test
       / re-validate in Search Console.
 
-## Final values used
-- ratingValue: 5.0
-- reviewCount: 12
+## Final values used (corrected per owner)
+- ratingValue: 4.4  (real Google rating for J Massage SLC)
+- reviewCount: 477  (real Google review total)
 - bestRating: 5
+- Visible stats on /reviews (hero, H1, CTA, footer, title/meta) updated to
+  match 477 / 4.4 so markup == visible content (Google spam policy).
+- The 12 nested Review objects remain a DISPLAYED SAMPLE; aggregateRating
+  carries the true totals.
+
+## Open follow-ups (owner asked about)
+- The 12 sample reviews are placeholder/testimonial copy, all 5 stars, not
+  real Google reviews. With a real 4.4 aggregate, showing only fabricated
+  5-star samples is inaccurate and a Google spam-policy risk. Recommend
+  replacing with live/real reviews (see handoff in chat).
+- "450+ / 5.0" still appears on OTHER pages (index, services, about,
+  contact, pricing, massage-salt-lake-city, footer of every page). Only
+  reviews.html was corrected. Decide whether to roll 477/4.4 site-wide.
+- Self-serving review caveat: review markup about your own LocalBusiness on
+  your own site generally does NOT earn star rich results in Google Search
+  (2019 policy). Fixing the GSC validity error is still correct, but stars
+  in search come from the Google Business Profile, not this markup.
