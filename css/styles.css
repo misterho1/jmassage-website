@@ -1688,7 +1688,7 @@ button { cursor: pointer; border: none; background: none; }
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
-   BOOK PAGE — embedded Vagaro widget
+   BOOK PAGE — online booking handoff
 ════════════════════════════════════════════════════════════════════════════ */
 .book-hero {
   padding: 7rem 0 1.5rem;
@@ -1768,8 +1768,8 @@ button { cursor: pointer; border: none; background: none; }
   .book-hero { padding: 6rem 0 1rem; }
   .book-embed { padding: 1rem 0 2rem; }
   .book-embed__wrap { padding: 0 0.5rem; }
-  /* min-height 1100px keeps Vagaro's date+time picker visible without inner
-     iframe scroll on small phones (Vagaro's mobile widget needs ~1050px). */
+  /* min-height 1100px keeps the scheduler's date+time picker visible without inner
+     iframe scroll on small phones (the scheduler's mobile widget needs ~1050px). */
   .book-embed__iframe { height: calc(100vh - 160px); min-height: 1100px; }
 }
 
