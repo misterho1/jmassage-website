@@ -10,9 +10,13 @@ https://www.jmassageslc.com/*   https://jmassageslc.com/:splat   301
 /contact-us.html /contact 301
 /deep-tissue-massage.html /services/deep-tissue 301
 /shiatsu-massage.html /services/shiatsu 301
-/hot-stone.html /services/hot-stone 301
+/hot-stone.html /pricing 301
 /ashiatsu-massage.html /services/ashiatsu 301
 /reflexology.html /services/reflexology 301
 /peace-gardens.html / 301
 /red-butte-garden.html / 301
 /temple-square.html / 301
+
+# Hot stone + infrared sauna are now +$30 add-ons, not standalone services.
+/services/hot-stone /pricing 301
+/services/infrared-sauna /pricing 301
