@@ -93,67 +93,15 @@
       </div>
     </section>
 
-    <!-- Online booking (GoHighLevel) — pick a service, the scheduler loads below -->
+    <!-- Online booking (Vagaro) — interim while the Authorize.Net/Elavon gateway is being set up. GHL menu saved on branches book-menu-live / deploy-pricing-live. -->
     <section class="book-embed">
       <div class="container" style="max-width:1080px;margin:0 auto;padding-block:1rem 2rem;">
-
-        <style>
-          .book-menu__group{margin-bottom:1.35rem;}
-          .book-menu__title{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;margin:0 0 .55rem;color:#1a1a1a;}
-          .book-menu__title small{font-weight:400;opacity:.55;font-size:.74em;}
-          .book-menu__row{display:flex;flex-wrap:wrap;gap:.55rem;}
-          .book-pick{cursor:pointer;opacity:.5;transition:opacity .2s;}
-          .book-pick:hover{opacity:.85;}
-          .book-pick.is-active{opacity:1;}
-        </style>
-
-        <div class="book-menu" style="margin-bottom:1.9rem;">
-          <div class="book-menu__group">
-            <p class="book-menu__title">Single Massage <small>— Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Thai · Myofascial · Prenatal</small></p>
-            <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick is-active" data-cal="iYzZ0GbCUpIqrpaCbswy">60 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="g5R2qijQXBq7TRN4ySKJ">90 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="I5SVcGgdo29SnRL5lVmc">120 min</button>
-            </div>
-          </div>
-          <div class="book-menu__group">
-            <p class="book-menu__title">Couples Massage <small>— side by side</small></p>
-            <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="rICCpj4eRyVstN1WRZ79">60 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="ZR4sKFJmpX1LOwJreLdl">90 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="f0BGcU4zRUnHJJPrXKCA">120 min</button>
-            </div>
-          </div>
-          <div class="book-menu__group">
-            <p class="book-menu__title">4-Hand Massage <small>— two therapists</small></p>
-            <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="B7t88yqNvYp6w6vtWksT">60 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="61Y2h3xEJEvx8W1u8CaY">90 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="LlNmgD8xkqP4noUbUDRF">120 min</button>
-            </div>
-          </div>
-        </div>
-
         <div style="background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 34px 90px -42px rgba(0,0,0,0.6);">
-          <iframe src="https://api.leadconnectorhq.com/widget/booking/iYzZ0GbCUpIqrpaCbswy" style="width:100%;border:none;min-height:760px;display:block;" scrolling="no" id="ghl-booking-jmassage" title="Book your session at J Massage SLC"></iframe>
+          <iframe src="https://www.vagaro.com/Users/BusinessWidget.aspx?enc=MMLjhIwJMcwFQhXLL7ifVHKYuAKWAUhD4G0L9qRXJ5pm+kkiqAWwPdX1XsaeYmPl0JrchjPDG5qHxPdqGpuT5VUkJrVVC/V6OkhN7z9H93qNMF5h1uVTP8pXdABoEFp1t60XkKx1MoGeHQhf0qQlz1BEDE+E54KRIZAo/koOrZ9/aJa3otAborKYlGIAu40RMZCJ1JUFrvQIoF19ov9i69JaQlnxLtiK9D37/X10OsvtylybX4Eg0cJytqTP4qcrcGg0FwhJLH7GY8AfgJGFE23YrLIQPY233qBJ9Z36UnrC0Xee51D7GmpXbU7v6FKFPaaiNa6vBErJ1cqt4V+sJYW4OJAVY5fZylISm49Ax4Ao8a4oNi0xkAt9IFplsE19gwGag56mdydyvMyK4WtLCTWApc2S2egPnwtpT4AG7gi+Fn3VFUSMM1D703Ni963UIlRfEQ8HEvfF2w8buXQbAn2o3/L+Su5QtAwbECxMtx3QUal1GTXga7dwlvVpjEsqSyQqqm0Tjc2evw3uIgXWOA==" style="width:100%;border:none;min-height:760px;display:block;" id="vagaro-booking-jmassage" title="J Massage SLC online booking" loading="lazy" allow="payment"></iframe>
         </div>
-        <p class="book-embed__fallback" style="margin-top:1.75rem;text-align:center;">Prefer to book by phone? Call <a href="tel:+18012881118">(801) 288-1118</a> &mdash; open daily, 10am to 10pm.</p>
+        <p class="book-embed__fallback" style="margin-top:1.75rem;text-align:center;">Trouble loading the scheduler? <a href="https://www.vagaro.com/Users/BusinessWidget.aspx?enc=MMLjhIwJMcwFQhXLL7ifVHKYuAKWAUhD4G0L9qRXJ5pm+kkiqAWwPdX1XsaeYmPl0JrchjPDG5qHxPdqGpuT5VUkJrVVC/V6OkhN7z9H93qNMF5h1uVTP8pXdABoEFp1t60XkKx1MoGeHQhf0qQlz1BEDE+E54KRIZAo/koOrZ9/aJa3otAborKYlGIAu40RMZCJ1JUFrvQIoF19ov9i69JaQlnxLtiK9D37/X10OsvtylybX4Eg0cJytqTP4qcrcGg0FwhJLH7GY8AfgJGFE23YrLIQPY233qBJ9Z36UnrC0Xee51D7GmpXbU7v6FKFPaaiNa6vBErJ1cqt4V+sJYW4OJAVY5fZylISm49Ax4Ao8a4oNi0xkAt9IFplsE19gwGag56mdydyvMyK4WtLCTWApc2S2egPnwtpT4AG7gi+Fn3VFUSMM1D703Ni963UIlRfEQ8HEvfF2w8buXQbAn2o3/L+Su5QtAwbECxMtx3QUal1GTXga7dwlvVpjEsqSyQqqm0Tjc2evw3uIgXWOA==" target="_blank" rel="noopener">Open in a new tab</a> or call <a href="tel:+18012881118">(801) 288-1118</a>.</p>
       </div>
     </section>
-
-    <script>
-      (function(){
-        var frame=document.getElementById('ghl-booking-jmassage');
-        var base='https://api.leadconnectorhq.com/widget/booking/';
-        document.querySelectorAll('.book-pick').forEach(function(b){
-          b.addEventListener('click',function(){
-            document.querySelectorAll('.book-pick').forEach(function(x){x.classList.remove('is-active');});
-            b.classList.add('is-active');
-            if(frame){frame.src=base+b.getAttribute('data-cal');frame.scrollIntoView({behavior:'smooth',block:'nearest'});}
-          });
-        });
-      })();
-    </script>
 
   </main>
 
