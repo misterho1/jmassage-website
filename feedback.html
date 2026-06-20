@@ -119,7 +119,7 @@
 
   <script>
     // Filled in Task 1.5 once GHL webhook + Google review link exist. Do NOT deploy with placeholders.
-    const WEBHOOK_FEEDBACK = "https://services.leadconnectorhq.com/hooks/JTVhzuXGzfymuOd6igfn/webhook-trigger/eda737de-a324-4045-9c9b-cc40bf9c8d3f";
+    const WEBHOOK_FEEDBACK = "https://api.web3forms.com/submit";
     const GOOGLE_REVIEW_URL = "https://g.page/r/CaNXiQAAHC9EEBM/review";
     const BRAND = "jmassage";
     document.getElementById("fb-form").addEventListener("submit", async (e) => {
@@ -127,13 +127,13 @@
       const data = new FormData(e.target);
       if (!data.get("rating")) return;
       const rating = Number(data.get("rating"));
-      const payload = { brand: BRAND, rating, email: "reviewgate@jmassageslc.com", phone: "", feedback: data.get("feedback") || "", ts: new Date().toISOString() };
+      const payload = { access_key: "09b179d0-a8ea-48fe-ab01-9b1d40207026", subject: "Low review-gate feedback — J Massage SLC", brand: BRAND, rating, feedback: data.get("feedback") || "", ts: new Date().toISOString() };
       if (rating >= 4) {
         // happy guest -> straight to Google
         window.location.href = GOOGLE_REVIEW_URL;
         return;
       }
-      // 1-3 stays private: send to GHL for the owner, never to Google
+      // 1-3 stays private: emailed to the owner via web3forms, never to Google
       try {
         await fetch(WEBHOOK_FEEDBACK, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), keepalive: true });
       } catch (_) { /* never block the visitor on a webhook failure */ }
