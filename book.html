@@ -102,14 +102,24 @@
           .book-menu__title{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;margin:0 0 .55rem;color:#1a1a1a;}
           .book-menu__title small{font-weight:400;opacity:.55;font-size:.74em;}
           .book-menu__row{display:flex;flex-wrap:wrap;gap:.55rem;}
-          .book-pick{cursor:pointer;opacity:.5;transition:opacity .2s;}
-          .book-pick:hover{opacity:.85;}
-          .book-pick.is-active{opacity:1;}
+          .book-pick,.book-type{cursor:pointer;opacity:.5;transition:opacity .2s;}
+          .book-pick:hover,.book-type:hover{opacity:.85;}
+          .book-pick.is-active,.book-type.is-active{opacity:1;}
         </style>
 
         <div class="book-menu" style="margin-bottom:1.9rem;">
-          <div class="book-menu__group">
-            <p class="book-menu__title">Single Massage <small>— Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Thai · Myofascial · Prenatal</small></p>
+          <div class="book-menu__group" data-typed>
+            <p class="book-menu__title">Full Body Massage <small>— pick your style, then a length</small></p>
+            <div class="book-menu__row book-type-row" style="margin-bottom:.65rem;">
+              <button type="button" class="btn btn--gold btn--sm book-type is-active" data-type="Swedish">Swedish</button>
+              <button type="button" class="btn btn--gold btn--sm book-type" data-type="Deep Tissue">Deep Tissue</button>
+              <button type="button" class="btn btn--gold btn--sm book-type" data-type="Sports">Sports</button>
+              <button type="button" class="btn btn--gold btn--sm book-type" data-type="Ashiatsu">Ashiatsu</button>
+              <button type="button" class="btn btn--gold btn--sm book-type" data-type="Shiatsu">Shiatsu</button>
+              <button type="button" class="btn btn--gold btn--sm book-type" data-type="Thai">Thai</button>
+              <button type="button" class="btn btn--gold btn--sm book-type" data-type="Myofascial">Myofascial</button>
+              <button type="button" class="btn btn--gold btn--sm book-type" data-type="Prenatal">Prenatal</button>
+            </div>
             <div class="book-menu__row">
               <button type="button" class="btn btn--gold btn--sm book-pick is-active" data-cal="iYzZ0GbCUpIqrpaCbswy">60 min</button>
               <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="g5R2qijQXBq7TRN4ySKJ">90 min</button>
@@ -135,7 +145,7 @@
         </div>
 
         <div style="background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 34px 90px -42px rgba(0,0,0,0.6);">
-          <iframe src="https://api.leadconnectorhq.com/widget/booking/iYzZ0GbCUpIqrpaCbswy" style="width:100%;border:none;min-height:760px;display:block;" scrolling="no" id="ghl-booking-jmassage" title="Book your session at J Massage SLC"></iframe>
+          <iframe src="https://api.leadconnectorhq.com/widget/booking/iYzZ0GbCUpIqrpaCbswy?massage_type=Swedish" style="width:100%;border:none;min-height:760px;display:block;" scrolling="no" id="ghl-booking-jmassage" title="Book your session at J Massage SLC"></iframe>
         </div>
         <p class="book-embed__fallback" style="margin-top:1.75rem;text-align:center;">Prefer to book by phone? Call <a href="tel:+18012881118">(801) 288-1118</a> &mdash; open daily, 10am to 10pm.</p>
       </div>
@@ -145,11 +155,29 @@
       (function(){
         var frame=document.getElementById('ghl-booking-jmassage');
         var base='https://api.leadconnectorhq.com/widget/booking/';
+        function scrollFrame(){if(frame)frame.scrollIntoView({behavior:'smooth',block:'nearest'});}
+        function load(){
+          var pick=document.querySelector('.book-pick.is-active');
+          if(!frame||!pick)return;
+          var url=base+pick.getAttribute('data-cal');
+          var grp=pick.closest('[data-typed]');
+          if(grp){var t=grp.querySelector('.book-type.is-active');if(t)url+='?massage_type='+encodeURIComponent(t.getAttribute('data-type'));}
+          frame.src=url;
+        }
         document.querySelectorAll('.book-pick').forEach(function(b){
           b.addEventListener('click',function(){
             document.querySelectorAll('.book-pick').forEach(function(x){x.classList.remove('is-active');});
+            b.classList.add('is-active');load();scrollFrame();
+          });
+        });
+        document.querySelectorAll('.book-type').forEach(function(b){
+          b.addEventListener('click',function(){
+            b.closest('.book-type-row').querySelectorAll('.book-type').forEach(function(x){x.classList.remove('is-active');});
             b.classList.add('is-active');
-            if(frame){frame.src=base+b.getAttribute('data-cal');frame.scrollIntoView({behavior:'smooth',block:'nearest'});}
+            var grp=b.closest('[data-typed]');
+            document.querySelectorAll('.book-pick').forEach(function(x){x.classList.remove('is-active');});
+            var firstDur=grp.querySelector('.book-pick');if(firstDur)firstDur.classList.add('is-active');
+            load();scrollFrame();
           });
         });
       })();
