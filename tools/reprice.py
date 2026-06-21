@@ -311,8 +311,13 @@ REPLACEMENTS["services/4-hand-massage.html"] = [
     ("From <em>$80</em>", "From <em>$85</em>", 1),      # related Deep Tissue card (new from $85)
 ]
 
-if __name__ == "__main__":
-    check_only = "--check" in sys.argv
+def run(check_only=False):
+    """Apply (or, with check_only, dry-run) every guarded replacement.
+
+    Asserts each `old` occurs exactly its expected count before replacing, so a
+    drifted page aborts the run instead of being silently corrupted. Returns the
+    total number of replacements performed.
+    """
     total = 0
     for rel, rules in REPLACEMENTS.items():
         p = ROOT / rel
@@ -325,3 +330,8 @@ if __name__ == "__main__":
         if not check_only:
             p.write_text(text, encoding="utf-8", newline="")
     print(f"{'CHECK' if check_only else 'APPLIED'}: {total} replacements across {len(REPLACEMENTS)} files")
+    return total
+
+
+if __name__ == "__main__":
+    run(check_only="--check" in sys.argv)

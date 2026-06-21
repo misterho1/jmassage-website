@@ -1,0 +1,4 @@
+# Development / test dependencies for the J Massage SLC site.
+# Install with:  pip install -r requirements-dev.txt
+# Run tests with: pytest
+pytest>=8,<10
