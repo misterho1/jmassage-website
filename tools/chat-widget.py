@@ -19,25 +19,36 @@ SNIPPET = (
     b'data-widget-id="' + WIDGET_ID + b'" data-source="WEB_USER"></script>'
 )
 
-added, skipped, no_body = [], [], []
+def install(root):
+    """Insert the chat-widget loader before </body> in every .html under root.
 
-for path in sorted(ROOT.rglob("*.html")):
-    if ".git" in path.parts:
-        continue
-    data = path.read_bytes()
-    if WIDGET_ID in data:
-        skipped.append(path)
-        continue
-    if b"</body>" not in data:
-        no_body.append(path)
-        continue
-    eol = b"\r\n" if b"\r\n" in data else b"\n"
-    block = b"  <!-- GoHighLevel chat widget -->" + eol + b"  " + SNIPPET + eol
-    head, sep, tail = data.rpartition(b"</body>")
-    path.write_bytes(head + block + sep + tail)
-    added.append(path)
+    Returns (added, skipped, no_body) lists of paths. Idempotent: a page already
+    carrying WIDGET_ID is skipped, and per-file line endings are preserved.
+    """
+    added, skipped, no_body = [], [], []
 
-rel = lambda p: p.relative_to(ROOT).as_posix()
-print(f"added   ({len(added)}): " + ", ".join(rel(p) for p in added))
-print(f"skipped ({len(skipped)}): " + ", ".join(rel(p) for p in skipped))
-print(f"no body ({len(no_body)}): " + ", ".join(rel(p) for p in no_body))
+    for path in sorted(root.rglob("*.html")):
+        if ".git" in path.parts:
+            continue
+        data = path.read_bytes()
+        if WIDGET_ID in data:
+            skipped.append(path)
+            continue
+        if b"</body>" not in data:
+            no_body.append(path)
+            continue
+        eol = b"\r\n" if b"\r\n" in data else b"\n"
+        block = b"  <!-- GoHighLevel chat widget -->" + eol + b"  " + SNIPPET + eol
+        head, sep, tail = data.rpartition(b"</body>")
+        path.write_bytes(head + block + sep + tail)
+        added.append(path)
+
+    return added, skipped, no_body
+
+
+if __name__ == "__main__":
+    added, skipped, no_body = install(ROOT)
+    rel = lambda p: p.relative_to(ROOT).as_posix()
+    print(f"added   ({len(added)}): " + ", ".join(rel(p) for p in added))
+    print(f"skipped ({len(skipped)}): " + ", ".join(rel(p) for p in skipped))
+    print(f"no body ({len(no_body)}): " + ", ".join(rel(p) for p in no_body))
