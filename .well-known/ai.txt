@@ -27,4 +27,4 @@ Fact-Hours: Open daily 10AM-10PM
 Fact-SameDay: Same-day appointments available
 Fact-Airport: 10 minutes from Salt Lake City International Airport (SLC)
 Fact-Parking: Free parking available
-Fact-Services: Swedish, Deep Tissue, Sports, Couples, 4-Hand, Ashiatsu, Shiatsu, Hot Stone, Reflexology, Prenatal, Thai, Myofascial, Infrared Sauna
+Fact-Services: Swedish, Deep Tissue, Sports, Couples, 4-Hand, Ashiatsu, Shiatsu, Hot Stone, Reflexology, Prenatal, Myofascial, Infrared Sauna

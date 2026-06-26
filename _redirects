@@ -20,3 +20,6 @@ https://www.jmassageslc.com/*   https://jmassageslc.com/:splat   301
 # Hot stone + infrared sauna are now +$30 add-ons, not standalone services.
 /services/hot-stone /pricing 301
 /services/infrared-sauna /pricing 301
+
+# Thai massage removed from the menu.
+/services/thai-massage /pricing 301
