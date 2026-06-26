@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, follow">
-  <title>How was your visit — J Massage SLC</title>
+  <title>How was your visit · J Massage SLC</title>
   <meta name="description" content="Tell us about your appointment at J Massage SLC.">
   <link rel="canonical" href="https://jmassageslc.com/feedback">
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
@@ -127,7 +127,7 @@
       const data = new FormData(e.target);
       if (!data.get("rating")) return;
       const rating = Number(data.get("rating"));
-      const payload = { access_key: "09b179d0-a8ea-48fe-ab01-9b1d40207026", subject: "Low review-gate feedback — J Massage SLC", brand: BRAND, rating, feedback: data.get("feedback") || "", ts: new Date().toISOString() };
+      const payload = { access_key: "09b179d0-a8ea-48fe-ab01-9b1d40207026", subject: "Low review-gate feedback, J Massage SLC", brand: BRAND, rating, feedback: data.get("feedback") || "", ts: new Date().toISOString() };
       if (rating >= 4) {
         // happy guest -> straight to Google
         window.location.href = GOOGLE_REVIEW_URL;
