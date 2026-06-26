@@ -2284,6 +2284,7 @@ input:focus-visible,
   color: var(--text-hi);
   font-size: 0.95rem;
 }
+.gift-custom__input-wrap input:focus-visible { outline: 2px solid var(--lantern); outline-offset: -2px; }
 
 .gift__legal {
   margin-top: 1rem;
