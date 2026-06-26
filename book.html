@@ -101,9 +101,9 @@
           .book-menu__title{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:500;margin:0 0 .55rem;color:#1a1a1a;}
           .book-menu__title small{font-weight:400;opacity:.55;font-size:.74em;}
           .book-menu__row{display:flex;flex-wrap:wrap;gap:.55rem;}
-          .book-pick{cursor:pointer;opacity:.5;transition:opacity .2s;}
-          .book-pick:hover{opacity:.85;}
-          .book-pick.is-active{opacity:1;}
+          .book-pick{cursor:pointer;opacity:1;transition:box-shadow .15s,transform .15s;}
+          .book-pick:hover{transform:translateY(-1px);}
+          .book-pick.is-active{box-shadow:inset 0 0 0 2px #fff,0 0 0 2px #1a1a1a;}
         </style>
 
         <div class="book-menu" style="margin-bottom:1.9rem;">
