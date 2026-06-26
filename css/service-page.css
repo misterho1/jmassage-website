@@ -854,3 +854,13 @@ ol.svc-breadcrumb__list,
   transition: max-height 0.45s var(--ease-out), padding 0.3s;
 }
 .faq-enhanced .faq-item.open .faq-item__answer { max-height: 500px; padding-bottom: 1.4rem; }
+
+/* a11y: neutralize reveal motion under prefers-reduced-motion (mirror styles.css) */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-card {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
