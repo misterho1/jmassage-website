@@ -122,6 +122,17 @@ button { cursor: pointer; border: none; background: none; }
 }
 .skip-link:focus { left: 0; outline: 2px solid var(--lantern); outline-offset: 2px; }
 
+/* ─── A11Y: GLOBAL KEYBOARD FOCUS RING (WCAG 2.4.7) ─────────────────────── */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.nav__link:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--lantern);
+  outline-offset: 2px;
+}
+
 /* ─── CONTAINER ─────────────────────────────────────────────────────────── */
 .container {
   max-width: var(--container);
@@ -735,7 +746,10 @@ button { cursor: pointer; border: none; background: none; }
 .services__chooser-link:focus-visible {
   color: var(--lantern);
   border-bottom-color: var(--lantern);
-  outline: none;
+}
+.services__chooser-link:focus-visible {
+  outline: 2px solid var(--lantern);
+  outline-offset: 2px;
 }
 .services__chooser-link:hover em,
 .services__chooser-link:focus-visible em {
@@ -950,8 +964,11 @@ button { cursor: pointer; border: none; background: none; }
 .services__more-list a:focus-visible {
   color: var(--lantern);
   padding-left: 0.5rem;
-  outline: none;
   border-bottom-color: var(--lantern);
+}
+.services__more-list a:focus-visible {
+  outline: 2px solid var(--lantern);
+  outline-offset: 2px;
 }
 .services__more-list em {
   font-style: italic;
@@ -977,8 +994,11 @@ button { cursor: pointer; border: none; background: none; }
 .services__more-link:hover,
 .services__more-link:focus-visible {
   opacity: 0.65;
-  outline: none;
   background: oklch(48% 0.085 35 / 0.06);
+}
+.services__more-link:focus-visible {
+  outline: 2px solid var(--lantern);
+  outline-offset: 2px;
 }
 
 @media (max-width: 720px) {
