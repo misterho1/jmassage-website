@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  <title>You're booked · J Massage SLC</title>
+  <meta name="description" content="Your appointment at J Massage SLC is confirmed.">
+  <link rel="canonical" href="https://jmassageslc.com/thank-you">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="css/styles.css?v=15">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Google tag (gtag.js) - G-HR9MP6ENEP -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HR9MP6ENEP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HR9MP6ENEP');
+    gtag('config', 'AW-18046916928');
+  </script>
+
+  <!-- BOOKING CONVERSION: fires once when this page loads (GHL calendar redirects here on a completed booking). -->
+  <!-- Setup: in Google Ads, link GA4 (G-HR9MP6ENEP) and import the GA4 event "booking_complete" as a PRIMARY conversion. -->
+  <!-- Optional: once a native Google Ads booking conversion action exists, uncomment the conversion line below with its label. -->
+  <script>
+    (function () {
+      function fireOnce() {
+        if (window.__jm_conv_fired) return;
+        window.__jm_conv_fired = true;
+        if (typeof gtag !== 'function') return;
+        // GA4 key event (import to Google Ads as PRIMARY conversion)
+        gtag('event', 'booking_complete', {
+          send_to: 'G-HR9MP6ENEP',
+          source: 'ghl_booking_redirect'
+        });
+        gtag('event', 'generate_lead', {
+          send_to: 'G-HR9MP6ENEP',
+          currency: 'USD',
+          value: 0
+        });
+        // Native Google Ads conversion (uncomment + add the conversion label once created in Ads):
+        // gtag('event', 'conversion', { send_to: 'AW-18046916928/REPLACE_WITH_LABEL' });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fireOnce);
+      } else {
+        fireOnce();
+      }
+    })();
+  </script>
+
+  <style>
+    .ty-wrap { min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 6rem 1.25rem; background: linear-gradient(160deg, var(--soot, #1a1714) 0%, var(--timber, #241f1a) 70%); }
+    .ty-card { max-width: 560px; text-align: center; }
+    .ty-mark { width: 64px; height: 64px; margin: 0 auto 1.75rem; border-radius: 50%; display: grid; place-items: center; background: rgba(199,158,106,0.14); border: 1px solid var(--lantern, #c79e6a); }
+    .ty-mark svg { width: 30px; height: 30px; stroke: var(--lantern, #c79e6a); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .ty-eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; color: var(--lantern, #c79e6a); margin: 0 0 .9rem; font-family: var(--font-body, 'Switzer', sans-serif); }
+    .ty-card h1 { font-family: var(--font-head, 'Fraunces', serif); font-weight: 300; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.12; color: var(--text-hi, #f3ece2); margin: 0 0 1.1rem; }
+    .ty-card h1 em { color: var(--lantern, #c79e6a); font-style: italic; }
+    .ty-card p { font-family: var(--font-body, 'Switzer', sans-serif); font-size: 1.05rem; line-height: 1.6; color: var(--text-mid, #cdbfae); margin: 0 auto 2rem; max-width: 460px; }
+    .ty-actions { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; }
+    .ty-btn { font-family: var(--font-body, 'Switzer', sans-serif); font-size: .95rem; padding: .85rem 1.6rem; border-radius: 999px; text-decoration: none; display: inline-block; }
+    .ty-btn--primary { background: var(--lantern, #c79e6a); color: var(--soot, #1a1714); font-weight: 600; }
+    .ty-btn--ghost { border: 1px solid var(--border, rgba(255,255,255,0.18)); color: var(--text-hi, #f3ece2); }
+  </style>
+</head>
+<body>
+  <main id="main" class="ty-wrap">
+    <div class="ty-card">
+      <div class="ty-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <p class="ty-eyebrow">Appointment confirmed</p>
+      <h1>You're <em>booked</em>.</h1>
+      <p>Thank you for booking with J Massage SLC. You'll get a confirmation by email and text. If you need to change anything, call us and we'll take care of it.</p>
+      <div class="ty-actions">
+        <a class="ty-btn ty-btn--primary" href="/">Back to home</a>
+        <a class="ty-btn ty-btn--ghost" href="tel:+18012881118" data-phone>Call the studio</a>
+      </div>
+    </div>
+  </main>
+  <script src="/js/tracking.js" defer></script>
+</body>
+</html>
