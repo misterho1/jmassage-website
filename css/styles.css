@@ -48,7 +48,7 @@
   --star:        oklch(48% 0.085 35);          /* clay */
 
   /* Fonts — Fraunces serif for editorial headings, Switzer sans for body */
-  --font-head:   'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-head:   'Fraunces', Georgia, serif;
   --font-body:   'Switzer', 'Helvetica Neue', Arial, sans-serif;
   --font-display: 'Fraunces', Georgia, serif;
 

@@ -1,4 +1,4 @@
-﻿/* ═══════════════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════════════════════
    J MASSAGE SLC — MAIN.JS v3.0
    • Cursor glow tracking
    • Hero clip-path text reveals
@@ -213,21 +213,21 @@ function initCardGlow() {
       card.style.setProperty('--glow-x', x + '%');
       card.style.setProperty('--glow-y', y + '%');
       card.style.setProperty('--before-bg',
-        `radial-gradient(circle at ${x}% ${y}%, var(--glow-strong, rgba(200,136,42,0.13)) 0%, transparent 65%)`
+        `radial-gradient(circle at ${x}% ${y}%, var(--glow-strong, oklch(48% 0.085 35 / 0.13)) 0%, transparent 65%)`
       );
     });
 
     card.addEventListener('mouseleave', () => {
       card.style.removeProperty('--before-bg');
       card.style.setProperty('--before-bg',
-        'radial-gradient(circle at 50% 120%, var(--glow-rest, rgba(200,136,42,0.07)) 0%, transparent 65%)'
+        'radial-gradient(circle at 50% 120%, var(--glow-rest, oklch(48% 0.085 35 / 0.07)) 0%, transparent 65%)'
       );
     });
   });
 
   // CSS custom property override for ::before
   const style = document.createElement('style');
-  style.textContent = `.svc-card::before { background: var(--before-bg, radial-gradient(circle at 50% 120%, var(--glow-rest, rgba(200,136,42,0.07)) 0%, transparent 65%)) !important; }`;
+  style.textContent = `.svc-card::before { background: var(--before-bg, radial-gradient(circle at 50% 120%, var(--glow-rest, oklch(48% 0.085 35 / 0.07)) 0%, transparent 65%)) !important; }`;
   document.head.appendChild(style);
 }
 
