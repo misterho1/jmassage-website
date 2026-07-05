@@ -31,7 +31,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet"></noscript>
 
-  <link rel="stylesheet" href="css/styles.css?v=17">
+  <link rel="stylesheet" href="css/styles.css?v=18">
 
   <script type="application/ld+json">
   {
@@ -162,6 +162,36 @@
             of itself.
           </p>
           <p class="ed-intro__byline">A note from the studio</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2b. THE SESSION — pinned scroll-scrub scene (cinematic layer 2026-07).
+         Static state (no-JS / mobile / reduced-motion): final scene + strongest
+         caption visible via .is-active; motion.js takes over on desktop. -->
+    <section class="ed-session" id="session" aria-label="What a session here feels like">
+      <div class="ed-session__stage">
+        <figure class="ed-session__scene" data-scene="1">
+          <img src="images/editorial/session-room.webp" alt="Warm massage room ready for a session" loading="lazy" width="1920" height="1080">
+        </figure>
+        <figure class="ed-session__scene" data-scene="2">
+          <img src="images/editorial/session-oil.webp" alt="Warm oil poured slowly before the massage" loading="lazy" width="1920" height="1080">
+        </figure>
+        <figure class="ed-session__scene" data-scene="3">
+          <img src="images/editorial/session-hands.webp" alt="Therapist working along a client's upper back" loading="lazy" width="1920" height="1080">
+        </figure>
+        <figure class="ed-session__scene is-active" data-scene="4">
+          <img src="images/editorial/session-exhale.webp" alt="Client resting at ease after the massage" loading="lazy" width="1920" height="1080">
+        </figure>
+        <div class="ed-session__scrim" aria-hidden="true"></div>
+        <div class="ed-session__content container">
+          <span class="ed-eyebrow">The session</span>
+          <h2 class="ed-session__caption">
+            <span class="ed-session__cap" data-cap="1">The room is ready before you are.</span>
+            <span class="ed-session__cap" data-cap="2">Warm oil. Warmer hands.</span>
+            <span class="ed-session__cap" data-cap="3">Pressure exactly where you carry it.</span>
+            <span class="ed-session__cap is-active" data-cap="4">And then — the exhale.</span>
+          </h2>
         </div>
       </div>
     </section>

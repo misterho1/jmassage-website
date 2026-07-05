@@ -185,6 +185,49 @@
         }
       }
 
+      /* ── The Session — pinned scroll-scrub scene (cinematic). Four stills
+         crossfade as the scroll walks the session arc; captions swap in step.
+         Static markup ships scene 4 active, so mobile/reduced-motion/no-JS
+         see the strongest single frame; JS re-seats to scene 1 here. ── */
+      if (cinematic) {
+        var sess = document.querySelector('.ed-session');
+        if (sess) {
+          var sScenes = gsap.utils.toArray(sess.querySelectorAll('.ed-session__scene'));
+          var sCaps = gsap.utils.toArray(sess.querySelectorAll('.ed-session__cap'));
+          if (sScenes.length === 4 && sCaps.length === 4) {
+            sScenes.concat(sCaps).forEach(function (el) { el.classList.remove('is-active'); });
+            gsap.set(sScenes, { autoAlpha: 0 });
+            gsap.set(sCaps, { autoAlpha: 0, y: 14 });
+            gsap.set(sScenes[0], { autoAlpha: 1 });
+            gsap.set(sCaps[0], { autoAlpha: 1, y: 0 });
+            /* Slow continuous drift on whichever scene is up (Ken Burns). */
+            sScenes.forEach(function (sc) {
+              gsap.fromTo(sc.querySelector('img'), { scale: 1.0 }, {
+                scale: 1.06, ease: 'none',
+                scrollTrigger: { trigger: sess, start: 'top top', end: '+=320%', scrub: true }
+              });
+            });
+            var stl = gsap.timeline({
+              scrollTrigger: {
+                trigger: sess,
+                start: 'top top',
+                end: '+=320%',
+                pin: true,
+                scrub: 0.5,
+                anticipatePin: 1
+              }
+            });
+            for (var i = 1; i < 4; i++) {
+              stl.to(sCaps[i - 1], { autoAlpha: 0, y: -14, duration: 0.35, ease: 'none' }, i)
+                 .to(sScenes[i - 1], { autoAlpha: 0, duration: 0.6, ease: 'none' }, i + 0.05)
+                 .to(sScenes[i], { autoAlpha: 1, duration: 0.6, ease: 'none' }, i)
+                 .fromTo(sCaps[i], { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: 'none' }, i + 0.25);
+            }
+            stl.to({}, { duration: 0.6 }); // hold on the exhale before release
+          }
+        }
+      }
+
       /* ── Live scroll-progress counter (cinematic) — climbs 000 → 100. ── */
       if (cinematic) {
         var prog = document.createElement('div');
