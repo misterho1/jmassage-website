@@ -275,6 +275,11 @@ function initSmoothScroll() {
       if (!target) return;
       e.preventDefault();
       const offset = (document.getElementById('header')?.offsetHeight || 72) + 16;
+      // Lenis (motion.js) owns scrolling when present; native fallback otherwise.
+      if (window.__lenis) {
+        window.__lenis.scrollTo(target, { offset: -offset });
+        return;
+      }
       window.scrollTo({
         top: target.getBoundingClientRect().top + window.scrollY - offset,
         behavior: 'smooth'

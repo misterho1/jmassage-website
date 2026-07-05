@@ -2739,3 +2739,100 @@ img[data-parallax] { scale: 1.12; }
   .ed-svc:not(.ed-svc--featured) { grid-column: 8 / 13; }
   .ed-svc:not(.ed-svc--featured) .ed-svc__media { aspect-ratio: 16 / 7; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CINEMATIC LAYER (2026-07) — video hero, loading intro, scroll progress,
+   pinned philosophy. Motion driven by js/motion.js; everything here is
+   display-gated so no-JS, mobile, and reduced-motion stay static + fast.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Lenis owns scrolling when active — kill native smooth so they don't fight */
+html.lenis, html.lenis body { height: auto; }
+html.lenis { scroll-behavior: auto !important; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+/* Hero ambient video — sits between the LCP image and the scrim.
+   No src until motion.js decides (desktop + motionOK): zero mobile bytes. */
+.ed-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Loading-reveal intro — injected by motion.js, so no-JS never sees it */
+.cine-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: var(--pool-warm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+}
+.cine-intro__mark {
+  overflow: hidden;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-family: var(--font-display);
+  color: oklch(96% 0.01 80);
+}
+.cine-intro__j {
+  display: inline-block;
+  font-size: clamp(3.2rem, 8vw, 6rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--glow);
+}
+.cine-intro__word {
+  display: inline-block;
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+.cine-intro__word em { font-style: italic; color: var(--glow); }
+.cine-intro__line {
+  width: min(240px, 40vw);
+  height: 1px;
+  background: oklch(96% 0.01 80 / 0.35);
+  transform-origin: left center;
+}
+html.cine-lock { overflow: hidden; }
+
+/* Live scroll-progress counter — top right, desktop only */
+.cine-progress {
+  position: fixed;
+  top: 5.2rem;
+  right: clamp(1rem, 3vw, 2.2rem);
+  z-index: 900;
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--text-lo);
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  pointer-events: none;
+}
+.cine-progress__num { color: var(--lantern); font-size: 1.05rem; }
+.cine-progress::after { content: ""; display: block; width: 26px; height: 1px; background: var(--border-mid); align-self: center; }
+
+/* Pinned philosophy — word-by-word scrub reveal (spans injected by JS) */
+.ed-intro .qw { opacity: 1; } /* JS animates from dim; static = fully readable */
+
+/* Gates: mobile + reduced motion never pay for any of this */
+@media (max-width: 819px) {
+  .ed-hero__video, .cine-progress { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ed-hero__video, .cine-progress, .cine-intro { display: none !important; }
+}
