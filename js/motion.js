@@ -270,6 +270,57 @@
         }
       };
 
+      /* ── Ambient video layers (playbook pass) — couples band + final CTA.
+         Same attach policy as the hero: desktop now, phones post-load on
+         decent connections; fade in on canplaythrough; pause offscreen. ── */
+      var ambConn = navigator.connection || {};
+      var ambOkNet = !ambConn.saveData && !/(slow-2g|2g|3g)/.test(ambConn.effectiveType || '');
+      gsap.utils.toArray('.ed-ambient-video').forEach(function (av) {
+        if (!av.dataset.src || av.getAttribute('src')) return;
+        av.addEventListener('canplaythrough', function once() {
+          av.removeEventListener('canplaythrough', once);
+          var p = av.play();
+          if (p && p.then) {
+            p.then(function () {
+              gsap.to(av, { autoAlpha: 1, duration: 1.6, ease: 'power2.inOut' });
+            }).catch(function () {});
+          }
+        });
+        var attach = function () { av.src = av.dataset.src; av.load(); };
+        if (isDesktop) attach();
+        else if (ambOkNet) {
+          if (document.readyState === 'complete') gsap.delayedCall(2.5, attach);
+          else window.addEventListener('load', function () { gsap.delayedCall(2.5, attach); });
+        }
+        ScrollTrigger.create({
+          trigger: av.closest('section') || av,
+          start: 'top bottom',
+          end: 'bottom top',
+          onLeave: function () { av.pause(); },
+          onEnter: function () { var p = av.play(); if (p && p.catch) p.catch(function () {}); },
+          onEnterBack: function () { var p = av.play(); if (p && p.catch) p.catch(function () {}); }
+        });
+      });
+
+      /* ── Film grain — static texture overlay, JS-injected (no-JS safe). ── */
+      if (!document.querySelector('.cine-grain')) {
+        var grain = document.createElement('div');
+        grain.className = 'cine-grain';
+        grain.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(grain);
+      }
+
+      /* ── Masked title reveals — section titles wipe up from their baseline
+         on entry. clip-path only, so HTML inside titles (<em>, <br>) is safe. ── */
+      gsap.utils.toArray('.ed-section-title').forEach(function (t) {
+        gsap.fromTo(t,
+          { clipPath: 'inset(0 0 100% 0)', y: 24 },
+          {
+            clipPath: 'inset(0 0 -8% 0)', y: 0, duration: 1.1, ease: 'expo.out',
+            scrollTrigger: { trigger: t, start: 'top 88%', once: true }
+          });
+      });
+
       if (!isDesktop) return cleanup;
 
       /* Editorial image parallax — scoped to the new attribute only,
