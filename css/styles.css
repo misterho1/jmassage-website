@@ -2829,9 +2829,12 @@ html.cine-lock { overflow: hidden; }
 /* Pinned philosophy — word-by-word scrub reveal (spans injected by JS) */
 .ed-intro .qw { opacity: 1; } /* JS animates from dim; static = fully readable */
 
-/* Gates: mobile + reduced motion never pay for any of this */
+/* Gates (2026-07 mobile pass): phones run the cinematic tier too — counter
+   shrinks, hero video attaches post-load via motion.js (poster stays LCP).
+   Reduced motion stays fully static. */
 @media (max-width: 819px) {
-  .ed-hero__video, .cine-progress { display: none !important; }
+  .cine-progress { top: 4.6rem; font-size: 0.7rem; }
+  .cine-progress__num { font-size: 0.9rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ed-hero__video, .cine-progress, .cine-intro { display: none !important; }
@@ -2841,7 +2844,7 @@ html.cine-lock { overflow: hidden; }
    Static contract: .is-active scene + caption visible with zero JS.
    motion.js re-seats state to scene 1 and scrubs on desktop+motionOK only. */
 .ed-session { background: var(--pool-warm); }
-.ed-session__stage { position: relative; height: 100vh; overflow: hidden; }
+.ed-session__stage { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
 .ed-session__scene {
   position: absolute; inset: 0; margin: 0;
   opacity: 0; visibility: hidden;
@@ -2876,6 +2879,5 @@ html.cine-lock { overflow: hidden; }
 .ed-session__cap em { font-style: italic; color: var(--glow); }
 .ed-session__cap.is-active { opacity: 1; visibility: visible; }
 
-@media (max-width: 819px) {
-  .ed-session__stage { height: 72vh; }
-}
+/* (mobile pass) session stage stays full-viewport on phones — the pinned
+   scrub runs there now; static fallback is handled by reduced-motion/no-JS. */

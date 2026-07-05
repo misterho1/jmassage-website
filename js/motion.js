@@ -23,16 +23,21 @@
       var isDesktop = context.conditions.isDesktop;
       if (!motionOK) return;
 
-      /* Cinematic tier — everything below that says "cinematic" is
-         desktop-with-mouse only. */
-      var cinematic = isDesktop;
+      /* Cinematic tiers (2026-07 mobile pass): scrub scenes, pins, the intro
+         and the progress counter run on ALL motion-OK devices — they are
+         transform/opacity-only and cost no extra bytes. Pointer-driven extras
+         (Lenis, parallax, magnetic) stay desktop; phones attach the hero
+         video after load, on decent connections only, so LCP is untouched. */
+      var cinematic = true;
+      var heavy = isDesktop;
+      if (!isDesktop) ScrollTrigger.normalizeScroll(true);
 
       /* ── Lenis smooth scroll (cinematic) ──────────────────────────────
          Drives window scroll through GSAP's ticker; ScrollTrigger stays in
          sync via lenis.on('scroll'). main.js routes #anchor clicks through
          window.__lenis so the two never fight. */
       var lenis = null;
-      if (cinematic && window.Lenis) {
+      if (heavy && window.Lenis) {
         lenis = new Lenis({ duration: 1.15, smoothWheel: true });
         window.__lenis = lenis;
         lenis.on('scroll', ScrollTrigger.update);
@@ -111,13 +116,22 @@
             }
           };
           gsap.delayedCall(introDelay + 2.2, function () { vidTimeUp = true; tryFadeIn(); });
-          vid.src = vid.dataset.src;
-          vid.load();
           vid.addEventListener('canplaythrough', function once() {
             vid.removeEventListener('canplaythrough', once);
             vidCanPlay = true;
             tryFadeIn();
           });
+          /* Attach: desktop right away; mobile only after the page has fully
+             loaded (poster stays the LCP) and never on save-data/slow nets. */
+          var conn = navigator.connection || {};
+          var okNet = !conn.saveData && !/(slow-2g|2g|3g)/.test(conn.effectiveType || '');
+          var attachVid = function () { vid.src = vid.dataset.src; vid.load(); };
+          if (isDesktop) {
+            attachVid();
+          } else if (okNet) {
+            if (document.readyState === 'complete') gsap.delayedCall(2.0, attachVid);
+            else window.addEventListener('load', function () { gsap.delayedCall(2.0, attachVid); });
+          }
           ScrollTrigger.create({
             trigger: hero,
             start: 'top bottom',
@@ -246,7 +260,17 @@
         });
       }
 
-      if (!isDesktop) return;
+      /* matchMedia cleanup — registered for BOTH tiers: hand scrolling back
+         to the browser if conditions flip (resize, RM toggle). */
+      var cleanup = function () {
+        if (!isDesktop) ScrollTrigger.normalizeScroll(false);
+        if (lenis) {
+          lenis.destroy();
+          if (window.__lenis === lenis) window.__lenis = null;
+        }
+      };
+
+      if (!isDesktop) return cleanup;
 
       /* Editorial image parallax — scoped to the new attribute only,
          never the existing .reveal system. */
@@ -273,14 +297,7 @@
         btn.addEventListener('mouseleave', function () { qx(0); qy(0); });
       });
 
-      /* matchMedia cleanup — if conditions flip (resize, RM toggle),
-         hand scrolling back to the browser. */
-      return function () {
-        if (lenis) {
-          lenis.destroy();
-          if (window.__lenis === lenis) window.__lenis = null;
-        }
-      };
+      return cleanup;
     }
   );
 
