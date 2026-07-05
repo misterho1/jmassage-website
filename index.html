@@ -70,7 +70,8 @@
     gtag('config', 'G-HR9MP6ENEP');
     gtag('config', 'AW-18046916928');
   </script>
-  <link rel="preload" as="image" href="/images/editorial/hero-room.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="/images/editorial/hero-room.webp" fetchpriority="high" media="(orientation: landscape)">
+  <link rel="preload" as="image" href="/images/editorial/hero-room-portrait.webp" fetchpriority="high" media="(orientation: portrait)">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
@@ -122,10 +123,13 @@
     <section class="ed-hero">
       <div class="ed-hero__media" aria-hidden="true">
         <picture>
+          <!-- Portrait phones get a purpose-framed 9:16 cut — the landscape
+               16:9 center-crop reads wrong on a tall screen. -->
+          <source media="(orientation: portrait)" srcset="images/editorial/hero-room-portrait.webp">
           <source srcset="images/editorial/hero-room.webp" type="image/webp">
           <img src="images/editorial/hero-room.webp" alt="Massage room at J Massage SLC, Salt Lake City" loading="eager" fetchpriority="high" width="2752" height="1536">
         </picture>
-        <video class="ed-hero__video" data-src="/videos/hero-ambient.mp4" muted loop playsinline preload="none" poster="images/editorial/hero-room.webp" aria-hidden="true" tabindex="-1"></video>
+        <video class="ed-hero__video" data-src="/videos/hero-ambient.mp4" data-src-portrait="/videos/hero-ambient-portrait.mp4" muted loop playsinline preload="none" poster="images/editorial/hero-room.webp" aria-hidden="true" tabindex="-1"></video>
         <div class="ed-hero__scrim"></div>
       </div>
       <div class="ed-hero__content container">
@@ -172,16 +176,28 @@
     <section class="ed-session" id="session" aria-label="What a session here feels like">
       <div class="ed-session__stage">
         <figure class="ed-session__scene" data-scene="1">
-          <img src="images/editorial/session-room.webp" alt="Warm massage room ready for a session" loading="lazy" width="1920" height="1080">
+          <picture>
+            <source media="(orientation: portrait)" srcset="images/editorial/session-room-portrait.webp">
+            <img src="images/editorial/session-room.webp" alt="Warm massage room ready for a session" loading="lazy" width="1920" height="1080">
+          </picture>
         </figure>
         <figure class="ed-session__scene" data-scene="2">
-          <img src="images/editorial/session-oil.webp" alt="Warm oil poured slowly before the massage" loading="lazy" width="1920" height="1080">
+          <picture>
+            <source media="(orientation: portrait)" srcset="images/editorial/session-oil-portrait.webp">
+            <img src="images/editorial/session-oil.webp" alt="Warm oil poured slowly before the massage" loading="lazy" width="1920" height="1080">
+          </picture>
         </figure>
         <figure class="ed-session__scene" data-scene="3">
-          <img src="images/editorial/session-hands.webp" alt="Therapist working along a client's upper back" loading="lazy" width="1920" height="1080">
+          <picture>
+            <source media="(orientation: portrait)" srcset="images/editorial/session-hands-portrait.webp">
+            <img src="images/editorial/session-hands.webp" alt="Therapist working along a client's upper back" loading="lazy" width="1920" height="1080">
+          </picture>
         </figure>
         <figure class="ed-session__scene is-active" data-scene="4">
-          <img src="images/editorial/session-exhale.webp" alt="Client resting at ease after the massage" loading="lazy" width="1920" height="1080">
+          <picture>
+            <source media="(orientation: portrait)" srcset="images/editorial/session-exhale-portrait.webp">
+            <img src="images/editorial/session-exhale.webp" alt="Client resting at ease after the massage" loading="lazy" width="1920" height="1080">
+          </picture>
         </figure>
         <div class="ed-session__scrim" aria-hidden="true"></div>
         <div class="ed-session__content container">
@@ -397,7 +413,7 @@
     <!-- 8. FINAL CTA -->
     <section id="book" class="booking band-warm section">
       <div class="booking__media" aria-hidden="true">
-        <video class="ed-ambient-video" data-src="/videos/cta-afterglow.mp4" muted loop playsinline preload="none" poster="images/editorial/session-exhale.webp" tabindex="-1"></video>
+        <video class="ed-ambient-video" data-src="/videos/cta-afterglow.mp4" data-src-portrait="/videos/cta-afterglow-portrait.mp4" muted loop playsinline preload="none" poster="images/editorial/session-exhale.webp" tabindex="-1"></video>
         <div class="booking__scrim"></div>
       </div>
       <div class="container">

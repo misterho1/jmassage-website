@@ -125,7 +125,13 @@
              loaded (poster stays the LCP) and never on save-data/slow nets. */
           var conn = navigator.connection || {};
           var okNet = !conn.saveData && !/(slow-2g|2g|3g)/.test(conn.effectiveType || '');
-          var attachVid = function () { vid.src = vid.dataset.src; vid.load(); };
+          /* Portrait screens get the 9:16 cut when one is declared —
+             matches the portrait poster/still so the crossfade holds. */
+          var heroPortrait = window.matchMedia('(orientation: portrait)').matches;
+          var attachVid = function () {
+            vid.src = (heroPortrait && vid.dataset.srcPortrait) ? vid.dataset.srcPortrait : vid.dataset.src;
+            vid.load();
+          };
           if (isDesktop) {
             attachVid();
           } else if (okNet) {
@@ -286,7 +292,11 @@
             }).catch(function () {});
           }
         });
-        var attach = function () { av.src = av.dataset.src; av.load(); };
+        var avPortrait = window.matchMedia('(orientation: portrait)').matches;
+        var attach = function () {
+          av.src = (avPortrait && av.dataset.srcPortrait) ? av.dataset.srcPortrait : av.dataset.src;
+          av.load();
+        };
         if (isDesktop) attach();
         else if (ambOkNet) {
           if (document.readyState === 'complete') gsap.delayedCall(2.5, attach);
