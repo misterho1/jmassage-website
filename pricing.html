@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
   <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="css/styles.css?v=16">
+  <link rel="stylesheet" href="css/styles.css?v=21">
 
   <style>
     .pricing-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 0.92rem; }
@@ -186,41 +186,37 @@
   <main id="main">
 
     <!-- HERO -->
-    <section style="padding: 9rem 0 5rem; background: linear-gradient(160deg, var(--soot) 0%, var(--timber) 60%); border-bottom: 1px solid var(--border);">
-      <div class="container" style="text-align: center; max-width: 800px; margin: 0 auto;">
-        <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
-          <ol style="list-style: none; display: flex; gap: 0.5rem; justify-content: center; font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.08em;">
-            <li><a href="/" style="color: var(--lantern); text-decoration: none;">Home</a></li>
-            <li style="opacity: 0.4;">›</li>
-            <li style="color: var(--text-lo);">Pricing</li>
-          </ol>
-        </nav>
-        <h1 style="font-family: var(--font-head); font-size: clamp(2rem, 4.5vw, 3.4rem); font-weight: 300; color: var(--text-hi); line-height: 1.15; margin-bottom: 1.2rem;">
-          J Massage SLC Pricing ,<br><em style="color: var(--lantern);">Transparent, No Hidden Fees</em>
-        </h1>
-        <p style="font-family: var(--font-body); font-size: 1rem; color: var(--text-mid); max-width: 580px; margin: 0 auto 2rem; line-height: 1.8;">
-          What you see is what you pay. No surprise charges, no mandatory upsells. Sessions available same-day, open daily 10AM to 10PM.
-        </p>
-        <div style="display: inline-flex; gap: 1.5rem; align-items: center; background: var(--soot); border: 1px solid var(--border); border-radius: var(--r); padding: 0.9rem 2rem; font-family: var(--font-body); font-size: 0.85rem; color: var(--text-lo); flex-wrap: wrap; justify-content: center;">
-          <span>Sessions from <strong style="color: var(--lantern);">$85</strong></span>
-          <span style="color: var(--border-mid);">|</span>
-          <span>Open Daily <strong style="color: var(--text-hi);">10AM–10PM</strong></span>
-          <span style="color: var(--border-mid);">|</span>
-          <span>Same-Day Available</span>
+    <section class="pr-hero">
+      <div class="container">
+        <div class="pr-hero__inner">
+          <nav aria-label="Breadcrumb" class="book-hero__crumbs" style="margin-bottom: 1.5rem;">
+            <a href="/">Home</a> <span>›</span> <span>Pricing</span>
+          </nav>
+          <span class="ed-eyebrow">Full Price List</span>
+          <h1 class="pr-hero__title">Transparent pricing.<br><em>No hidden fees.</em></h1>
+          <p class="pr-hero__sub">
+            What you see is what you pay. No surprise charges, no mandatory upsells. Sessions available same-day, open daily 10am to 10pm.
+          </p>
+          <div class="pr-hero__facts">
+            <span>Sessions from <strong>$85</strong></span>
+            <span class="pr-hero__facts-sep" aria-hidden="true">·</span>
+            <span>Open daily <strong>10am to 10pm</strong></span>
+            <span class="pr-hero__facts-sep" aria-hidden="true">·</span>
+            <span>Same-day available</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- PRICING TABLE -->
-    <section style="padding: var(--section-y) 0;">
-      <div class="container" style="max-width: 960px; margin: 0 auto;">
-        <p style="font-family: var(--font-body); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--lantern); margin-bottom: 1rem; text-align: center;">Full Price List</p>
-        <h2 style="font-family: var(--font-head); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 300; color: var(--text-hi); text-align: center; margin-bottom: 3rem;">
-          All Services &amp; Session Lengths
+    <section class="pr-section">
+      <div class="container pr-wrap">
+        <h2 class="pr-heading pr-heading--center" style="margin-bottom: 3rem;">
+          All services &amp; <em>session lengths</em>
         </h2>
 
-        <div style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden;">
-          <div style="overflow-x: auto;">
+        <div class="pr-tablecard">
+          <div class="pr-tablecard__scroll">
             <table class="pricing-table">
               <thead>
                 <tr>
@@ -289,78 +285,77 @@
             </table>
           </div>
         </div>
-        <p style="color: var(--text-lo); font-size: 0.82rem; text-align: center; margin-top: 1.2rem;">
+        <p class="pr-note">
           All prices in USD. A small card processing fee may apply; no fee for cash payment.
         </p>
       </div>
     </section>
 
     <!-- ADD-ONS -->
-    <section style="padding: 0 0 var(--section-y);">
-      <div class="container" style="max-width: 960px; margin: 0 auto;">
-        <h2 style="font-family: var(--font-head); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 300; color: var(--text-hi); margin-bottom: 2rem;">
-          Enhancements &amp; Add-Ons
+    <section class="pr-section--tight">
+      <div class="container pr-wrap">
+        <h2 class="pr-heading" style="margin-bottom: 2rem;">
+          Enhancements &amp; <em>add-ons</em>
         </h2>
-        <p style="color: var(--text-lo); font-size: 0.92rem; line-height: 1.8; margin-bottom: 2rem; max-width: 60ch;">Add any of these to a massage when you book. Hot stones and cupping are $20 each; infrared sauna and CBD are $30 each. A 30-minute prenatal extension is $50.</p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
-          <div style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r); padding: 1.8rem;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem;">
-              <h3 style="font-family: var(--font-head); font-size: 1.25rem; font-weight: 400; color: var(--text-hi);">Cupping</h3>
-              <span style="font-family: var(--font-body); font-size: 0.9rem; color: var(--lantern); font-weight: 500;">+$20</span>
+        <p class="pr-lede">Add any of these to a massage when you book. Hot stones and cupping are $20 each; infrared sauna and CBD are $30 each. A 30-minute prenatal extension is $50.</p>
+        <div class="pr-addons">
+          <div class="pr-addon">
+            <div class="pr-addon__head">
+              <h3 class="pr-addon__name">Cupping</h3>
+              <span class="pr-addon__price">+$20</span>
             </div>
-            <p style="color: var(--text-lo); font-size: 0.88rem; line-height: 1.7;">Suction that lifts fascia and decompresses connective tissue. Effective for chronic tightness and stubborn restrictions.</p>
+            <p class="pr-addon__body">Suction that lifts fascia and decompresses connective tissue. Effective for chronic tightness and stubborn restrictions.</p>
           </div>
-          <div style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r); padding: 1.8rem;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem;">
-              <h3 style="font-family: var(--font-head); font-size: 1.25rem; font-weight: 400; color: var(--text-hi);">Hot Stones</h3>
-              <span style="font-family: var(--font-body); font-size: 0.9rem; color: var(--lantern); font-weight: 500;">+$20</span>
+          <div class="pr-addon">
+            <div class="pr-addon__head">
+              <h3 class="pr-addon__name">Hot Stones</h3>
+              <span class="pr-addon__price">+$20</span>
             </div>
-            <p style="color: var(--text-lo); font-size: 0.88rem; line-height: 1.7;">Heated basalt stones layered into your massage for deeper warmth, slower release, and a more complete sense of calm.</p>
+            <p class="pr-addon__body">Heated basalt stones layered into your massage for deeper warmth, slower release, and a more complete sense of calm.</p>
           </div>
-          <div style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r); padding: 1.8rem;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem;">
-              <h3 style="font-family: var(--font-head); font-size: 1.25rem; font-weight: 400; color: var(--text-hi);">Infrared Sauna</h3>
-              <span style="font-family: var(--font-body); font-size: 0.9rem; color: var(--lantern); font-weight: 500;">+$30</span>
+          <div class="pr-addon">
+            <div class="pr-addon__head">
+              <h3 class="pr-addon__name">Infrared Sauna</h3>
+              <span class="pr-addon__price">+$30</span>
             </div>
-            <p style="color: var(--text-lo); font-size: 0.88rem; line-height: 1.7;">A 30-minute infrared warm-up before or after your session. Promotes circulation, eases soreness, and amplifies relaxation.</p>
+            <p class="pr-addon__body">A 30-minute infrared warm-up before or after your session. Promotes circulation, eases soreness, and amplifies relaxation.</p>
           </div>
-          <div style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r); padding: 1.8rem;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem;">
-              <h3 style="font-family: var(--font-head); font-size: 1.25rem; font-weight: 400; color: var(--text-hi);">CBD</h3>
-              <span style="font-family: var(--font-body); font-size: 0.9rem; color: var(--lantern); font-weight: 500;">+$30</span>
+          <div class="pr-addon">
+            <div class="pr-addon__head">
+              <h3 class="pr-addon__name">CBD</h3>
+              <span class="pr-addon__price">+$30</span>
             </div>
-            <p style="color: var(--text-lo); font-size: 0.88rem; line-height: 1.7;">CBD oil worked into the session for extra calm and a deeper sense of release in tight, overworked muscle.</p>
+            <p class="pr-addon__body">CBD oil worked into the session for extra calm and a deeper sense of release in tight, overworked muscle.</p>
           </div>
-          <div style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r); padding: 1.8rem;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem;">
-              <h3 style="font-family: var(--font-head); font-size: 1.25rem; font-weight: 400; color: var(--text-hi);">Prenatal Extension</h3>
-              <span style="font-family: var(--font-body); font-size: 0.9rem; color: var(--lantern); font-weight: 500;">+$50</span>
+          <div class="pr-addon">
+            <div class="pr-addon__head">
+              <h3 class="pr-addon__name">Prenatal Extension</h3>
+              <span class="pr-addon__price">+$50</span>
             </div>
-            <p style="color: var(--text-lo); font-size: 0.88rem; line-height: 1.7;">Add 30 minutes to any prenatal session.</p>
+            <p class="pr-addon__body">Add 30 minutes to any prenatal session.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- GIFT CARDS -->
-    <section style="padding: var(--section-y) 0; background: var(--soot); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-      <div class="container" style="max-width: 800px; margin: 0 auto;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+    <section class="pr-section pr-gift">
+      <div class="container">
+        <div class="pr-gift__grid">
           <div>
-            <p style="font-family: var(--font-body); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--lantern); margin-bottom: 1rem;">Gift Cards</p>
-            <h2 style="font-family: var(--font-head); font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 300; color: var(--text-hi); margin-bottom: 1rem; line-height: 1.2;">
-              Give the Gift of <em>Real Relief</em>
+            <span class="ed-eyebrow">Gift Cards</span>
+            <h2 class="pr-heading" style="margin-bottom: 1rem;">
+              Give the gift of <em>real relief</em>
             </h2>
-            <p style="color: var(--text-lo); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem;">
+            <p class="pr-gift__body">
               J Massage SLC gift cards are available for any dollar amount or specific service. Perfect for birthdays, anniversaries, holidays, or just because. Never expire.
             </p>
-            <a href="/gift-cards" class="btn btn--gold">Buy a Gift Card</a>
+            <a href="/gift-cards" class="ed-btn ed-btn--filled">Buy a Gift Card</a>
           </div>
-          <div style="background: var(--timber); border: 1px solid var(--border-mid); border-radius: var(--r-lg); padding: 2.5rem; text-align: center; position: relative;">
-            <div style="position: absolute; top: -1px; left: 2rem; right: 2rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern), transparent);"></div>
-            <div style="font-family: var(--font-head); font-size: 3.5rem; font-weight: 300; color: var(--lantern); line-height: 1;">$</div>
-            <div style="font-family: var(--font-head); font-size: 1.4rem; color: var(--text-hi); margin: 0.5rem 0;">Gift Card</div>
-            <div style="font-family: var(--font-body); font-size: 0.8rem; color: var(--text-lo); margin-top: 0.5rem;">Any amount · Never expires</div>
+          <div class="pr-gift__card">
+            <div class="pr-gift__card-mark">$</div>
+            <div class="pr-gift__card-label">Gift Card</div>
+            <div class="pr-gift__card-meta">Any amount · Never expires</div>
           </div>
         </div>
       </div>
@@ -368,23 +363,23 @@
 
     <!-- SAME-DAY NOTE -->
     <section style="padding: 3rem 0; border-bottom: 1px solid var(--border);">
-      <div class="container" style="max-width: 800px; margin: 0 auto;">
-        <div style="background: var(--ember); border: 1px solid var(--border-mid); border-radius: var(--r); padding: 1.8rem 2.5rem; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+      <div class="container pr-wrap--narrow">
+        <div class="pr-sameday">
           <div style="flex: 1; min-width: 200px;">
-            <h3 style="font-family: var(--font-head); font-size: 1.3rem; color: var(--text-hi); margin-bottom: 0.4rem;">Same-Day Availability</h3>
-            <p style="color: var(--text-lo); font-size: 0.9rem; line-height: 1.7; margin: 0;">Same-day appointments are frequently available. Book online or call us, we'll get you in today.</p>
+            <h3 class="pr-sameday__title">Same-day availability</h3>
+            <p class="pr-sameday__body">Same-day appointments are frequently available. Book online or call us, we'll get you in today.</p>
           </div>
-          <a href="/book" class="btn btn--gold btn--sm" style="white-space: nowrap;">Check Availability</a>
+          <a href="/book" class="ed-btn ed-btn--ghost" style="white-space: nowrap; min-width: auto;">Check Availability</a>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section style="padding: var(--section-y) 0;">
-      <div class="container" style="max-width: 760px; margin: 0 auto;">
-        <p style="font-family: var(--font-body); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--lantern); margin-bottom: 1rem; text-align: center;">FAQ</p>
-        <h2 style="font-family: var(--font-head); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 300; color: var(--text-hi); text-align: center; margin-bottom: 3rem;">
-          Pricing Questions
+    <section class="pr-section">
+      <div class="container pr-wrap--faq">
+        <span class="ed-eyebrow" style="display: block; text-align: center;">FAQ</span>
+        <h2 class="pr-heading pr-heading--center" style="margin-bottom: 3rem;">
+          Pricing <em>questions</em>
         </h2>
 
         <div>
@@ -409,7 +404,7 @@
           <details class="faq-item">
             <summary>Are gift cards available?</summary>
             <div class="faq-body">
-              Yes, J Massage SLC gift cards are available for any dollar amount or for a specific service. They never expire and make a thoughtful gift for any occasion. Visit our <a href="/gift-cards" style="color: var(--lantern);">gift cards page</a> or call <a href="tel:+18012881118" style="color: var(--lantern);">(801) 288-1118</a> to purchase.
+              Yes, J Massage SLC gift cards are available for any dollar amount or for a specific service. They never expire and make a thoughtful gift for any occasion. Visit our <a href="/gift-cards" class="pr-cta__phone">gift cards page</a> or call <a href="tel:+18012881118" class="pr-cta__phone">(801) 288-1118</a> to purchase.
             </div>
           </details>
         </div>
@@ -417,18 +412,20 @@
     </section>
 
     <!-- CTA -->
-    <section style="padding: 5rem 0; background: linear-gradient(160deg, var(--ember) 0%, var(--soot) 100%); border-top: 1px solid var(--border-mid);">
-      <div class="container" style="text-align: center; max-width: 600px; margin: 0 auto;">
-        <h2 style="font-family: var(--font-head); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; color: var(--text-hi); margin-bottom: 1.2rem;">
-          Ready to Book?
-        </h2>
-        <p style="color: var(--text-mid); margin-bottom: 2rem; line-height: 1.8;">
-          Select your service, pick a time that works, and we'll take care of the rest. Open daily 10AM–10PM.
-        </p>
-        <a href="/book" class="btn btn--gold" style="font-size: 1rem; padding: 1rem 2.5rem;">Book Your Session Now</a>
-        <p style="margin-top: 1.5rem; color: var(--text-lo); font-size: 0.85rem;">
-          Questions? Call <a href="tel:+18012881118" style="color: var(--lantern); text-decoration: none;">(801) 288-1118</a> or <a href="tel:+13855301030" style="color: var(--lantern); text-decoration: none;">(385) 530-1030</a>
-        </p>
+    <section class="pr-cta">
+      <div class="container">
+        <div class="pr-cta__inner">
+          <h2 class="pr-heading pr-heading--center" style="margin-bottom: 1.2rem;">
+            Ready to <em>book?</em>
+          </h2>
+          <p class="pr-cta__body">
+            Select your service, pick a time that works, and we'll take care of the rest. Open daily 10am to 10pm.
+          </p>
+          <a href="/book" class="ed-btn ed-btn--filled">Book Your Session Now</a>
+          <p style="margin-top: 1.5rem; color: var(--text-lo); font-size: 0.85rem;">
+            Questions? Call <a href="tel:+18012881118" class="pr-cta__phone">(801) 288-1118</a> or <a href="tel:+13855301030" class="pr-cta__phone">(385) 530-1030</a>
+          </p>
+        </div>
       </div>
     </section>
 
