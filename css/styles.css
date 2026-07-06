@@ -1792,10 +1792,96 @@ input:focus-visible,
   border-color: var(--glow);
 }
 
+/* ── Reassurance rail: warm trust cues above the scheduler ───────────────── */
+.book-reassure {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem 1.2rem;
+  margin: 0 auto 1.4rem;
+  padding: 0.9rem 1.4rem;
+  max-width: 820px;
+  background: var(--soot);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+}
+.book-reassure__item {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+.book-reassure__item strong {
+  color: var(--text-hi);
+  font-weight: 600;
+}
+.book-reassure__star { color: var(--star); }
+.book-reassure__sep { color: var(--border-mid); }
+
+/* ── First-timer triage hint ─────────────────────────────────────────────── */
+.book-firsttimer {
+  max-width: 820px;
+  margin: 0 auto 1.4rem;
+  padding: 0.85rem 1.2rem;
+  background: var(--lantern-dim);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--lantern);
+  border-radius: var(--r-sm);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-mid);
+  text-align: center;
+}
+.book-firsttimer strong { color: var(--text-hi); font-weight: 600; }
+
+/* ── Scheduler loading overlay: skeleton shimmer over the iframe on src swap ─ */
+.book-frame {
+  position: relative;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 34px 90px -42px rgba(0,0,0,0.6);
+}
+.book-frame__loader {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--timber);
+}
+.book-frame.is-loading .book-frame__loader { display: flex; }
+.book-frame__spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--border-mid);
+  border-top-color: var(--lantern);
+  animation: book-spin 0.7s linear infinite;
+}
+.book-frame__loading-text {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: var(--text-lo);
+}
+@keyframes book-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .book-frame__spinner { animation: none; }
+}
+
 @media (max-width: 720px) {
   .book-hero { padding: 6rem 0 1rem; }
   .book-embed { padding: 1rem 0 2rem; }
   .book-embed__wrap { padding: 0 0.5rem; }
+  .book-reassure { gap: 0.4rem 0.9rem; padding: 0.8rem 1rem; }
+  .book-reassure__item { font-size: 0.78rem; white-space: normal; }
   /* min-height 1100px keeps the scheduler's date+time picker visible without inner
      iframe scroll on small phones (the scheduler's mobile widget needs ~1050px). */
   .book-embed__iframe { height: calc(100vh - 160px); min-height: 1100px; }
