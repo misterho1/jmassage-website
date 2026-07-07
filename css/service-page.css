@@ -26,23 +26,9 @@
   pointer-events: none;
 }
 
-/* Abstract geometric line art in background */
-.svc-hero::after {
-  content: '';
-  position: absolute;
-  right: -80px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  border: 1px solid oklch(48% 0.085 35 / 0.06);
-  box-shadow:
-    0 0 0 60px  oklch(48% 0.085 35 / 0.03),
-    0 0 0 120px oklch(48% 0.085 35 / 0.025),
-    0 0 0 200px oklch(48% 0.085 35 / 0.015);
-  pointer-events: none;
-}
+/* Concentric-ring decoration removed — it read as an AI-tell and diverged from
+   the homepage's clean editorial hero. The .svc-glow wash above carries the
+   warmth on its own. */
 
 .svc-hero__inner {
   position: relative;
@@ -83,19 +69,17 @@ ol.svc-breadcrumb__list,
 /* current page — WCAG AA: small text needs charcoal not clay */
 .svc-breadcrumb__list li[aria-current="page"] { color: var(--text-hi); }
 
-/* Hero eyebrow */
+/* Hero eyebrow — matches the homepage .ed-eyebrow (clean letter-spaced label,
+   no pill/border/background) so a Google-landing visitor meets the same brand. */
 .svc-hero__eyebrow {
   display: inline-block;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--lantern);
-  margin-bottom: 1rem;
-  padding: 0.4rem 1rem;
-  border: 1px solid var(--border-mid);
-  border-radius: 40px;
-  background: oklch(48% 0.085 35 / 0.06);
+  color: var(--text-lo);
+  margin-bottom: 1.4rem;
 }
 
 /* Hero heading — .svc-hero__title is the HTML class used; alias kept for safety */
@@ -115,11 +99,12 @@ ol.svc-breadcrumb__list,
   color: var(--lantern);
 }
 
-/* Hero intro */
+/* Hero intro — aligned to homepage .ed-hero__sub restraint (was 1.25rem) */
 .svc-hero__intro {
-  font-size: 1.25rem;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
   color: var(--text-mid);
-  line-height: 1.75;
+  line-height: 1.7;
   max-width: 560px;
   margin-bottom: 2.2rem;
 }
@@ -134,18 +119,20 @@ ol.svc-breadcrumb__list,
 .svc-hero__pill {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.25rem;
+  gap: 0.45rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
   font-weight: 500;
+  letter-spacing: 0.01em;
   color: var(--text-mid);
-  background: var(--char);
+  background: var(--soot);
   border: 1px solid var(--border);
-  padding: 0.5rem 0.9rem;
+  padding: 0.4rem 0.85rem;
   border-radius: 40px;
 }
 .svc-hero__pill svg {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   color: var(--lantern);
   flex-shrink: 0;
 }
@@ -279,6 +266,7 @@ ol.svc-breadcrumb__list,
   grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
   margin-top: 3.5rem;
+  counter-reset: benefit;
 }
 .benefit-card {
   background: var(--char);
@@ -300,13 +288,24 @@ ol.svc-breadcrumb__list,
 }
 .benefit-card:hover { border-color: var(--border-mid); transform: translateY(-4px); }
 .benefit-card:hover::after { transform: scaleX(1); }
+/* Catalog numeral (01 / 02 / 03…) replaces the old abstract stroked-SVG glyph,
+   matching the homepage .ed-svc__num language. The number is generated from a
+   counter on .svc-benefits__grid, so cards need no per-card markup. */
+.benefit-card { counter-increment: benefit; }
 .benefit-card__icon {
-  width: 40px;
-  height: 40px;
   color: var(--lantern);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
-.benefit-card__icon svg { width: 100%; height: 100%; }
+.benefit-card__icon::before {
+  content: counter(benefit, decimal-leading-zero);
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--lantern);
+}
+.benefit-card__icon svg { display: none; }
 .benefit-card__title {
   font-family: var(--font-head);
   font-size: 1.4rem;
@@ -315,7 +314,7 @@ ol.svc-breadcrumb__list,
   margin-bottom: 0.5rem;
 }
 .benefit-card__desc {
-  font-size: 1.5rem;
+  font-size: 0.95rem;
   color: var(--text-mid);
   line-height: 1.7;
 }

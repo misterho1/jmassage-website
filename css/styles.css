@@ -1792,13 +1792,272 @@ input:focus-visible,
   border-color: var(--glow);
 }
 
+/* ── Reassurance rail: warm trust cues above the scheduler ───────────────── */
+.book-reassure {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem 1.2rem;
+  margin: 0 auto 1.4rem;
+  padding: 0.9rem 1.4rem;
+  max-width: 820px;
+  background: var(--soot);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+}
+.book-reassure__item {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+.book-reassure__item strong {
+  color: var(--text-hi);
+  font-weight: 600;
+}
+.book-reassure__star { color: var(--star); }
+.book-reassure__sep { color: var(--border-mid); }
+
+/* ── First-timer triage hint ─────────────────────────────────────────────── */
+.book-firsttimer {
+  max-width: 820px;
+  margin: 0 auto 1.4rem;
+  padding: 0.85rem 1.2rem;
+  background: var(--lantern-dim);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--lantern);
+  border-radius: var(--r-sm);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-mid);
+  text-align: center;
+}
+.book-firsttimer strong { color: var(--text-hi); font-weight: 600; }
+
+/* ── Scheduler loading overlay: skeleton shimmer over the iframe on src swap ─ */
+.book-frame {
+  position: relative;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 34px 90px -42px rgba(0,0,0,0.6);
+}
+.book-frame__loader {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--timber);
+}
+.book-frame.is-loading .book-frame__loader { display: flex; }
+.book-frame__spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--border-mid);
+  border-top-color: var(--lantern);
+  animation: book-spin 0.7s linear infinite;
+}
+.book-frame__loading-text {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: var(--text-lo);
+}
+@keyframes book-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .book-frame__spinner { animation: none; }
+}
+
 @media (max-width: 720px) {
   .book-hero { padding: 6rem 0 1rem; }
   .book-embed { padding: 1rem 0 2rem; }
   .book-embed__wrap { padding: 0 0.5rem; }
+  .book-reassure { gap: 0.4rem 0.9rem; padding: 0.8rem 1rem; }
+  .book-reassure__item { font-size: 0.78rem; white-space: normal; }
   /* min-height 1100px keeps the scheduler's date+time picker visible without inner
      iframe scroll on small phones (the scheduler's mobile widget needs ~1050px). */
   .book-embed__iframe { height: calc(100vh - 160px); min-height: 1100px; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PRICING PAGE — ported from inline styles, aligned to the ed-* homepage language
+════════════════════════════════════════════════════════════════════════════ */
+.pr-hero {
+  padding: 9rem 0 4.5rem;
+  text-align: center;
+  background: var(--timber);
+  border-bottom: 1px solid var(--border);
+}
+.pr-hero__inner { max-width: 820px; margin: 0 auto; }
+.pr-hero__title {
+  font-family: var(--font-display);
+  font-size: var(--type-section);
+  font-weight: 400;
+  font-variation-settings: "opsz" 96, "SOFT" 50;
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  color: var(--text-hi);
+  margin-bottom: 1.2rem;
+}
+.pr-hero__title em {
+  font-style: italic;
+  color: var(--text-hi);
+  font-variation-settings: "opsz" 144, "SOFT" 80;
+}
+.pr-hero__sub {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-mid);
+  max-width: 580px;
+  margin: 0 auto 2rem;
+  line-height: 1.7;
+}
+.pr-hero__facts {
+  display: inline-flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: var(--soot);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 0.9rem 2rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-mid);
+}
+.pr-hero__facts strong { color: var(--text-hi); font-weight: 600; }
+.pr-hero__facts-sep { color: var(--border-mid); }
+
+.pr-section { padding: var(--section-y) 0; }
+.pr-section--tight { padding: 0 0 var(--section-y); }
+.pr-wrap { max-width: 960px; margin: 0 auto; }
+.pr-wrap--narrow { max-width: 800px; }
+.pr-wrap--faq { max-width: 760px; }
+
+.pr-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  font-variation-settings: "opsz" 96, "SOFT" 50;
+  letter-spacing: -0.018em;
+  color: var(--text-hi);
+  line-height: 1.08;
+}
+.pr-heading em { font-style: italic; color: var(--text-hi); }
+.pr-heading--center { text-align: center; }
+
+.pr-tablecard {
+  background: var(--soot);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.pr-tablecard__scroll { overflow-x: auto; }
+.pr-note {
+  color: var(--text-lo);
+  font-size: 0.82rem;
+  text-align: center;
+  margin-top: 1.2rem;
+}
+
+.pr-addons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.pr-addon {
+  background: var(--soot);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.8rem;
+}
+.pr-addon__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+}
+.pr-addon__name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text-hi);
+}
+.pr-addon__price {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--lantern);
+  font-weight: 600;
+}
+.pr-addon__body { color: var(--text-mid); font-size: 0.88rem; line-height: 1.7; }
+.pr-lede { color: var(--text-mid); font-size: 0.95rem; line-height: 1.8; max-width: 60ch; margin-bottom: 2rem; }
+
+.pr-gift { background: var(--soot); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.pr-gift__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.pr-gift__body { color: var(--text-mid); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem; }
+.pr-gift__card {
+  background: var(--timber);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--r-lg);
+  padding: 2.5rem;
+  text-align: center;
+}
+.pr-gift__card-mark {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--lantern);
+  line-height: 1;
+}
+.pr-gift__card-label { font-family: var(--font-display); font-size: 1.4rem; color: var(--text-hi); margin: 0.5rem 0; }
+.pr-gift__card-meta { font-family: var(--font-body); font-size: 0.8rem; color: var(--text-lo); margin-top: 0.5rem; }
+
+.pr-sameday {
+  background: var(--soot);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--lantern);
+  border-radius: var(--r);
+  padding: 1.8rem 2.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.pr-sameday__title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--text-hi); margin-bottom: 0.4rem; }
+.pr-sameday__body { color: var(--text-mid); font-size: 0.9rem; line-height: 1.7; margin: 0; }
+
+.pr-cta {
+  padding: 5.5rem 0;
+  text-align: center;
+  background: var(--soot);
+  border-top: 1px solid var(--border);
+}
+.pr-cta__inner { max-width: 600px; margin: 0 auto; }
+.pr-cta__body { color: var(--text-mid); margin-bottom: 2rem; line-height: 1.8; }
+.pr-cta__phone { color: var(--text-hi); text-decoration: none; border-bottom: 1px solid var(--lantern-mid); }
+.pr-cta__phone:hover { color: var(--lantern); border-color: var(--lantern); }
+
+@media (max-width: 720px) {
+  .pr-hero { padding: 7rem 0 3rem; }
+  .pr-gift__grid { grid-template-columns: 1fr; gap: 2rem; }
+  .pr-sameday { padding: 1.5rem 1.5rem; }
 }
 
 /* ════════════════════════════════════════════════════════════════════════════
@@ -2738,4 +2997,179 @@ img[data-parallax] { scale: 1.12; }
   .ed-svc--featured .ed-svc__name { font-size: clamp(1.8rem, 2.4vw, 2.6rem); }
   .ed-svc:not(.ed-svc--featured) { grid-column: 8 / 13; }
   .ed-svc:not(.ed-svc--featured) .ed-svc__media { aspect-ratio: 16 / 7; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CINEMATIC LAYER (2026-07) — video hero, loading intro, scroll progress,
+   pinned philosophy. Motion driven by js/motion.js; everything here is
+   display-gated so no-JS, mobile, and reduced-motion stay static + fast.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Lenis owns scrolling when active — kill native smooth so they don't fight */
+html.lenis, html.lenis body { height: auto; }
+html.lenis { scroll-behavior: auto !important; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+/* Hero ambient video — sits between the LCP image and the scrim.
+   No src until motion.js decides (desktop + motionOK): zero mobile bytes. */
+.ed-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Loading-reveal intro — injected by motion.js, so no-JS never sees it */
+.cine-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: var(--pool-warm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+}
+.cine-intro__mark {
+  overflow: hidden;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-family: var(--font-display);
+  color: oklch(96% 0.01 80);
+}
+.cine-intro__j {
+  display: inline-block;
+  font-size: clamp(3.2rem, 8vw, 6rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--glow);
+}
+.cine-intro__word {
+  display: inline-block;
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+.cine-intro__word em { font-style: italic; color: var(--glow); }
+.cine-intro__line {
+  width: min(240px, 40vw);
+  height: 1px;
+  background: oklch(96% 0.01 80 / 0.35);
+  transform-origin: left center;
+}
+html.cine-lock { overflow: hidden; }
+
+/* Live scroll-progress counter — top right, desktop only */
+.cine-progress {
+  position: fixed;
+  top: 5.2rem;
+  right: clamp(1rem, 3vw, 2.2rem);
+  z-index: 900;
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--text-lo);
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  pointer-events: none;
+}
+.cine-progress__num { color: var(--lantern); font-size: 1.05rem; }
+.cine-progress::after { content: ""; display: block; width: 26px; height: 1px; background: var(--border-mid); align-self: center; }
+
+/* Pinned philosophy — word-by-word scrub reveal (spans injected by JS) */
+.ed-intro .qw { opacity: 1; } /* JS animates from dim; static = fully readable */
+
+/* Gates (2026-07 mobile pass): phones run the cinematic tier too — counter
+   shrinks, hero video attaches post-load via motion.js (poster stays LCP).
+   Reduced motion stays fully static. */
+@media (max-width: 819px) {
+  .cine-progress { top: 4.6rem; font-size: 0.7rem; }
+  .cine-progress__num { font-size: 0.9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ed-hero__video, .cine-progress, .cine-intro { display: none !important; }
+}
+
+/* ─── THE SESSION — pinned scroll-scrub scene (cinematic layer 2026-07) ───
+   Static contract: .is-active scene + caption visible with zero JS.
+   motion.js re-seats state to scene 1 and scrubs on desktop+motionOK only. */
+.ed-session { background: var(--pool-warm); }
+.ed-session__stage { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
+.ed-session__scene {
+  position: absolute; inset: 0; margin: 0;
+  opacity: 0; visibility: hidden;
+}
+.ed-session__scene.is-active { opacity: 1; visibility: visible; }
+.ed-session__scene img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.ed-session__scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, oklch(20% 0.015 60 / 0.72) 0%, oklch(20% 0.015 60 / 0.18) 45%, oklch(20% 0.015 60 / 0.10) 100%);
+}
+.ed-session__content {
+  position: absolute; left: 0; right: 0; bottom: clamp(3rem, 9vh, 6rem);
+  z-index: 2;
+}
+.ed-session__content .ed-eyebrow { color: oklch(88% 0.02 80 / 0.85); }
+.ed-session__caption {
+  display: grid; margin-top: 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.9rem, 4.2vw, 3.4rem);
+  line-height: 1.12;
+  color: oklch(97% 0.008 85);
+  min-height: 2.4em;
+}
+.ed-session__cap {
+  grid-area: 1 / 1;
+  opacity: 0; visibility: hidden;
+  max-width: 14ch;
+}
+.ed-session__cap em { font-style: italic; color: var(--glow); }
+.ed-session__cap.is-active { opacity: 1; visibility: visible; }
+
+/* (mobile pass) session stage stays full-viewport on phones — the pinned
+   scrub runs there now; static fallback is handled by reduced-motion/no-JS. */
+
+/* ─── FULL-PAGE CINEMATIC (2026-07 playbook pass) ─────────────────────────
+   Film grain, ambient video layers on the couples band + final CTA, and
+   masked title reveals. Same contracts as the rest of the cinematic layer:
+   no-JS fully static, reduced-motion hides video layers. */
+
+/* Site-wide film grain — static texture (not motion), whisper-quiet */
+.cine-grain {
+  position: fixed; inset: 0; z-index: 2500; pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* Ambient video layers — attach lazily via motion.js, fade in over posters */
+.ed-ambient-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0; visibility: hidden; pointer-events: none;
+}
+.ed-pair__media { position: relative; overflow: hidden; }
+
+/* Final CTA — full-bleed afterglow video under a warm scrim */
+.booking { position: relative; overflow: hidden; }
+.booking__media { position: absolute; inset: 0; z-index: 0; }
+.booking__scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, oklch(20% 0.015 60 / 0.88) 0%, oklch(20% 0.015 60 / 0.72) 55%, oklch(20% 0.015 60 / 0.62) 100%);
+}
+.booking > .container { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ed-ambient-video, .cine-grain { display: none !important; }
 }

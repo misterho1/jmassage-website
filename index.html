@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>J Massage SLC | #1 Rated Massage Therapy in Salt Lake City, Open Daily 10am–10pm</title>
-  <meta name="description" content="Salt Lake City's highest-rated massage studio. 477 Google reviews. Swedish, deep tissue, Ashiatsu, couples & 4-hand massage by Utah-licensed therapists. Open 7 days, 10am–10pm. Same-day appointments available. Book now.">
-  <meta name="keywords" content="massage Salt Lake City, best massage SLC, deep tissue massage Salt Lake City, couples massage SLC, sports massage salt lake city, ashiatsu massage SLC, 4 hand massage Salt Lake City, massage therapy utah, luxury massage downtown SLC, licensed massage therapist salt lake city">
+  <title>Massage in Salt Lake City | J Massage SLC · Open Daily</title>
+  <meta name="description" content="Salt Lake City's most-reviewed massage studio, 477 Google reviews. Swedish, deep tissue, Ashiatsu, couples & 4-hand. Open daily 10am–10pm, same-day booking.">
   <link rel="canonical" href="https://jmassageslc.com/">
   <meta name="robots" content="index, follow">
   <meta name="geo.region" content="US-UT">
@@ -15,7 +14,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jmassageslc.com/">
-  <meta property="og:title" content="J Massage SLC | Salt Lake City's #1 Rated Massage Studio">
+  <meta property="og:title" content="J Massage SLC | Salt Lake City's Most-Reviewed Massage Studio">
   <meta property="og:description" content="477 Google reviews. Fourteen modalities. Utah-licensed therapists. Open every day 10am–10pm.">
   <meta property="og:image" content="https://jmassageslc.com/og-image-v4.jpg">
   <meta property="og:image:width" content="1200">
@@ -32,7 +31,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet"></noscript>
 
-  <link rel="stylesheet" href="css/styles.css?v=16">
+  <link rel="stylesheet" href="css/styles.css?v=21">
 
   <script type="application/ld+json">
   {
@@ -42,10 +41,10 @@
     "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.4", "reviewCount": "477", "bestRating": "5" },
     "name": "J Massage SLC",
     "alternateName": ["J Massage", "JMassage SLC"],
-    "description": "Salt Lake City's highest-rated massage therapy studio with 477 Google reviews. Utah-licensed therapists open 7 days a week, 10am–10pm.",
+    "description": "Salt Lake City's most-reviewed massage therapy studio with 477 Google reviews. Utah-licensed therapists open 7 days a week, 10am–10pm.",
     "url": "https://jmassageslc.com/",
     "telephone": "+18012881118",
-    "email": "info@jmassageslc.com",
+    "email": "jmassage677@gmail.com",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
@@ -71,7 +70,8 @@
     gtag('config', 'G-HR9MP6ENEP');
     gtag('config', 'AW-18046916928');
   </script>
-  <link rel="preload" as="image" href="/images/editorial/hero-room.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="/images/editorial/hero-room.webp" fetchpriority="high" media="(orientation: landscape)">
+  <link rel="preload" as="image" href="/images/editorial/hero-room-portrait.webp" fetchpriority="high" media="(orientation: portrait)">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
@@ -123,9 +123,13 @@
     <section class="ed-hero">
       <div class="ed-hero__media" aria-hidden="true">
         <picture>
+          <!-- Portrait phones get a purpose-framed 9:16 cut — the landscape
+               16:9 center-crop reads wrong on a tall screen. -->
+          <source media="(orientation: portrait)" srcset="images/editorial/hero-room-portrait.webp">
           <source srcset="images/editorial/hero-room.webp" type="image/webp">
           <img src="images/editorial/hero-room.webp" alt="Massage room at J Massage SLC, Salt Lake City" loading="eager" fetchpriority="high" width="2752" height="1536">
         </picture>
+        <video class="ed-hero__video" data-src="/videos/hero-ambient.mp4" data-src-portrait="/videos/hero-ambient-portrait.mp4" muted loop playsinline preload="none" poster="images/editorial/hero-room.webp" aria-hidden="true" tabindex="-1"></video>
         <div class="ed-hero__scrim"></div>
       </div>
       <div class="ed-hero__content container">
@@ -135,7 +139,7 @@
           <span class="line"><span class="line-inner"><em>exhales.</em></span></span>
         </h1>
         <p class="ed-hero__sub">
-          Salt Lake City's highest-rated massage studio. Fourteen modalities,
+          Salt Lake City's most-reviewed massage studio. Fourteen modalities,
           Utah-licensed therapists, open every day from ten to ten.
         </p>
         <div class="ed-hero__actions">
@@ -162,6 +166,48 @@
             of itself.
           </p>
           <p class="ed-intro__byline">A note from the studio</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2b. THE SESSION — pinned scroll-scrub scene (cinematic layer 2026-07).
+         Static state (no-JS / mobile / reduced-motion): final scene + strongest
+         caption visible via .is-active; motion.js takes over on desktop. -->
+    <section class="ed-session" id="session" aria-label="What a session here feels like">
+      <div class="ed-session__stage">
+        <figure class="ed-session__scene" data-scene="1">
+          <picture>
+            <source media="(orientation: portrait)" srcset="images/editorial/session-room-portrait.webp">
+            <img src="images/editorial/session-room.webp" alt="Warm massage room ready for a session" loading="lazy" width="1920" height="1080">
+          </picture>
+        </figure>
+        <figure class="ed-session__scene" data-scene="2">
+          <picture>
+            <source media="(orientation: portrait)" srcset="images/editorial/session-oil-portrait.webp">
+            <img src="images/editorial/session-oil.webp" alt="Warm oil poured slowly before the massage" loading="lazy" width="1920" height="1080">
+          </picture>
+        </figure>
+        <figure class="ed-session__scene" data-scene="3">
+          <picture>
+            <source media="(orientation: portrait)" srcset="images/editorial/session-hands-portrait.webp">
+            <img src="images/editorial/session-hands.webp" alt="Therapist working along a client's upper back" loading="lazy" width="1920" height="1080">
+          </picture>
+        </figure>
+        <figure class="ed-session__scene is-active" data-scene="4">
+          <picture>
+            <source media="(orientation: portrait)" srcset="images/editorial/session-exhale-portrait.webp">
+            <img src="images/editorial/session-exhale.webp" alt="Client resting at ease after the massage" loading="lazy" width="1920" height="1080">
+          </picture>
+        </figure>
+        <div class="ed-session__scrim" aria-hidden="true"></div>
+        <div class="ed-session__content container">
+          <span class="ed-eyebrow">The session</span>
+          <h2 class="ed-session__caption">
+            <span class="ed-session__cap" data-cap="1">The room is ready before you are.</span>
+            <span class="ed-session__cap" data-cap="2">Warm oil. Warmer hands.</span>
+            <span class="ed-session__cap" data-cap="3">Pressure exactly where you carry it.</span>
+            <span class="ed-session__cap is-active" data-cap="4">And then — the exhale.</span>
+          </h2>
         </div>
       </div>
     </section>
@@ -250,6 +296,7 @@
             <source srcset="images/editorial/service-couples.webp" type="image/webp">
             <img src="images/editorial/service-couples.webp" alt="Private couples massage suite at J Massage SLC" loading="lazy" width="1376" height="768" data-parallax="0.05">
           </picture>
+          <video class="ed-ambient-video" data-src="/videos/couples-ambient.mp4" muted loop playsinline preload="none" poster="images/editorial/service-couples.webp" aria-hidden="true" tabindex="-1"></video>
         </div>
         <div class="ed-pair__content">
           <span class="ed-eyebrow">Together</span>
@@ -365,6 +412,10 @@
 
     <!-- 8. FINAL CTA -->
     <section id="book" class="booking band-warm section">
+      <div class="booking__media" aria-hidden="true">
+        <video class="ed-ambient-video" data-src="/videos/cta-afterglow.mp4" data-src-portrait="/videos/cta-afterglow-portrait.mp4" muted loop playsinline preload="none" poster="images/editorial/session-exhale.webp" tabindex="-1"></video>
+        <div class="booking__scrim"></div>
+      </div>
       <div class="container">
         <div class="booking__cta-center reveal">
           <h2 class="booking__cta-heading">Ready when you are.</h2>
@@ -383,7 +434,7 @@
     <div class="footer__grid">
       <div class="footer__brand">
         <span class="footer__logo">J Massage <em>SLC</em></span>
-        <p>Highest-rated massage studio in Salt Lake County. Fourteen modalities. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+        <p>Most-reviewed massage studio in Salt Lake County. Fourteen modalities. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
         <div class="footer__rating">
           <span class="stars">★★★★<span class="star-half" aria-hidden="true">★</span></span>
           <span>4.4 &nbsp;·&nbsp; 477 Verified Google Reviews</span>
@@ -409,6 +460,8 @@
           <li><a href="/contact">Contact</a></li>
           <li><a href="/gift-cards">Gift Cards</a></li>
           <li><a href="/faq">FAQ</a></li>
+          <li><a href="/massage-salt-lake-city">Massage in Salt Lake City</a></li>
+          <li><a href="https://www.elitespautah.com" rel="noopener">Elite Spa Utah (sister location)</a></li>
         </ul>
       </div>
       <div class="footer__contact">
@@ -430,6 +483,7 @@
 
   <script src="js/vendor/gsap.min.js"></script>
   <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/vendor/lenis.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/motion.js"></script>
   <!-- GoHighLevel chat widget -->

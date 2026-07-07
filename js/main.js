@@ -275,6 +275,11 @@ function initSmoothScroll() {
       if (!target) return;
       e.preventDefault();
       const offset = (document.getElementById('header')?.offsetHeight || 72) + 16;
+      // Lenis (motion.js) owns scrolling when present; native fallback otherwise.
+      if (window.__lenis) {
+        window.__lenis.scrollTo(target, { offset: -offset });
+        return;
+      }
       window.scrollTo({
         top: target.getBoundingClientRect().top + window.scrollY - offset,
         behavior: 'smooth'
@@ -415,7 +420,9 @@ function initGiftCards() {
       setTimeout(() => { displayAmt.style.transform = ''; }, 220);
     }
     if (purchaseBtn) {
-      purchaseBtn.href = '/book.html';
+      // Gift cards are purchased on the talech microsite (secure online checkout),
+      // not the booking scheduler. Keep this in sync with the gift-cards.html href.
+      purchaseBtn.href = 'https://microsite.talech.com/gift-card/JMASSAGE-SALT-LAKE-CITY-UT/lRzV8wqp7la9E3Q7';
     }
   };
 
