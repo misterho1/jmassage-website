@@ -25,4 +25,4 @@ https://www.jmassageslc.com/*   https://jmassageslc.com/:splat   301
 /services/thai-massage /pricing 301
 
 # Staff receipt-reprint tool -> private n8n hosted form (not linked publicly). 302 so the target URL can change.
-/print https://misterho.app.n8n.cloud/form/a1c31f49-e61d-40f1-8be9-68a7c37a00e2 302
+/print https://spa-phone-booking.andrew-86d.workers.dev/reprint 302
