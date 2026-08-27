@@ -172,81 +172,9 @@
         });
       });
 
-      /* ── Pinned philosophy (cinematic) — the studio's one line holds the
-         screen while its words surface with the scroll, then releases. ── */
-      if (cinematic) {
-        var quote = document.querySelector('.ed-intro__quote');
-        if (quote && !quote.dataset.split) {
-          quote.dataset.split = '1';
-          var words = quote.textContent.trim().split(/\s+/);
-          quote.textContent = '';
-          words.forEach(function (w, i) {
-            var s = document.createElement('span');
-            s.className = 'qw';
-            s.textContent = w;
-            quote.appendChild(s);
-            if (i < words.length - 1) quote.appendChild(document.createTextNode(' '));
-          });
-          var byline = document.querySelector('.ed-intro__byline');
-          var ptl = gsap.timeline({
-            scrollTrigger: {
-              trigger: '.ed-intro',
-              start: 'top top',
-              end: '+=110%',
-              pin: true,
-              scrub: 0.4,
-              anticipatePin: 1
-            }
-          });
-          ptl.from(quote.querySelectorAll('.qw'), {
-            opacity: 0.14, stagger: 0.05, duration: 0.5, ease: 'none'
-          }, 0);
-          if (byline) ptl.from(byline, { autoAlpha: 0, y: 14, duration: 0.6, ease: 'none' }, '>-0.15');
-        }
-      }
-
-      /* ── The Session — pinned scroll-scrub scene (cinematic). Four stills
-         crossfade as the scroll walks the session arc; captions swap in step.
-         Static markup ships scene 4 active, so mobile/reduced-motion/no-JS
-         see the strongest single frame; JS re-seats to scene 1 here. ── */
-      if (cinematic) {
-        var sess = document.querySelector('.ed-session');
-        if (sess) {
-          var sScenes = gsap.utils.toArray(sess.querySelectorAll('.ed-session__scene'));
-          var sCaps = gsap.utils.toArray(sess.querySelectorAll('.ed-session__cap'));
-          if (sScenes.length === 4 && sCaps.length === 4) {
-            sScenes.concat(sCaps).forEach(function (el) { el.classList.remove('is-active'); });
-            gsap.set(sScenes, { autoAlpha: 0 });
-            gsap.set(sCaps, { autoAlpha: 0, y: 14 });
-            gsap.set(sScenes[0], { autoAlpha: 1 });
-            gsap.set(sCaps[0], { autoAlpha: 1, y: 0 });
-            /* Slow continuous drift on whichever scene is up (Ken Burns). */
-            sScenes.forEach(function (sc) {
-              gsap.fromTo(sc.querySelector('img'), { scale: 1.0 }, {
-                scale: 1.06, ease: 'none',
-                scrollTrigger: { trigger: sess, start: 'top top', end: '+=320%', scrub: true }
-              });
-            });
-            var stl = gsap.timeline({
-              scrollTrigger: {
-                trigger: sess,
-                start: 'top top',
-                end: '+=320%',
-                pin: true,
-                scrub: 0.5,
-                anticipatePin: 1
-              }
-            });
-            for (var i = 1; i < 4; i++) {
-              stl.to(sCaps[i - 1], { autoAlpha: 0, y: -14, duration: 0.35, ease: 'none' }, i)
-                 .to(sScenes[i - 1], { autoAlpha: 0, duration: 0.6, ease: 'none' }, i + 0.05)
-                 .to(sScenes[i], { autoAlpha: 1, duration: 0.6, ease: 'none' }, i)
-                 .fromTo(sCaps[i], { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.35, ease: 'none' }, i + 0.25);
-            }
-            stl.to({}, { duration: 0.6 }); // hold on the exhale before release
-          }
-        }
-      }
+      /* ── Philosophy quote + session band ride the standard [data-reveal]
+         fades. The pinned scroll-scrub versions were retired 2026-08-27:
+         simpler Elite-style sections, no scroll hijack. ── */
 
       /* ── Live scroll-progress counter (cinematic) — climbs 000 → 100. ── */
       if (cinematic) {

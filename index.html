@@ -132,8 +132,8 @@
       <div class="ed-hero__content container">
         <p class="ed-hero__eyebrow">Salt Lake City · Open daily 10am–10pm</p>
         <h1 class="ed-hero__title">
-          <span class="line"><span class="line-inner">Come in tight.</span></span>
-          <span class="line"><span class="line-inner"><em>Leave loose.</em></span></span>
+          <span class="line"><span class="line-inner">Hard week?</span></span>
+          <span class="line"><span class="line-inner"><em>Harder hands.</em></span></span>
         </h1>
         <p class="ed-hero__sub">
           Salt Lake City's most-reviewed massage studio. Swedish to Ashiatsu,
@@ -156,7 +156,7 @@
     <!-- 2. INTRO / PHILOSOPHY -->
     <section class="ed-intro section">
       <div class="container">
-        <div class="ed-intro__inner">
+        <div class="ed-intro__inner" data-reveal>
           <p class="ed-intro__quote">
             Massage is not a luxury. It is regular maintenance for a body
             that runs hard, sleeps less than it should, and asks too much
@@ -167,45 +167,17 @@
       </div>
     </section>
 
-    <!-- 2b. THE SESSION — pinned scroll-scrub scene (cinematic layer 2026-07).
-         Static state (no-JS / mobile / reduced-motion): final scene + strongest
-         caption visible via .is-active; motion.js takes over on desktop. -->
-    <section class="ed-session" id="session" aria-label="What a session here feels like">
-      <div class="ed-session__stage">
-        <figure class="ed-session__scene" data-scene="1">
-          <picture>
-            <source media="(orientation: portrait)" srcset="images/editorial/session-room-portrait.webp">
-            <img src="images/editorial/session-room.webp" alt="Warm massage room ready for a session" loading="lazy" width="1920" height="1080">
-          </picture>
-        </figure>
-        <figure class="ed-session__scene" data-scene="2">
-          <picture>
-            <source media="(orientation: portrait)" srcset="images/editorial/session-oil-portrait.webp">
-            <img src="images/editorial/session-oil.webp" alt="Warm oil poured slowly before the massage" loading="lazy" width="1920" height="1080">
-          </picture>
-        </figure>
-        <figure class="ed-session__scene" data-scene="3">
-          <picture>
-            <source media="(orientation: portrait)" srcset="images/editorial/session-hands-portrait.webp">
-            <img src="images/editorial/session-hands.webp" alt="Therapist working along a client's upper back" loading="lazy" width="1920" height="1080">
-          </picture>
-        </figure>
-        <figure class="ed-session__scene is-active" data-scene="4">
+    <!-- 2b. THE SESSION — single editorial band (Elite-style, no pin/scrub). -->
+    <section class="ed-still section" id="session" aria-label="What a session here feels like">
+      <div class="container">
+        <span class="ed-eyebrow" data-reveal>The session</span>
+        <figure class="ed-still__media" data-reveal>
           <picture>
             <source media="(orientation: portrait)" srcset="images/editorial/session-exhale-portrait.webp">
             <img src="images/editorial/session-exhale.webp" alt="Client resting at ease after the massage" loading="lazy" width="1920" height="1080">
           </picture>
         </figure>
-        <div class="ed-session__scrim" aria-hidden="true"></div>
-        <div class="ed-session__content container">
-          <span class="ed-eyebrow">The session</span>
-          <h2 class="ed-session__caption">
-            <span class="ed-session__cap" data-cap="1">The room is ready before you are.</span>
-            <span class="ed-session__cap" data-cap="2">Warm oil. Warmer hands.</span>
-            <span class="ed-session__cap" data-cap="3">Pressure exactly where you carry it.</span>
-            <span class="ed-session__cap is-active" data-cap="4">And then — the exhale.</span>
-          </h2>
-        </div>
+        <h2 class="ed-still__caption" data-reveal>And then, the exhale.</h2>
       </div>
     </section>
 
