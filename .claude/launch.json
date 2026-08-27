@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jmassage-static",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8735", "--directory", "C:\\Users\\goho2\\jmassage-website"],
+      "port": 8735
+    }
+  ]
+}
