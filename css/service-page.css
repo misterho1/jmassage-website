@@ -95,7 +95,7 @@ ol.svc-breadcrumb__list,
 }
 .svc-hero__h1 em,
 .svc-hero__title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--lantern);
 }
 
@@ -110,13 +110,15 @@ ol.svc-breadcrumb__list,
 }
 
 /* Meta pills */
-.svc-hero__meta {
+.svc-hero__meta,
+.svc-hero__pills {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-bottom: 2.2rem;
 }
-.svc-hero__pill {
+.svc-hero__pill,
+.svc-pill {
   display: flex;
   align-items: center;
   gap: 0.45rem;
@@ -130,7 +132,8 @@ ol.svc-breadcrumb__list,
   padding: 0.4rem 0.85rem;
   border-radius: 40px;
 }
-.svc-hero__pill svg {
+.svc-hero__pill svg,
+.svc-pill svg {
   width: 13px;
   height: 13px;
   color: var(--lantern);
@@ -215,8 +218,8 @@ ol.svc-breadcrumb__list,
 .svc-abstract__price-num {
   font-family: var(--font-head);
   font-size: 3rem;
-  font-weight: 600;
-  font-style: italic;
+  font-weight: 400;
+  font-style: normal;
   color: var(--glow);
   line-height: 1;
 }
@@ -235,8 +238,8 @@ ol.svc-breadcrumb__list,
 .svc-what__heading {
   font-family: var(--font-head);
   font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 500;
-  font-style: italic;
+  font-weight: 400;
+  font-style: normal;
   color: var(--text-hi);
   line-height: 1.15;
   margin-bottom: 1.5rem;
@@ -300,8 +303,8 @@ ol.svc-breadcrumb__list,
   content: counter(benefit, decimal-leading-zero);
   font-family: var(--font-head);
   font-size: 1rem;
-  font-style: italic;
-  font-weight: 500;
+  font-style: normal;
+  font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--lantern);
 }
@@ -309,7 +312,7 @@ ol.svc-breadcrumb__list,
 .benefit-card__title {
   font-family: var(--font-head);
   font-size: 1.4rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-hi);
   margin-bottom: 0.5rem;
 }
@@ -357,8 +360,8 @@ ol.svc-breadcrumb__list,
   margin: 0 auto 1.5rem;
   font-family: var(--font-head);
   font-size: 1.5rem;
-  font-style: italic;
-  font-weight: 600;
+  font-style: normal;
+  font-weight: 400;
   color: var(--lantern);
   position: relative;
   z-index: 1;
@@ -366,7 +369,7 @@ ol.svc-breadcrumb__list,
 .process-step__title {
   font-family: var(--font-head);
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-hi);
   margin-bottom: 0.5rem;
 }
@@ -415,8 +418,8 @@ ol.svc-breadcrumb__list,
 .price-card__amount {
   font-family: var(--font-head);
   font-size: 3.5rem;
-  font-weight: 600;
-  font-style: italic;
+  font-weight: 400;
+  font-style: normal;
   color: var(--glow);
   line-height: 1;
   margin-bottom: 0.3rem;
@@ -495,7 +498,7 @@ ol.svc-breadcrumb__list,
 .who-card__title {
   font-family: var(--font-head);
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-hi);
   margin-bottom: 0.4rem;
 }
@@ -605,7 +608,7 @@ ol.svc-breadcrumb__list,
 .related-card__name {
   font-family: var(--font-head);
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-hi);
   margin-bottom: 0.5rem;
 }
@@ -616,7 +619,7 @@ ol.svc-breadcrumb__list,
   flex: 1;
 }
 .related-card__price em {
-  font-style: italic;
+  font-style: normal;
   color: var(--glow);
   font-family: var(--font-head);
   font-size: 1rem;
@@ -654,7 +657,7 @@ ol.svc-breadcrumb__list,
   margin-bottom: 1rem;
   position: relative;
 }
-.svc-cta-band__title em { font-style: italic; color: var(--lantern); }
+.svc-cta-band__title em { font-style: normal; color: var(--lantern); }
 .svc-cta-band__sub {
   font-size: 1rem;
   color: var(--text-mid);
@@ -708,7 +711,8 @@ ol.svc-breadcrumb__list,
   .svc-hero__intro { font-size: 1rem; }
   .svc-hero__actions { flex-direction: column; }
   .svc-hero__actions .btn { width: 100%; justify-content: center; min-height: 48px; }
-  .svc-hero__meta { gap: 0.5rem; flex-wrap: wrap; }
+  .svc-hero__meta,
+.svc-hero__pills { gap: 0.5rem; flex-wrap: wrap; }
   .svc-hero__pills { gap: 0.5rem; }
   .svc-pill { font-size: 1rem; padding: 0.35rem 0.85rem; }
   .svc-section-title { font-size: clamp(1.9rem, 8vw, 2.6rem); }
@@ -788,7 +792,7 @@ ol.svc-breadcrumb__list,
 }
 .svc-photo__price .svc-abstract__from,
 .svc-photo__price .svc-abstract__unit { font-size: 1.25rem; opacity: 0.7; font-family: var(--font-ui); }
-.svc-photo__price .svc-abstract__amount { font-size: 1.8rem; font-family: var(--font-ui); font-style: italic; color: var(--glow); line-height: 1; }
+.svc-photo__price .svc-abstract__amount { font-size: 1.8rem; font-family: var(--font-ui); font-style: normal; color: var(--glow); line-height: 1; }
 
 /* When a real image is dropped into .svc-photo__visual, it covers the gradient
    placeholder. We use :has() to hide the abstract decorations only when an

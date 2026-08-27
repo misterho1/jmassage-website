@@ -285,14 +285,14 @@ input:focus-visible,
 .logo {
   font-family: var(--font-head);
   font-size: 1.45rem;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.01em;
   color: var(--text-hi);
   line-height: 1;
 }
 .logo__j {
   color: var(--lantern);
-  font-style: italic;
+  font-style: normal;
   font-size: 1.65rem;
 }
 .logo__rest em {
@@ -556,7 +556,7 @@ input:focus-visible,
   transform: translateY(0);
   opacity: 1;
 }
-.hero__line--italic > span { font-style: italic; color: var(--lantern); }
+.hero__line--italic > span { font-style: normal; color: var(--lantern); }
 
 /* Hero sub & actions fade */
 [data-reveal-fade] {
@@ -843,7 +843,7 @@ input:focus-visible,
   font-family: var(--font-head);
   font-size: clamp(3.5rem, 5vw, 5rem);
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
   line-height: 0.9;
   letter-spacing: -0.03em;
   color: var(--lantern);
@@ -866,7 +866,7 @@ input:focus-visible,
 .svc-card__name {
   font-family: var(--font-head);
   font-size: 1.9rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.01em;
   color: var(--text-hi);
   margin-bottom: 0.65rem;
@@ -899,9 +899,9 @@ input:focus-visible,
 .svc-card__price strong {
   font-family: var(--font-head);
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--glow);
-  font-style: italic;
+  font-style: normal;
 }
 
 .svc-card__btn {
@@ -971,7 +971,7 @@ input:focus-visible,
   outline-offset: 2px;
 }
 .services__more-list em {
-  font-style: italic;
+  font-style: normal;
   color: var(--text-lo);
   font-size: 0.9rem;
   white-space: nowrap;
@@ -1020,8 +1020,8 @@ input:focus-visible,
 .addons__title {
   font-family: var(--font-head);
   font-size: 1.1rem;
-  font-weight: 500;
-  font-style: italic;
+  font-weight: 400;
+  font-style: normal;
   color: var(--lantern);
   letter-spacing: 0.02em;
 }
@@ -1111,8 +1111,8 @@ input:focus-visible,
   display: block;
   font-family: var(--font-head);
   font-size: 2.5rem;
-  font-weight: 600;
-  font-style: italic;
+  font-weight: 400;
+  font-style: normal;
   color: var(--lantern);
   line-height: 1;
 }
@@ -1451,7 +1451,7 @@ input:focus-visible,
   display: block;
   font-family: var(--font-display);
   font-size: 0.92rem;
-  font-style: italic;
+  font-style: normal;
   color: var(--lantern);
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
@@ -1544,7 +1544,7 @@ input:focus-visible,
   font-family: var(--font-display);
   font-size: 2.8rem;
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
   font-variation-settings: "opsz" 144;
   color: var(--lantern);
   line-height: 1;
@@ -1587,13 +1587,13 @@ input:focus-visible,
   line-height: 0.5;
   color: var(--lantern);
   margin-bottom: 1.5rem;
-  font-style: italic;
+  font-style: normal;
 }
 .ed-quote__text {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 2.6vw, 2rem);
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
   font-variation-settings: "opsz" 144, "SOFT" 80;
   line-height: 1.45;
   color: #faf7f3;
@@ -1663,7 +1663,7 @@ input:focus-visible,
   font-family: var(--font-display);
   font-size: 1.02rem;
   color: var(--text-hi);
-  font-style: italic;
+  font-style: normal;
   font-variation-settings: "opsz" 96;
 }
 .ed-about__media {
@@ -2019,7 +2019,7 @@ input:focus-visible,
   font-family: var(--font-display);
   font-size: 3.5rem;
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   color: var(--lantern);
   line-height: 1;
 }
@@ -2255,7 +2255,7 @@ input:focus-visible,
 .review-card__quote {
   font-family: var(--font-head);
   font-size: 1.4rem;
-  font-style: italic;
+  font-style: normal;
   color: var(--text-hi);
   line-height: 1.75;
   margin-bottom: 1.8rem;
@@ -2410,7 +2410,7 @@ input:focus-visible,
 .gift-card-mock__brand {
   font-family: var(--font-head);
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--text-hi);
   letter-spacing: 0.02em;
 }
@@ -2425,8 +2425,8 @@ input:focus-visible,
 .gift-card-mock__amount {
   font-family: var(--font-head);
   font-size: clamp(3rem, 8vw, 4.5rem);
-  font-weight: 600;
-  font-style: italic;
+  font-weight: 400;
+  font-style: normal;
   color: var(--glow);
   transition: transform 0.2s var(--ease-spring);
   display: inline-block;
@@ -2484,8 +2484,8 @@ input:focus-visible,
   padding: 0.75rem 0.5rem;
   font-family: var(--font-head);
   font-size: 1rem;
-  font-style: italic;
-  font-weight: 600;
+  font-style: normal;
+  font-weight: 400;
   text-align: center;
   color: var(--text-mid);
   background: var(--ember);
@@ -2528,8 +2528,8 @@ input:focus-visible,
   color: var(--lantern);
   font-family: var(--font-head);
   font-size: 1.1rem;
-  font-style: italic;
-  font-weight: 600;
+  font-style: normal;
+  font-weight: 400;
 }
 .gift-custom__input-wrap input {
   flex: 1;
@@ -2636,12 +2636,12 @@ input:focus-visible,
 .footer__logo {
   font-family: var(--font-head);
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--text-hi);
   display: block;
   margin-bottom: 0.9rem;
 }
-.footer__logo em { font-style: italic; color: var(--lantern); }
+.footer__logo em { font-style: normal; color: var(--lantern); }
 .footer__brand p {
   font-size: 0.9rem;
   color: var(--text-lo);
@@ -2900,7 +2900,7 @@ input:focus-visible,
 .booking-modal__title {
   font-family: var(--font-head);
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-hi);
   flex: 1;
 }
@@ -3053,7 +3053,7 @@ html.lenis { scroll-behavior: auto !important; }
   font-weight: 300;
   letter-spacing: 0.04em;
 }
-.cine-intro__word em { font-style: italic; color: var(--glow); }
+.cine-intro__word em { font-style: normal; color: var(--glow); }
 .cine-intro__line {
   width: min(240px, 40vw);
   height: 1px;
@@ -3132,7 +3132,7 @@ html.cine-lock { overflow: hidden; }
   opacity: 0; visibility: hidden;
   max-width: 14ch;
 }
-.ed-session__cap em { font-style: italic; color: var(--glow); }
+.ed-session__cap em { font-style: normal; color: var(--glow); }
 .ed-session__cap.is-active { opacity: 1; visibility: visible; }
 
 /* (mobile pass) session stage stays full-viewport on phones — the pinned
