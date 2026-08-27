@@ -119,31 +119,33 @@
         <p class="book-firsttimer">First time? A <strong>60-minute Swedish</strong> is the right first visit. It's already selected below, just pick a time.</p>
 
         <div class="book-menu" style="margin-bottom:1.9rem;">
-          <div class="book-menu__group">
+          <div class="book-menu__group" data-service="single">
             <p class="book-menu__title">Single Massage <small>· Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Myofascial · Prenatal</small></p>
             <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick is-active" data-cal="iYzZ0GbCUpIqrpaCbswy">60 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="g5R2qijQXBq7TRN4ySKJ">90 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="nPGP7qVKUf8ChBsd39dY">120 min</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick is-active" data-cal="iYzZ0GbCUpIqrpaCbswy">60 min · $85</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="g5R2qijQXBq7TRN4ySKJ">90 min · $125</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="nPGP7qVKUf8ChBsd39dY">120 min · $165</button>
             </div>
           </div>
-          <div class="book-menu__group">
+          <div class="book-menu__group" data-service="couples">
             <p class="book-menu__title">Couples Massage <small>· side by side</small></p>
             <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="rICCpj4eRyVstN1WRZ79">60 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="Xt5skgfbFw3i2aqAymAg">90 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="9up7NwJ9Zq9C8TYtKTyr">120 min</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="rICCpj4eRyVstN1WRZ79">60 min · $165</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="Xt5skgfbFw3i2aqAymAg">90 min · $245</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="9up7NwJ9Zq9C8TYtKTyr">120 min · $325</button>
             </div>
           </div>
-          <div class="book-menu__group">
+          <div class="book-menu__group" data-service="4hand">
             <p class="book-menu__title">4-Hand Massage <small>· two therapists</small></p>
             <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="7MOTfueYlSBJVB7VeyGm">60 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="61Y2h3xEJEvx8W1u8CaY">90 min</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="0uwvyTaLs96plJocptuH">120 min</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="7MOTfueYlSBJVB7VeyGm">60 min · $165</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="61Y2h3xEJEvx8W1u8CaY">90 min · $245</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="0uwvyTaLs96plJocptuH">120 min · $325</button>
             </div>
           </div>
         </div>
+
+        <p class="book-embed__fallback" style="margin-bottom:1rem;text-align:center;">Rather book by phone? Call <a href="tel:+18012881118">(801) 288-1118</a>.</p>
 
         <div class="book-frame" id="book-frame">
           <div class="book-frame__loader" aria-hidden="true">
@@ -176,6 +178,20 @@
             }
           });
         });
+        // Deep link: /book?service=couples|4hand|single(&len=60|90|120) preselects the group.
+        var q=new URLSearchParams(location.search);
+        var svc=q.get('service');
+        if(svc){
+          var grp=document.querySelector('.book-menu__group[data-service="'+svc+'"]');
+          if(grp){
+            var len=q.get('len')||'60';
+            var target=null;
+            grp.querySelectorAll('.book-pick').forEach(function(x){
+              if(x.textContent.indexOf(len+' min')===0){target=x;}
+            });
+            (target||grp.querySelector('.book-pick')).click();
+          }
+        }
       })();
     </script>
 
@@ -192,7 +208,7 @@
         </div>
       </div>
       <div class="footer__links">
-        <h4>Treatments</h4>
+        <h3 class="footer__heading">Treatments</h3>
         <ul>
           <li><a href="/services/swedish-massage">Swedish Massage</a></li>
           <li><a href="/services/deep-tissue">Deep Tissue</a></li>
@@ -203,7 +219,7 @@
         </ul>
       </div>
       <div class="footer__contact">
-        <h4>Visit Us</h4>
+        <h3 class="footer__heading">Visit Us</h3>
         <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
         <a href="tel:+18012881118">(801) 288-1118</a>
         <p>Open Daily &nbsp;·&nbsp; 10am – 10pm</p>

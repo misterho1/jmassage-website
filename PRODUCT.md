@@ -6,72 +6,62 @@ brand
 
 ## Users
 
-**Primary — Wellness-conscious Salt Lake City professionals (30–55).** Mid-career, mid-to-high disposable income. Reach for massage as recovery from real stress (long hours, poor sleep, training, parenting, post-injury). Not "spa day" tourists; people who know they need it and want it done well. Will book tonight or this weekend; expect same-day or next-day availability. Compare 3–5 SLC studios on Google before booking; decide based on review depth + ease of booking + gut feel about whether the studio is "for them" within a 60-second evaluation window.
+**Primary — Wellness-conscious Salt Lake City professionals (30–55).** Mid-career, mid-to-high disposable income. Reach for massage as recovery from real stress (long hours, poor sleep, training, parenting, post-injury). Will book tonight or this weekend; expect same-day or next-day availability. Compare 3–5 SLC studios on Google before booking; decide on review depth + booking ease + gut feel inside a 60-second evaluation window.
 
-**Secondary — Athletes and serious-recovery clients.** Marathoners, climbers, ski racers, gym-goers. Need deep tissue + sports massage. Repeat customers (weekly / bi-weekly). Care about therapist credentials and modality specialization more than ambiance.
+**Secondary — Athletes and serious-recovery clients.** Marathoners, climbers, skiers, mountain bikers. Need deep tissue + sports massage. Repeat customers (weekly / bi-weekly). Care about therapist skill and modality specialization more than ambiance.
 
-**Tertiary — Couples and occasion bookings.** Anniversaries, gift cards, date nights. Lower frequency, higher per-visit spend. Care about presentation + ease of gifting + ambiance.
+**Tertiary — Couples and occasion bookings.** Anniversaries, gift cards, date nights. Lower frequency, higher per-visit spend. Care about presentation + ease of gifting + the private couples suite.
 
 ## Product Purpose
 
-**Convert site visitors into Square bookings.** The homepage's job is to move someone from "researching SLC massage studios" into a confirmed booking inside the 60-second evaluation window most visitors give it. Secondary: gift card purchases (Square-native). Tertiary: phone bookings for clients who prefer voice.
+**Convert visitors into GoHighLevel bookings.** Booking is an embedded LeadConnector scheduler on /book (three service groups, nine duration buttons, deep-linkable via /book?service=couples|4hand|single&len=60|90|120). Secondary: gift-card purchases (talech microsite; amount chosen at checkout). Tertiary: phone bookings, (801) 288-1118.
 
 **Strategic moat:**
-- 7-day operation, 10am–10pm, same-day availability. Most SLC competitors close by 6pm and require 48-hour notice. This is the strongest competitive lever and should be visible above the fold on every page.
-- 400+ verified Google 5-star reviews. Public-checkable social proof competitors cannot fake.
-- Six modalities + add-ons (hot stones, cupping, infrared sauna) under one roof.
+- Open 7 days, 10am–10pm, same-day availability. Most SLC competitors close by 6pm.
+- 516 Google reviews at 4.4 stars (live-synced 2026-08-26; shown honestly with a clipped half-star — never round up, never inflate the count).
+- Eleven massage service pages under one roof, Swedish to Ashiatsu; head spa and reflexology referrals go to sister studio elitespautah.com (topic ownership: JM owns massage modalities, Elite owns facials/sauna/head spa).
 
 ## Brand Personality
 
-**Three words: quiet luxury, considered, restrained.**
+**Three words: quiet luxury, considered, warm.**
 
-**Reference family:** Aesop, Loro Piana retail, Aman Resorts. Sophistication-from-restraint. NOT candle-and-amber spa-template; NOT corporate-chain-pastel; NOT new-age-woo. The vibe is "someone who has been doing this craft a long time and doesn't need to oversell it."
+**Reference family:** shared design language with elitespautah.com — one candlelit room-world (terracotta clay plaster, cream linen, amber glass, walnut), Marcellus display + PT Serif body + DM Sans chrome, cream/ink/terracotta palette. The two studios must read as siblings, JM with its own facts and massage-only menu.
 
-**Tone:** confident without bragging. Specific over generic. Treats massage as a serious therapeutic craft, not a "tranquility journey." Says less to mean more.
+**Tone:** confident without bragging. Specific over generic. Massage is a therapeutic craft, not a "tranquility journey." Says less to mean more. Sentence-case headlines with terminal periods. No emojis, no exclamation points, we/you.
 
 | Voice example | |
 |---|---|
-| Good | "Restore. Reclaim. Rise again." (current hero. Keep.) |
-| Good | "Highest-rated massage studio in Salt Lake County. Open every day, 10am–10pm." |
+| Good | "Come in tight. Leave loose." (current hero) |
+| Good | "Salt Lake City's most-reviewed massage studio. Open every day until 10pm." |
 | Good | "Ashiatsu uses controlled foot pressure for deeper, broader strokes than hands can deliver. Ask for it specifically." |
 | Bad | "Embark on your wellness journey..." |
 | Bad | "Tranquil, transformative, trusted." (alliteration as substitute for substance) |
-| Bad | "Our team of dedicated wellness professionals..." (chain-spa) |
+| Bad | Census-data local SEO ("median household income sits near $98,500") — talk to the reader, not about them |
 
 ## Anti-references
 
 The site must explicitly NOT look like:
 
-1. **Warm-amber candle "wellness journey" cliche.** Cormorant Garamond + amber/gold palette + candlelit imagery + "tranquility journey" copy. The current state of jmassageslc.com falls fully into this category; the visual reset must escape it.
-2. **Massage Envy / chain-spa corporate.** Soft pastels + bland sans-serif + "membership" framing + corporate-stock photography. The volume-spa default.
-3. **Goop / new-age wellness woo.** Crystals, chakras, "energy alignment" language, script fonts, ethereal photography. The aspirational-mystical lane.
-4. **Aspirational-stock spa photography.** Oil drops on backs, hands kneading shoulders from behind, candle close-ups, lavender stems, towel-clad-from-behind women. Real photos of YOUR therapists in YOUR rooms doing actual work always beat the Getty Images spa archive.
+1. **Massage Envy / chain-spa corporate.** Soft pastels + bland sans-serif + "membership" framing + corporate stock photography.
+2. **Goop / new-age wellness woo.** Crystals, chakras, "energy alignment," script fonts, ethereal photography.
+3. **Getty-stock spa clichés.** Lavender stems, orchid-on-towel, generic oil-drop close-ups from every other spa site. Our imagery is one continuous room-world, seeded from a single anchor shot; every image belongs to the same place and light. (Current set is AI-interim — replace with a real shoot of the actual rooms when it lands; never fabricate "real client" photos or reviews.)
+4. **Programmatic local-SEO filler.** Demographic statistics, incorporation dates, "serves both groups" third-person profiling on neighborhood pages.
 
 ## Design Principles
 
-1. **Quiet over loud.** A premium massage studio doesn't need to shout. Restraint reads as confidence; volume reads as compensation. When in doubt, cut decoration, increase whitespace, simplify language.
-
-2. **Real over aspirational.** Real photos of your specific therapists, your specific rooms, your specific clients (with permission). Never stock spa imagery. The category is saturated with stock; the differentiation is having actual identity.
-
-3. **Craft, not journey.** Massage is a therapeutic craft practiced by trained professionals. Treat it that way in copy. Lead with what each modality *does* (Ashiatsu = broader/deeper strokes via foot pressure) not what it *feels like* ("transcendent journey"). Wellness-conscious adults respond to specificity, not adjectives.
-
-4. **Same-day is the moat.** Most SLC competitors close at 6pm and require advance booking. J Massage opens 7 days, 10am–10pm, with same-day availability. That single fact converts. It belongs above the fold on every page, not buried in the footer.
-
-5. **Booking friction is enemy #1.** Square is the booking system. Embed inline; don't link out. Every domain handoff costs 10–30% of conversion intent. The user who wants a massage tonight should be able to book in 3 clicks or fewer.
+1. **Quiet over loud.** Restraint reads as confidence. When in doubt, cut decoration, increase whitespace, simplify language.
+2. **One room-world.** Every photo and video shares the same room, palette, and candlelit exposure. Continuity is the identity.
+3. **Craft, not journey.** Lead with what each modality does, not what it feels like. Specificity converts this audience.
+4. **Same-day is the moat.** Open daily 10am–10pm with same-day availability belongs above the fold on every page.
+5. **Booking friction is enemy #1.** The GHL scheduler is embedded, never linked out. Prices appear on the duration buttons. Deep links carry service context from service pages to /book.
+6. **Honest numbers only.** 4.4/516 with a real half-star. No "#1 rated," no invented counts, no "approximate pricing" hedges that fight the transparent-pricing promise ($5 card fee stated plainly, cash no fee).
 
 ## Accessibility & Inclusion
 
 **Target:** WCAG 2.2 AA.
 
-**Already established (in current code):**
-- `prefers-reduced-motion` is respected for the count-up animation (after the counter-placeholder fix).
-- IntersectionObserver-driven reveals don't block content.
-
-**Action items for upcoming impeccable steps:**
-- Verify color contrast across the new palette during `/impeccable colorize`.
-- Floor uppercase eyebrow text at 11px (current site has tracked-uppercase below threshold in places).
-- Confirm Square widget is keyboard-accessible, or pre-warn users about the external context handoff if the widget stays linked rather than embedded.
-- Verify alt text on all photography (current hero has none visible).
-- Add structured data (`LocalBusiness`, `OpeningHoursSpecification`, `AggregateRating` JSON-LD schema). High-impact for local SEO and assistive tech.
-
-**Known user accommodations declared:** none at this stage.
+Standing rules from the 2026-08-26 audit:
+- Hover states deepen (--amber), never lighten past text contrast; button text on terracotta uses --ember.
+- prefers-reduced-motion collapses the motion layer to the vanilla path (verified by harness).
+- All imagery carries real alt text; footer headings are h3 under page h2s; UTF-8 with ★ U+2605 only.
+- Known gaps (external): GHL booking iframe and chat widget are third-party chrome — keyboard access inside them is GHL's surface; phone fallback stays visible beside the scheduler.

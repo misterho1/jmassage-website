@@ -409,7 +409,7 @@ function initGiftCards() {
 
   customAmt?.addEventListener('input', () => {
     const val = parseInt(customAmt.value, 10);
-    if (val >= 10 && val <= 500) {
+    if (val >= 25 && val <= 500) {
       amtBtns.forEach(b => b.classList.remove('gift-amt--active'));
       updateDisplay(val);
     }

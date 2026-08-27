@@ -419,14 +419,11 @@ input:focus-visible,
   text-transform: uppercase;
   color: var(--text-mid);
   text-decoration: none;
-  transition: color var(--t), background var(--t), padding-left var(--t);
-  border-left: 2px solid transparent;
+  transition: color var(--t), background var(--t);
 }
 .nav__dropdown a:hover {
-  color: var(--glow);
-  background: rgba(160, 77, 44, 0.07);
-  padding-left: 1.55rem;
-  border-left-color: var(--lantern);
+  color: var(--amber);
+  background: rgba(160, 77, 44, 0.08);
 }
 
 .nav__dropdown-caret {
@@ -1964,6 +1961,17 @@ a.btn--gold,
   overflow: hidden;
 }
 .pr-tablecard__scroll { overflow-x: auto; }
+@media (max-width: 640px) {
+  .pr-tablecard { position: relative; }
+  .pr-tablecard::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 28px;
+    background: linear-gradient(to left, var(--soot), transparent);
+    pointer-events: none;
+  }
+}
 .pr-note {
   color: var(--text-lo);
   font-size: 0.82rem;
@@ -2664,7 +2672,8 @@ a.btn--gold,
 }
 
 .footer__links h4,
-.footer__contact h4 {
+.footer__contact h4,
+.footer .footer__heading {
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.16em;
