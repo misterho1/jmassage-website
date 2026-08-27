@@ -22,36 +22,8 @@ const GOOGLE_PLACES_API_KEY = ''; // ← paste key here
 const GOOGLE_PLACE_ID = '';       // ← paste Place ID here
 
 /* ─── STATIC REVIEW FALLBACK ────────────────────────────────────────────── */
-const STATIC_REVIEWS = [
-  {
-    initials: 'SM',
-    name: 'Sarah M.',
-    rating: 5,
-    time: '2 weeks ago',
-    text: "I've been to nearly every studio in SLC. J Massage isn't just the best — it's in a different category. The therapists are intuitive in a way that's almost unsettling. They found tension I didn't know I had, and I slept better than I had in months. I will not go anywhere else."
-  },
-  {
-    initials: 'RT',
-    name: 'Ryan T.',
-    rating: 5,
-    time: '1 month ago',
-    text: "As a competitive athlete, I rely on regular sports massage to stay at peak performance. The team here understands muscle recovery better than anyone in the city. The same-day availability is a total game-changer when I'm beat up after a race. My secret weapon."
-  },
-  {
-    initials: 'JL',
-    name: 'Jessica L.',
-    rating: 5,
-    time: '3 weeks ago',
-    text: "My partner and I booked the couples massage for our anniversary. The private suite was absolutely serene — both therapists were perfectly synchronized, like they'd choreographed it. It felt like a $500-a-night resort experience. We're already planning our next visit."
-  },
-  {
-    initials: 'MD',
-    name: 'Marcus D.',
-    rating: 5,
-    time: '2 months ago',
-    text: "The Ashiatsu changed my life. I've had chronic lower-back pain for seven years, and this was the first treatment that actually reached the depth I needed. Not just relief — transformation. I've already booked my next four sessions. Don't hesitate. Just go."
-  }
-];
+/* Fabricated fallback testimonials removed 2026-08-26: real reviews only. */
+const STATIC_REVIEWS = [];
 
 /* ═══════════════════════════════════════════════════════════════════════════
    INIT

@@ -337,6 +337,7 @@ input:focus-visible,
 .nav__link:hover::after { transform: scaleX(1); }
 
 .nav__cta {
+  display: inline-block;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.18em;
