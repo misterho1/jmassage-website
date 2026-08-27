@@ -47,10 +47,11 @@
   /* Stars / rating */
   --star:        #a04d2c;                      /* terracotta */
 
-  /* Fonts — Fraunces serif for editorial headings, Switzer sans for body */
-  --font-head:   'Fraunces', Georgia, serif;
-  --font-body:   'Switzer', 'Helvetica Neue', Arial, sans-serif;
-  --font-display: 'Fraunces', Georgia, serif;
+  /* Fonts — Elite trio: Marcellus display, PT Serif body, DM Sans UI chrome */
+  --font-head:   'Marcellus', Georgia, serif;
+  --font-body:   'PT Serif', Georgia, serif;
+  --font-display: 'Marcellus', Georgia, serif;
+  --font-ui:     'DM Sans', system-ui, -apple-system, sans-serif;
 
   /* Motion — ease-out only; spring (cubic-bezier(0.34,1.56,0.64,1)) removed
      per impeccable "no bounce, no elastic" motion law. ease-spring is now
@@ -114,7 +115,7 @@ button { cursor: pointer; border: none; background: none; }
   padding: 0.8rem 1.2rem;
   background: var(--text-hi);
   color: var(--timber);
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
@@ -151,7 +152,7 @@ input:focus-visible,
 
 .section-label {
   display: inline-block;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: 0.22em;
@@ -183,9 +184,8 @@ input:focus-visible,
   letter-spacing: -0.022em;
 }
 .section-title em {
-  font-style: italic;
-  color: var(--text-hi);
-  font-variation-settings: "opsz" 144, "SOFT" 80;
+  font-style: normal;
+  color: var(--lantern);
 }
 
 .section-sub {
@@ -296,7 +296,7 @@ input:focus-visible,
   font-size: 1.65rem;
 }
 .logo__rest em {
-  font-style: italic;
+  font-style: normal;
   color: var(--lantern);
   font-weight: 400;
 }
@@ -630,7 +630,7 @@ input:focus-visible,
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -738,7 +738,7 @@ input:focus-visible,
   transition: color var(--t), border-color var(--t);
 }
 .services__chooser-link em {
-  font-style: italic;
+  font-style: normal;
   color: var(--text-hi);
   margin-right: 0.15rem;
 }
@@ -932,7 +932,7 @@ input:focus-visible,
 }
 .services__more-label {
   display: block;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.2em;
@@ -1169,7 +1169,7 @@ input:focus-visible,
 /* ── Shared editorial primitives ─────────────────────────────────────────── */
 .ed-eyebrow {
   display: inline-block;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.24em;
@@ -1200,9 +1200,8 @@ input:focus-visible,
   margin-bottom: 1.2rem;
 }
 .ed-section-title em {
-  font-style: italic;
-  color: var(--text-hi);
-  font-variation-settings: "opsz" 144, "SOFT" 80;
+  font-style: normal;
+  color: var(--lantern);
 }
 
 .ed-section-sub {
@@ -1217,7 +1216,7 @@ input:focus-visible,
 
 .ed-btn {
   display: inline-block;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.18em;
@@ -1251,7 +1250,7 @@ input:focus-visible,
 }
 
 .ed-link {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.86rem;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -1318,7 +1317,7 @@ input:focus-visible,
   max-width: 880px;
 }
 .ed-hero__eyebrow {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: 0.28em;
@@ -1337,9 +1336,8 @@ input:focus-visible,
   margin-bottom: 1.5rem;
 }
 .ed-hero__title em {
-  font-style: italic;
-  color: var(--timber);
-  font-variation-settings: "opsz" 144, "SOFT" 100;
+  font-style: normal;
+  color: var(--glow);
 }
 .ed-hero__sub {
   font-family: var(--font-body);
@@ -1377,7 +1375,7 @@ input:focus-visible,
   border-color: var(--timber);
 }
 .ed-hero__meta {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   color: rgba(245, 240, 232, 0.65);
@@ -1409,12 +1407,12 @@ input:focus-visible,
   letter-spacing: -0.01em;
 }
 .ed-intro__quote em {
-  font-style: italic;
+  font-style: normal;
   color: var(--lantern);
 }
 .ed-intro__byline {
   margin-top: 1.5rem;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.78rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1476,7 +1474,7 @@ input:focus-visible,
 }
 .ed-svc__cta {
   display: block;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -1615,7 +1613,7 @@ input:focus-visible,
   font-size: 0.95rem;
 }
 .ed-quote__name {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -1655,7 +1653,7 @@ input:focus-visible,
 }
 .ed-about__facts > div { display: flex; flex-direction: column; gap: 0.25rem; }
 .ed-about__facts dt {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1807,7 +1805,7 @@ input:focus-visible,
   border-radius: var(--r);
 }
 .book-reassure__item {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.82rem;
   letter-spacing: 0.01em;
   color: var(--text-mid);
@@ -1866,7 +1864,7 @@ input:focus-visible,
   animation: book-spin 0.7s linear infinite;
 }
 .book-frame__loading-text {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.82rem;
   letter-spacing: 0.06em;
   color: var(--text-lo);
@@ -1908,9 +1906,8 @@ input:focus-visible,
   margin-bottom: 1.2rem;
 }
 .pr-hero__title em {
-  font-style: italic;
-  color: var(--text-hi);
-  font-variation-settings: "opsz" 144, "SOFT" 80;
+  font-style: normal;
+  color: var(--lantern);
 }
 .pr-hero__sub {
   font-family: var(--font-body);
@@ -1930,7 +1927,7 @@ input:focus-visible,
   border: 1px solid var(--border);
   border-radius: var(--r);
   padding: 0.9rem 2rem;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.85rem;
   color: var(--text-mid);
 }
@@ -1952,7 +1949,7 @@ input:focus-visible,
   color: var(--text-hi);
   line-height: 1.08;
 }
-.pr-heading em { font-style: italic; color: var(--text-hi); }
+.pr-heading em { font-style: normal; color: var(--lantern); }
 .pr-heading--center { text-align: center; }
 
 .pr-tablecard {
@@ -1993,7 +1990,7 @@ input:focus-visible,
   color: var(--text-hi);
 }
 .pr-addon__price {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.9rem;
   color: var(--lantern);
   font-weight: 600;
@@ -2100,7 +2097,7 @@ input:focus-visible,
   color: #faf7f3;
 }
 .booking__cta-heading em {
-  font-style: italic;
+  font-style: normal;
   color: var(--glow);
 }
 
@@ -2123,7 +2120,7 @@ input:focus-visible,
 .booking__btn {
   display: inline-block;
   padding: 1.15rem 2.4rem;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -2417,7 +2414,7 @@ input:focus-visible,
   color: var(--text-hi);
   letter-spacing: 0.02em;
 }
-.gift-card-mock__brand em { font-style: italic; color: var(--lantern); }
+.gift-card-mock__brand em { font-style: normal; color: var(--lantern); }
 .gift-card-mock__logo-icon { width: 36px; height: 36px; opacity: 0.5; }
 
 .gift-card-mock__mid {

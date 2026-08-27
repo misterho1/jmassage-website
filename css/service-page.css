@@ -73,7 +73,7 @@ ol.svc-breadcrumb__list,
    no pill/border/background) so a Google-landing visitor meets the same brand. */
 .svc-hero__eyebrow {
   display: inline-block;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.24em;
@@ -120,7 +120,7 @@ ol.svc-breadcrumb__list,
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -787,8 +787,8 @@ ol.svc-breadcrumb__list,
   color: var(--text-hi);
 }
 .svc-photo__price .svc-abstract__from,
-.svc-photo__price .svc-abstract__unit { font-size: 1.25rem; opacity: 0.7; font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif; }
-.svc-photo__price .svc-abstract__amount { font-size: 1.8rem; font-family: 'Switzer', 'Helvetica Neue', Arial, sans-serif; font-style: italic; color: var(--glow); line-height: 1; }
+.svc-photo__price .svc-abstract__unit { font-size: 1.25rem; opacity: 0.7; font-family: var(--font-ui); }
+.svc-photo__price .svc-abstract__amount { font-size: 1.8rem; font-family: var(--font-ui); font-style: italic; color: var(--glow); line-height: 1; }
 
 /* When a real image is dropped into .svc-photo__visual, it covers the gradient
    placeholder. We use :has() to hide the abstract decorations only when an
