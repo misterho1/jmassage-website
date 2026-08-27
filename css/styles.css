@@ -360,7 +360,7 @@ input:focus-visible,
 }
 .nav__cta:hover::before { transform: translateX(100%); }
 .nav__cta:hover {
-  background: var(--lantern);
+  background: var(--amber);
   transform: translateY(-1px);
   box-shadow: 0 4px 20px rgba(160, 77, 44, 0.35);
 }
@@ -654,15 +654,19 @@ input:focus-visible,
 
 /* Primary gold */
 .btn--gold,
-.btn--light {
+.btn--light,
+a.btn--gold,
+.footer__contact a.btn--gold {
   background: var(--lantern);
-  color: var(--timber);
+  color: var(--ember);
   border: 1px solid var(--lantern);
 }
 .btn--gold:hover,
-.btn--light:hover {
-  background: var(--glow);
-  border-color: var(--glow);
+.btn--light:hover,
+.footer__contact a.btn--gold:hover {
+  color: var(--timber);
+  background: var(--amber);
+  border-color: var(--amber);
   transform: translateY(-2px);
   box-shadow: 0 6px 28px rgba(160, 77, 44, 0.4);
 }
@@ -919,7 +923,7 @@ input:focus-visible,
 }
 .svc-card__btn:hover {
   background: var(--lantern);
-  color: var(--timber);
+  color: var(--ember);
   border-color: var(--lantern);
 }
 
@@ -1235,8 +1239,8 @@ input:focus-visible,
   border-color: var(--text-hi);
 }
 .ed-btn--filled:hover {
-  background: var(--lantern);
-  border-color: var(--lantern);
+  background: var(--amber);
+  border-color: var(--amber);
   color: var(--timber);
 }
 .ed-btn--ghost {
@@ -1360,8 +1364,8 @@ input:focus-visible,
   border-color: var(--timber);
 }
 .ed-hero .ed-btn--filled:hover {
-  background: var(--lantern);
-  border-color: var(--lantern);
+  background: var(--amber);
+  border-color: var(--amber);
   color: var(--timber);
 }
 .ed-hero .ed-btn--ghost {
@@ -1786,8 +1790,8 @@ input:focus-visible,
   transition: color var(--t), border-color var(--t);
 }
 .book-embed__fallback a:hover {
-  color: var(--glow);
-  border-color: var(--glow);
+  color: var(--amber);
+  border-color: var(--amber);
 }
 
 /* ── Reassurance rail: warm trust cues above the scheduler ───────────────── */
@@ -2138,9 +2142,9 @@ input:focus-visible,
   border: 1px solid #faf7f3;
 }
 .booking__btn--primary:hover {
-  background: var(--glow);
-  border-color: var(--glow);
-  color: #faf7f3;
+  background: var(--char);
+  border-color: var(--char);
+  color: var(--pool);
 }
 
 .booking__btn--secondary {
@@ -2494,10 +2498,11 @@ input:focus-visible,
   transition: all var(--t);
 }
 .gift-amt:hover { border-color: var(--border-hi); color: var(--lantern); }
+.gift-amt--active:hover { color: var(--timber); }
 .gift-amt--active {
   background: var(--lantern);
   border-color: var(--lantern);
-  color: var(--timber);
+  color: var(--ember);
 }
 
 .gift-custom {
