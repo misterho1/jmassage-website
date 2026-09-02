@@ -26,3 +26,13 @@ https://www.jmassageslc.com/*   https://jmassageslc.com/:splat   301
 
 # Staff receipt-reprint tool -> private n8n hosted form (not linked publicly). 302 so the target URL can change.
 /print https://spa-phone-booking.andrew-86d.workers.dev/reprint 302
+
+# Internal repo files must never be publicly served. This is a static-HTML Pages
+# project with no build step, so Cloudflare publishes the whole repo root — every
+# committed file is reachable. robots.txt, 404.html and the llms.txt pair are
+# deliberately public and stay served.
+/CLAUDE.md   /404.html  404
+/PRODUCT.md  /404.html  404
+/README.md   /404.html  404
+/goal.md     /404.html  404
+/.gitignore  /404.html  404
