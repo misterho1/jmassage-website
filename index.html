@@ -30,6 +30,111 @@
 
   <link rel="stylesheet" href="css/styles.css?v=23">
 
+  <!-- Live Google reviews widget (homepage) — scoped, uses shared design tokens -->
+  <style>
+    #reviews { background: var(--pool); color: var(--timber); padding: 7rem 0; }
+    #reviews[hidden] { display: none !important; }
+    #reviews .ed-eyebrow { color: var(--glow); }
+    #reviews .ed-section-title { color: var(--timber); }
+    #reviews .ed-section-title em { color: var(--glow); }
+
+    .rev__head { text-align: center; max-width: 720px; margin: 0 auto 3.4rem; }
+    .rev__summary {
+      font-family: var(--font-ui);
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+      color: rgba(250, 247, 243, 0.75);
+      line-height: 1.6;
+      margin-top: 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      justify-content: center;
+      align-items: baseline;
+    }
+    .rev__stars { color: var(--glow); letter-spacing: 0.15em; }
+    .rev__rating { color: var(--timber); font-weight: 600; }
+    .rev__dot { color: rgba(250, 247, 243, 0.4); }
+    .rev__summary a[data-all] {
+      color: rgba(250, 247, 243, 0.92);
+      border-bottom: 1px solid rgba(250, 247, 243, 0.3);
+      padding-bottom: 1px;
+      transition: color var(--t), border-color var(--t);
+    }
+    .rev__summary a[data-all]:hover { color: var(--glow); border-color: var(--glow); }
+
+    .rev__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+    }
+    .rev-card {
+      background: rgba(250, 247, 243, 0.05);
+      border: 1px solid rgba(250, 247, 243, 0.12);
+      border-radius: var(--r);
+      padding: 1.9rem 1.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.95rem;
+    }
+    .rev-card__stars { color: var(--glow); letter-spacing: 0.18em; font-size: 0.95rem; }
+    .rev-card__text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.65;
+      color: rgba(250, 247, 243, 0.88);
+      display: -webkit-box;
+      -webkit-line-clamp: 7;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .rev-card__meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      margin-top: auto;
+      padding-top: 0.35rem;
+    }
+    .rev-card__author {
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--timber);
+    }
+    .rev-card__when {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 243, 0.5);
+    }
+    .rev__attribution {
+      text-align: center;
+      margin-top: 2.6rem;
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 243, 0.45);
+    }
+
+    @keyframes revFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      #reviews:not([hidden]) { animation: revFadeIn 0.8s var(--ease-out) both; }
+    }
+    @media (max-width: 900px) {
+      .rev__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      #reviews { padding: 5rem 0; }
+      .rev__grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -345,24 +450,38 @@
       </div>
     </section>
 
-    <!-- 6. FEATURED TESTIMONIAL -->
-    <section class="ed-quote" data-reveal>
+    <!-- 6. LIVE GOOGLE REVIEWS — starts hidden; revealed only when /api/reviews returns real reviews -->
+    <section id="reviews" class="rev section" aria-labelledby="reviews-title" hidden>
       <div class="container">
-        <div class="ed-quote__inner">
-          <span class="ed-quote__mark" aria-hidden="true">"</span>
-          <blockquote class="ed-quote__text">
-            Jaiden is incredible, I've honestly never had a better massage.
-            She knew exactly what was going on when I explained my painful
-            points. I left feeling so much better.
-          </blockquote>
-          <p class="ed-quote__cite">
-            <span class="ed-quote__stars">★★★★★</span>
-            <span class="ed-quote__name">A verified Google review</span>
+        <header class="rev__head">
+          <span class="ed-eyebrow">In their words</span>
+          <h2 class="ed-section-title" id="reviews-title">What our <em>clients say.</em></h2>
+          <p class="rev__summary">
+            <span class="rev__stars" data-stars aria-hidden="true"></span>
+            <span><span class="rev__rating" data-rating></span> on Google</span>
+            <span class="rev__dot" aria-hidden="true">·</span>
+            <span data-count></span>
+            <span class="rev__dot" aria-hidden="true">·</span>
+            <a data-all href="/reviews" rel="noopener">read them on Google</a>
           </p>
-          <a href="/reviews" class="ed-link ed-quote__more">Read all 516 reviews →</a>
-        </div>
+        </header>
+
+        <div class="rev__grid" data-list></div>
+
+        <p class="rev__attribution">Reviews from Google</p>
       </div>
     </section>
+
+    <template id="review-card-tpl">
+      <article class="rev-card">
+        <span class="rev-card__stars" data-c-stars aria-hidden="true"></span>
+        <p class="rev-card__text" data-c-text></p>
+        <p class="rev-card__meta">
+          <span class="rev-card__author" data-c-author></span>
+          <span class="rev-card__when" data-c-when></span>
+        </p>
+      </article>
+    </template>
 
     <!-- 7. ABOUT / DETAIL -->
     <section class="ed-about section">
@@ -473,5 +592,30 @@
   <!-- GoHighLevel chat widget -->
   <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a35ff645dcabc40b5934513" data-source="WEB_USER"></script>
   <script src="/js/tracking.js" defer></script>
+
+  <!-- Live Google reviews: fetch /api/reviews, reveal only if >=1 real review -->
+  <script>
+  (async () => {
+    const s = document.getElementById('reviews'); if (!s) return;
+    const stars = (n) => { const r = Math.max(0, Math.min(5, Math.round(Number(n)||0))); return '★'.repeat(r) + '☆'.repeat(5-r); };
+    try {
+      const res = await fetch('/api/reviews'); if (!res.ok) return;
+      const d = await res.json();
+      if (!d || !Array.isArray(d.reviews) || d.reviews.length === 0) return; // stay hidden
+      const q = (sel) => s.querySelector(sel);
+      if (d.rating != null) { const el=q('[data-rating]'); if(el) el.textContent = Number(d.rating).toFixed(1); const st=q('[data-stars]'); if(st) st.textContent = stars(d.rating); }
+      if (d.count) { const c=q('[data-count]'); if(c) c.textContent = 'across ' + d.count + ' reviews'; }
+      const all = q('[data-all]'); if (all) { if (d.profileUrl) all.href = d.profileUrl; else all.remove(); }
+      const list = q('[data-list]'); const tpl = document.getElementById('review-card-tpl');
+      d.reviews.slice(0,6).forEach((rv) => { const node = tpl.content.cloneNode(true);
+        node.querySelector('[data-c-stars]').textContent = stars(rv.rating);
+        node.querySelector('[data-c-text]').textContent = rv.text;
+        node.querySelector('[data-c-author]').textContent = rv.author || 'Google user';
+        node.querySelector('[data-c-when]').textContent = rv.when || '';
+        list.appendChild(node); });
+      s.hidden = false;
+    } catch {}
+  })();
+  </script>
 </body>
 </html>
