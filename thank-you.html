@@ -43,8 +43,10 @@
           currency: 'USD',
           value: 0
         });
-        // Native Google Ads conversion (uncomment + add the conversion label once created in Ads):
-        // gtag('event', 'conversion', { send_to: 'AW-18046916928/REPLACE_WITH_LABEL' });
+        // Native Google Ads conversion — action "Booking - Thank you page" (Purchase, Primary, One).
+        // No value is passed on purpose: Google applies that action's own $165 default, so the
+        // amount stays editable in Ads without a deploy.
+        gtag('event', 'conversion', { send_to: 'AW-18046916928/xnG9CK-j4O4cEMCyuJ1D' });
       }
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', fireOnce);
