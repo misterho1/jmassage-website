@@ -1,10 +1,10 @@
-/* J Massage SLC — conversion event tracking (GA4 G-HR9MP6ENEP / Ads AW-18046916928)
+/* J Massage SLC — conversion event tracking (GA4 G-W8JB6XPYH9 / Ads AW-18046916928)
    Site-wide micro-conversions. The PRIMARY booking conversion fires on /thank-you
    (the GHL calendar redirects there on a completed booking).
    Safe: no-ops if gtag isn't present. */
 (function () {
   if (typeof window.gtag !== 'function') return;
-  var GA = 'G-HR9MP6ENEP';
+  var GA = 'G-W8JB6XPYH9';
 
   // Phone clicks (any tel: link)
   document.addEventListener('click', function (e) {
