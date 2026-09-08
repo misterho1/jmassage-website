@@ -177,6 +177,12 @@
         var frame=document.getElementById('ghl-booking-jmassage');
         var wrap=document.getElementById('book-frame');
         var base='https://api.leadconnectorhq.com/widget/booking/';
+        // Dynamic Google Ads conversion value: parse the selected pill's price
+        // ($NN in its aria-label) and store it. /thank-you (same origin, reached
+        // via GHL's post-booking redirect) reads jm_book_value and passes it as
+        // the conversion value. Falls back to the action default if absent.
+        function jmPrice(el){ if(!el) return 0; var m=(el.getAttribute('aria-label')||el.textContent||'').match(/\$(\d+)/); return m?parseInt(m[1],10):0; }
+        function storeJmValue(el){ try{ var v=jmPrice(el); if(v>0) localStorage.setItem('jm_book_value',String(v)); }catch(e){} }
         // Clear the loading overlay once the (re)loaded scheduler paints.
         if(frame){frame.addEventListener('load',function(){if(wrap){wrap.classList.remove('is-loading');}});}
         document.querySelectorAll('.book-pick').forEach(function(b){
@@ -184,6 +190,7 @@
             document.querySelectorAll('.book-pick').forEach(function(x){x.classList.remove('is-active');x.setAttribute('aria-pressed','false');});
             b.classList.add('is-active');
             b.setAttribute('aria-pressed','true');
+            storeJmValue(b);
             if(frame){
               // Show the skeleton loader while the iframe swaps to the new service.
               if(wrap){wrap.classList.add('is-loading');}
@@ -207,6 +214,9 @@
             if(pick){pick.click();}
           }
         }
+        // Store the value of whichever pill is active after init (default or deep-link).
+        var jmActive=document.querySelector('.book-pick.is-active');
+        if(jmActive) storeJmValue(jmActive);
       })();
     </script>
 
