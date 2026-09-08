@@ -121,28 +121,39 @@
 
         <div class="book-menu" style="margin-bottom:1.9rem;">
           <div class="book-menu__group" data-service="single">
-            <p class="book-menu__title">Single Massage <small>· Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Myofascial · Prenatal</small></p>
+            <p class="book-menu__title">Single Massage <small>· Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Myofascial</small></p>
             <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick is-active" data-cal="iYzZ0GbCUpIqrpaCbswy">60 min · $85</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="g5R2qijQXBq7TRN4ySKJ">90 min · $125</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="nPGP7qVKUf8ChBsd39dY">120 min · $165</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick is-active" data-cal="iYzZ0GbCUpIqrpaCbswy" aria-pressed="true" aria-label="Single massage, 60 minutes, $85">60 min · $85</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="g5R2qijQXBq7TRN4ySKJ" aria-pressed="false" aria-label="Single massage, 90 minutes, $125">90 min · $125</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="nPGP7qVKUf8ChBsd39dY" aria-pressed="false" aria-label="Single massage, 120 minutes, $165">120 min · $165</button>
+            </div>
+          </div>
+          <!-- Prenatal (side-lying) calendars created 2026-09-07:
+               60 nqIDCIwXpxbj2u7zoTfl, 90 NMqagEYm3cxWj8vXgzcJ, 120 tlLFTHvmSJHdFoVx39mH.
+               Priced $105/$155/$205, distinct from the $85 single-massage calendars. -->
+          <div class="book-menu__group" data-service="prenatal">
+            <p class="book-menu__title">Prenatal Massage <small>· second &amp; third trimester</small></p>
+            <div class="book-menu__row">
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="nqIDCIwXpxbj2u7zoTfl" aria-pressed="false" aria-label="Prenatal massage, 60 minutes, $105">60 min · $105</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="NMqagEYm3cxWj8vXgzcJ" aria-pressed="false" aria-label="Prenatal massage, 90 minutes, $155">90 min · $155</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="tlLFTHvmSJHdFoVx39mH" aria-pressed="false" aria-label="Prenatal massage, 120 minutes, $205">120 min · $205</button>
             </div>
           </div>
           <div class="book-menu__group" data-service="couples">
             <p class="book-menu__title">Couples Massage <small>· side by side</small></p>
             <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="rICCpj4eRyVstN1WRZ79">60 min · $165</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="Xt5skgfbFw3i2aqAymAg">90 min · $245</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="9up7NwJ9Zq9C8TYtKTyr">120 min · $325</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="rICCpj4eRyVstN1WRZ79" aria-pressed="false" aria-label="Couples massage, 60 minutes, $165">60 min · $165</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="Xt5skgfbFw3i2aqAymAg" aria-pressed="false" aria-label="Couples massage, 90 minutes, $245">90 min · $245</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="9up7NwJ9Zq9C8TYtKTyr" aria-pressed="false" aria-label="Couples massage, 120 minutes, $325">120 min · $325</button>
             </div>
             <p class="book-menu__note" style="margin:.5rem 0 0;font-size:.82rem;opacity:.7;">Also available as a couples head spa or couples foot massage, same booking, no separate calendar. Pick a time above and note your preference.</p>
           </div>
           <div class="book-menu__group" data-service="4hand">
             <p class="book-menu__title">4-Hand Massage <small>· two therapists</small></p>
             <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="7MOTfueYlSBJVB7VeyGm">60 min · $165</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="61Y2h3xEJEvx8W1u8CaY">90 min · $245</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="0uwvyTaLs96plJocptuH">120 min · $325</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="7MOTfueYlSBJVB7VeyGm" aria-pressed="false" aria-label="4-hand massage, 60 minutes, $165">60 min · $165</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="61Y2h3xEJEvx8W1u8CaY" aria-pressed="false" aria-label="4-hand massage, 90 minutes, $245">90 min · $245</button>
+              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="0uwvyTaLs96plJocptuH" aria-pressed="false" aria-label="4-hand massage, 120 minutes, $325">120 min · $325</button>
             </div>
           </div>
         </div>
@@ -170,8 +181,9 @@
         if(frame){frame.addEventListener('load',function(){if(wrap){wrap.classList.remove('is-loading');}});}
         document.querySelectorAll('.book-pick').forEach(function(b){
           b.addEventListener('click',function(){
-            document.querySelectorAll('.book-pick').forEach(function(x){x.classList.remove('is-active');});
+            document.querySelectorAll('.book-pick').forEach(function(x){x.classList.remove('is-active');x.setAttribute('aria-pressed','false');});
             b.classList.add('is-active');
+            b.setAttribute('aria-pressed','true');
             if(frame){
               // Show the skeleton loader while the iframe swaps to the new service.
               if(wrap){wrap.classList.add('is-loading');}
@@ -191,7 +203,8 @@
             grp.querySelectorAll('.book-pick').forEach(function(x){
               if(x.textContent.indexOf(len+' min')===0){target=x;}
             });
-            (target||grp.querySelector('.book-pick')).click();
+            var pick=target||grp.querySelector('.book-pick');
+            if(pick){pick.click();}
           }
         }
       })();
@@ -259,7 +272,7 @@
   <style>
     .m-cta{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;gap:.5rem;padding:.5rem calc(.6rem + 72px) .5rem .6rem;background:rgba(20,17,14,.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid rgba(250,247,243,.14);box-shadow:0 -6px 20px rgba(0,0,0,.30)}
     .m-cta a{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;padding:.8rem .5rem;border-radius:10px;text-decoration:none;font-family:var(--font-ui,'DM Sans',system-ui,sans-serif);font-weight:600;font-size:.98rem;letter-spacing:.02em}
-    .m-cta__book{background:var(--lantern,#c9a86a);color:#1a1512}
+    .m-cta__book{background:var(--lantern,#c9a86a);color:var(--ember,#fffdfb)}
     .m-cta__call{background:transparent;color:#faf7f3;border:1px solid rgba(250,247,243,.45)}
     @media (max-width:820px){.m-cta{display:flex}body{padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}}
   </style>

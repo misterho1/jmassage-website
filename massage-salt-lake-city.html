@@ -205,13 +205,14 @@
     .faq-list { display: flex; flex-direction: column; gap: 0; margin-top: 2.5rem; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; }
     .faq-item { border-bottom: 1px solid var(--border); }
     .faq-item:last-child { border-bottom: none; }
-    .faq-item__q { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.4rem 1.75rem; cursor: pointer; background: var(--ember); transition: background 0.2s; }
+    .faq-item__q { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.4rem 1.75rem; cursor: pointer; background: var(--ember); transition: background 0.2s; list-style: none; }
+    .faq-item__q::-webkit-details-marker { display: none; }
     .faq-item__q:hover { background: rgba(160, 77, 44, 0.06); }
+    .faq-item__q:focus-visible { outline: 2px solid var(--lantern); outline-offset: -2px; }
     .faq-item__q-text { font-family: var(--font-head); font-size: 1.05rem; font-weight: 500; color: var(--text-hi); line-height: 1.4; }
     .faq-item__icon { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--border-mid); display: flex; align-items: center; justify-content: center; color: var(--lantern); font-size: 0.85rem; transition: transform 0.3s; }
-    .faq-item__a { display: none; padding: 1.25rem 1.75rem 1.5rem; background: var(--char); }
-    .faq-item--open .faq-item__a { display: block; }
-    .faq-item--open .faq-item__icon { transform: rotate(45deg); }
+    .faq-item__a { padding: 1.25rem 1.75rem 1.5rem; background: var(--char); }
+    .faq-item[open] .faq-item__icon { transform: rotate(45deg); }
     .faq-item__a p { font-size: 0.95rem; color: var(--text-mid); line-height: 1.75; }
 
     /* CTA band */
@@ -571,55 +572,55 @@
 
         <div class="faq-list reveal" id="faqList">
 
-          <div class="faq-item">
-            <div class="faq-item__q" onclick="toggleFaq(this)">
+          <details class="faq-item">
+            <summary class="faq-item__q">
               <span class="faq-item__q-text">What is the best massage studio in Salt Lake City?</span>
-              <span class="faq-item__icon">+</span>
-            </div>
+              <span class="faq-item__icon" aria-hidden="true">+</span>
+            </summary>
             <div class="faq-item__a">
               <p>J Massage SLC is an experienced massage studio in Salt Lake City, with 518 Google reviews and a 4.4 rating. Located at 677 S 200 W Suite #C in downtown SLC, the studio offers six professional modalities, Swedish, deep tissue, sports, Ashiatsu, couples, and 4-hand massage, all performed by Utah-licensed therapists. Open every day from 10AM to 10PM.</p>
             </div>
-          </div>
+          </details>
 
-          <div class="faq-item">
-            <div class="faq-item__q" onclick="toggleFaq(this)">
+          <details class="faq-item">
+            <summary class="faq-item__q">
               <span class="faq-item__q-text">Is there a massage studio near Salt Lake City airport?</span>
-              <span class="faq-item__icon">+</span>
-            </div>
+              <span class="faq-item__icon" aria-hidden="true">+</span>
+            </summary>
             <div class="faq-item__a">
               <p>Yes, J Massage SLC is located just 10 minutes from Salt Lake City International Airport (SLC). At 677 S 200 W Suite #C in downtown Salt Lake City, it's the ideal stop for travelers on a layover or arriving and departing SLC. Same-day appointments are available daily from 10AM to 10PM, book online or call (801) 288-1118.</p>
             </div>
-          </div>
+          </details>
 
-          <div class="faq-item">
-            <div class="faq-item__q" onclick="toggleFaq(this)">
+          <details class="faq-item">
+            <summary class="faq-item__q">
               <span class="faq-item__q-text">Do you offer same-day massage appointments in Salt Lake City?</span>
-              <span class="faq-item__icon">+</span>
-            </div>
+              <span class="faq-item__icon" aria-hidden="true">+</span>
+            </summary>
             <div class="faq-item__a">
               <p>Yes, same-day appointments are available daily from 10AM to 10PM at J Massage SLC. Book online instantly at jmassageslc.com or call (801) 288-1118 to check availability. Same-day slots fill quickly, booking early in the day gives you the most options. Walk-ins may be accommodated based on availability.</p>
             </div>
-          </div>
+          </details>
 
-          <div class="faq-item">
-            <div class="faq-item__q" onclick="toggleFaq(this)">
+          <details class="faq-item">
+            <summary class="faq-item__q">
               <span class="faq-item__q-text">What areas of Salt Lake City does J Massage SLC serve?</span>
-              <span class="faq-item__icon">+</span>
-            </div>
+              <span class="faq-item__icon" aria-hidden="true">+</span>
+            </summary>
             <div class="faq-item__a">
               <p>J Massage SLC welcomes clients from all across the Salt Lake Valley, including Downtown SLC, Sugar House, Millcreek, Murray, Sandy, Draper, West Jordan, South Salt Lake, Holladay, and Taylorsville. The studio is centrally located at 677 S 200 W Suite #C in downtown Salt Lake City, with free parking available for easy access from anywhere in the valley.</p>
             </div>
-          </div>
+          </details>
 
-          <div class="faq-item">
-            <div class="faq-item__q" onclick="toggleFaq(this)">
+          <details class="faq-item">
+            <summary class="faq-item__q">
               <span class="faq-item__q-text">How do I book a massage in Salt Lake City?</span>
-              <span class="faq-item__icon">+</span>
-            </div>
+              <span class="faq-item__icon" aria-hidden="true">+</span>
+            </summary>
             <div class="faq-item__a">
               <p>Book online instantly at jmassageslc.com, select your service, preferred therapist, and available time slot for immediate confirmation. No phone tag, no waiting. You can also call (801) 288-1118 during business hours. J Massage SLC is open every day from 10AM to 10PM, and same-day appointments are frequently available.</p>
             </div>
-          </div>
+          </details>
 
         </div>
       </div>
@@ -712,21 +713,6 @@
   <script src="js/vendor/ScrollTrigger.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/motion.js"></script>
-  <script>
-    // Simple FAQ accordion
-    function toggleFaq(btn) {
-      var item = btn.closest('.faq-item');
-      var isOpen = item.classList.contains('faq-item--open');
-      // Close all
-      document.querySelectorAll('.faq-item--open').forEach(function(el) {
-        el.classList.remove('faq-item--open');
-      });
-      // Open clicked if it wasn't open
-      if (!isOpen) {
-        item.classList.add('faq-item--open');
-      }
-    }
-  </script>
   <!-- GoHighLevel chat widget -->
   <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a35ff645dcabc40b5934513" data-source="WEB_USER"></script>
   <script src="/js/tracking.js" defer></script>
@@ -734,7 +720,7 @@
   <style>
     .m-cta{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;gap:.5rem;padding:.5rem calc(.6rem + 72px) .5rem .6rem;background:rgba(20,17,14,.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid rgba(250,247,243,.14);box-shadow:0 -6px 20px rgba(0,0,0,.30)}
     .m-cta a{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;padding:.8rem .5rem;border-radius:10px;text-decoration:none;font-family:var(--font-ui,'DM Sans',system-ui,sans-serif);font-weight:600;font-size:.98rem;letter-spacing:.02em}
-    .m-cta__book{background:var(--lantern,#c9a86a);color:#1a1512}
+    .m-cta__book{background:var(--lantern,#c9a86a);color:var(--ember,#fffdfb)}
     .m-cta__call{background:transparent;color:#faf7f3;border:1px solid rgba(250,247,243,.45)}
     @media (max-width:820px){.m-cta{display:flex}body{padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}}
   </style>

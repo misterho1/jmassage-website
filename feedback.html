@@ -22,7 +22,7 @@
     gtag('config', 'AW-18046916928');
   </script>
   <style>
-    /* Review-gate form — scoped, portable (fallbacks survive any token set) */
+    /* Private feedback form — scoped, portable (fallbacks survive any token set) */
     .fb-wrap { padding: 4rem 0; }
     .fb-eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; opacity: .7; margin: 0 0 .5rem; }
     .fb-title { font-family: 'Marcellus', Georgia, serif; font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 .5rem; }
@@ -74,6 +74,8 @@
         <p class="fb-eyebrow">Your visit</p>
         <h1 class="fb-title">How did we do</h1>
         <p class="fb-lead">Tell us about your appointment. It takes ten seconds.</p>
+        <p><a id="fb-public-review" href="https://g.page/r/CaNXiQAAHC9EEBM/review" target="_blank" rel="noopener">Write a Google review</a>. All feedback is welcome.</p>
+        <p>You can also send us a private note below.</p>
         <form id="fb-form" class="fb-form" novalidate>
           <fieldset>
             <legend>On a scale of 1 to 5, how likely are you to recommend us to a friend or family member</legend>
@@ -87,9 +89,10 @@
           </fieldset>
           <label for="fb-text">Anything you want us to know</label>
           <textarea id="fb-text" name="feedback" rows="4"></textarea>
-          <button class="btn btn--gold" type="submit" data-magnetic>Submit</button>
+          <button class="btn btn--gold" type="submit" data-magnetic>Send private feedback</button>
         </form>
-        <p id="fb-thanks" hidden>Thank you. We read every note, and we will make it right.</p>
+        <p id="fb-error" role="alert" hidden><span id="fb-error-message">We could not send your note. Your feedback is still here. Try again or call us.</span> <a href="tel:+18012881118">(801) 288-1118</a></p>
+        <p id="fb-thanks" role="status" hidden>Thank you. We received your private feedback.</p>
       </div>
     </section>
   </main>
@@ -98,7 +101,7 @@
     <div class="footer__grid">
       <div class="footer__brand">
         <span class="footer__logo">J Massage <em>SLC</em></span>
-        <p>Most-reviewed massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+        <p>Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
       </div>
       <div class="footer__contact">
         <h2 class="footer__heading">Visit Us</h2>
@@ -116,27 +119,36 @@
   </footer>
 
   <script>
-    // Filled in Task 1.5 once GHL webhook + Google review link exist. Do NOT deploy with placeholders.
     const WEBHOOK_FEEDBACK = "https://api.web3forms.com/submit";
-    const GOOGLE_REVIEW_URL = "https://g.page/r/CaNXiQAAHC9EEBM/review";
-    const BRAND = "jmassage";
     document.getElementById("fb-form").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const data = new FormData(e.target);
-      if (!data.get("rating")) return;
+      const form = e.target;
+      const button = form.querySelector('button[type="submit"]');
+      if (button.disabled) return;
+      const error = document.getElementById("fb-error");
+      const errorMessage = document.getElementById("fb-error-message");
+      error.hidden = true;
+      const data = new FormData(form);
       const rating = Number(data.get("rating"));
-      const payload = { access_key: "09b179d0-a8ea-48fe-ab01-9b1d40207026", subject: "Low review-gate feedback, J Massage SLC", brand: BRAND, rating, feedback: data.get("feedback") || "", ts: new Date().toISOString() };
-      if (rating >= 4) {
-        // happy guest -> straight to Google
-        window.location.href = GOOGLE_REVIEW_URL;
+      if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+        errorMessage.textContent = "Choose a rating before sending your private feedback.";
+        error.hidden = false;
         return;
       }
-      // 1-3 stays private: emailed to the owner via web3forms, never to Google
+      const payload = { access_key: "09b179d0-a8ea-48fe-ab01-9b1d40207026", subject: "Private feedback · J Massage SLC", brand: "jmassage", rating, feedback: data.get("feedback") || "", ts: new Date().toISOString() };
+      button.disabled = true;
       try {
-        await fetch(WEBHOOK_FEEDBACK, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), keepalive: true });
-      } catch (_) { /* never block the visitor on a webhook failure */ }
-      e.target.hidden = true;
-      document.getElementById("fb-thanks").hidden = false;
+        const response = await fetch(WEBHOOK_FEEDBACK, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+        const result = await response.json();
+        if (!response.ok || result.success !== true) throw new Error("Feedback not accepted");
+        form.hidden = true;
+        document.getElementById("fb-thanks").hidden = false;
+      } catch (_) {
+        errorMessage.textContent = "We could not send your note. Your feedback is still here. Try again or call us.";
+        error.hidden = false;
+      } finally {
+        button.disabled = false;
+      }
     });
   </script>
   <script src="js/main.js" defer></script>
