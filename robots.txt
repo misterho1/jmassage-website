@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: GPTBot
 Allow: /
@@ -18,9 +19,11 @@ Allow: /
 
 User-agent: Googlebot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: OAI-SearchBot
 Allow: /
