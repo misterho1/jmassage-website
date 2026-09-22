@@ -19,9 +19,11 @@ Allow: /
 
 User-agent: Googlebot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: OAI-SearchBot
 Allow: /

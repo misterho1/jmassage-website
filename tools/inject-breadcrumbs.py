@@ -26,11 +26,13 @@ PAGES = {
 }
 BASE = "https://jmassageslc.com"
 for name, crumbs in PAGES.items():
-    p = pathlib.Path(name); html = p.read_text(encoding="utf-8")
+    p = pathlib.Path(name); html = p.read_text(encoding="utf-8", newline="")
     if "BreadcrumbList" in html: print("skip", name); continue
+    eol = "\r\n" if "\r\n" in html else "\n"  # newline="" keeps the file's own endings
     ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": i + 1, "name": n, "item": BASE + u} for i, (n, u) in enumerate(crumbs)]}
-    block = '  <script type="application/ld+json">\n  ' + json.dumps(ld, ensure_ascii=False) + '\n  </script>\n'
+    block = ('  <script type="application/ld+json">\n  ' + json.dumps(ld, ensure_ascii=False)
+             + '\n  </script>\n').replace("\n", eol)
     new, n = re.subn(r"(</head>)", lambda m: block + m.group(1), html, count=1)
     if n != 1: sys.exit(f"no </head> in {name}")
-    p.write_text(new, encoding="utf-8"); print("ok", name)
+    p.write_text(new, encoding="utf-8", newline=""); print("ok", name)
