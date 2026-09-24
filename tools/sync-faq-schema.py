@@ -4,6 +4,8 @@ Google requires FAQ markup to describe content visible on the page, and this sit
 keeps two hand-written copies of every FAQ. The visible FAQ is the source: for each
 page this rewrites only the FAQPage node's "mainEntity" list, word for word and in
 page order, and leaves every other byte of the file alone (line endings included).
+Each rewritten Question has the canonical shape (name and acceptedAnswer text), so
+other properties on an old Question are not kept.
 
 Visible Q&A items:
   <details>                        the <summary> is the question, the rest of the
@@ -80,7 +82,7 @@ class _VisibleFaq(HTMLParser):
             return
         attrs = dict(attrs)
         classes = set((attrs.get("class") or "").split())
-        hides = tag in UNSEEN or _hidden(attrs) or attrs.get("aria-hidden") == "true"
+        hides = tag in UNSEEN or _hidden(attrs) or (attrs.get("aria-hidden") or "").strip().lower() == "true"
         before = self.mode
         if self.mode is None and not self.unseen and not hides:
             if tag == "details":
@@ -212,6 +214,9 @@ def _pages(root):
 
 def main(argv):
     paths = [Path(arg) for arg in argv] or list(_pages(Path(".")))
+    if not paths:
+        print("no FAQPage pages found under the current directory; run from the repo root")
+        return 1
     results = [(path, *sync(path)) for path in paths]
     for path, status, message, _ in results:
         print(f"{status} {path.as_posix()}: {message}")

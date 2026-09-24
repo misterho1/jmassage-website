@@ -78,6 +78,10 @@ class VisibleItems(unittest.TestCase):
                '<div class="faq-item__a"><p>Yes, based on availability.</p></div></details>')
         self.assertEqual(tool.visible_items(src), [("Do you take walk-ins?", "Yes, based on availability.")])
 
+    def test_aria_hidden_value_is_case_insensitive(self):
+        src = '<details><summary>Q?<span aria-hidden="TRUE">+</span></summary><p>A.</p></details>'
+        self.assertEqual(tool.visible_items(src), [("Q?", "A.")])
+
     def test_whitespace_squashed_and_entities_decoded(self):
         src = ('<div class="faq-q">\n  Is it   safe?\n</div>\n'
                '<div class="faq-a">Yes&nbsp;&nbsp;it is &ldquo;safe&rdquo;.</div>')
@@ -148,6 +152,18 @@ class Sync(unittest.TestCase):
         status, _, new = tool.sync(self.write("post.html", page(head, body)))
         self.assertEqual(status, "ok")
         self.assertEqual(new, page(head.replace("Old one.", "One."), body))
+
+    def test_one_entry_per_line_layout_kept_with_crlf(self):
+        head = ('  <script type="application/ld+json">\n'
+                '  {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [\n'
+                '    {"@type": "Question", "name": "Q1?", "acceptedAnswer": {"@type": "Answer", "text": "Old one."}},\n'
+                '    {"@type": "Question", "name": "Q2?", "acceptedAnswer": {"@type": "Answer", "text": "Two."}}\n'
+                '  ]}\n'
+                '  </script>\n')
+        body = "<details><summary>Q1?</summary><p>One.</p></details>\n<details><summary>Q2?</summary><p>Two.</p></details>"
+        status, _, new = tool.sync(self.write("post.html", page(head, body).replace("\n", "\r\n")))
+        self.assertEqual(status, "ok")
+        self.assertEqual(new, page(head.replace("Old one.", "One."), body).replace("\n", "\r\n"))
 
     def test_crlf_line_endings_kept(self):
         head = LOCAL_BUSINESS + faq_block([("Will it hurt?", "Old answer.")])
@@ -244,6 +260,10 @@ class Main(unittest.TestCase):
         self.write("dist/d.html", faq_page)
         self.write("node_modules/e.html", faq_page)
         self.assertEqual(self.run_main([]), (0, ["same services/a.html: 1 Q&As"]))
+
+    def test_no_faq_pages_is_an_error(self):
+        self.write("b.html", page(LOCAL_BUSINESS, "<p>No FAQ.</p>"))
+        self.assertEqual(self.run_main([]), (1, ["no FAQPage pages found under the current directory; run from the repo root"]))
 
 
 if __name__ == "__main__":
