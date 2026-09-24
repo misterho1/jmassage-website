@@ -14,6 +14,7 @@ Visible Q&A items:
   .faq-item__answer                services/*, massage-in-*
 Text follows check_faq_schema.py in the spa-blog skill: block tags break with a
 space, inline tags join, hidden and sr-only text is skipped, whitespace is squashed.
+It also skips aria-hidden elements, such as a decorative "+" toggle icon.
 
 Run from the repo root:  python tools/sync-faq-schema.py [FILE ...]
 With no FILE it syncs every page that has FAQPage JSON-LD. Prints ok / same / FAIL
@@ -79,7 +80,7 @@ class _VisibleFaq(HTMLParser):
             return
         attrs = dict(attrs)
         classes = set((attrs.get("class") or "").split())
-        hides = tag in UNSEEN or _hidden(attrs)
+        hides = tag in UNSEEN or _hidden(attrs) or attrs.get("aria-hidden") == "true"
         before = self.mode
         if self.mode is None and not self.unseen and not hides:
             if tag == "details":

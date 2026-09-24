@@ -71,6 +71,13 @@ class VisibleItems(unittest.TestCase):
                '<span style="display: none"> three</span><span style="opacity:0"> four</span>.</p></details>')
         self.assertEqual(tool.visible_items(src), [("Q?", "Seen.")])
 
+    def test_aria_hidden_icon_is_skipped(self):  # massage-salt-lake-city.html
+        src = ('<details class="faq-item"><summary class="faq-item__q">'
+               '<span class="faq-item__q-text">Do you take walk-ins?</span>'
+               '<span class="faq-item__icon" aria-hidden="true">+</span></summary>'
+               '<div class="faq-item__a"><p>Yes, based on availability.</p></div></details>')
+        self.assertEqual(tool.visible_items(src), [("Do you take walk-ins?", "Yes, based on availability.")])
+
     def test_whitespace_squashed_and_entities_decoded(self):
         src = ('<div class="faq-q">\n  Is it   safe?\n</div>\n'
                '<div class="faq-a">Yes&nbsp;&nbsp;it is &ldquo;safe&rdquo;.</div>')
