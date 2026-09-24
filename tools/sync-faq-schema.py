@@ -157,7 +157,8 @@ def sync(path):
     """Return (status, message, new page text or None) for one page.
     status is "ok" (text to write), "same" (already in sync) or "FAIL"."""
     try:
-        html = path.read_text(encoding="utf-8", newline="")
+        with path.open(encoding="utf-8", newline="") as fh:  # read_text(newline=) needs Python 3.13
+            html = fh.read()
     except UnicodeDecodeError:
         return "FAIL", "not UTF-8", None
     except OSError as err:
