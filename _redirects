@@ -6,6 +6,10 @@
 
 # Force apex (www -> non-www) for consistent canonical host
 https://www.jmassageslc.com/*   https://jmassageslc.com/:splat   301
+
+# GSC cleanup 2026-09: /home has no canonical purpose, redirect to the homepage.
+/home / 301
+
 /about-us.html /about 301
 /contact-us.html /contact 301
 /deep-tissue-massage.html /services/deep-tissue 301
