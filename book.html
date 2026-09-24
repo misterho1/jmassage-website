@@ -38,6 +38,21 @@
 <script type="application/ld+json">
   {"@context":"https://schema.org","@type":["LocalBusiness","HealthAndBeautyBusiness","MassageTherapist"],"@id":"https://jmassageslc.com/#business","name":"J Massage SLC","url":"https://jmassageslc.com/","telephone":"+18012881118","priceRange":"$$","address":{"@type":"PostalAddress","streetAddress":"677 S 200 W Suite #C","addressLocality":"Salt Lake City","addressRegion":"UT","postalCode":"84101","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":40.7509,"longitude":-111.9022},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"10:00","closes":"22:00"}]}
   </script>
+  <!-- Price notice (effective 2026-12-01): decide before first paint whether /book shows it. -->
+  <script>
+    (function () {
+      var PRE_END = Date.UTC(2026, 11, 1, 7);  // 2026-12-01 00:00 Mountain (MST)
+      var POST_END = Date.UTC(2027, 0, 1, 7);  // 2027-01-01 00:00 Mountain (MST)
+      var forced = /[?&]price-notice=(pre|post)(?:&|$)/.exec(location.search);
+      var now = Date.now();
+      var variant = forced ? forced[1] : now < PRE_END ? 'pre' : now < POST_END ? 'post' : '';
+      if (!variant) return;
+      if (!forced) {
+        try { if (localStorage.getItem('price-notice-2026-' + variant)) return; } catch (e) {}
+      }
+      document.documentElement.setAttribute('data-price-notice', variant);
+    })();
+  </script>
 </head>
 <body>
 
@@ -108,6 +123,26 @@
           .book-pick{cursor:pointer;opacity:1;transition:box-shadow .15s,transform .15s;}
           .book-pick:hover{transform:translateY(-1px);}
           .book-pick.is-active{box-shadow:inset 0 0 0 2px #fffdfb,0 0 0 2px #2a2622;}
+          /* Price notice (effective 2026-12-01). Hidden unless html[data-price-notice] is set. */
+          .price-notice{display:none}
+          html[data-price-notice] .price-notice{display:block}
+          html[data-price-notice="pre"] .price-notice [data-pn="post"],
+          html[data-price-notice="post"] .price-notice [data-pn="pre"]{display:none}
+          .price-notice{position:relative;margin:0 0 1.5rem;padding:1rem 3rem 1rem 1.25rem;background:var(--ember);border:1px solid var(--border-mid);border-radius:var(--r);color:var(--text-hi);text-align:left}
+          .price-notice__title{margin:0 0 .375rem;font-family:var(--font-head);font-size:1.125rem;line-height:1.3;color:var(--text-hi)}
+          .price-notice__body{margin:0 0 .625rem;font-family:var(--font-body);font-size:.9375rem;line-height:1.55;color:var(--text-mid)}
+          .price-notice__cta{margin:0}
+          .price-notice__link{font-family:var(--font-ui);font-size:.875rem;font-weight:600;color:var(--lantern);text-decoration:underline;text-underline-offset:3px}
+          .price-notice__link:hover{color:var(--amber)}
+          .price-notice__close{position:absolute;top:.25rem;right:.25rem;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;background:none;border:0;border-radius:var(--r-sm);font-size:1.5rem;line-height:1;color:var(--text-mid);cursor:pointer}
+          .price-notice__close:hover{color:var(--text-hi)}
+          .price-notice__link:focus-visible,.price-notice__close:focus-visible{outline:2px solid var(--lantern);outline-offset:2px}
+          @media (min-width:821px){
+            .price-notice{position:fixed;left:24px;bottom:24px;z-index:800;width:min(360px,calc(100vw - 48px));margin:0;box-shadow:var(--shadow-card);animation:price-notice-in .5s var(--ease-out) .8s backwards;transition:opacity .2s,visibility 0s}
+            .price-notice.is-dodging{opacity:0;visibility:hidden;transition:opacity .2s,visibility 0s .2s}
+          }
+          @keyframes price-notice-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+          @media (prefers-reduced-motion:reduce){.price-notice{animation:none}}
         </style>
 
         <div class="book-reassure">
@@ -122,6 +157,14 @@
 
         <p class="book-firsttimer">First time? A <strong>60-minute Swedish</strong> is the right first visit. It's already selected below, just pick a time.</p>
 
+        <!-- Price notice (effective 2026-12-01). Shown only when the head script sets html[data-price-notice]. -->
+        <aside id="price-notice" class="price-notice" aria-labelledby="price-notice-title">
+          <p class="price-notice__title" id="price-notice-title">A quick note</p>
+          <p class="price-notice__body" data-pn="pre">Thank you for spending your time with us. Labor and supply costs keep rising, so our prices will go up on December 1, 2026. It wasn't an easy decision. It keeps our team cared for and everything running smoothly, so we can keep taking good care of you. We're grateful for your continued support.</p>
+          <p class="price-notice__body" data-pn="post">Our new prices started December 1, 2026. Thank you for your continued support.</p>
+          <p class="price-notice__cta"><a class="price-notice__link" data-pn="pre" href="/price-update">See the new prices →</a><a class="price-notice__link" data-pn="post" href="/price-update">See prices →</a></p>
+          <button type="button" class="price-notice__close" aria-label="Close price update">×</button>
+        </aside>
         <div class="book-menu" style="margin-bottom:1.9rem;">
           <div class="book-menu__group" data-service="single">
             <p class="book-menu__title">Single Massage <small>· Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Myofascial</small></p>
@@ -293,5 +336,59 @@
     <a class="m-cta__book" href="/book">Book</a>
     <a class="m-cta__call" href="tel:+18012881118">Call</a>
   </nav>
+  <!-- Price notice: close (×, Esc, link) and, on desktop, step aside while the booking calendar is under the card. -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var variant = root.getAttribute('data-price-notice');
+      var card = document.getElementById('price-notice');
+      if (!variant || !card) return;
+      var frame = document.querySelector('.book-frame iframe');
+      var desktop = window.matchMedia('(min-width: 821px)');
+      var ticking = false;
+      var observer = null;
+
+      function dodge() {
+        ticking = false;
+        if (!frame || !desktop.matches) { card.classList.remove('is-dodging'); return; }
+        var c = card.getBoundingClientRect();
+        var f = frame.getBoundingClientRect();
+        var hit = f.top < c.bottom + 8 && f.bottom > c.top - 8 && f.left < c.right + 8 && f.right > c.left - 8;
+        card.classList.toggle('is-dodging', hit);
+      }
+      function schedule() {
+        if (!ticking) { ticking = true; window.requestAnimationFrame(dodge); }
+      }
+      function onKey(e) {
+        if (e.key !== 'Escape') return;
+        var a = document.activeElement;
+        if (a === document.body || a === root || card.contains(a)) close(true);
+      }
+      function close(moveFocus) {
+        var hadFocus = card.contains(document.activeElement);
+        root.removeAttribute('data-price-notice');
+        try { localStorage.setItem('price-notice-2026-' + variant, '1'); } catch (e) {}
+        document.removeEventListener('keydown', onKey);
+        window.removeEventListener('scroll', schedule);
+        window.removeEventListener('resize', schedule);
+        if (desktop.removeEventListener) desktop.removeEventListener('change', schedule);
+        if (observer) observer.disconnect();
+        if (moveFocus && hadFocus) {
+          var first = document.querySelector('.book-pick');
+          if (first) first.focus();
+        }
+      }
+
+      card.querySelector('.price-notice__close').addEventListener('click', function () { close(true); });
+      var links = card.querySelectorAll('.price-notice__link');
+      for (var i = 0; i < links.length; i++) links[i].addEventListener('click', function () { close(false); });
+      document.addEventListener('keydown', onKey);
+      window.addEventListener('scroll', schedule, { passive: true });
+      window.addEventListener('resize', schedule);
+      if (desktop.addEventListener) desktop.addEventListener('change', schedule);
+      if (frame && 'ResizeObserver' in window) { observer = new ResizeObserver(schedule); observer.observe(frame); }
+      schedule();
+    })();
+  </script>
 </body>
 </html>
