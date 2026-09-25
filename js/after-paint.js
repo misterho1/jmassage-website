@@ -19,7 +19,7 @@
    opens, or 5 s, whichever comes first. The dataLayer queue keeps every
    gtag() call, and js/tracking.js keeps working off the inline gtag() stub.
    Vanilla, no deps. */
-// Consumers find this file with script[src*="/js/after-paint.js"] (js/defer-load.js, book.html's calendar gate). Update them together if this file is renamed or moved.
+// Consumers find this file with script[src*="/js/after-paint.js"] (js/defer-load.js). Update them together if this file is renamed or moved.
 (function () {
   'use strict';
 

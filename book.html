@@ -18,6 +18,7 @@
 
   <link rel="preload" href="/fonts/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
   <link rel="stylesheet" href="css/styles.css?v=22">
 
@@ -170,7 +171,7 @@
             <span class="book-frame__loading-text">Loading your scheduler…</span>
           </div>
           <iframe data-src="https://api.leadconnectorhq.com/widget/booking/iYzZ0GbCUpIqrpaCbswy" style="width:100%;border:none;min-height:760px;display:block;" scrolling="no" id="ghl-booking-jmassage" title="Book your session at J Massage SLC"></iframe>
-          <noscript><style>#ghl-booking-jmassage,#book-frame .book-frame__loader{display:none}</style><iframe src="https://api.leadconnectorhq.com/widget/booking/iYzZ0GbCUpIqrpaCbswy" style="width:100%;border:none;min-height:760px;display:block;" scrolling="no" title="Book your session at J Massage SLC"></iframe></noscript>
+          <noscript><style>#ghl-booking-jmassage{display:none!important}#book-frame .book-frame__loader{display:none}</style><iframe src="https://api.leadconnectorhq.com/widget/booking/iYzZ0GbCUpIqrpaCbswy" style="width:100%;border:none;min-height:760px;display:block;" scrolling="no" title="Book your session at J Massage SLC"></iframe></noscript>
         </div>
         <p class="book-embed__fallback" style="margin-top:1.75rem;text-align:center;">Prefer to book by phone? Call <a href="tel:+18012881118">(801) 288-1118</a> · open daily, 10am to 10pm.</p>
         <p class="book-embed__fallback" style="margin-top:.5rem;text-align:center;">Have a gift card? Call <a href="tel:+18012881118">(801) 288-1118</a> to book · gift cards are redeemed at the spa.</p>
@@ -247,6 +248,7 @@
             var pick=target||grp.querySelector('.book-pick');
             if(pick){pick.click();}
           }
+          loadCalendar();
         }
         // Store the value of whichever pill is active after init (default or deep-link).
         var jmActive=document.querySelector('.book-pick.is-active');
