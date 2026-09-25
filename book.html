@@ -165,7 +165,8 @@
 
         <p class="book-embed__fallback" style="margin-bottom:1rem;text-align:center;">Rather book by phone? Call <a href="tel:+18012881118">(801) 288-1118</a>.</p>
 
-        <div class="book-frame is-loading" id="book-frame">
+        <!-- min-height: GHL's form_embed.js takes the iframe out of the flow until the calendar is ready; the box keeps its 760 px. -->
+        <div class="book-frame is-loading" id="book-frame" style="min-height:760px;">
           <div class="book-frame__loader" aria-hidden="true">
             <span class="book-frame__spinner"></span>
             <span class="book-frame__loading-text">Loading your scheduler…</span>
