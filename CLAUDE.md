@@ -10,8 +10,9 @@ This repo once shipped CP1252 mojibake. Every file stays UTF-8. Star glyph is �
 J Massage owns massage modalities. Facials, sauna, reflexology, head spa belong to elitespautah.com — never build the same keyword on both. The spa-blog / spa-gbp-post / spa-service-page skills enforce this.
 
 ## Facts
-- Pricing: standard $85/$125/$165 (60/90/120) · premium (couples, 4-hand) $165/$245/$325 · add-ons $30 (cupping $20) · prenatal 105/155/205.
+- Pricing (mirrors pricing.html): massage $85/$125/$165 (60/90/120; Swedish, deep tissue, sports, ashiatsu, shiatsu, myofascial all one rate) · prenatal $105/$155/$205 (60/90/120) · couples & 4-hand $165/$245/$325 (60/90/120) · add-ons: hot stones $20, cupping $20, 30-min infrared sauna $30, CBD $30, 30-min prenatal extension $50 · cards add a $5 processing fee; cash has no fee.
 - Service pages live at `services/{slug}.html`. No generator script — copy an existing `services/*.html` as the template and keep body copy unique per page.
+- FAQ: the visible FAQ is the source. After editing FAQ copy, run `python tools/sync-faq-schema.py` so the FAQPage JSON-LD matches it (Google policy).
 - Real rating: 4.4/516 on Google (synced 2026-08-26). Use real numbers only.
 - Cinematic layer is live. Mobile portrait uses the `data-src-portrait` pattern (9:16 sources swapped in ≤768px) — new hero/section media needs a portrait cut, not a center-crop of the landscape file. Mobile gets the FULL cinematic tier; Andrew reviews on iPhone.
 
