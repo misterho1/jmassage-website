@@ -34,16 +34,13 @@
     .pricing-table tr:hover td { background: rgba(160, 77, 44, 0.04); }
     .pricing-table .price { color: var(--text-hi); font-weight: 500; }
     .pricing-table .na { color: var(--text-dim); }
-    .faq-item { border-bottom: 1px solid var(--border); }
-    .faq-item summary { list-style: none; cursor: pointer; padding: 1.4rem 0; display: flex; justify-content: space-between; align-items: center; color: var(--text-hi); font-family: var(--font-body); font-size: 0.95rem; }
-    .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-item summary::after { content: '+'; color: var(--lantern); font-size: 1.3rem; font-weight: 300; flex-shrink: 0; margin-left: 1rem; transition: transform 0.2s; }
-    .faq-item[open] summary::after { content: '-'; }
-    .faq-item .faq-body { padding: 0 0 1.4rem; color: var(--text-lo); line-height: 1.8; font-size: 0.92rem; }
+    .pr-hero__sub a { color: var(--lantern); text-decoration: underline; text-underline-offset: 3px; }
+    .pr-hero__sub a:hover { color: var(--amber); }
+    .book-hero__crumbs span[aria-current] { opacity: 1; }
+    .pr-addon__head:last-child { margin-bottom: 0; }
     .pn-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   </style>
 
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
 <!-- Google tag (gtag.js) - G-W8JB6XPYH9 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8JB6XPYH9"></script>
 <script>
@@ -106,7 +103,7 @@
       <div class="container">
         <div class="pr-hero__inner">
           <nav aria-label="Breadcrumb" class="book-hero__crumbs" style="margin-bottom: 1.5rem;">
-            <a href="/">Home</a> <span>›</span> <a href="/pricing">Pricing</a> <span>›</span> <span>Price update</span>
+            <a href="/">Home</a> <span>›</span> <a href="/pricing">Pricing</a> <span>›</span> <span aria-current="page">Price update</span>
           </nav>
           <span class="ed-eyebrow">Price update</span>
           <h1 class="pr-hero__title">Our new <em>prices</em></h1>
