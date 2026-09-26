@@ -32,12 +32,6 @@
       document.documentElement.setAttribute('data-price-notice', variant);
     })();
   </script>
-  <link rel="preload" href="/fonts/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/styles.css?v=22">
-
   <!-- Google tag (gtag.js) - G-W8JB6XPYH9: injected by /js/after-paint.js on the first tap, scroll or key after first paint, or 5 s after it (data-gtag="interaction"); ad-click URLs load it at parse below -->
   <script src="/js/after-paint.js?v=1" defer data-gtag="interaction"></script>
   <script>
@@ -49,6 +43,12 @@
     // Ad click (gclid/gbraid/wbraid): load the tag now so the click ID is saved before any tap.
     if (/[?&](gclid|gbraid|wbraid)=/.test(location.search)) document.head.appendChild(Object.assign(document.createElement('script'), { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-W8JB6XPYH9' }));
   </script>
+  <link rel="preload" href="/fonts/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css?v=1">
+  <link rel="stylesheet" href="css/styles.css?v=22">
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://jmassageslc.com/"}, {"@type": "ListItem", "position": 2, "name": "Book Online", "item": "https://jmassageslc.com/book"}]}
@@ -287,8 +287,20 @@
           calIo.observe(wrap);
         }
         (window.__afterPaint=window.__afterPaint||[]).push(function(){setTimeout(function(){loadCalendar();},5000);});
-        // Clear the loading overlay once the scheduler paints (the empty frame's own load is ignored).
-        if(frame){frame.addEventListener('load',function(){if(calendarLoaded&&wrap){wrap.classList.remove('is-loading');}});}
+        // Clear the loading overlay once the scheduler is on screen (the empty frame's own load is ignored).
+        // On the first load form_embed.js keeps the iframe at visibility:hidden until the scheduler reports
+        // its size, so wait for that reveal (4 s cap) instead of showing an empty card.
+        var revealMo=null,revealTimer=0;
+        function stopRevealWait(){if(revealMo){revealMo.disconnect();revealMo=null;}clearTimeout(revealTimer);}
+        function clearOverlay(){stopRevealWait();if(wrap){wrap.classList.remove('is-loading');}}
+        if(frame){frame.addEventListener('load',function(){
+          if(!calendarLoaded) return;
+          stopRevealWait();
+          if(frame.style.visibility!=='hidden'||!window.MutationObserver){clearOverlay();return;}
+          revealMo=new MutationObserver(function(){if(frame.style.visibility!=='hidden'){clearOverlay();}});
+          revealMo.observe(frame,{attributes:true,attributeFilter:['style']});
+          revealTimer=setTimeout(clearOverlay,4000);
+        });}
         document.querySelectorAll('.book-pick').forEach(function(b){
           b.addEventListener('click',function(){
             document.querySelectorAll('.book-pick').forEach(function(x){x.classList.remove('is-active');x.setAttribute('aria-pressed','false');});
@@ -297,7 +309,7 @@
             storeJmValue(b);
             if(frame){
               // Show the skeleton loader while the iframe swaps to the new service.
-              if(wrap){wrap.classList.add('is-loading');}
+              stopRevealWait();if(wrap){wrap.classList.add('is-loading');}
               loadCalendar(base+b.getAttribute('data-cal'));
               frame.scrollIntoView({behavior:'smooth',block:'nearest'});
             }
@@ -307,7 +319,8 @@
         var q=new URLSearchParams(location.search);
         var svc=q.get('service');
         if(svc){
-          var grp=document.querySelector('.book-menu__group[data-service="'+svc+'"]');
+          var grp=null;
+          document.querySelectorAll('.book-menu__group[data-service]').forEach(function(g){if(!grp&&g.getAttribute('data-service')===svc){grp=g;}});
           if(grp){
             var len=q.get('len')||'60';
             var target=null;
@@ -319,6 +332,10 @@
           }
           loadCalendar();
         }
+        // Back/forward (and reload) can restore the iframe's last calendar at parse, before any trigger.
+        // Start the calendar now, like a deep link, so that restored load is replaced in flight instead of
+        // loading a second time later.
+        try{var navEntry=performance.getEntriesByType('navigation')[0];if(navEntry&&(navEntry.type==='back_forward'||navEntry.type==='reload')){loadCalendar();}}catch(e){}
         // Store the value of whichever pill is active after init (default or deep-link).
         var jmActive=document.querySelector('.book-pick.is-active');
         if(jmActive) storeJmValue(jmActive);
