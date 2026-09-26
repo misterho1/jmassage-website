@@ -33,21 +33,23 @@
       document.documentElement.setAttribute('data-price-notice', variant);
     })();
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="css/styles.css?v=22">
-
-  <!-- Google tag (gtag.js) - G-W8JB6XPYH9 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8JB6XPYH9"></script>
+  <!-- Google tag (gtag.js) - G-W8JB6XPYH9: injected by /js/after-paint.js on the first tap, scroll or key after first paint, or 5 s after it (data-gtag="interaction"); ad-click URLs load it at parse below -->
+  <script src="/js/after-paint.js?v=1" defer data-gtag="interaction"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-W8JB6XPYH9');
     gtag('config', 'AW-18046916928');
+    // Ad click (gclid/gbraid/wbraid): load the tag now so the click ID is saved before any tap.
+    if (/[?&](gclid|gbraid|wbraid)=/.test(location.search)) document.head.appendChild(Object.assign(document.createElement('script'), { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-W8JB6XPYH9' }));
   </script>
+  <link rel="preload" href="/fonts/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css?v=1">
+  <link rel="stylesheet" href="css/styles.css?v=22">
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://jmassageslc.com/"}, {"@type": "ListItem", "position": 2, "name": "Book Online", "item": "https://jmassageslc.com/book"}]}
@@ -232,12 +234,14 @@
 
         <p class="book-embed__fallback" style="margin-bottom:1rem;text-align:center;">Rather book by phone? Call <a href="tel:+18012881118">(801) 288-1118</a>.</p>
 
-        <div class="book-frame" id="book-frame">
+        <!-- min-height: GHL's form_embed.js takes the iframe out of the flow until the calendar is ready; the box keeps its 760 px. -->
+        <div class="book-frame is-loading" id="book-frame" style="min-height:760px;">
           <div class="book-frame__loader" aria-hidden="true">
             <span class="book-frame__spinner"></span>
             <span class="book-frame__loading-text">Loading your scheduler…</span>
           </div>
-          <iframe src="https://api.leadconnectorhq.com/widget/booking/iYzZ0GbCUpIqrpaCbswy" style="width:100%;border:none;min-height:760px;display:block;" scrolling="no" id="ghl-booking-jmassage" title="Book your session at J Massage SLC"></iframe>
+          <iframe data-src="https://api.leadconnectorhq.com/widget/booking/iYzZ0GbCUpIqrpaCbswy" style="width:100%;border:none;min-height:760px;display:block;" scrolling="no" id="ghl-booking-jmassage" title="Book your session at J Massage SLC"></iframe>
+          <noscript><style>#ghl-booking-jmassage{display:none!important}#book-frame .book-frame__loader{display:none}</style><iframe src="https://api.leadconnectorhq.com/widget/booking/iYzZ0GbCUpIqrpaCbswy" style="width:100%;border:none;min-height:760px;display:block;" scrolling="no" title="Book your session at J Massage SLC"></iframe></noscript>
         </div>
         <p class="book-embed__fallback" style="margin-top:1.75rem;text-align:center;">Prefer to book by phone? Call <a href="tel:+18012881118">(801) 288-1118</a> · open daily, 10am to 10pm.</p>
         <p class="book-embed__fallback" style="margin-top:.5rem;text-align:center;">Have a gift card? Call <a href="tel:+18012881118">(801) 288-1118</a> to book · gift cards are redeemed at the spa.</p>
@@ -255,8 +259,49 @@
         // the conversion value. Falls back to the action default if absent.
         function jmPrice(el){ if(!el) return 0; var m=(el.getAttribute('aria-label')||el.textContent||'').match(/\$(\d+)/); return m?parseInt(m[1],10):0; }
         function storeJmValue(el){ try{ var v=jmPrice(el); if(v>0) localStorage.setItem('jm_book_value',String(v)); }catch(e){} }
-        // Clear the loading overlay once the (re)loaded scheduler paints.
-        if(frame){frame.addEventListener('load',function(){if(wrap){wrap.classList.remove('is-loading');}});}
+        // Calendar gate (2026-09-25, same as elitespautah.com book.html): the iframe
+        // starts with data-src and loads on the first tap/scroll/key, when it is on
+        // screen, on a pill tap, on a ?service= deep link, or 5 s after first paint.
+        // form_embed.js (GHL's iframe helper) loads with it.
+        var calendarLoaded=false;
+        function loadCalendar(src){
+          if(!frame) return;
+          if(calendarLoaded){ if(src){frame.src=src;} return; }
+          calendarLoaded=true;
+          frame.src=src||frame.getAttribute('data-src');
+          var fe=document.createElement('script');
+          fe.src='https://link.msgsndr.com/js/form_embed.js';
+          fe.async=true;
+          document.body.appendChild(fe);
+        }
+        ['pointerdown','touchstart','keydown','scroll'].forEach(function(evt){
+          window.addEventListener(evt,function(e){
+            // A pill tap loads that pill's calendar from its click handler instead.
+            if(e.target&&e.target.closest&&e.target.closest('.book-pick')) return;
+            loadCalendar();
+          },{once:true,passive:true});
+        });
+        if('IntersectionObserver' in window&&wrap){
+          var calIo=new IntersectionObserver(function(entries){
+            if(entries.some(function(en){return en.isIntersecting;})){calIo.disconnect();loadCalendar();}
+          });
+          calIo.observe(wrap);
+        }
+        (window.__afterPaint=window.__afterPaint||[]).push(function(){setTimeout(function(){loadCalendar();},5000);});
+        // Clear the loading overlay once the scheduler is on screen (the empty frame's own load is ignored).
+        // On the first load form_embed.js keeps the iframe at visibility:hidden until the scheduler reports
+        // its size, so wait for that reveal (4 s cap) instead of showing an empty card.
+        var revealMo=null,revealTimer=0;
+        function stopRevealWait(){if(revealMo){revealMo.disconnect();revealMo=null;}clearTimeout(revealTimer);}
+        function clearOverlay(){stopRevealWait();if(wrap){wrap.classList.remove('is-loading');}}
+        if(frame){frame.addEventListener('load',function(){
+          if(!calendarLoaded) return;
+          stopRevealWait();
+          if(frame.style.visibility!=='hidden'||!window.MutationObserver){clearOverlay();return;}
+          revealMo=new MutationObserver(function(){if(frame.style.visibility!=='hidden'){clearOverlay();}});
+          revealMo.observe(frame,{attributes:true,attributeFilter:['style']});
+          revealTimer=setTimeout(clearOverlay,4000);
+        });}
         document.querySelectorAll('.book-pick').forEach(function(b){
           b.addEventListener('click',function(){
             document.querySelectorAll('.book-pick').forEach(function(x){x.classList.remove('is-active');x.setAttribute('aria-pressed','false');});
@@ -265,8 +310,8 @@
             storeJmValue(b);
             if(frame){
               // Show the skeleton loader while the iframe swaps to the new service.
-              if(wrap){wrap.classList.add('is-loading');}
-              frame.src=base+b.getAttribute('data-cal');
+              stopRevealWait();if(wrap){wrap.classList.add('is-loading');}
+              loadCalendar(base+b.getAttribute('data-cal'));
               frame.scrollIntoView({behavior:'smooth',block:'nearest'});
             }
           });
@@ -275,7 +320,8 @@
         var q=new URLSearchParams(location.search);
         var svc=q.get('service');
         if(svc){
-          var grp=document.querySelector('.book-menu__group[data-service="'+svc+'"]');
+          var grp=null;
+          document.querySelectorAll('.book-menu__group[data-service]').forEach(function(g){if(!grp&&g.getAttribute('data-service')===svc){grp=g;}});
           if(grp){
             var len=q.get('len')||'60';
             var target=null;
@@ -285,7 +331,12 @@
             var pick=target||grp.querySelector('.book-pick');
             if(pick){pick.click();}
           }
+          loadCalendar();
         }
+        // Back/forward (and reload) can restore the iframe's last calendar at parse, before any trigger.
+        // Start the calendar now, like a deep link, so that restored load is replaced in flight instead of
+        // loading a second time later.
+        try{var navEntry=performance.getEntriesByType('navigation')[0];if(navEntry&&(navEntry.type==='back_forward'||navEntry.type==='reload')){loadCalendar();}}catch(e){}
         // Store the value of whichever pill is active after init (default or deep-link).
         var jmActive=document.querySelector('.book-pick.is-active');
         if(jmActive) storeJmValue(jmActive);
@@ -342,13 +393,13 @@
     </div>
   </footer>
 
-  <script src="js/vendor/gsap.min.js"></script>
-  <script src="js/vendor/ScrollTrigger.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/motion.js"></script>
-  <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
-  <!-- GoHighLevel chat widget -->
-  <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a35ff645dcabc40b5934513" data-source="WEB_USER"></script>
+  <script src="js/vendor/gsap.min.js" defer></script>
+  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/motion.js" defer></script>
+  <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
+       The widget id stays literal on this tag (tools/chat-widget.py keys on it). form_embed.js loads with the calendar. -->
+  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
   <!-- Sticky mobile Book/Call bar (P1 CRO) -->
   <style>
