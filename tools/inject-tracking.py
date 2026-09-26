@@ -34,18 +34,20 @@ TRACKING_TAG = f'  <script src="{TRACKING_SRC}" defer></script>\n'
 
 SKIP_DIRS = {".git", "node_modules", "docs", "tools"}
 
-# Search Console verifies ownership by fetching this file byte-for-byte.
-VERIFICATION_FILE = re.compile(r"google[0-9a-f]+\.html")
+# Search Console verification tokens are 16 hex characters.
+VERIFICATION_FILE = re.compile(r"google[0-9a-f]{16}\.html")
 
-# The GA4 config call as a whole line, capturing its indent; the Ads line goes right under it.
+# The GA4 config call alone on its line, capturing its indent; the Ads line goes right under it.
 GA_CONFIG_LINE = re.compile(
-    r"^([ \t]*)gtag\(\s*['\"]config['\"]\s*,\s*['\"]" + re.escape(GA_ID) + r"['\"].*$", re.MULTILINE)
+    r"^([ \t]*)gtag\(\s*['\"]config['\"]\s*,\s*['\"]" + re.escape(GA_ID) + r"['\"][ \t]*\)[ \t]*;?[ \t]*$", re.MULTILINE)
 AW_CONFIG = re.compile(r"gtag\(\s*['\"]config['\"]\s*,\s*['\"]" + re.escape(AW_ID) + r"['\"]")
+# Any other page's gtag loader or config call, meaning a tag this tool didn't add.
+OTHER_GTAG = re.compile(r"googletagmanager\.com/gtag/js|gtag\(\s*['\"]config['\"]\s*,")
 
 
 def iter_html(root):
     for dirpath, dirnames, filenames in os.walk(root):
-        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS and not d.startswith(".")]
         for name in filenames:
             if name.endswith(".html") and not VERIFICATION_FILE.fullmatch(name):
                 yield os.path.join(dirpath, name)
@@ -59,13 +61,16 @@ def process(path, apply):
 
     # 1) GA4 + Ads tag
     if GA_ID not in html:
-        m = re.search(r"<head[^>]*>", html, re.IGNORECASE)
-        if m:
-            idx = m.end()
-            html = html[:idx] + "\n" + SNIPPET + html[idx:]
-            actions.append("added-tag")
+        if OTHER_GTAG.search(html):
+            actions.append("OTHER-GTAG(skipped-tag)")
         else:
-            actions.append("NO-HEAD(skipped-tag)")
+            m = re.search(r"<head[^>]*>", html, re.IGNORECASE)
+            if m:
+                idx = m.end()
+                html = html[:idx] + "\n" + SNIPPET + html[idx:]
+                actions.append("added-tag")
+            else:
+                actions.append("NO-HEAD(skipped-tag)")
 
     # 2) Ads config on a page that already loads GA4
     if GA_ID in html and not AW_CONFIG.search(html):

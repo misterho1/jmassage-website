@@ -13,7 +13,7 @@ J Massage owns massage modalities. Facials, sauna, reflexology, head spa belong 
 - Pricing (mirrors pricing.html): massage $85/$125/$165 (60/90/120; Swedish, deep tissue, sports, ashiatsu, shiatsu, myofascial all one rate) · prenatal $105/$155/$205 (60/90/120) · couples & 4-hand $165/$245/$325 (60/90/120) · add-ons: hot stones $20, cupping $20, 30-min infrared sauna $30, CBD $30, 30-min prenatal extension $50 · cards add a $5 processing fee; cash has no fee.
 - Service pages live at `services/{slug}.html`. No generator script — copy an existing `services/*.html` as the template and keep body copy unique per page.
 - FAQ: the visible FAQ is the source. After editing FAQ copy, run `python tools/sync-faq-schema.py` so the FAQPage JSON-LD matches it (Google policy).
-- Google tag: after adding or copying any page, run `python tools/inject-tracking.py --apply` (adds a missing GA4 tag, Ads config line or tracking.js). A plain dry run must end with `0 file(s) need changes` before you push.
+- Google tag: after adding or copying any page, run `python tools/inject-tracking.py` (a dry run). It must list only the page(s) you touched. Then run it with `--apply`; a plain dry run must end with `0 file(s) need changes` before you push. A `NO-...` or `OTHER-GTAG` action means fix that page's tag by hand.
 - Real rating: 4.4/516 on Google (synced 2026-08-26). Use real numbers only.
 - Cinematic layer is live. Mobile portrait uses the `data-src-portrait` pattern (9:16 sources swapped in ≤768px) — new hero/section media needs a portrait cut, not a center-crop of the landscape file. Mobile gets the FULL cinematic tier; Andrew reviews on iPhone.
 
