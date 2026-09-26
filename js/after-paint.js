@@ -18,6 +18,9 @@
    /pricing), the tag waits for the first tap, scroll or key after the gate
    opens, or 5 s, whichever comes first. The dataLayer queue keeps every
    gtag() call, and js/tracking.js keeps working off the inline gtag() stub.
+   Visits from another site or with utm_* parameters still load the tag when
+   the gate opens, so a first tap that leaves the page can't drop the landing
+   hit and its source (GA4 would file the session as Direct).
    Vanilla, no deps. */
 // Consumers find this file with script[src*="/js/after-paint.js"] (js/defer-load.js). Update them together if this file is renamed or moved.
 (function () {
@@ -65,8 +68,19 @@
     });
   }
 
+  // A landing from another site or a campaign link (utm_*) keeps the tag at the
+  // gate, so its source is recorded before a first tap can leave the page.
+  function landingNeedsTag() {
+    try {
+      if (/[?&]utm_[a-z]+=/i.test(location.search)) return true;
+      if (!document.referrer) return false;
+      var bare = function (host) { return host.replace(/^www\./, ''); };
+      return bare(new URL(document.referrer).hostname) !== bare(location.hostname);
+    } catch (e) { return false; }
+  }
+
   function startTag() {
-    if (!tagOnInteraction || interacted) { loadGtag(); return; }
+    if (!tagOnInteraction || interacted || landingNeedsTag()) { loadGtag(); return; }
     setTimeout(loadGtag, TAG_WAIT_MS);
   }
 
