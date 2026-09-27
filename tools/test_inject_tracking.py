@@ -1,11 +1,15 @@
 """Tests for inject-tracking.py. Run from the repo root:
     python -m unittest discover -s tools -p "test_*.py" -v
 """
+import contextlib
 import importlib.util
+import io
 import os
+import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 _spec = importlib.util.spec_from_file_location("inject_tracking", Path(__file__).with_name("inject-tracking.py"))
 tool = importlib.util.module_from_spec(_spec)
@@ -68,6 +72,10 @@ RETIRED_HEAD = "".join([
     "    gtag('config', 'AW-18046916928');\n",
     '  </script>\n',
 ])
+# /book and /pricing: js/after-paint.js loads gtag.js after first paint.
+LAZY_LOADER = '  <script src="/js/after-paint.js?v=1" defer data-gtag="interaction"></script>\n'
+# The same pages as they ship: the lazy loader plus the inline stub with both configs.
+BOOK_HEAD = LAZY_LOADER + FULL_HEAD.split("\n", 1)[1]
 
 
 def page(head):
@@ -194,6 +202,79 @@ class InjectTracking(unittest.TestCase):
         path = self.write("spaced.html", page(head))
         self.assertEqual(tool.process(path, apply=True), [])
         self.assertEqual(self.read(path), page(head))
+
+    def test_after_paint_page_without_inline_tag_gets_no_eager_loader(self):
+        src = page(LAZY_LOADER)
+        path = self.write("lazy.html", src)
+        self.assertEqual(tool.process(path, apply=True), ["LAZY-GTAG(skipped-tag)"])
+        self.assertEqual(self.read(path), src)
+
+    def test_after_paint_page_with_inline_stub_is_complete(self):  # /book and /pricing today
+        src = page(BOOK_HEAD)
+        path = self.write("book.html", src)
+        self.assertEqual(tool.process(path, apply=True), [])
+        self.assertEqual(self.read(path), src)
+
+    def test_commented_out_ads_line_is_reported_not_counted(self):
+        src = page(GA_ONLY_HEAD + "  <!-- gtag('config', 'AW-18046916928'); -->\n")
+        path = self.write("commented.html", src)
+        self.assertEqual(tool.process(path, apply=True), ["COMMENTED-ADS(skipped-ads)"])
+        self.assertEqual(self.read(path), src)
+
+    def test_ga_config_line_inside_a_comment_is_not_an_anchor(self):
+        head = GA_ONLY_HEAD.replace(GA_LINE, "") + "  <!--\n" + GA_LINE + "  -->\n"
+        path = self.write("anchor.html", page(head))
+        self.assertEqual(tool.process(path, apply=True), ["NO-GA-CONFIG(skipped-ads)"])
+        self.assertEqual(self.read(path), page(head))
+
+    def test_bare_foreign_config_without_loader_is_not_stacked(self):  # a GTM-managed page
+        src = page("  <script>\n    gtag('config', 'UA-11111111-1');\n  </script>\n")
+        path = self.write("gtm.html", src)
+        self.assertEqual(tool.process(path, apply=True), ["OTHER-GTAG(skipped-tag)"])
+        self.assertEqual(self.read(path), src)
+
+    def run_main(self, *args):
+        """Run main() from self.dir; return (exit code, printed output)."""
+        out = io.StringIO()
+        cwd = os.getcwd()
+        os.chdir(self.dir)
+        try:
+            with mock.patch.object(sys, "argv", ["inject-tracking.py", *args]), contextlib.redirect_stdout(out):
+                code = tool.main()
+        finally:
+            os.chdir(cwd)
+        return code, out.getvalue()
+
+    def test_dry_run_exits_1_while_anything_is_listed(self):
+        self.write("post.html", page(GA_ONLY_HEAD))
+        code, out = self.run_main()
+        self.assertEqual(code, 1)
+        self.assertIn("WOULD", out)
+        self.assertEqual(self.run_main("--apply")[0], 0)
+        code, out = self.run_main()
+        self.assertEqual(code, 0)
+        self.assertIn("0 file(s) need changes", out)
+
+    def test_apply_says_skipped_for_a_page_it_cannot_fix(self):
+        src = page(LAZY_LOADER)
+        path = self.write("lazy.html", src)
+        code, out = self.run_main("--apply")
+        self.assertEqual(code, 1)
+        self.assertIn("SKIPPED", out)
+        self.assertNotIn("WROTE", out)
+        self.assertEqual(self.read(path), src)
+
+    def test_other_tag_id_in_a_js_file_is_reported_stale(self):
+        self.write("index.html", page(FULL_HEAD))
+        self.write(os.path.join("js", "after-paint.js"),
+                   "var GTAG_SRC = 'https://www.googletagmanager.com/gtag/js?id=G-OLDOLDOLD1';\n")
+        self.write(os.path.join("js", "tracking.js"), "var GA = 'G-W8JB6XPYH9'; // AW-18046916928\n")
+        self.write(os.path.join("js", "vendor", "lib.js"), "var x = 'G-VENDORVEND';\n")
+        code, out = self.run_main()
+        self.assertEqual(code, 1)
+        self.assertEqual(out.count("STALE-ID"), 1)
+        self.assertIn("G-OLDOLDOLD1", out)
+        self.assertNotIn("G-VENDORVEND", out)
 
 
 if __name__ == "__main__":
