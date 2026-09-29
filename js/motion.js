@@ -173,8 +173,18 @@
           root.classList.remove('cine-pending');
         }
       };
-      if (afterCover) requestAnimationFrame(function () { requestAnimationFrame(buildIntroAndHero); });
-      else buildIntroAndHero();
+      /* The covered build runs after this callback returns, so hand it to the
+         matchMedia context: a later revert (the window crossing 820 px, reduced
+         motion switched on) then undoes these timelines too, as it does when
+         they are built right away. */
+      if (afterCover) {
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            if (context.isReverted) { root.classList.remove('cine-pending'); return; }
+            context.add(buildIntroAndHero);
+          });
+        });
+      } else buildIntroAndHero();
 
       /* Scroll reveals — homepage editorial sections (new attributes only;
          the IO .reveal system on service pages stays untouched). */
