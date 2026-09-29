@@ -23,6 +23,18 @@
   <meta property="og:site_name" content="J Massage SLC">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- Google tag (gtag.js) - G-W8JB6XPYH9: injected by /js/after-paint.js on the first tap, scroll or key after first paint, or 5 s after it (data-gtag="interaction"); ad-click URLs load it at parse below -->
+  <script src="/js/after-paint.js?v=1" defer data-gtag="interaction"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W8JB6XPYH9');
+    gtag('config', 'AW-18046916928');
+    // Ad click (gclid/gbraid/wbraid): load the tag now so the click ID is saved before any tap.
+    if (/[?&](gclid|gbraid|wbraid)=/.test(location.search)) document.head.appendChild(Object.assign(document.createElement('script'), { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-W8JB6XPYH9' }));
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -170,14 +182,6 @@
     ]}
   </script>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8JB6XPYH9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-W8JB6XPYH9');
-    gtag('config', 'AW-18046916928');
-  </script>
   <link rel="preload" as="image" href="/images/editorial/hero-room.webp" fetchpriority="high" media="(orientation: landscape)">
   <link rel="preload" as="image" href="/images/editorial/hero-room-portrait.webp" fetchpriority="high" media="(orientation: portrait)">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -632,18 +636,19 @@
     </div>
   </footer>
 
-  <script src="js/vendor/gsap.min.js"></script>
-  <script src="js/vendor/ScrollTrigger.min.js"></script>
-  <script src="js/vendor/lenis.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/motion.js"></script>
-  <!-- GoHighLevel chat widget -->
-  <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a35ff645dcabc40b5934513" data-source="WEB_USER"></script>
+  <script src="js/vendor/gsap.min.js" defer></script>
+  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="js/vendor/lenis.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/motion.js" defer></script>
+  <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
+       The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
+  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
 
-  <!-- Live Google reviews: fetch /api/reviews, reveal only if >=1 real review -->
+  <!-- Live Google reviews: fetch /api/reviews after first paint (js/after-paint.js), reveal only if >=1 real review -->
   <script>
-  (async () => {
+  (window.__afterPaint = window.__afterPaint || []).push(async () => {
     const s = document.getElementById('reviews'); if (!s) return;
     const stars = (n) => { const r = Math.max(0, Math.min(5, Math.round(Number(n)||0))); return '★'.repeat(r) + '☆'.repeat(5-r); };
     try {
@@ -663,7 +668,7 @@
         list.appendChild(node); });
       s.hidden = false;
     } catch {}
-  })();
+  });
   </script>
   <!-- Sticky mobile Book/Call bar (P1 CRO) -->
   <style>
