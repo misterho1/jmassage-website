@@ -727,6 +727,28 @@
     window.addEventListener('load', function () { setTimeout(swap, 4000); });
   })();
   </script>
+  <!-- Scroll reveals: the page can change height after load (the live reviews replace the taller static
+       fallback; the session photo's portrait cut arrives). ScrollTrigger only re-measures on its own events,
+       so re-measure once per frame whenever the height really changed; otherwise reveals below fire late. -->
+  <script>
+  (function () {
+    if (!('ResizeObserver' in window)) return;
+    var measured = -1, queued = false;
+    function remeasure() {
+      queued = false;
+      var h = document.documentElement.scrollHeight;
+      if (h === measured || !window.ScrollTrigger) return;
+      measured = h;
+      ScrollTrigger.refresh();
+    }
+    window.addEventListener('load', function () {
+      measured = document.documentElement.scrollHeight; // ScrollTrigger refreshes itself on load
+      new ResizeObserver(function () {
+        if (!queued) { queued = true; requestAnimationFrame(remeasure); }
+      }).observe(document.body);
+    });
+  })();
+  </script>
   <!-- Sticky mobile Book/Call bar (P1 CRO) -->
   <style>
     .m-cta{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;gap:.5rem;padding:.5rem calc(.6rem + 72px) .5rem .6rem;background:rgba(20,17,14,.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid rgba(250,247,243,.14);box-shadow:0 -6px 20px rgba(0,0,0,.30)}
