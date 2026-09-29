@@ -23,6 +23,13 @@
   <meta property="og:site_name" content="J Massage SLC">
   <meta name="twitter:card" content="summary_large_image">
 
+  <!-- Runs before any stylesheet, so the parser never waits on CSS for it. -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      root.classList.add('js');
+    })();
+  </script>
   <!-- Google tag (gtag.js) - G-W8JB6XPYH9: injected by /js/after-paint.js on the first tap, scroll or key after first paint, or 5 s after it (data-gtag="interaction"); ad-click URLs load it at parse below -->
   <script src="/js/after-paint.js?v=1" defer data-gtag="interaction"></script>
   <script>
@@ -41,6 +48,11 @@
   <link rel="stylesheet" href="/css/fonts.css?v=1">
 
   <link rel="stylesheet" href="css/styles.css?v=23">
+  <style>
+    /* Service photos start after first paint (script before </body>); without JS their <noscript> copies show. */
+    html:not(.js) picture[data-after-paint] { display: none; }
+    picture[data-after-paint] img:not([src]) { visibility: hidden; }
+  </style>
 
   <!-- Live Google reviews widget (homepage) — scoped, uses shared design tokens -->
   <style>
@@ -242,7 +254,7 @@
           <source srcset="images/editorial/hero-room.webp" type="image/webp">
           <img src="images/editorial/hero-room.webp" alt="Massage room at J Massage SLC, Salt Lake City" loading="eager" fetchpriority="high" width="2752" height="1536">
         </picture>
-        <video class="ed-hero__video" data-src="/videos/hero-ambient.mp4" data-src-portrait="/videos/hero-ambient-portrait.mp4" muted loop playsinline preload="none" poster="images/editorial/hero-room.webp" aria-hidden="true" tabindex="-1"></video>
+        <video class="ed-hero__video" data-src="/videos/hero-ambient.mp4" data-src-portrait="/videos/hero-ambient-portrait.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
         <div class="ed-hero__scrim"></div>
       </div>
       <div class="ed-hero__content container">
@@ -314,10 +326,14 @@
           <article class="ed-svc ed-svc--featured">
             <a href="/services/swedish-massage" class="ed-svc__link">
               <div class="ed-svc__media">
-                <picture>
+                <picture data-after-paint>
+                  <source data-srcset="images/editorial/service-body.webp" type="image/webp">
+                  <img data-src="images/editorial/service-body.webp" alt="Therapist working on a client's back at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
+                </picture>
+                <noscript><picture>
                   <source srcset="images/editorial/service-body.webp" type="image/webp">
                   <img src="images/editorial/service-body.webp" alt="Therapist working on a client's back at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture>
+                </picture></noscript>
               </div>
               <span class="ed-svc__num">01</span>
               <h3 class="ed-svc__name">Body Massage</h3>
@@ -332,10 +348,14 @@
           <article class="ed-svc">
             <a href="/services/foot-massage-head-spa" class="ed-svc__link">
               <div class="ed-svc__media">
-                <picture>
+                <picture data-after-paint>
+                  <source data-srcset="images/editorial/service-head.webp" type="image/webp">
+                  <img data-src="images/editorial/service-head.webp" alt="Head spa and scalp treatment at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
+                </picture>
+                <noscript><picture>
                   <source srcset="images/editorial/service-head.webp" type="image/webp">
                   <img src="images/editorial/service-head.webp" alt="Head spa and scalp treatment at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture>
+                </picture></noscript>
               </div>
               <span class="ed-svc__num">02</span>
               <h3 class="ed-svc__name">Head &amp; Scalp Spa</h3>
@@ -350,10 +370,14 @@
           <article class="ed-svc">
             <a href="/services/reflexology" class="ed-svc__link">
               <div class="ed-svc__media">
-                <picture>
+                <picture data-after-paint>
+                  <source data-srcset="images/editorial/service-foot.webp" type="image/webp">
+                  <img data-src="images/editorial/service-foot.webp" alt="Foot reflexology at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
+                </picture>
+                <noscript><picture>
                   <source srcset="images/editorial/service-foot.webp" type="image/webp">
                   <img src="images/editorial/service-foot.webp" alt="Foot reflexology at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture>
+                </picture></noscript>
               </div>
               <span class="ed-svc__num">03</span>
               <h3 class="ed-svc__name">Foot &amp; Reflexology</h3>
@@ -395,7 +419,7 @@
             <source srcset="images/editorial/service-couples.webp" type="image/webp">
             <img src="images/editorial/service-couples.webp" alt="Private couples massage suite at J Massage SLC" loading="lazy" width="1376" height="768" data-parallax="0.05">
           </picture>
-          <video class="ed-ambient-video" data-src="/videos/couples-ambient.mp4" muted loop playsinline preload="none" poster="images/editorial/service-couples.webp" aria-hidden="true" tabindex="-1"></video>
+          <video class="ed-ambient-video" data-src="/videos/couples-ambient.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
         </div>
         <div class="ed-pair__content">
           <span class="ed-eyebrow">Together</span>
@@ -558,7 +582,7 @@
     <!-- 8. FINAL CTA -->
     <section id="book" class="booking band-warm section">
       <div class="booking__media" aria-hidden="true">
-        <video class="ed-ambient-video" data-src="/videos/cta-afterglow.mp4" muted loop playsinline preload="none" poster="images/editorial/session-exhale.webp" tabindex="-1"></video>
+        <video class="ed-ambient-video" data-src="/videos/cta-afterglow.mp4" muted loop playsinline preload="none" tabindex="-1"></video>
         <div class="booking__scrim"></div>
       </div>
       <div class="container">
@@ -669,6 +693,24 @@
       s.hidden = false;
     } catch {}
   });
+  </script>
+  <!-- Service photos: start after first paint (on phones they sit inside Chrome's lazy-load distance).
+       Load + 4 s covers js/after-paint.js failing to load. They keep loading="lazy". -->
+  <script>
+  (function () {
+    var done = false;
+    function swap() {
+      if (done) return;
+      done = true;
+      document.querySelectorAll('picture[data-after-paint]').forEach(function (p) {
+        p.querySelectorAll('source[data-srcset]').forEach(function (s) { s.srcset = s.getAttribute('data-srcset'); });
+        var img = p.querySelector('img[data-src]');
+        if (img) img.src = img.getAttribute('data-src');
+      });
+    }
+    (window.__afterPaint = window.__afterPaint || []).push(swap);
+    window.addEventListener('load', function () { setTimeout(swap, 4000); });
+  })();
   </script>
   <!-- Sticky mobile Book/Call bar (P1 CRO) -->
   <style>
