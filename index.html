@@ -28,6 +28,17 @@
     (function () {
       var root = document.documentElement;
       root.classList.add('js');
+      // Intro cover (once per session): paint the intro's backdrop from the first frame so the
+      // hero never shows before the intro. js/motion.js builds the intro after that frame and
+      // removes the class; if motion.js never takes over, DOMContentLoaded removes it.
+      try {
+        if (matchMedia('(prefers-reduced-motion: no-preference)').matches && !sessionStorage.getItem('jm-intro')) {
+          root.classList.add('cine-pending');
+          document.addEventListener('DOMContentLoaded', function () {
+            if (!window.__introCover) root.classList.remove('cine-pending');
+          });
+        }
+      } catch (e) {}
     })();
   </script>
   <!-- Google tag (gtag.js) - G-W8JB6XPYH9: injected by /js/after-paint.js on the first tap, scroll or key after first paint, or 5 s after it (data-gtag="interaction"); ad-click URLs load it at parse below -->
@@ -49,6 +60,10 @@
 
   <link rel="stylesheet" href="css/styles.css?v=23">
   <style>
+    /* Intro cover: .cine-intro's backdrop, painted from the first frame on intro visits (see the <head> script).
+       If js/motion.js never arrives, it hides itself after 5 s. */
+    html.cine-pending body::after { content: ""; position: fixed; inset: 0; z-index: 3000; background: var(--pool-warm); animation: cine-cover-out 0s linear 5s forwards; }
+    @keyframes cine-cover-out { to { visibility: hidden; } }
     /* Service photos start after first paint (script before </body>); without JS their <noscript> copies show. */
     html:not(.js) picture[data-after-paint] { display: none; }
     picture[data-after-paint] img:not([src]) { visibility: hidden; }
