@@ -176,12 +176,14 @@
       /* The covered build runs after this callback returns, so hand it to the
          matchMedia context: a later revert (the window crossing 820 px, reduced
          motion switched on) then undoes these timelines too, as it does when
-         they are built right away. */
+         they are built right away. A revert that lands before the build cancels
+         it through cleanup (below). context.isReverted can't: gsap re-runs this
+         callback on the same context, which resets it to false. */
+      var coverBuildLive = afterCover;
       if (afterCover) {
         requestAnimationFrame(function () {
           requestAnimationFrame(function () {
-            if (context.isReverted) { root.classList.remove('cine-pending'); return; }
-            context.add(buildIntroAndHero);
+            if (coverBuildLive) context.add(buildIntroAndHero);
           });
         });
       } else buildIntroAndHero();
@@ -226,6 +228,10 @@
       /* matchMedia cleanup — registered for BOTH tiers: hand scrolling back
          to the browser if conditions flip (resize, RM toggle). */
       var cleanup = function () {
+        /* Drop a covered build that hasn't run yet, and its cover. The re-run
+           finds jm-intro set, so it builds the hero at once, with no intro. */
+        coverBuildLive = false;
+        root.classList.remove('cine-pending');
         if (!isDesktop) ScrollTrigger.normalizeScroll(false);
         if (lenis) {
           lenis.destroy();
