@@ -318,8 +318,8 @@
         <span class="ed-eyebrow" data-reveal>The session</span>
         <figure class="ed-still__media" data-reveal>
           <picture>
-            <source media="(orientation: portrait)" srcset="images/editorial/session-exhale-portrait.webp">
-            <img src="images/editorial/session-exhale.webp" alt="Client resting at ease after the massage" loading="lazy" width="1920" height="1080">
+            <source media="(orientation: portrait)" srcset="images/editorial/session-exhale-portrait.webp" width="802" height="1428">
+            <img src="images/editorial/session-exhale.webp" alt="Client resting at ease after the massage" loading="lazy" width="2560" height="1428">
           </picture>
         </figure>
         <h2 class="ed-still__caption" data-reveal>And then, the exhale.</h2>
@@ -726,23 +726,19 @@
   })();
   </script>
   <!-- Scroll reveals: the page can change height after load (the live reviews replace the taller static
-       fallback; the session photo's portrait cut arrives). ScrollTrigger only re-measures on its own events,
-       so re-measure once per frame whenever the height really changed; otherwise reveals below fire late. -->
+       fallback). ScrollTrigger only re-measures on its own events, so ask it to whenever the height really
+       changed; otherwise reveals below fire late. refresh(true) takes ScrollTrigger's own resize path:
+       batched over 200 ms and held until scrolling stops, so a window drag or a scroll in progress is left alone. -->
   <script>
   (function () {
     if (!('ResizeObserver' in window)) return;
-    var measured = -1, queued = false;
-    function remeasure() {
-      queued = false;
-      var h = document.documentElement.scrollHeight;
-      if (h === measured || !window.ScrollTrigger) return;
-      measured = h;
-      ScrollTrigger.refresh();
-    }
     window.addEventListener('load', function () {
-      measured = document.documentElement.scrollHeight; // ScrollTrigger refreshes itself on load
+      var measured = document.documentElement.scrollHeight; // ScrollTrigger refreshes itself on load
       new ResizeObserver(function () {
-        if (!queued) { queued = true; requestAnimationFrame(remeasure); }
+        var h = document.documentElement.scrollHeight;
+        if (h === measured || !window.ScrollTrigger) return;
+        measured = h;
+        ScrollTrigger.refresh(true);
       }).observe(document.body);
     });
   })();
