@@ -27,10 +27,10 @@
   <script>
     (function () {
       var root = document.documentElement;
-      root.classList.add('js');
       // Intro cover (once per session): paint the intro's backdrop from the first frame so the
       // hero never shows before the intro. js/motion.js builds the intro after that frame and
       // removes the class; if motion.js never takes over, DOMContentLoaded removes it.
+      // Keep this test in step with motion.js's playIntro (same 'jm-intro' key, same query).
       try {
         if (matchMedia('(prefers-reduced-motion: no-preference)').matches && !sessionStorage.getItem('jm-intro')) {
           root.classList.add('cine-pending');
@@ -60,14 +60,16 @@
 
   <link rel="stylesheet" href="css/styles.css?v=23">
   <style>
-    /* Intro cover: .cine-intro's backdrop, painted from the first frame on intro visits (see the <head> script).
-       If js/motion.js never arrives, it hides itself after 5 s. */
-    html.cine-pending body::after { content: ""; position: fixed; inset: 0; z-index: 3000; background: var(--pool-warm); animation: cine-cover-out 0s linear 5s forwards; }
+    /* Intro cover: .cine-intro's backdrop (css/styles.css: same position, z-index and colour), painted from
+       the first frame on intro visits (see the <head> script). If js/motion.js hasn't taken over within 2 s
+       (slow network), it hides itself and the page shows; the intro still plays when motion.js arrives. */
+    html.cine-pending body::after { content: ""; position: fixed; inset: 0; z-index: 3000; background: var(--pool-warm); animation: cine-cover-out 0s linear 2s forwards; }
     @keyframes cine-cover-out { to { visibility: hidden; } }
-    /* Service photos start after first paint (script before </body>); without JS their <noscript> copies show. */
-    html:not(.js) picture[data-after-paint] { display: none; }
+    /* Service photos start after first paint (script before </body>); until then they stay blank. */
     picture[data-after-paint] img:not([src]) { visibility: hidden; }
   </style>
+  <!-- Without JS the service photos come from their <noscript> copies. -->
+  <noscript><style>picture[data-after-paint] { display: none; }</style></noscript>
 
   <!-- Live Google reviews widget (homepage) — scoped, uses shared design tokens -->
   <style>
@@ -342,7 +344,6 @@
             <a href="/services/swedish-massage" class="ed-svc__link">
               <div class="ed-svc__media">
                 <picture data-after-paint>
-                  <source data-srcset="images/editorial/service-body.webp" type="image/webp">
                   <img data-src="images/editorial/service-body.webp" alt="Therapist working on a client's back at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
                 </picture>
                 <noscript><picture>
@@ -364,7 +365,6 @@
             <a href="/services/foot-massage-head-spa" class="ed-svc__link">
               <div class="ed-svc__media">
                 <picture data-after-paint>
-                  <source data-srcset="images/editorial/service-head.webp" type="image/webp">
                   <img data-src="images/editorial/service-head.webp" alt="Head spa and scalp treatment at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
                 </picture>
                 <noscript><picture>
@@ -386,7 +386,6 @@
             <a href="/services/reflexology" class="ed-svc__link">
               <div class="ed-svc__media">
                 <picture data-after-paint>
-                  <source data-srcset="images/editorial/service-foot.webp" type="image/webp">
                   <img data-src="images/editorial/service-foot.webp" alt="Foot reflexology at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
                 </picture>
                 <noscript><picture>
@@ -710,21 +709,20 @@
   });
   </script>
   <!-- Service photos: start after first paint (on phones they sit inside Chrome's lazy-load distance).
-       Load + 4 s covers js/after-paint.js failing to load. They keep loading="lazy". -->
+       The 6 s timer covers js/after-paint.js failing or stalling (a stalled deferred script also holds
+       back the load event). They keep loading="lazy". -->
   <script>
   (function () {
     var done = false;
     function swap() {
       if (done) return;
       done = true;
-      document.querySelectorAll('picture[data-after-paint]').forEach(function (p) {
-        p.querySelectorAll('source[data-srcset]').forEach(function (s) { s.srcset = s.getAttribute('data-srcset'); });
-        var img = p.querySelector('img[data-src]');
-        if (img) img.src = img.getAttribute('data-src');
+      document.querySelectorAll('picture[data-after-paint] img[data-src]').forEach(function (img) {
+        img.src = img.getAttribute('data-src');
       });
     }
     (window.__afterPaint = window.__afterPaint || []).push(swap);
-    window.addEventListener('load', function () { setTimeout(swap, 4000); });
+    setTimeout(swap, 6000);
   })();
   </script>
   <!-- Scroll reveals: the page can change height after load (the live reviews replace the taller static
