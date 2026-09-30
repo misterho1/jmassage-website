@@ -1,6 +1,7 @@
 /* After-first-paint gate (J Massage copy of elitespautah.com assets/after-paint.js,
    2026-09-25). The Google tag, the chat widget and the /book calendar start only
-   once the first frame is on screen. Lighthouse charges every request that
+   once the first frame is on screen; on the homepage (2026-09-29) so do the live
+   reviews fetch and the service photos. Lighthouse charges every request that
    finishes before first paint to LCP, and headless Chrome can hold that paint
    1-2 s.
 
@@ -14,8 +15,8 @@
    The Google tag loads first. On ad-click URLs (gclid/gbraid/wbraid) the inline
    <head> block has already loaded it at parse, and loadGtag skips.
 
-   With data-gtag="interaction" on this file's <script> tag (used on /book and
-   /pricing), the tag waits for the first tap, scroll or key after the gate
+   With data-gtag="interaction" on this file's <script> tag (used on the homepage,
+   /book and /pricing), the tag waits for the first tap, scroll or key after the gate
    opens, or 5 s, whichever comes first. The dataLayer queue keeps every
    gtag() call, and js/tracking.js keeps working off the inline gtag() stub.
    Visits from another site or with utm_* parameters still load the tag when
@@ -23,6 +24,7 @@
    hit and its source (GA4 would file the session as Direct).
    Vanilla, no deps. */
 // Consumers find this file with script[src*="/js/after-paint.js"] (js/defer-load.js). Update them together if this file is renamed or moved.
+// index.html's inline reviews fetch and photo swap push onto the queue without that check: drop this file from the homepage and the reviews never load (the photos have their own 6 s timer).
 (function () {
   'use strict';
 

@@ -45,7 +45,9 @@
         gsap.ticker.lagSmoothing(0);
       }
 
-      /* ── Loading-reveal intro (cinematic, once per session) ─────────── */
+      /* ── Loading-reveal intro (cinematic, once per session) ───────────
+         index.html's first <head> script repeats this test (jm-intro, the
+         reduced-motion query) to paint its intro cover: keep them in step. */
       var introDelay = 0;
       var playIntro = false;
       if (cinematic) {
@@ -135,11 +137,11 @@
                 tryFadeIn();
               });
               /* Attach: desktop right away; mobile only after the page has fully
-                 loaded (poster stays the LCP) and never on save-data/slow nets. */
+                 loaded (the still image stays the LCP) and never on save-data/slow nets. */
               var conn = navigator.connection || {};
               var okNet = !conn.saveData && !/(slow-2g|2g|3g)/.test(conn.effectiveType || '');
               /* Portrait screens get the 9:16 cut when one is declared —
-                 matches the portrait poster/still so the crossfade holds. */
+                 matches the portrait still so the crossfade holds. */
               var heroPortrait = window.matchMedia('(orientation: portrait)').matches;
               var attachVid = function () {
                 vid.src = (heroPortrait && vid.dataset.srcPortrait) ? vid.dataset.srcPortrait : vid.dataset.src;

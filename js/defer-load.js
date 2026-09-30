@@ -1,4 +1,5 @@
-/* After-first-paint consumers for J Massage /book and /pricing (2026-09-25).
+/* After-first-paint consumers for J Massage /book and /pricing (2026-09-25) and
+   the homepage (2026-09-29).
    The GoHighLevel chat widget (~215KB) loads on the first tap, scroll or key,
    or 6 s after first paint: the same rule as elitespautah.com defer-load.js.
    The widget id stays literal in the HTML on this file's tag

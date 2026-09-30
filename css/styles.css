@@ -3035,7 +3035,9 @@ html.lenis { scroll-behavior: auto !important; }
   pointer-events: none;
 }
 
-/* Loading-reveal intro — injected by motion.js, so no-JS never sees it */
+/* Loading-reveal intro — injected by motion.js, so no-JS never sees it.
+   index.html paints this backdrop before motion.js runs (html.cine-pending
+   body::after): change position, z-index or colour in both places. */
 .cine-intro {
   position: fixed;
   inset: 0;
@@ -3101,7 +3103,7 @@ html.cine-lock { overflow: hidden; }
 .ed-intro .qw { opacity: 1; } /* JS animates from dim; static = fully readable */
 
 /* Gates (2026-07 mobile pass): phones run the cinematic tier too — counter
-   shrinks, hero video attaches post-load via motion.js (poster stays LCP).
+   shrinks, hero video attaches post-load via motion.js (still image stays LCP).
    Reduced motion stays fully static. */
 @media (max-width: 819px) {
   .cine-progress { top: 4.6rem; font-size: 0.7rem; }
@@ -3166,7 +3168,7 @@ html.cine-lock { overflow: hidden; }
   background-size: 160px 160px;
 }
 
-/* Ambient video layers — attach lazily via motion.js, fade in over posters */
+/* Ambient video layers — attach lazily via motion.js, fade in over the still or band colour behind them */
 .ed-ambient-video {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; opacity: 0; visibility: hidden; pointer-events: none;
