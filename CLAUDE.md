@@ -28,3 +28,6 @@ index.html follows the /book pattern below (the tag, the chat and the live revie
 
 ## Performance: /book and /pricing (2026-09-25)
 Both pages keep third-party work off the first-paint path for mobile Lighthouse 90+. The Google tag, the GHL chat and the /book calendar load through `js/after-paint.js` (`window.__afterPaint`). The tag waits for the first tap, scroll or key, or 5 s (`data-gtag="interaction"`); visits from another site or with `utm_*` load it at first paint, and ad-click URLs load it at parse. Fonts come from `/fonts` through `css/fonts.css`, and gsap, ScrollTrigger, main.js and motion.js are `defer` (not gated), so the intro still starts at page load. Don't add sync scripts or Google Fonts links to these two pages.
+
+## Fonts (every page)
+Every page loads fonts from `/fonts` through `<link rel="stylesheet" href="/css/fonts.css?v=1">`. Never add a Google Fonts link or preconnect. Blog posts and general pages also preload `marcellus-latin` and `pt-serif-400-latin`. Pages that link `service-page.css` preload no fonts: they scored lower with preloads (PR #27). A new page copies its font lines from a page of the same template. If `css/fonts.css` changes, bump `?v=` on every page.
