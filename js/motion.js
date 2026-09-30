@@ -50,6 +50,7 @@
          reduced-motion query) to paint its intro cover: keep them in step. */
       var introDelay = 0;
       var playIntro = false;
+      var intro = null;
       if (cinematic) {
         try {
           playIntro = !sessionStorage.getItem('jm-intro');
@@ -70,7 +71,7 @@
         try {
           if (playIntro) {
             introDelay = 1.05;
-            var intro = document.createElement('div');
+            intro = document.createElement('div');
             intro.className = 'cine-intro';
             intro.setAttribute('aria-hidden', 'true');
             intro.innerHTML =
@@ -234,6 +235,15 @@
            finds jm-intro set, so it builds the hero at once, with no intro. */
         coverBuildLive = false;
         root.classList.remove('cine-pending');
+        /* A revert mid-intro kills its timeline before onComplete, and the
+           re-run plays no intro: take the overlay and the scroll lock down
+           here. The counter's node outlives its reverted ScrollTrigger; the
+           re-run appends a fresh one. */
+        if (intro) {
+          intro.remove();
+          root.classList.remove('cine-lock');
+        }
+        if (prog) prog.remove();
         if (!isDesktop) ScrollTrigger.normalizeScroll(false);
         if (lenis) {
           lenis.destroy();
