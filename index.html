@@ -23,12 +23,53 @@
   <meta property="og:site_name" content="J Massage SLC">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"></noscript>
+  <!-- Runs before any stylesheet, so the parser never waits on CSS for it. -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      // Intro cover (once per session): paint the intro's backdrop from the first frame so the
+      // hero never shows before the intro. js/motion.js builds the intro after that frame and
+      // removes the class; if motion.js never takes over, DOMContentLoaded removes it.
+      // Keep this test in step with motion.js's playIntro (same 'jm-intro' key, same query).
+      try {
+        if (matchMedia('(prefers-reduced-motion: no-preference)').matches && !sessionStorage.getItem('jm-intro')) {
+          root.classList.add('cine-pending');
+          document.addEventListener('DOMContentLoaded', function () {
+            if (!window.__introCover) root.classList.remove('cine-pending');
+          });
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <!-- Google tag (gtag.js) - G-W8JB6XPYH9: injected by /js/after-paint.js on the first tap, scroll or key after first paint, or 5 s after it (data-gtag="interaction"); ad-click URLs load it at parse below -->
+  <script src="/js/after-paint.js?v=1" defer data-gtag="interaction"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W8JB6XPYH9');
+    gtag('config', 'AW-18046916928');
+    // Ad click (gclid/gbraid/wbraid): load the tag now so the click ID is saved before any tap.
+    if (/[?&](gclid|gbraid|wbraid)=/.test(location.search)) document.head.appendChild(Object.assign(document.createElement('script'), { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-W8JB6XPYH9' }));
+  </script>
+
+  <link rel="preload" href="/fonts/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css?v=1">
 
   <link rel="stylesheet" href="css/styles.css?v=23">
+  <style>
+    /* Intro cover: .cine-intro's backdrop (css/styles.css: same position, z-index and colour), painted from
+       the first frame on intro visits (see the <head> script). If js/motion.js hasn't taken over within 2 s
+       (slow network), it hides itself and the page shows; the intro still plays when motion.js arrives. */
+    html.cine-pending body::after { content: ""; position: fixed; inset: 0; z-index: 3000; background: var(--pool-warm); animation: cine-cover-out 0s linear 2s forwards; }
+    @keyframes cine-cover-out { to { visibility: hidden; } }
+    /* Service photos start after first paint (script before </body>); until then they stay blank. */
+    picture[data-after-paint] img:not([src]) { visibility: hidden; }
+  </style>
+  <!-- Without JS the service photos come from their <noscript> copies. -->
+  <noscript><style>picture[data-after-paint] { display: none; }</style></noscript>
 
   <!-- Live Google reviews widget (homepage) — scoped, uses shared design tokens -->
   <style>
@@ -170,14 +211,6 @@
     ]}
   </script>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8JB6XPYH9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-W8JB6XPYH9');
-    gtag('config', 'AW-18046916928');
-  </script>
   <link rel="preload" as="image" href="/images/editorial/hero-room.webp" fetchpriority="high" media="(orientation: landscape)">
   <link rel="preload" as="image" href="/images/editorial/hero-room-portrait.webp" fetchpriority="high" media="(orientation: portrait)">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -238,7 +271,7 @@
           <source srcset="images/editorial/hero-room.webp" type="image/webp">
           <img src="images/editorial/hero-room.webp" alt="Massage room at J Massage SLC, Salt Lake City" loading="eager" fetchpriority="high" width="2752" height="1536">
         </picture>
-        <video class="ed-hero__video" data-src="/videos/hero-ambient.mp4" data-src-portrait="/videos/hero-ambient-portrait.mp4" muted loop playsinline preload="none" poster="images/editorial/hero-room.webp" aria-hidden="true" tabindex="-1"></video>
+        <video class="ed-hero__video" data-src="/videos/hero-ambient.mp4" data-src-portrait="/videos/hero-ambient-portrait.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
         <div class="ed-hero__scrim"></div>
       </div>
       <div class="ed-hero__content container">
@@ -285,8 +318,8 @@
         <span class="ed-eyebrow" data-reveal>The session</span>
         <figure class="ed-still__media" data-reveal>
           <picture>
-            <source media="(orientation: portrait)" srcset="images/editorial/session-exhale-portrait.webp">
-            <img src="images/editorial/session-exhale.webp" alt="Client resting at ease after the massage" loading="lazy" width="1920" height="1080">
+            <source media="(orientation: portrait)" srcset="images/editorial/session-exhale-portrait.webp" width="802" height="1428">
+            <img src="images/editorial/session-exhale.webp" alt="Client resting at ease after the massage" loading="lazy" width="2560" height="1428">
           </picture>
         </figure>
         <h2 class="ed-still__caption" data-reveal>And then, the exhale.</h2>
@@ -310,10 +343,13 @@
           <article class="ed-svc ed-svc--featured">
             <a href="/services/swedish-massage" class="ed-svc__link">
               <div class="ed-svc__media">
-                <picture>
+                <picture data-after-paint>
+                  <img data-src="images/editorial/service-body.webp" alt="Therapist working on a client's back at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
+                </picture>
+                <noscript><picture>
                   <source srcset="images/editorial/service-body.webp" type="image/webp">
                   <img src="images/editorial/service-body.webp" alt="Therapist working on a client's back at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture>
+                </picture></noscript>
               </div>
               <span class="ed-svc__num">01</span>
               <h3 class="ed-svc__name">Body Massage</h3>
@@ -328,10 +364,13 @@
           <article class="ed-svc">
             <a href="/services/foot-massage-head-spa" class="ed-svc__link">
               <div class="ed-svc__media">
-                <picture>
+                <picture data-after-paint>
+                  <img data-src="images/editorial/service-head.webp" alt="Head spa and scalp treatment at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
+                </picture>
+                <noscript><picture>
                   <source srcset="images/editorial/service-head.webp" type="image/webp">
                   <img src="images/editorial/service-head.webp" alt="Head spa and scalp treatment at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture>
+                </picture></noscript>
               </div>
               <span class="ed-svc__num">02</span>
               <h3 class="ed-svc__name">Head &amp; Scalp Spa</h3>
@@ -346,10 +385,13 @@
           <article class="ed-svc">
             <a href="/services/reflexology" class="ed-svc__link">
               <div class="ed-svc__media">
-                <picture>
+                <picture data-after-paint>
+                  <img data-src="images/editorial/service-foot.webp" alt="Foot reflexology at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
+                </picture>
+                <noscript><picture>
                   <source srcset="images/editorial/service-foot.webp" type="image/webp">
                   <img src="images/editorial/service-foot.webp" alt="Foot reflexology at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture>
+                </picture></noscript>
               </div>
               <span class="ed-svc__num">03</span>
               <h3 class="ed-svc__name">Foot &amp; Reflexology</h3>
@@ -391,7 +433,7 @@
             <source srcset="images/editorial/service-couples.webp" type="image/webp">
             <img src="images/editorial/service-couples.webp" alt="Private couples massage suite at J Massage SLC" loading="lazy" width="1376" height="768" data-parallax="0.05">
           </picture>
-          <video class="ed-ambient-video" data-src="/videos/couples-ambient.mp4" muted loop playsinline preload="none" poster="images/editorial/service-couples.webp" aria-hidden="true" tabindex="-1"></video>
+          <video class="ed-ambient-video" data-src="/videos/couples-ambient.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
         </div>
         <div class="ed-pair__content">
           <span class="ed-eyebrow">Together</span>
@@ -554,7 +596,7 @@
     <!-- 8. FINAL CTA -->
     <section id="book" class="booking band-warm section">
       <div class="booking__media" aria-hidden="true">
-        <video class="ed-ambient-video" data-src="/videos/cta-afterglow.mp4" muted loop playsinline preload="none" poster="images/editorial/session-exhale.webp" tabindex="-1"></video>
+        <video class="ed-ambient-video" data-src="/videos/cta-afterglow.mp4" muted loop playsinline preload="none" tabindex="-1"></video>
         <div class="booking__scrim"></div>
       </div>
       <div class="container">
@@ -632,18 +674,19 @@
     </div>
   </footer>
 
-  <script src="js/vendor/gsap.min.js"></script>
-  <script src="js/vendor/ScrollTrigger.min.js"></script>
-  <script src="js/vendor/lenis.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/motion.js"></script>
-  <!-- GoHighLevel chat widget -->
-  <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a35ff645dcabc40b5934513" data-source="WEB_USER"></script>
+  <script src="js/vendor/gsap.min.js" defer></script>
+  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="js/vendor/lenis.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/motion.js" defer></script>
+  <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
+       The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
+  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
 
-  <!-- Live Google reviews: fetch /api/reviews, reveal only if >=1 real review -->
+  <!-- Live Google reviews: fetch /api/reviews after first paint (js/after-paint.js), reveal only if >=1 real review -->
   <script>
-  (async () => {
+  (window.__afterPaint = window.__afterPaint || []).push(async () => {
     const s = document.getElementById('reviews'); if (!s) return;
     const stars = (n) => { const r = Math.max(0, Math.min(5, Math.round(Number(n)||0))); return '★'.repeat(r) + '☆'.repeat(5-r); };
     try {
@@ -663,6 +706,41 @@
         list.appendChild(node); });
       s.hidden = false;
     } catch {}
+  });
+  </script>
+  <!-- Service photos: start after first paint (on phones they sit inside Chrome's lazy-load distance).
+       The 6 s timer covers js/after-paint.js failing or stalling (a stalled deferred script also holds
+       back the load event). They keep loading="lazy". -->
+  <script>
+  (function () {
+    var done = false;
+    function swap() {
+      if (done) return;
+      done = true;
+      document.querySelectorAll('picture[data-after-paint] img[data-src]').forEach(function (img) {
+        img.src = img.getAttribute('data-src');
+      });
+    }
+    (window.__afterPaint = window.__afterPaint || []).push(swap);
+    setTimeout(swap, 6000);
+  })();
+  </script>
+  <!-- Scroll reveals: the page can change height after load (the live reviews replace the taller static
+       fallback). ScrollTrigger only re-measures on its own events, so ask it to whenever the height really
+       changed; otherwise reveals below fire late. refresh(true) takes ScrollTrigger's own resize path:
+       batched over 200 ms and held until scrolling stops, so a window drag or a scroll in progress is left alone. -->
+  <script>
+  (function () {
+    if (!('ResizeObserver' in window)) return;
+    window.addEventListener('load', function () {
+      var measured = document.documentElement.scrollHeight; // ScrollTrigger refreshes itself on load
+      new ResizeObserver(function () {
+        var h = document.documentElement.scrollHeight;
+        if (h === measured || !window.ScrollTrigger) return;
+        measured = h;
+        ScrollTrigger.refresh(true);
+      }).observe(document.body);
+    });
   })();
   </script>
   <!-- Sticky mobile Book/Call bar (P1 CRO) -->
