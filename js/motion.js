@@ -302,6 +302,13 @@
          never the existing .reveal system. */
       gsap.utils.toArray('[data-parallax]').forEach(function (el) {
         var amt = parseFloat(el.getAttribute('data-parallax')) || 0.06;
+        /* styles.css overscales these (scale: 1.12) so the drift never shows
+           an edge. GSAP folds that CSS scale into its own transform, but reads
+           it through the service photos' transform transition, which can give
+           1 and leave a bare strip under the photo: hand it the CSS value.
+           Read it once: GSAP's inline scale: none outlives a matchMedia revert. */
+        if (!el._cssScale) el._cssScale = parseFloat(getComputedStyle(el).scale) || 1;
+        gsap.set(el, { scale: el._cssScale });
         gsap.to(el, {
           yPercent: -100 * amt, ease: 'none',
           scrollTrigger: {
