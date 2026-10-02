@@ -46,11 +46,12 @@
          sync via lenis.on('scroll'). main.js routes #anchor clicks through
          window.__lenis so the two never fight. */
       var lenis = null;
+      var lenisTick = function (t) { lenis.raf(t * 1000); };
       if (heavy && window.Lenis) {
         lenis = new Lenis({ duration: 1.15, smoothWheel: true });
         window.__lenis = lenis;
         lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+        gsap.ticker.add(lenisTick);
         gsap.ticker.lagSmoothing(0);
       }
 
@@ -255,7 +256,12 @@
         if (prog) prog.remove();
         listeners.forEach(function (l) { l[0].removeEventListener(l[1], l[2]); });
         if (!isDesktop) ScrollTrigger.normalizeScroll(false);
+        /* The ticker and its lag smoothing are global: give both back, or the
+           ticker keeps driving the destroyed Lenis. 500/33 are GSAP's defaults,
+           which every run without Lenis uses. */
         if (lenis) {
+          gsap.ticker.remove(lenisTick);
+          gsap.ticker.lagSmoothing(500, 33);
           lenis.destroy();
           if (window.__lenis === lenis) window.__lenis = null;
         }
