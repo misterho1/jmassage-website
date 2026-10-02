@@ -32,6 +32,15 @@
       var heavy = isDesktop;
       if (!isDesktop) ScrollTrigger.normalizeScroll(true);
 
+      /* DOM listeners this run adds go through listen(). gsap's revert undoes
+         gsap objects only (tweens, timelines, ScrollTriggers, delayedCalls),
+         so cleanup removes these itself and a re-run never stacks a second set. */
+      var listeners = [];
+      var listen = function (el, type, fn) {
+        el.addEventListener(type, fn);
+        listeners.push([el, type, fn]);
+      };
+
       /* ── Lenis smooth scroll (cinematic) ──────────────────────────────
          Drives window scroll through GSAP's ticker; ScrollTrigger stays in
          sync via lenis.on('scroll'). main.js routes #anchor clicks through
@@ -244,6 +253,7 @@
           root.classList.remove('cine-lock');
         }
         if (prog) prog.remove();
+        listeners.forEach(function (l) { l[0].removeEventListener(l[1], l[2]); });
         if (!isDesktop) ScrollTrigger.normalizeScroll(false);
         if (lenis) {
           lenis.destroy();
@@ -328,16 +338,17 @@
         });
       });
 
-      /* Magnetic CTAs. */
+      /* Magnetic CTAs. Through listen(): a listener left over from a reverted
+         run would call that run's killed quickTo, and resetTo revives it. */
       document.querySelectorAll('[data-magnetic]').forEach(function (btn) {
         var qx = gsap.quickTo(btn, 'x', { duration: 0.4, ease: 'power3.out' });
         var qy = gsap.quickTo(btn, 'y', { duration: 0.4, ease: 'power3.out' });
-        btn.addEventListener('mousemove', function (e) {
+        listen(btn, 'mousemove', function (e) {
           var r = btn.getBoundingClientRect();
           qx((e.clientX - r.left - r.width / 2) * 0.22);
           qy((e.clientY - r.top - r.height / 2) * 0.22);
         });
-        btn.addEventListener('mouseleave', function () { qx(0); qy(0); });
+        listen(btn, 'mouseleave', function () { qx(0); qy(0); });
       });
 
       return cleanup;
