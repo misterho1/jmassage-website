@@ -18,7 +18,7 @@
       motionOK: '(prefers-reduced-motion: no-preference)',
       isDesktop: '(min-width: 820px) and (pointer: fine)'
     },
-    function (context) {
+    function (context, contextSafe) {
       var motionOK = context.conditions.motionOK;
       var isDesktop = context.conditions.isDesktop;
       if (!motionOK) return;
@@ -127,26 +127,33 @@
                and reduced-motion never download a byte. The still and the clip
                are two different scenes (portrait → room), so the crossfade is
                gated behind the load choreography: it always lands as the hero's
-               deliberate second beat, never at a random network moment. */
+               deliberate second beat, never at a random network moment.
+               A re-run after a revert finds src already set. It attaches
+               nothing, rebuilds the pause/play trigger, and re-arms the fade,
+               which stands down once the clip has faded in (vid._shown): a
+               crossing never restarts a clip that onLeave paused offscreen. */
             var vid = hero.querySelector('.ed-hero__video');
-            if (cinematic && vid && vid.dataset.src && !vid.getAttribute('src')) {
-              var vidCanPlay = false;
+            if (cinematic && vid && vid.dataset.src) {
+              var vidCanPlay = vid.readyState >= 4; /* HAVE_ENOUGH_DATA: canplaythrough already fired */
               var vidTimeUp = false;
               var tryFadeIn = function () {
-                if (!vidCanPlay || !vidTimeUp) return;
+                if (vid._shown || !vidCanPlay || !vidTimeUp) return;
                 var p = vid.play();
                 if (p && p.then) {
                   p.then(function () {
+                    vid._shown = true;
                     gsap.to(vid, { autoAlpha: 1, duration: 2.0, ease: 'power2.inOut' });
                   }).catch(function () { /* autoplay refused — still image stays */ });
                 }
               };
               gsap.delayedCall(introDelay + 2.2, function () { vidTimeUp = true; tryFadeIn(); });
-              vid.addEventListener('canplaythrough', function once() {
-                vid.removeEventListener('canplaythrough', once);
-                vidCanPlay = true;
-                tryFadeIn();
-              });
+              if (!vidCanPlay) {
+                listen(vid, 'canplaythrough', function once() {
+                  vid.removeEventListener('canplaythrough', once);
+                  vidCanPlay = true;
+                  tryFadeIn();
+                });
+              }
               /* Attach: desktop right away; mobile only after the page has fully
                  loaded (the still image stays the LCP) and never on save-data/slow nets. */
               var conn = navigator.connection || {};
@@ -155,14 +162,17 @@
                  matches the portrait still so the crossfade holds. */
               var heroPortrait = window.matchMedia('(orientation: portrait)').matches;
               var attachVid = function () {
+                if (vid.getAttribute('src')) return; /* attached by an earlier run */
                 vid.src = (heroPortrait && vid.dataset.srcPortrait) ? vid.dataset.srcPortrait : vid.dataset.src;
                 vid.load();
               };
               if (isDesktop) {
                 attachVid();
-              } else if (okNet) {
+              } else if (okNet && !vid.getAttribute('src')) {
+                /* contextSafe: the delayedCall joins this run's context, so a
+                   revert kills it like the run's other gsap objects. */
                 if (document.readyState === 'complete') gsap.delayedCall(2.0, attachVid);
-                else window.addEventListener('load', function () { gsap.delayedCall(2.0, attachVid); });
+                else listen(window, 'load', contextSafe(function () { gsap.delayedCall(2.0, attachVid); }));
               }
               ScrollTrigger.create({
                 trigger: hero,
@@ -269,29 +279,32 @@
 
       /* ── Ambient video layers (playbook pass) — couples band + final CTA.
          Same attach policy as the hero: desktop now, phones post-load on
-         decent connections; fade in on canplaythrough; pause offscreen. ── */
+         decent connections; fade in on canplaythrough; pause offscreen.
+         src attaches once per page and attach() hooks the one-time fade-in,
+         so a re-run after a revert only rebuilds the pause/play trigger. ── */
       var ambConn = navigator.connection || {};
       var ambOkNet = !ambConn.saveData && !/(slow-2g|2g|3g)/.test(ambConn.effectiveType || '');
       gsap.utils.toArray('.ed-ambient-video').forEach(function (av) {
-        if (!av.dataset.src || av.getAttribute('src')) return;
-        av.addEventListener('canplaythrough', function once() {
-          av.removeEventListener('canplaythrough', once);
-          var p = av.play();
-          if (p && p.then) {
-            p.then(function () {
-              gsap.to(av, { autoAlpha: 1, duration: 1.6, ease: 'power2.inOut' });
-            }).catch(function () {});
-          }
-        });
+        if (!av.dataset.src) return;
         var avPortrait = window.matchMedia('(orientation: portrait)').matches;
         var attach = function () {
+          if (av.getAttribute('src')) return; /* attached by an earlier run */
+          av.addEventListener('canplaythrough', function once() {
+            av.removeEventListener('canplaythrough', once);
+            var p = av.play();
+            if (p && p.then) {
+              p.then(function () {
+                gsap.to(av, { autoAlpha: 1, duration: 1.6, ease: 'power2.inOut' });
+              }).catch(function () {});
+            }
+          });
           av.src = (avPortrait && av.dataset.srcPortrait) ? av.dataset.srcPortrait : av.dataset.src;
           av.load();
         };
         if (isDesktop) attach();
-        else if (ambOkNet) {
+        else if (ambOkNet && !av.getAttribute('src')) {
           if (document.readyState === 'complete') gsap.delayedCall(2.5, attach);
-          else window.addEventListener('load', function () { gsap.delayedCall(2.5, attach); });
+          else listen(window, 'load', contextSafe(function () { gsap.delayedCall(2.5, attach); }));
         }
         ScrollTrigger.create({
           trigger: av.closest('section') || av,
