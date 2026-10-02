@@ -65,7 +65,11 @@
         try {
           playIntro = !sessionStorage.getItem('jm-intro');
           if (playIntro) sessionStorage.setItem('jm-intro', '1');
-        } catch (e) { /* private mode — skip intro rather than replay forever */ }
+        } catch (e) {
+          /* private mode: setItem can throw after getItem worked. Skip the
+             intro rather than replay it on every page and every re-run. */
+          playIntro = false;
+        }
       }
       /* Homepage intro cover (2026-09-28): index.html paints the intro's
          backdrop from the first frame (html.cine-pending), so the hero never
