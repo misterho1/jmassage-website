@@ -72,15 +72,9 @@
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-            "opens": "09:00",
-            "closes": "21:00"
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Saturday","Sunday"],
-            "opens": "09:00",
-            "closes": "20:00"
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "10:00",
+            "closes": "22:00"
           }
         ],
         "priceRange": "$$",
@@ -170,7 +164,7 @@
         "name": "Can I book same-day at Elite Spa Utah?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, Elite Spa Utah offers same-day appointments based on availability. Visit elitespautah.com/foot-reflexology-massage to check availability and book online, or call them directly at (801) 839-8880. Elite Spa Utah is located at 1136 S State St, Salt Lake City, open Monday through Friday 9am–9pm and weekends 9am–8pm."
+          "text": "Yes, Elite Spa Utah offers same-day appointments based on availability. Visit elitespautah.com/foot-reflexology-massage to check availability and book online, or call them directly at (801) 839-8880. Elite Spa Utah is located at 1136 S State St, Salt Lake City, open daily 10am–10pm."
         }
       }
     ]
@@ -279,7 +273,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--ember, #a04d2c);
+      color: var(--lantern);
       font-size: 1.75rem;
     }
     .sister-banner__text { flex: 1; min-width: 200px; }
@@ -289,7 +283,7 @@
       font-weight: 600;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ember, #a04d2c);
+      color: var(--text-mid);
       margin-bottom: .5rem;
     }
     .sister-banner__heading {
@@ -395,7 +389,7 @@
       font-weight: 600;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ember, #a04d2c);
+      color: var(--text-mid);
       margin-bottom: .75rem;
     }
     .svc-split__heading {
@@ -430,8 +424,8 @@
     }
     .svc-split__features li:last-child { border-bottom: none; }
     .svc-split__features li::before {
-      content: "?";
-      color: var(--ember, #a04d2c);
+      content: "✦";
+      color: var(--lantern);
       font-size: .65rem;
       margin-top: .3rem;
       flex-shrink: 0;
@@ -457,7 +451,7 @@
       font-weight: 600;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--ember, #a04d2c);
+      color: var(--text-mid);
       margin-bottom: .75rem;
     }
     .sister-map__title {
@@ -488,7 +482,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--ember, #a04d2c);
+      color: var(--lantern);
       flex-shrink: 0;
       font-size: 1rem;
     }
@@ -542,7 +536,7 @@
       font-family: 'PT Serif', Georgia, serif;
       font-size: .82rem;
       font-weight: 500;
-      color: var(--ember, #a04d2c);
+      color: var(--text-hi);
       margin-bottom: 1.5rem;
       letter-spacing: .04em;
     }
@@ -550,13 +544,17 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--ember, #a04d2c);
+      background: var(--lantern);
       animation: pulse-dot 2s ease-in-out infinite;
     }
     @keyframes pulse-dot {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: .5; transform: scale(.7); }
     }
+
+    /* -- Rating stars: one unbreakable row; the half star sits on that row (overflow:hidden puts an inline-block baseline at its bottom edge) */
+    .star-row { display: inline-block; white-space: nowrap; }
+    .star-row .star-half { vertical-align: bottom; margin-right: .15em; }
   </style>
 
   <!-- Google tag (gtag.js) - G-W8JB6XPYH9 -->
@@ -647,7 +645,7 @@
           <span class="svc-pill">Elite Spa Utah, Sister Location</span>
           <span class="svc-pill">1136 S State St, SLC</span>
           <span class="svc-pill">Same-Day Available</span>
-          <span class="svc-pill">★★★★★ 4.9 Rating</span>
+          <span class="svc-pill"><span class="star-row">★★★★<span class="star-half" aria-hidden="true">★</span></span> 4.7 Rating</span>
         </div>
 
         <!-- Actions -->
@@ -658,7 +656,7 @@
 
         <!-- Trust line at bottom of hero -->
         <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(160, 77, 44, 0.2);display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;">
-          <span style="font-family:'PT Serif',sans-serif;font-size:.82rem;color:rgba(91, 84, 76, 0.55);letter-spacing:.06em;">★★★★★ Elite Spa Utah · 4.9 Rating · 150+ reviews</span>
+          <span style="font-family:'PT Serif',sans-serif;font-size:.82rem;color:rgba(91, 84, 76, 0.55);letter-spacing:.06em;"><span class="star-row">★★★★<span class="star-half" aria-hidden="true">★</span></span> Elite Spa Utah · 4.7 Rating · 273 reviews</span>
           <span style="color:rgba(160, 77, 44, 0.3);">|</span>
           <a href="tel:+18018398880" style="font-family:'PT Serif',sans-serif;font-size:.82rem;color:rgba(160, 77, 44, 0.75);text-decoration:none;letter-spacing:.04em;">(801) 839-8880</a>
           <span style="color:rgba(160, 77, 44, 0.3);">|</span>
@@ -677,7 +675,7 @@
       <div class="container">
         <div class="sister-banner__inner" style="background:rgba(160, 77, 44, 0.04);border:1px solid rgba(160, 77, 44, 0.2);border-radius:4px;padding:2rem 2.5rem;backdrop-filter:blur(4px);">
 
-          <div class="sister-banner__icon" aria-hidden="true" style="width:72px;height:72px;font-size:2rem;color:var(--lantern);"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" width="32" height="32"><path d="M10 2C7.2 2 5 4.2 5 7c0 3.6 5 11 5 11s5-7.4 5-11c0-2.8-2.2-5-5-5z"/><circle cx="10" cy="7" r="2"/></svg></div>
+          <div class="sister-banner__icon" aria-hidden="true" style="width:72px;height:72px;font-size:2rem;"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" width="32" height="32"><path d="M10 2C7.2 2 5 4.2 5 7c0 3.6 5 11 5 11s5-7.4 5-11c0-2.8-2.2-5-5-5z"/><circle cx="10" cy="7" r="2"/></svg></div>
 
           <div class="sister-banner__text">
             <p class="sister-banner__label">Sister Location Notice</p>
@@ -707,7 +705,7 @@
         <div class="svc-split__grid">
 
           <div class="svc-split__visual svc-split__visual--foot reveal">
-            <svg class="svc-split__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" style="color:var(--ember,#a04d2c);">
+            <svg class="svc-split__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" style="color:var(--lantern);">
               <ellipse cx="60" cy="80" rx="28" ry="16" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
               <path d="M38 60 C36 50 38 38 44 32 C48 28 52 28 55 32 C57 35 56 42 55 50" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
               <path d="M55 50 C54 42 54 34 58 30 C61 27 65 28 66 32 C67 36 66 44 65 52" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
@@ -806,7 +804,7 @@
          BOOK NOW CTA (mid-page)
     ----------------------------------------------- -->
     <div class="reveal" style="text-align:center;padding:3rem 0;background:#f5f0e8;border-top:1px solid rgba(160, 77, 44, 0.1);">
-      <p style="font-family:'PT Serif',sans-serif;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ember,#a04d2c);margin-bottom:.75rem;">Available at Our Sister Location</p>
+      <p style="font-family:'PT Serif',sans-serif;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-mid);margin-bottom:.75rem;">Available at Our Sister Location</p>
       <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" class="btn btn--gold btn--lg">Book Foot Massage at Elite Spa Utah →</a>
       &nbsp;&nbsp;
       <a href="https://www.elitespautah.com" target="_blank" rel="noopener" class="btn btn--ghost btn--lg">Visit Elite Spa Utah</a>
@@ -880,38 +878,38 @@
 
             <div class="sister-map__details">
               <div class="sister-map__detail">
-                <div class="sister-map__detail-icon" aria-hidden="true" style="color:var(--lantern)"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" width="18" height="18"><path d="M10 2C7.2 2 5 4.2 5 7c0 3.6 5 11 5 11s5-7.4 5-11c0-2.8-2.2-5-5-5z"/><circle cx="10" cy="7" r="2"/></svg></div>
+                <div class="sister-map__detail-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" width="18" height="18"><path d="M10 2C7.2 2 5 4.2 5 7c0 3.6 5 11 5 11s5-7.4 5-11c0-2.8-2.2-5-5-5z"/><circle cx="10" cy="7" r="2"/></svg></div>
                 <div class="sister-map__detail-text">
                   <strong>Address</strong>
                   <span>1136 S State St, Salt Lake City, UT 84111</span>
                 </div>
               </div>
               <div class="sister-map__detail">
-                <div class="sister-map__detail-icon" aria-hidden="true" style="color:var(--lantern)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div>
+                <div class="sister-map__detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div>
                 <div class="sister-map__detail-text">
                   <strong>Phone</strong>
-                  <span><a href="tel:+18018398880" style="color:var(--ember,#a04d2c);">(801) 839-8880</a></span>
+                  <span><a href="tel:+18018398880" style="color:var(--lantern);">(801) 839-8880</a></span>
                 </div>
               </div>
               <div class="sister-map__detail">
-                <div class="sister-map__detail-icon" aria-hidden="true" style="color:var(--lantern)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+                <div class="sister-map__detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
                 <div class="sister-map__detail-text">
                   <strong>Hours</strong>
-                  <span>Mon–Fri 9am–9pm · Sat–Sun 9am–8pm</span>
+                  <span>Daily 10am–10pm</span>
                 </div>
               </div>
               <div class="sister-map__detail">
-                <div class="sister-map__detail-icon" aria-hidden="true" style="color:var(--lantern)">★</div>
+                <div class="sister-map__detail-icon" aria-hidden="true">★</div>
                 <div class="sister-map__detail-text">
                   <strong>Rating</strong>
-                  <span>★★★★★ 4.9 · 150+ Google Reviews</span>
+                  <span><span class="star-row">★★★★<span class="star-half" aria-hidden="true">★</span></span> 4.7 · 273 Google Reviews</span>
                 </div>
               </div>
               <div class="sister-map__detail">
-                <div class="sister-map__detail-icon" aria-hidden="true" style="color:var(--lantern)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg></div>
+                <div class="sister-map__detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg></div>
                 <div class="sister-map__detail-text">
                   <strong>Website</strong>
-                  <span><a href="https://www.elitespautah.com" target="_blank" rel="noopener" style="color:var(--ember,#a04d2c);">www.elitespautah.com</a></span>
+                  <span><a href="https://www.elitespautah.com" target="_blank" rel="noopener" style="color:var(--lantern);">www.elitespautah.com</a></span>
                 </div>
               </div>
             </div>
@@ -956,7 +954,7 @@
               <span class="faq-item__icon" aria-hidden="true"></span>
             </button>
             <div class="faq-item__answer">
-              <p>J Massage SLC at 677 S 200 W does not currently offer foot massage or head spa services at this location. However, our sister location, Elite Spa Utah at 1136 S State St in downtown Salt Lake City, specializes in exactly these treatments. Both locations share the same commitment to exceptional service and therapeutic excellence. You can book directly at <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,#a04d2c);">elitespautah.com</a>.</p>
+              <p>J Massage SLC at 677 S 200 W does not currently offer foot massage or head spa services at this location. However, our sister location, Elite Spa Utah at 1136 S State St in downtown Salt Lake City, specializes in exactly these treatments. Both locations share the same commitment to exceptional service and therapeutic excellence. You can book directly at <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--lantern);">elitespautah.com</a>.</p>
             </div>
           </li>
 
@@ -1006,7 +1004,7 @@
               <span class="faq-item__icon" aria-hidden="true"></span>
             </button>
             <div class="faq-item__answer">
-              <p>Yes, Elite Spa Utah offers same-day appointments based on availability. Visit <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,#a04d2c);">elitespautah.com/foot-reflexology-massage</a> to check availability and book online, or call them directly at <a href="tel:+18018398880" style="color:var(--ember,#a04d2c);">(801) 839-8880</a>. Elite Spa Utah is located at 1136 S State St, Salt Lake City, open Monday through Friday 9am–9pm and weekends 9am–8pm.</p>
+              <p>Yes, Elite Spa Utah offers same-day appointments based on availability. Visit <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--lantern);">elitespautah.com/foot-reflexology-massage</a> to check availability and book online, or call them directly at <a href="tel:+18018398880" style="color:var(--lantern);">(801) 839-8880</a>. Elite Spa Utah is located at 1136 S State St, Salt Lake City, open daily 10am–10pm.</p>
             </div>
           </li>
 
@@ -1043,7 +1041,7 @@
           <div class="svc-cta-band__trust">
             <span>Elite Spa Utah · 1136 S State St, SLC</span>
             <span class="svc-cta-band__divider">•</span>
-            <span>★★★★★ 4.9 Rating</span>
+            <span><span class="star-row">★★★★<span class="star-half" aria-hidden="true">★</span></span> 4.7 Rating</span>
             <span class="svc-cta-band__divider">•</span>
             <span>(801) 839-8880</span>
           </div>
@@ -1208,10 +1206,10 @@
           <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
           <li><a href="/services/reflexology">Reflexology</a></li>
           <li style="margin-top:.5rem;padding-top:.5rem;border-top:1px solid rgba(160, 77, 44, 0.15);">
-            <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--ember,#a04d2c);">Foot Massage → Elite Spa Utah</a>
+            <a href="https://www.elitespautah.com/foot-reflexology-massage" target="_blank" rel="noopener" style="color:var(--lantern);">Foot Massage → Elite Spa Utah</a>
           </li>
           <li>
-            <a href="https://www.elitespautah.com/head-spa-massage" target="_blank" rel="noopener" style="color:var(--ember,#a04d2c);">Head Spa → Elite Spa Utah</a>
+            <a href="https://www.elitespautah.com/head-spa-massage" target="_blank" rel="noopener" style="color:var(--lantern);">Head Spa → Elite Spa Utah</a>
           </li>
         </ul>
       </div>
