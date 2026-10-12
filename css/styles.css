@@ -2736,6 +2736,9 @@ a.btn--gold,
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* safe: when the expanded Services list overflows, start at the top so
+       every link can be scrolled to (plain center pushes the top off-screen). */
+    justify-content: safe center;
     gap: 0.5rem;
     transform: translateX(100%);
     transition: transform var(--t-slow) var(--ease-out);
