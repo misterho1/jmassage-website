@@ -32,12 +32,23 @@
         if (window.__jm_conv_fired) return;
         window.__jm_conv_fired = true;
         if (typeof gtag !== 'function') return;
-        // Dynamic value: book.html stores the selected service+duration price in
-        // localStorage (jm_book_value); pass it so reporting/ROAS reflect the real
-        // ticket ($85-$325). Falls back to the action default when absent. The AW
-        // action must be set to "different value per conversion" to use it.
+        // Dynamic value (the AW action uses "different value per conversion",
+        // default $165). Each GHL calendar redirects here with its own price,
+        // /thank-you?value=85, and that wins: it needs no browser storage, which
+        // often did not reach this page. Fallback: the price book.html stored in
+        // localStorage (jm_book_value) for the tapped pill. Neither valid -> no
+        // value, so the action default applies. Valid = plain number, 0 < n <= 1000.
+        function price(raw) {
+          if (!/^\d+(\.\d+)?$/.test(raw || '')) return 0;
+          var n = Number(raw);
+          return n > 0 && n <= 1000 ? n : 0;
+        }
         var val = 0;
-        try { val = parseFloat(localStorage.getItem('jm_book_value')) || 0; localStorage.removeItem('jm_book_value'); } catch (e) {}
+        try { val = price(new URLSearchParams(location.search).get('value')); } catch (e) {}
+        try {
+          if (!val) val = price(localStorage.getItem('jm_book_value'));
+          localStorage.removeItem('jm_book_value');
+        } catch (e) {}
         // GA4 key event (import to Google Ads as PRIMARY conversion)
         var ga = { send_to: 'G-W8JB6XPYH9', source: 'ghl_booking_redirect' };
         if (val > 0) { ga.currency = 'USD'; ga.value = val; }
