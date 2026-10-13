@@ -56,8 +56,9 @@
       }
 
       /* ── Loading-reveal intro (cinematic, once per session) ───────────
-         index.html's first <head> script repeats this test (jm-intro, the
-         reduced-motion query) to paint its intro cover: keep them in step. */
+         The first <head> script of index.html and of
+         services/couples-massage.html repeats this test (jm-intro, the
+         reduced-motion query) to paint its intro cover: keep all three in step. */
       var introDelay = 0;
       var playIntro = false;
       var intro = null;
@@ -71,12 +72,12 @@
           playIntro = false;
         }
       }
-      /* Homepage intro cover (2026-09-28): index.html paints the intro's
-         backdrop from the first frame (html.cine-pending), so the hero never
-         shows before the intro. Build the intro and the hero choreography
-         after that frame: the hero text is painted once under the cover,
-         which is the frame Chrome times as LCP. Other pages have no cover
-         and build right away, as before. */
+      /* Intro cover (homepage 2026-09-28, couples page 2026-10-13): index.html
+         and services/couples-massage.html paint the intro's backdrop from the
+         first frame (html.cine-pending), so the hero never shows before the
+         intro. Build the intro and the hero choreography after that frame:
+         the hero text is painted once under the cover, which is the frame
+         Chrome times as LCP. Pages without the cover build right away. */
       var root = document.documentElement;
       var afterCover = playIntro && root.classList.contains('cine-pending');
       if (afterCover) window.__introCover = true;

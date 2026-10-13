@@ -3049,8 +3049,9 @@ html.lenis { scroll-behavior: auto !important; }
 }
 
 /* Loading-reveal intro — injected by motion.js, so no-JS never sees it.
-   index.html paints this backdrop before motion.js runs (html.cine-pending
-   body::after): change position, z-index or colour in both places. */
+   index.html and services/couples-massage.html paint this backdrop before
+   motion.js runs (html.cine-pending body::after): change position, z-index
+   or colour in all three places. */
 .cine-intro {
   position: fixed;
   inset: 0;
