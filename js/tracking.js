@@ -6,6 +6,14 @@
   if (typeof window.gtag !== 'function') return;
   var GA = 'G-W8JB6XPYH9';
 
+  // Same-origin link to the booking page. pathname drops the ?query and #hash, so
+  // /book, /book?service=couples and https://jmassageslc.com/book all match. Bare
+  // #fragment links stay on the current page (the /book skip link), so they don't.
+  function isBookLink(a) {
+    return a.getAttribute('href').charAt(0) !== '#' &&
+      a.origin === location.origin && /^\/book(?:\.html|\/)?$/.test(a.pathname);
+  }
+
   // Phone clicks (any tel: link)
   document.addEventListener('click', function (e) {
     var t = e.target;
@@ -20,9 +28,10 @@
       return;
     }
 
-    // Booking intent (Book Now CTA / links to /book) — soft micro-conversion
-    var book = t.closest('a[href$="/book"], a[href="/book"], a[href="book.html"], a[href$="/book.html"], .nav__cta');
-    if (book) {
+    // Booking intent (Book Now CTA / links to /book) — soft micro-conversion.
+    // One emit site, so a .nav__cta that also links to /book fires once.
+    var link = t.closest('a[href]');
+    if (t.closest('.nav__cta') || (link && isBookLink(link))) {
       gtag('event', 'begin_checkout', { send_to: GA, item_category: 'booking' });
     }
   }, true);
