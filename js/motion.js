@@ -56,8 +56,9 @@
       }
 
       /* ── Loading-reveal intro (cinematic, once per session) ───────────
-         index.html's first <head> script repeats this test (jm-intro, the
-         reduced-motion query) to paint its intro cover: keep them in step. */
+         The first <head> script of index.html and of
+         services/couples-massage.html repeats this test (jm-intro, the
+         reduced-motion query) to paint its intro cover: keep all three in step. */
       var introDelay = 0;
       var playIntro = false;
       var intro = null;
