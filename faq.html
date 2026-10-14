@@ -826,8 +826,9 @@
   </footer>
 
   <script>
-    // Scoped so these names stay out of the global scope: the GHL chat loader below
-    // declares top-level functions (o, h, ...) and fails to run on any name clash.
+    // Scoped so these names stay out of the global scope: the GHL chat loader
+    // (added by /js/defer-load.js) declares top-level functions (o, h, ...) and
+    // fails to run on any name clash.
     (function () {
     // Header
     const h = document.getElementById('header');
@@ -873,8 +874,9 @@
     sections.forEach(s => scrollSpy.observe(s));
     })();
   </script>
-  <!-- GoHighLevel chat widget -->
-  <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a35ff645dcabc40b5934513" data-source="WEB_USER"></script>
+  <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
+       The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
+  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
   <!-- Sticky mobile Book/Call bar (P1 CRO) -->
   <style>
