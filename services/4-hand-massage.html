@@ -142,21 +142,45 @@
   }
   </script>
 
+  <!-- Runs before any stylesheet, so the parser never waits on CSS for it. -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      // Intro cover (once per session): paint the intro's backdrop from the first frame so the
+      // hero never shows before the intro. js/motion.js builds the intro after that frame and
+      // removes the class; if motion.js never takes over, DOMContentLoaded removes it.
+      // Keep this test in step with motion.js's playIntro (same 'jm-intro' key, same query).
+      try {
+        if (matchMedia('(prefers-reduced-motion: no-preference)').matches && !sessionStorage.getItem('jm-intro')) {
+          root.classList.add('cine-pending');
+          document.addEventListener('DOMContentLoaded', function () {
+            if (!window.__introCover) root.classList.remove('cine-pending');
+          });
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <!-- Google tag (gtag.js) - G-W8JB6XPYH9: injected by /js/after-paint.js on the first tap, scroll or key after first paint, or 5 s after it (data-gtag="interaction"); ad-click URLs load it at parse below -->
+  <script src="/js/after-paint.js?v=1" defer data-gtag="interaction"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W8JB6XPYH9');
+    gtag('config', 'AW-18046916928');
+    // Ad click (gclid/gbraid/wbraid): load the tag now so the click ID is saved before any tap.
+    if (/[?&](gclid|gbraid|wbraid)=/.test(location.search)) document.head.appendChild(Object.assign(document.createElement('script'), { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=G-W8JB6XPYH9' }));
+  </script>
+
   <!-- Fonts -->
+  <link rel="preload" href="/fonts/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="../css/styles.css?v=22">
+  <link rel="stylesheet" href="../css/styles.css?v=24">
   <link rel="stylesheet" href="../css/service-page.css?v=6">
-<!-- Google tag (gtag.js) - G-W8JB6XPYH9 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W8JB6XPYH9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-W8JB6XPYH9');
-  gtag('config', 'AW-18046916928');
-</script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body class="page--4hand">
@@ -639,17 +663,18 @@
       </div>
     </div>
     <div class="footer__bottom container">
-      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp; <a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a> &nbsp;·&nbsp; <a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a> &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
+      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp; <a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a> &nbsp;·&nbsp; <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--> &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
     </p>
     </div>
   </footer>
 
-  <script src="../js/vendor/gsap.min.js"></script>
-  <script src="../js/vendor/ScrollTrigger.min.js"></script>
-  <script src="../js/service-page.js?v=2"></script>
-  <script src="../js/motion.js"></script>
-  <!-- GoHighLevel chat widget -->
-  <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a35ff645dcabc40b5934513" data-source="WEB_USER"></script>
+  <script src="../js/vendor/gsap.min.js" defer></script>
+  <script src="../js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="../js/service-page.js?v=2" defer></script>
+  <script src="../js/motion.js" defer></script>
+  <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
+       The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
+  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
   <!-- Sticky mobile Book/Call bar (P1 CRO) -->
   <style>
