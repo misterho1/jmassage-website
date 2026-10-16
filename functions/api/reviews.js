@@ -25,7 +25,12 @@ export async function onRequestGet({ env }) {
   const cache = caches.default;
   const cacheKey = new Request(`https://reviews.internal/reviews/${placeId}`);
   const cached = await cache.match(cacheKey);
-  if (cached) return cached;
+  if (cached) {
+    // Entries cached before the noindex header existed lack it; cached headers are immutable.
+    const hit = new Response(cached.body, cached);
+    hit.headers.set('X-Robots-Tag', 'noindex');
+    return hit;
+  }
 
   try {
     const url =
@@ -63,9 +68,12 @@ export async function onRequestGet({ env }) {
   }
 }
 
+// HEAD runs the same handler (the runtime drops the body), so `curl -I` sees the real headers.
+export const onRequestHead = onRequestGet;
+
 function json(obj, extraHeaders = {}) {
   return new Response(JSON.stringify(obj), {
     status: 200,
-    headers: { 'Content-Type': 'application/json', ...extraHeaders },
+    headers: { 'Content-Type': 'application/json', 'X-Robots-Tag': 'noindex', ...extraHeaders },
   });
 }
