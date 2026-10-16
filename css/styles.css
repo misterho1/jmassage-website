@@ -3048,10 +3048,16 @@ html.lenis { scroll-behavior: auto !important; }
   pointer-events: none;
 }
 
-/* Loading-reveal intro — injected by motion.js, so no-JS never sees it.
-   index.html and services/couples-massage.html paint this backdrop before
-   motion.js runs (html.cine-pending body::after): change position, z-index
-   or colour in all three places. */
+/* Intro cover: every page that loads motion.js, except /book and /pricing, adds
+   html.cine-pending from its first <head> script on intro visits, and this paints .cine-intro's backdrop
+   from the first frame, before motion.js runs: keep position, z-index and
+   colour in step with .cine-intro below. If motion.js hasn't taken over within
+   2 s (slow network), it hides itself and the page shows; the intro still
+   plays when motion.js arrives. */
+html.cine-pending body::after { content: ""; position: fixed; inset: 0; z-index: 3000; background: var(--pool-warm); animation: cine-cover-out 0s linear 2s forwards; }
+@keyframes cine-cover-out { to { visibility: hidden; } }
+
+/* Loading-reveal intro — injected by motion.js, so no-JS never sees it. */
 .cine-intro {
   position: fixed;
   inset: 0;
