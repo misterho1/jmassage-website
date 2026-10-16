@@ -508,7 +508,7 @@
             <span class="rev__stars" data-stars aria-hidden="true"></span>
             <span><span class="rev__rating" data-rating></span> on Google</span>
             <span class="rev__dot" aria-hidden="true">·</span>
-            <span data-count></span>
+            <span data-review-count></span>
             <span class="rev__dot" aria-hidden="true">·</span>
             <a data-all href="/reviews" rel="noopener">read them on Google</a>
           </p>
@@ -669,7 +669,7 @@
       <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
         <a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a>
         &nbsp;·&nbsp;
-        <a href="tel:+18012881118">(801) 288-1118</a> &nbsp;·&nbsp; <a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a> &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
+        <a href="tel:+18012881118">(801) 288-1118</a> &nbsp;·&nbsp; <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--> &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
     </p>
     </div>
   </footer>
@@ -695,7 +695,7 @@
       if (!d || !Array.isArray(d.reviews) || d.reviews.length === 0) return; // stay hidden
       const q = (sel) => s.querySelector(sel);
       if (d.rating != null) { const el=q('[data-rating]'); if(el) el.textContent = Number(d.rating).toFixed(1); const st=q('[data-stars]'); if(st) st.textContent = stars(d.rating); }
-      if (d.count) { const c=q('[data-count]'); if(c) c.textContent = 'across ' + d.count + ' reviews'; }
+      if (d.count) { const c=q('[data-review-count]'); if(c) c.textContent = 'across ' + d.count + ' reviews'; }
       const all = q('[data-all]'); if (all) { if (d.profileUrl) all.href = d.profileUrl; else all.remove(); }
       const list = q('[data-list]'); const tpl = document.getElementById('review-card-tpl');
       d.reviews.slice(0,6).forEach((rv) => { const node = tpl.content.cloneNode(true);

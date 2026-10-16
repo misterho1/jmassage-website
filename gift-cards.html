@@ -745,6 +745,9 @@
   </footer>
 
   <script>
+    // Scoped so these names stay out of the global scope: the GHL chat loader below
+    // declares top-level functions (o, h, ...) and fails to run on any name clash.
+    (function () {
     // Header scroll
     const h = document.getElementById('header');
     window.addEventListener('scroll', () => h.classList.toggle('scrolled', window.scrollY > 60), {passive:true});
@@ -827,6 +830,7 @@
       });
       mockCard.addEventListener('mouseleave', () => { mockCard.style.transform = ''; });
     }
+    })();
   </script>
   <!-- GoHighLevel chat widget -->
   <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a35ff645dcabc40b5934513" data-source="WEB_USER"></script>
