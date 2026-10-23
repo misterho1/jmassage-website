@@ -18,7 +18,7 @@ brand
 
 **Strategic moat:**
 - Open 7 days, 10am–10pm, same-day availability. Most SLC competitors close by 6pm.
-- 516 Google reviews at 4.4 stars (live-synced 2026-08-26; shown honestly with a clipped half-star — never round up, never inflate the count).
+- 531 Google reviews at 4.4 stars (live-synced 2026-10-23; shown honestly with a clipped half-star — never round up, never inflate the count).
 - Eleven massage service pages under one roof, Swedish to Ashiatsu; head spa and reflexology referrals go to sister studio elitespautah.com (topic ownership: JM owns massage modalities, Elite owns facials/sauna/head spa).
 
 ## Brand Personality
@@ -54,7 +54,7 @@ The site must explicitly NOT look like:
 3. **Craft, not journey.** Lead with what each modality does, not what it feels like. Specificity converts this audience.
 4. **Same-day is the moat.** Open daily 10am–10pm with same-day availability belongs above the fold on every page.
 5. **Booking friction is enemy #1.** The GHL scheduler is embedded, never linked out. Prices appear on the duration buttons. Deep links carry service context from service pages to /book.
-6. **Honest numbers only.** 4.4/516 with a real half-star. No "#1 rated," no invented counts, no "approximate pricing" hedges that fight the transparent-pricing promise ($5 card fee stated plainly, cash no fee).
+6. **Honest numbers only.** 4.4/531 with a real half-star. No "#1 rated," no invented counts, no "approximate pricing" hedges that fight the transparent-pricing promise ($5 card fee stated plainly, cash no fee).
 
 ## Accessibility & Inclusion
 

@@ -14,7 +14,7 @@ J Massage owns massage modalities. Facials, sauna, reflexology, head spa belong 
 - Service pages live at `services/{slug}.html`. No generator script — copy an existing `services/*.html` as the template and keep body copy unique per page.
 - FAQ: the visible FAQ is the source. After editing FAQ copy, run `python tools/sync-faq-schema.py` so the FAQPage JSON-LD matches it (Google policy).
 - Google tag: after adding or copying any page, editing a page's `<head>`, or changing a GA4 or Ads ID, run `python tools/inject-tracking.py` (a dry run). It lists every page that needs a fix, not only yours, so read each line. Then run it with `--apply`; a plain dry run must end with `0 file(s) need changes` and exit 0 before you push. Fix any `(skipped-...)` or `STALE-ID` line by hand. `LAZY-GTAG` means the page loads the tag through `js/after-paint.js`: copy the inline gtag stub from /book, never an eager loader.
-- Real rating: 4.4/516 on Google (synced 2026-08-26). Use real numbers only.
+- Real rating: 4.4/531 on Google (synced 2026-10-23). Use real numbers only.
 - Cinematic layer is live. Mobile portrait uses the `data-src-portrait` pattern (9:16 sources swapped in ≤768px) — new hero/section media needs a portrait cut, not a center-crop of the landscape file. Mobile gets the FULL cinematic tier; Andrew reviews on iPhone.
 
 ## Verify
