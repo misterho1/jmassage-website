@@ -1,0 +1,112 @@
+# One-time job: merges the reviewed Nov 1, 2026 price-switch PR just after midnight Mountain time,
+# so the site switches prices together with the Google Ads swap (rules fire 12:00-1:00 AM MDT).
+# Andrew approved this unattended merge on 2026-09-26. It fails safe: it merges only when the PR head
+# is the reviewed commit (repo variable PRICE_SWITCH_HEAD) and already contains main, so what ships
+# is exactly what was reviewed. A failed run emails Andrew (GitHub's failed-workflow email) and opens
+# an issue assigned to him. Delete this file in the December cleanup.
+#
+# Repo variables: PRICE_SWITCH_PR (PR number), PRICE_SWITCH_HEAD (reviewed head SHA),
+# PRICE_SWITCH_LIVE_URL (page to check after the merge), PRICE_SWITCH_LIVE_MARKER (text only the new page has).
+name: Nov 1 price switch
+
+on:
+  schedule:
+    # 00:05-00:50 MDT on Nov 1 (06:05-06:50 UTC), then hourly retries in case a scheduled run is late or dropped.
+    - cron: '5,20,35,50 6 1 11 *'
+    - cron: '10 7-12 1 11 *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run every check but do not merge'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: price-switch-nov1
+  cancel-in-progress: false
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      PR: ${{ vars.PRICE_SWITCH_PR }}
+      HEAD_SHA: ${{ vars.PRICE_SWITCH_HEAD }}
+      LIVE_URL: ${{ vars.PRICE_SWITCH_LIVE_URL }}
+      LIVE_MARKER: ${{ vars.PRICE_SWITCH_LIVE_MARKER }}
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+      ISSUE_TITLE: 'Nov 1 price switch needs a human'
+    steps:
+      - name: Merge the reviewed price-switch PR
+        run: |
+          set -euo pipefail
+          hard_fail() {
+            echo "::error::$1"
+            if [ "$DRY_RUN" != "true" ]; then
+              gh issue create -R "$REPO" --assignee misterho1 --title "$ISSUE_TITLE" --body "$1
+
+          Run: $GITHUB_SERVER_URL/$REPO/actions/runs/$GITHUB_RUN_ID
+
+          The price-switch PR was NOT merged. Later scheduled runs skip while this issue is open.
+          Fix the cause, close this issue, then run the workflow by hand with dry_run off.
+          If the site cannot switch on Nov 1, pause the Google Ads rules named \"Nov 1 prices - ...\"."
+            fi
+            exit 1
+          }
+
+          now=$(date -u +%s)
+          if [ "$DRY_RUN" != "true" ]; then
+            if [ "$now" -lt "$(date -u -d '2026-11-01T06:00:00Z' +%s)" ] || [ "$now" -ge "$(date -u -d '2026-11-02T06:00:00Z' +%s)" ]; then
+              echo "Outside the Nov 1, 2026 window. Nothing to do."; exit 0
+            fi
+            open=$(gh issue list -R "$REPO" --state open --search "\"$ISSUE_TITLE\" in:title" --json number --jq 'length')
+            if [ "$open" != "0" ]; then
+              echo "An open \"$ISSUE_TITLE\" issue exists. Waiting for a human."; exit 0
+            fi
+          fi
+          for v in PR HEAD_SHA LIVE_URL LIVE_MARKER; do
+            [ -n "${!v}" ] || hard_fail "Repo variable for $v is not set."
+          done
+
+          read -r merged state base head <<<"$(gh api "repos/$REPO/pulls/$PR" --jq '[.merged, .state, .base.ref, .head.sha] | @tsv')"
+          if [ "$merged" = "true" ]; then
+            echo "PR #$PR is already merged."
+          else
+            [ "$state" = "open" ] || hard_fail "PR #$PR is closed without being merged."
+            [ "$base" = "main" ] || hard_fail "PR #$PR does not target main."
+            [ "$head" = "$HEAD_SHA" ] || hard_fail "PR #$PR head is $head, not the reviewed commit $HEAD_SHA. Someone pushed after review."
+            main=$(gh api "repos/$REPO/git/ref/heads/main" --jq .object.sha)
+            behind=$(gh api "repos/$REPO/compare/$main...$head" --jq .behind_by)
+            [ "$behind" = "0" ] || hard_fail "main moved after review: PR #$PR is $behind commit(s) behind main ($main). Merge main into the branch, re-verify, update PRICE_SWITCH_HEAD."
+            mergeable=null
+            for i in 1 2 3 4 5 6; do
+              mergeable=$(gh api "repos/$REPO/pulls/$PR" --jq .mergeable)
+              [ "$mergeable" != "null" ] && break
+              sleep 10
+            done
+            [ "$mergeable" = "true" ] || hard_fail "GitHub reports PR #$PR mergeable=$mergeable."
+            if [ "$DRY_RUN" = "true" ]; then
+              echo "Dry run: every check passed. PR #$PR at $head would merge into main at $main."; exit 0
+            fi
+            gh api -X PUT "repos/$REPO/pulls/$PR/merge" -f sha="$HEAD_SHA" -f merge_method=merge \
+              -f commit_title="Merge pull request #$PR: Nov 1, 2026 prices (scheduled)" >/dev/null \
+              || hard_fail "The merge API call failed for PR #$PR."
+            echo "Merged PR #$PR at $HEAD_SHA."
+          fi
+
+          # Cloudflare Pages deploys main on push; give it up to 15 minutes.
+          for i in $(seq 1 30); do
+            if curl -fsSL -A 'Mozilla/5.0 (price-switch check)' "$LIVE_URL?v=$GITHUB_RUN_ID-$i" | grep -qF "$LIVE_MARKER"; then
+              echo "Live: $LIVE_URL shows the new prices."; exit 0
+            fi
+            sleep 30
+          done
+          echo "::error::PR #$PR is merged but $LIVE_URL does not show \"$LIVE_MARKER\" after 15 minutes. Check the Cloudflare Pages deploy."
+          exit 1
