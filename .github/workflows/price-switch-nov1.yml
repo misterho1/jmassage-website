@@ -123,7 +123,8 @@ jobs:
           i=0
           while [ "$(date -u +%s)" -lt "$deadline" ]; do
             i=$((i + 1))
-            if curl -fsSL --connect-timeout 10 --max-time 20 -A 'Mozilla/5.0 (price-switch check)' "$LIVE_URL?v=$GITHUB_RUN_ID-$i" | grep -qF "$LIVE_MARKER"; then
+            # Read the whole page before searching: grep -q in a pipe can close it early and, with pipefail, fail a good check.
+            if page=$(curl -fsSL --connect-timeout 10 --max-time 20 -A 'Mozilla/5.0 (price-switch check)' "$LIVE_URL?v=$GITHUB_RUN_ID-$i")               && grep -qF "$LIVE_MARKER" <<<"$page"; then
               echo "Live: $LIVE_URL shows the new prices."; exit 0
             fi
             sleep 30
