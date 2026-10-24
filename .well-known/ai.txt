@@ -28,5 +28,5 @@ Fact-SameDay: Same-day appointments available
 Fact-Airport: 10 minutes from Salt Lake City International Airport (SLC)
 Fact-Parking: Free parking available
 Fact-Services: Swedish, Deep Tissue, Sports, Ashiatsu, Shiatsu, Myofascial Release, Prenatal, Couples, 4-Hand
-Fact-AddOns: Hot Stones, Cupping, Infrared Sauna, CBD
+Fact-AddOns: Hot Stones, Cupping, Infrared Sauna, CBD, dōTERRA Essential Oils
 Fact-SisterLocation: Foot reflexology and head spa are offered at Elite Spa Utah, 1136 S State St, Salt Lake City
