@@ -173,7 +173,7 @@
     <!-- CONTACT GRID -->
     <section style="padding: var(--section-y) 0;">
       <div class="container" style="max-width: 1100px; margin: 0 auto;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+        <div class="contact-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
 
           <!-- LEFT: Contact Info -->
           <div>
@@ -273,7 +273,7 @@
             </div>
 
             <!-- Book Online -->
-            <div style="background: var(--soot); border: 1px solid var(--border-mid); border-radius: var(--r-lg); padding: 2.5rem; text-align: center;">
+            <div class="contact-book" style="background: var(--soot); border: 1px solid var(--border-mid); border-radius: var(--r-lg); padding: 2.5rem; text-align: center;">
               <div style="position: relative; margin-bottom: 1.5rem;">
                 <div style="position: absolute; top: 0; left: 2rem; right: 2rem; height: 1px; background: linear-gradient(90deg, transparent, var(--lantern), transparent);"></div>
               </div>
@@ -369,7 +369,7 @@
     .m-cta a{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;padding:.8rem .5rem;border-radius:10px;text-decoration:none;font-family:var(--font-ui,'DM Sans',system-ui,sans-serif);font-weight:600;font-size:.98rem;letter-spacing:.02em}
     .m-cta__book{background:var(--lantern,#c9a86a);color:var(--ember,#fffdfb)}
     .m-cta__call{background:transparent;color:#faf7f3;border:1px solid rgba(250,247,243,.45)}
-    @media (max-width:820px){.m-cta{display:flex}body{padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}}
+    @media (max-width:820px){.m-cta{display:flex}body{padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}.contact-grid{grid-template-columns:minmax(0,1fr)!important;gap:2rem!important}.contact-book{padding:2rem 1.25rem!important}.contact-book a{white-space:normal!important}}
   </style>
   <nav class="m-cta" aria-label="Book or call">
     <a class="m-cta__book" href="/book">Book</a>
