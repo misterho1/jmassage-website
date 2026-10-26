@@ -178,6 +178,8 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="../css/styles.css?v=24">
   <link rel="stylesheet" href="../css/service-page.css?v=6">
+  <!-- Phones: the hero keeps the price and Private Suite pills so "Reserve Your Suite" sits above the sticky Book/Call bar. -->
+  <style>@media (max-width:480px){.svc-hero__meta .svc-hero__pill:nth-child(n+3){display:none}}</style>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
@@ -242,8 +244,6 @@
 
         <p class="svc-hero__intro">Two people. Two therapists. One private suite where the noise of the outside world genuinely cannot reach you. Whether it's a first date, a 25th anniversary, or simply a Tuesday when you both decide that the world can wait, this is the most intimate hour you'll spend together all year.</p>
 
-        <p class="svc-hero__intro">We also offer this as a couples head spa and a couples foot massage. Same private suite, same booking, no separate calendar needed. Just tell us which you would like when you reserve.</p>
-
         <div class="svc-hero__meta">
           <span class="svc-hero__pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -267,6 +267,8 @@
           <a href="/book?service=couples" class="btn btn--gold">Reserve Your Suite</a>
           <a href="../#services" class="btn btn--ghost">Explore All Services</a>
         </div>
+
+        <p class="svc-hero__intro">We also offer this as a couples head spa and a couples foot massage. Same private suite, same booking, no separate calendar needed. Just tell us which you would like when you reserve.</p>
 
       </div>
     </section>
