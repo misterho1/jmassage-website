@@ -18,11 +18,12 @@
 ## Services & Pricing
 Standard massage tiers: $65 (30 min, book by phone), $105 (60 min), $155 (90 min), $205 (120 min). Applies to:
 - Swedish Massage: $65 / $105 / $155 / $205
-- Deep Tissue Massage: $65 / $105 / $155 / $205
 - Sports Massage: $65 / $105 / $155 / $205
 - Ashiatsu Massage: $65 / $105 / $155 / $205
 - Shiatsu Massage: $65 / $105 / $155 / $205
 - Myofascial Release: $65 / $105 / $155 / $205
+Deep tissue:
+- Deep Tissue Massage: $125 (60 min), $175 (90 min), $245 (120 min)
 Prenatal:
 - Prenatal Massage: $105 (60 min), $155 (90 min), $205 (120 min); 30-minute extension $50
 Premium:
