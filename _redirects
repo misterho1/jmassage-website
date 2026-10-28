@@ -31,6 +31,10 @@ https://www.jmassageslc.com/*   https://jmassageslc.com/:splat   301
 # Thai massage removed from the menu.
 /services/thai-massage /pricing 301
 
+# Nov 1, 2026 price switch: the advance notice page is gone; /pricing has the current prices.
+/price-update /pricing 301
+/price-update.html /pricing 301
+
 # Staff receipt-reprint tool -> private n8n hosted form (not linked publicly). 302 so the target URL can change.
 /print https://spa-phone-booking.andrew-86d.workers.dev/reprint 302
 
