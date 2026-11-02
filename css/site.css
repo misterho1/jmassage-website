@@ -1261,3 +1261,6 @@ a.price-row:focus-visible { background: var(--brand-cream-soft); }
 @media (min-width: 800px) {
   .svc-price-col { position: sticky; top: calc(80px + var(--space-3)); }
 }
+/* Visit block on the foot massage & head spa page (Elite's address, phone, hours). */
+.svc-visit { list-style: none; padding: 0; margin: var(--space-3) 0 0; display: grid; gap: var(--space-1); }
+.svc-visit strong { font-family: var(--type-ui); font-weight: 500; margin-right: 0.5em; }

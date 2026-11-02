@@ -10,7 +10,8 @@ import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const shell = readFileSync(join(here, 'shell.html'), 'utf8');
-const part = (name) => shell.split(`<!--@@${name}-->`)[1].split('<!--@@')[0].replace(/\s+$/, '');
+// Leading newline off too, so a rerun replaces the block in place instead of adding a blank line.
+const part = (name) => shell.split(`<!--@@${name}-->`)[1].split('<!--@@')[0].replace(/^\r?\n/, '').replace(/\s+$/, '');
 const HEADER = part('header');
 const FOOTER = part('footer');
 const MCTA = part('mcta');
@@ -28,18 +29,25 @@ function apply(html) {
   h = h.replace(/<link rel="stylesheet" href="(?:\.\.\/|\/)?css\/styles\.css\?v=\d+">/, CSS);
   h = h.replace(/[ \t]*<link rel="stylesheet" href="(?:\.\.\/|\/)?css\/service-page\.css[^"]*">\r?\n/, '');
 
+  // Book links that preselect this page's service (prenatal, couples, 4-hand) carry over into the shared chrome.
+  const bookIn = (re) => ((h.match(re) || [''])[0].match(/href="(\/book[^"]*)"/) || [])[1] || '/book';
+  const withBook = (part, href) => lf(part.replace('href="/book"', `href="${href}"`));
+  const header = withBook(HEADER, bookIn(/<header[\s\S]*?<\/header>/));
+  const footer = withBook(FOOTER, bookIn(/<footer[\s\S]*?<\/footer>/));
+  const mcta = withBook(MCTA, bookIn(/<nav class="m-cta"[\s\S]*?<\/nav>/));
+
   // Body chrome.
   h = h.replace(/[ \t]*<div class="cursor-glow"[^>]*><\/div>\r?\n/, '');
-  const header = /[ \t]*<header id="header" class="header">[\s\S]*?<\/header>|[ \t]*<header class="site-header">[\s\S]*?<\/header>/;
-  if (header.test(h)) h = h.replace(header, lf(HEADER));
-  else h = h.replace(/(<a [^>]*class="skip-link"[^>]*>[^<]*<\/a>\r?\n|<body[^>]*>\r?\n)/, `$1${lf(HEADER)}${nl}`);
-  const footer = /[ \t]*<footer class="footer">[\s\S]*?<\/footer>|[ \t]*<footer class="site-footer">[\s\S]*?<\/footer>/;
-  if (footer.test(h)) h = h.replace(footer, lf(FOOTER));
-  else h = h.replace(/(<\/main>\r?\n)/, `$1${nl}${lf(FOOTER)}${nl}`);
+  const headerRe = /[ \t]*<header id="header" class="header">[\s\S]*?<\/header>|[ \t]*<header class="site-header">[\s\S]*?<\/header>/;
+  if (headerRe.test(h)) h = h.replace(headerRe, () => header);
+  else h = h.replace(/(<a [^>]*class="skip-link"[^>]*>[^<]*<\/a>\r?\n|<body[^>]*>\r?\n)/, (m) => `${m}${header}${nl}`);
+  const footerRe = /[ \t]*<footer class="footer">[\s\S]*?<\/footer>|[ \t]*<footer class="site-footer">[\s\S]*?<\/footer>/;
+  if (footerRe.test(h)) h = h.replace(footerRe, () => footer);
+  else h = h.replace(/(<\/main>\r?\n)/, (m) => `${m}${nl}${footer}${nl}`);
 
   // Phone bar: old inline style block out, canonical bar in (only where the page already had one).
   h = h.replace(/[ \t]*<!-- Sticky mobile Book\/Call bar[^>]*-->\s*<style>[\s\S]*?<\/style>\r?\n/, '');
-  if (hadCta) h = h.replace(/[ \t]*<nav class="m-cta"[\s\S]*?<\/nav>/, lf(MCTA));
+  if (hadCta) h = h.replace(/[ \t]*<nav class="m-cta"[\s\S]*?<\/nav>/, () => mcta);
 
   // Scripts: old motion stack out; nav.js + defer-load (motion moves into defer-load) in.
   h = h.replace(/[ \t]*<script src="(?:\.\.\/|\/)?js\/(?:vendor\/(?:gsap|ScrollTrigger|lenis)\.min\.js|main\.js|motion\.js|service-page\.js)[^"]*"[^>]*><\/script>\r?\n/g, '');
