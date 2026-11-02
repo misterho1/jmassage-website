@@ -1133,9 +1133,6 @@ p { margin: 0 0 var(--space-2); max-width: 65ch; }
 
 /* ============ JM ADDITIONS ============ */
 /* Footer: brand + four link columns (Treatments, Quick Links, Areas We Serve, Visit Us). */
-@media (min-width: 900px) {
-  .site-footer__grid--cols { grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; }
-}
 .site-footer__legal a { color: inherit; }
 .site-footer__rating { margin-top: var(--space-2); font-family: var(--type-ui); font-size: var(--type-6); color: rgba(250, 247, 243, 0.85); }
 .site-footer__rating .stars { color: var(--brand-orange-on-dark); letter-spacing: 0.08em; }
@@ -1166,3 +1163,80 @@ p { margin: 0 0 var(--space-2); max-width: 65ch; }
 
 /* Centered utility paragraphs span the row (p max-width 65ch would hold them left). */
 p.text-center { max-width: none; }
+
+/* Header. Elite's nav overflows at 900-1239px and wraps "Gift Cards" and the phone number at 1240-1440px
+   (same on elitespautah.com). JM keeps every label on one line, shows the menu button up to 1239px, and on
+   wide screens leaves the phone number to the hero, footer and phone bar. */
+.site-nav__link { white-space: nowrap; }
+@media (max-width: 1239px) {
+  .site-nav__list {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-1);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--brand-cream);
+    border-bottom: 1px solid var(--line);
+    padding: var(--space-2) var(--space-3) var(--space-3);
+    box-shadow: 0 8px 24px rgba(42, 38, 34, 0.08);
+    /* Short phones: the open menu scrolls so Book Now is always reachable. */
+    max-height: calc(100dvh - 80px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .site-nav__list--open { display: flex; }
+  .site-nav__link {
+    padding: var(--space-2);
+    border-bottom: 1px solid var(--line);
+    justify-content: flex-start;
+    min-height: 48px;
+  }
+  .site-nav__list .btn { margin-top: var(--space-2); }
+  .site-nav__menu-toggle { display: inline-flex; }
+}
+@media (min-width: 1240px) {
+  .site-nav__item--tel { display: none; }
+}
+
+/* Footer: two columns on tablets; on desktop the four link columns size to their content (one line each)
+   and the brand column takes the rest. */
+@media (min-width: 700px) and (max-width: 1099px) {
+  .site-footer__grid--cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1100px) {
+  .site-footer__grid--cols { grid-template-columns: minmax(0, 1fr) repeat(4, max-content); gap: var(--space-4) var(--space-3); }
+  .site-footer__grid--cols .site-footer__list { font-size: var(--type-6); white-space: nowrap; }
+}
+
+/* Trust band: 2 x 2 on small tablets instead of 3 + 1. */
+@media (min-width: 600px) and (max-width: 899px) {
+  .trust-bar { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Phones: the hero copy runs full width, so the scrim also darkens top to bottom. */
+@media (max-width: 640px) {
+  .hero__media::after {
+    background:
+      linear-gradient(180deg, rgba(20, 18, 16, 0.30) 0%, rgba(20, 18, 16, 0.55) 45%, rgba(20, 18, 16, 0.80) 100%),
+      linear-gradient(90deg, rgba(20, 18, 16, 0.80) 0%, rgba(20, 18, 16, 0.55) 30%, rgba(20, 18, 16, 0.05) 65%, transparent 100%);
+  }
+}
+
+/* Homepage services: two feature panels (photos drop in later) then three cards; quiet notes under the grid. */
+@media (min-width: 800px) {
+  .svc-editorial__rest--3 { grid-template-columns: repeat(3, 1fr); }
+}
+.svc-notes { margin-top: var(--space-4); }
+.svc-notes p { font-size: var(--type-6); color: var(--ink-muted); line-height: 1.6; }
+.cta-band__text { text-wrap: balance; }
+.reviews-summary .stars { color: var(--brand-orange); letter-spacing: 0.08em; }
+.reviews-summary .star-half { color: var(--line-strong); }
+.reviews-summary .star-half::before { color: var(--brand-orange); }
+/* Feature panels: 16:10 plus a 340px minimum height forces 544px wide, wider than a half column below 1100px. */
+@media (min-width: 800px) and (max-width: 1099px) {
+  .svc-feature--a,
+  .svc-feature--b { aspect-ratio: auto; }
+}
