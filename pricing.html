@@ -32,7 +32,7 @@
   <link rel="preload" href="/fonts/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/styles.css?v=24">
+  <link rel="stylesheet" href="/css/site.css?v=1">
 
   <style>
     .pricing-table { width: 100%; border-collapse: collapse; font-family: var(--font-body); font-size: 0.92rem; }
@@ -151,389 +151,230 @@
 <body>
 
   <a href="#main" class="skip-link">Skip to content</a>
-  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-  <header id="header" class="header">
-    <div class="header__inner container">
-      <a href="/" class="logo" aria-label="J Massage SLC, home">
-        <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <ul class="nav__list" id="navList">
-          <li class="nav__item nav__item--dropdown">
-            <a href="/#services" class="nav__link">Services <span class="nav__dropdown-caret">›</span></a>
-            <ul class="nav__dropdown">
-              <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-              <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-              <li><a href="/services/sports-massage">Sports Massage</a></li>
-              <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-              <li><a href="/services/couples-massage">Couples Massage</a></li>
-              <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-              <li><a href="/services/shiatsu">Shiatsu</a></li>
-              <li><a href="/services/reflexology">Reflexology</a></li>
-              <li><a href="/services/prenatal">Prenatal Massage</a></li>
-              <li><a href="/services/myofascial">Myofascial Release</a></li>
-              <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
-            </ul>
-          </li>
-          <li><a href="/about" class="nav__link">About</a></li>
-          <li><a href="/pricing" class="nav__link" aria-current="page">Pricing</a></li>
-          <li><a href="/reviews" class="nav__link">Reviews</a></li>
-          <li><a href="/gift-cards" class="nav__link">Gift Cards</a></li>
-          <li><a href="/faq" class="nav__link">FAQ</a></li>
-          <li><a href="/blog" class="nav__link">Blog</a></li>
-          <li><a href="/contact" class="nav__link">Contact</a></li>
-          <li><a href="/book" class="nav__cta" data-magnetic>Book Now</a></li>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="/">J Massage SLC</a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav__menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+        <ul class="site-nav__list" id="primary-nav">
+          <li><a class="site-nav__link" href="/services">Services</a></li>
+          <li><a class="site-nav__link" href="/pricing">Pricing</a></li>
+          <li><a class="site-nav__link" href="/reviews">Reviews</a></li>
+          <li><a class="site-nav__link" href="/about">About</a></li>
+          <li><a class="site-nav__link" href="/gift-cards">Gift Cards</a></li>
+          <li><a class="site-nav__link" href="/faq">FAQ</a></li>
+          <li><a class="site-nav__link" href="/blog">Blog</a></li>
+          <li><a class="site-nav__link" href="/contact">Contact</a></li>
+          <li class="site-nav__item--tel"><a class="site-nav__link" href="tel:+18012881118">(801) 288-1118</a></li>
+          <li><a class="btn btn--primary" href="/book" data-magnetic>Book Now</a></li>
         </ul>
-        <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
       </nav>
     </div>
   </header>
 
   <main id="main">
-
-    <!-- HERO -->
-    <section class="pr-hero">
-      <div class="container">
-        <div class="pr-hero__inner">
-          <nav aria-label="Breadcrumb" class="book-hero__crumbs" style="margin-bottom: 1.5rem;">
-            <a href="/">Home</a> <span>›</span> <span>Pricing</span>
-          </nav>
-          <span class="ed-eyebrow">Full Price List</span>
-          <h1 class="pr-hero__title">Transparent pricing.<br><em>No hidden fees.</em></h1>
-          <p class="pr-hero__sub">
-            What you see is what you pay. No surprise charges, no mandatory upsells. Sessions available same-day, open daily 10am to 10pm.
-          </p>
-          <div class="pr-hero__facts">
-            <span>60-minute sessions from <strong>$105</strong></span>
-            <span class="pr-hero__facts-sep" aria-hidden="true">·</span>
-            <span>Open daily <strong>10am to 10pm</strong></span>
-            <span class="pr-hero__facts-sep" aria-hidden="true">·</span>
-            <span>Same-day available</span>
-          </div>
-        </div>
+    <section class="page-header" data-hero>
+      <div class="container container--narrow">
+        <p class="eyebrow">Full Price List</p>
+        <h1><span class="line"><span class="line-inner">Transparent pricing. No hidden fees.</span></span></h1>
+        <p class="lead">What you see is what you pay. No surprise charges, no mandatory upsells. Sessions available same-day, open daily 10am to 10pm.</p>
       </div>
     </section>
 
-    <!-- PRICING TABLE -->
-    <section class="pr-section">
-      <div class="container pr-wrap">
-        <h2 class="pr-heading pr-heading--center" style="margin-bottom: 3rem;">
-          All services &amp; <em>session lengths</em>
-        </h2>
+    <section class="container container--narrow section">
+      <h2 data-reveal>All services &amp; session lengths</h2>
+      <div class="price-table" style="padding-inline: var(--space-2)" data-reveal>
+        <table style="width: 100%; border-collapse: collapse; table-layout: fixed; line-height: 1.3; font-family: var(--type-ui); font-size: clamp(0.9375rem, 0.85rem + 0.4vw, 1.25rem); color: var(--brand-orange)">
+          <colgroup><col style="width: 34%"><col span="4"></colgroup>
+          <thead>
+            <tr style="height: 3rem; font-size: var(--type-7); color: var(--ink-dim); text-align: left">
+              <th scope="col" style="font-weight: 500">Service</th>
+              <th scope="col" style="font-weight: 500">30 min</th>
+              <th scope="col" style="font-weight: 500">60 min</th>
+              <th scope="col" style="font-weight: 500">90 min</th>
+              <th scope="col" style="font-weight: 500">120 min</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="height: 3.5rem; border-top: 1px solid var(--line)">
+              <td style="color: var(--ink)">Swedish Massage</td>
+              <td>$65</td>
+              <td>$105</td>
+              <td>$155</td>
+              <td>$205</td>
+            </tr>
+            <tr style="height: 3.5rem; border-top: 1px solid var(--line)">
+              <td style="color: var(--ink)">Deep Tissue</td>
+              <td style="color: var(--ink-dim)"><span aria-hidden="true">—</span><span class="sr-only">call us</span></td>
+              <td>$125</td>
+              <td>$175</td>
+              <td>$245</td>
+            </tr>
+            <tr style="height: 3.5rem; border-top: 1px solid var(--line)">
+              <td style="color: var(--ink)">Sports Massage</td>
+              <td>$65</td>
+              <td>$105</td>
+              <td>$155</td>
+              <td>$205</td>
+            </tr>
+            <tr style="height: 3.5rem; border-top: 1px solid var(--line)">
+              <td style="color: var(--ink)">Ashiatsu</td>
+              <td>$65</td>
+              <td>$105</td>
+              <td>$155</td>
+              <td>$205</td>
+            </tr>
+            <tr style="height: 3.5rem; border-top: 1px solid var(--line)">
+              <td style="color: var(--ink)">Shiatsu</td>
+              <td>$65</td>
+              <td>$105</td>
+              <td>$155</td>
+              <td>$205</td>
+            </tr>
+            <tr style="height: 3.5rem; border-top: 1px solid var(--line)">
+              <td style="color: var(--ink)">Myofascial Release</td>
+              <td>$65</td>
+              <td>$105</td>
+              <td>$155</td>
+              <td>$205</td>
+            </tr>
+            <tr style="height: 3.5rem; border-top: 1px solid var(--line)">
+              <td style="color: var(--ink)">Prenatal</td>
+              <td style="color: var(--ink-dim)"><span aria-hidden="true">—</span><span class="sr-only">not offered</span></td>
+              <td>$105</td>
+              <td>$155</td>
+              <td>$205</td>
+            </tr>
+            <tr style="height: 3.5rem; border-top: 1px solid var(--line)">
+              <td style="color: var(--ink)">Couples Massage</td>
+              <td style="color: var(--ink-dim)"><span aria-hidden="true">—</span><span class="sr-only">not offered</span></td>
+              <td>$205</td>
+              <td>$305</td>
+              <td>$405</td>
+            </tr>
+            <tr style="height: 3.5rem; border-top: 1px solid var(--line)">
+              <td><a href="/services/4-hand-massage">4-Hand Massage</a></td>
+              <td style="color: var(--ink-dim)"><span aria-hidden="true">—</span><span class="sr-only">not offered</span></td>
+              <td>$205</td>
+              <td>$305</td>
+              <td>$405</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p data-reveal style="margin-top: var(--space-3)">To book a 30-minute massage, call us at <a href="tel:+18012881118">(801) 288-1118</a>.</p>
+      <p data-reveal>All prices in USD. Card payments carry a $5 processing fee; cash has no fee.</p>
 
-        <div class="pr-tablecard">
-          <div class="pr-tablecard__scroll">
-            <table class="pricing-table">
-              <thead>
-                <tr>
-                  <th style="min-width: 200px;">Service</th>
-                  <th>30 min</th>
-                  <th>60 min</th>
-                  <th>90 min</th>
-                  <th>120 min</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Swedish Massage</td>
-                  <td class="price">$65</td>
-                  <td class="price">$105</td>
-                  <td class="price">$155</td>
-                  <td class="price">$205</td>
-                </tr>
-                <tr>
-                  <td>Deep Tissue</td>
-                  <td class="na"><span aria-hidden="true">—</span><span class="pn-sr">call us</span></td>
-                  <td class="price">$125</td>
-                  <td class="price">$175</td>
-                  <td class="price">$245</td>
-                </tr>
-                <tr>
-                  <td>Sports Massage</td>
-                  <td class="price">$65</td>
-                  <td class="price">$105</td>
-                  <td class="price">$155</td>
-                  <td class="price">$205</td>
-                </tr>
-                <tr>
-                  <td>Ashiatsu</td>
-                  <td class="price">$65</td>
-                  <td class="price">$105</td>
-                  <td class="price">$155</td>
-                  <td class="price">$205</td>
-                </tr>
-                <tr>
-                  <td>Shiatsu</td>
-                  <td class="price">$65</td>
-                  <td class="price">$105</td>
-                  <td class="price">$155</td>
-                  <td class="price">$205</td>
-                </tr>
-                <tr>
-                  <td>Myofascial Release</td>
-                  <td class="price">$65</td>
-                  <td class="price">$105</td>
-                  <td class="price">$155</td>
-                  <td class="price">$205</td>
-                </tr>
-                <tr>
-                  <td>Prenatal</td>
-                  <td class="na"><span aria-hidden="true">—</span><span class="pn-sr">not offered</span></td>
-                  <td class="price">$105</td>
-                  <td class="price">$155</td>
-                  <td class="price">$205</td>
-                </tr>
-                <tr>
-                  <td>Couples Massage</td>
-                  <td class="na"><span aria-hidden="true">—</span><span class="pn-sr">not offered</span></td>
-                  <td class="price">$205</td>
-                  <td class="price">$305</td>
-                  <td class="price">$405</td>
-                </tr>
-                <tr>
-                  <td><a href="/services/4-hand-massage">4-Hand Massage</a></td>
-                  <td class="na"><span aria-hidden="true">—</span><span class="pn-sr">not offered</span></td>
-                  <td class="price">$205</td>
-                  <td class="price">$305</td>
-                  <td class="price">$405</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <p class="pr-note">
-          To book a 30-minute massage, call us at <a href="tel:+18012881118" class="pr-cta__phone">(801) 288-1118</a>.
-        </p>
-        <p class="pr-note">
-          All prices in USD. Card payments carry a $5 processing fee; cash has no fee.
-        </p>
+      <h2 data-reveal style="margin-top: var(--space-4)">Enhancements &amp; add-ons</h2>
+      <p data-reveal>Add any of these to a massage when you book. Hot stones, cupping and doTERRA essential oils are $20 each; infrared sauna and CBD are $30 each. A 30-minute prenatal extension is $50.</p>
+      <div class="price-table" data-reveal>
+        <div class="price-row" style="grid-template-columns: 1fr auto"><div><p class="price-row__name">Cupping</p><p class="price-row__time" style="margin: 0.25rem 0 0">Suction that lifts fascia and decompresses connective tissue. Effective for chronic tightness and stubborn restrictions.</p></div><span class="price-row__amount">+$20</span></div>
+        <div class="price-row" style="grid-template-columns: 1fr auto"><div><p class="price-row__name">Hot Stones</p><p class="price-row__time" style="margin: 0.25rem 0 0">Heated basalt stones layered into your massage for deeper warmth, slower release, and a more complete sense of calm.</p></div><span class="price-row__amount">+$20</span></div>
+        <div class="price-row" style="grid-template-columns: 1fr auto"><div><p class="price-row__name">Infrared Sauna</p><p class="price-row__time" style="margin: 0.25rem 0 0">A 30-minute infrared warm-up before or after your session. Promotes circulation, eases soreness, and amplifies relaxation.</p></div><span class="price-row__amount">+$30</span></div>
+        <div class="price-row" style="grid-template-columns: 1fr auto"><div><p class="price-row__name">CBD</p><p class="price-row__time" style="margin: 0.25rem 0 0">CBD oil worked into the session for extra calm and a deeper sense of release in tight, overworked muscle.</p></div><span class="price-row__amount">+$30</span></div>
+        <div class="price-row" style="grid-template-columns: 1fr auto"><div><p class="price-row__name">doTERRA Essential Oils</p><p class="price-row__time" style="margin: 0.25rem 0 0">doTERRA essential oils added to your session.</p></div><span class="price-row__amount">+$20</span></div>
+        <div class="price-row" style="grid-template-columns: 1fr auto"><div><p class="price-row__name">Prenatal Extension</p><p class="price-row__time" style="margin: 0.25rem 0 0">Add 30 minutes to any prenatal session.</p></div><span class="price-row__amount">+$50</span></div>
+      </div>
+
+      <h2 data-reveal style="margin-top: var(--space-4)">Give the gift of real relief</h2>
+      <p data-reveal>J Massage SLC gift cards are available for any dollar amount or specific service. Perfect for birthdays, anniversaries, holidays, or just because. Never expire.</p>
+      <p data-reveal style="margin-top: var(--space-2)"><a class="btn btn--secondary" href="/gift-cards" data-magnetic>Buy a Gift Card</a></p>
+
+      <h2 data-reveal style="margin-top: var(--space-4)">Pricing questions</h2>
+      <div class="faq" data-reveal>
+        <details class="faq__item"><summary>How much does a massage cost at J Massage SLC?</summary><div class="faq__answer"><p>Standard massages are $105 for 60 minutes, $155 for 90 minutes, and $205 for 120 minutes. This covers Swedish, sports, Ashiatsu, Shiatsu, and myofascial. A 30-minute massage is $65; call us at <a href="tel:+18012881118">(801) 288-1118</a> to book it. Deep tissue is $125 for 60 minutes, $175 for 90, and $245 for 120. Prenatal massage is $105 for 60 minutes, $155 for 90, and $205 for 120. Couples massage and 4-hand massage start at $205 for 60 minutes. All prices are listed in full above, no hidden fees.</p></div></details>
+        <details class="faq__item"><summary>Is there a fee for paying by card?</summary><div class="faq__answer"><p>A small card processing fee may apply when paying by credit or debit card. There is no additional fee when paying with cash. This is confirmed at the time of booking so there are no surprises.</p></div></details>
+        <details class="faq__item"><summary>What add-ons can I include with my massage?</summary><div class="faq__answer"><p>Five add-ons are available: hot stones, cupping and doTERRA essential oils for $20 each, plus infrared sauna (30 minutes) and CBD at $30 each. A 30-minute prenatal extension is $50. Select any of them when booking online or mention them when you call.</p></div></details>
+        <details class="faq__item"><summary>Are gift cards available?</summary><div class="faq__answer"><p>Yes, J Massage SLC gift cards are available for any dollar amount or for a specific service. They never expire and make a thoughtful gift for any occasion. Visit our <a href="/gift-cards">gift cards page</a> or call <a href="tel:+18012881118">(801) 288-1118</a> to purchase.</p></div></details>
       </div>
     </section>
 
-    <!-- ADD-ONS -->
-    <section class="pr-section--tight">
-      <div class="container pr-wrap">
-        <h2 class="pr-heading" style="margin-bottom: 2rem;">
-          Enhancements &amp; <em>add-ons</em>
-        </h2>
-        <p class="pr-lede">Add any of these to a massage when you book. Hot stones, cupping and doTERRA essential oils are $20 each; infrared sauna and CBD are $30 each. A 30-minute prenatal extension is $50.</p>
-        <div class="pr-addons">
-          <div class="pr-addon">
-            <div class="pr-addon__head">
-              <h3 class="pr-addon__name">Cupping</h3>
-              <span class="pr-addon__price">+$20</span>
-            </div>
-            <p class="pr-addon__body">Suction that lifts fascia and decompresses connective tissue. Effective for chronic tightness and stubborn restrictions.</p>
-          </div>
-          <div class="pr-addon">
-            <div class="pr-addon__head">
-              <h3 class="pr-addon__name">Hot Stones</h3>
-              <span class="pr-addon__price">+$20</span>
-            </div>
-            <p class="pr-addon__body">Heated basalt stones layered into your massage for deeper warmth, slower release, and a more complete sense of calm.</p>
-          </div>
-          <div class="pr-addon">
-            <div class="pr-addon__head">
-              <h3 class="pr-addon__name">Infrared Sauna</h3>
-              <span class="pr-addon__price">+$30</span>
-            </div>
-            <p class="pr-addon__body">A 30-minute infrared warm-up before or after your session. Promotes circulation, eases soreness, and amplifies relaxation.</p>
-          </div>
-          <div class="pr-addon">
-            <div class="pr-addon__head">
-              <h3 class="pr-addon__name">CBD</h3>
-              <span class="pr-addon__price">+$30</span>
-            </div>
-            <p class="pr-addon__body">CBD oil worked into the session for extra calm and a deeper sense of release in tight, overworked muscle.</p>
-          </div>
-          <div class="pr-addon">
-            <div class="pr-addon__head">
-              <h3 class="pr-addon__name">doTERRA Essential Oils</h3>
-              <span class="pr-addon__price">+$20</span>
-            </div>
-            <p class="pr-addon__body">doTERRA essential oils added to your session.</p>
-          </div>
-          <div class="pr-addon">
-            <div class="pr-addon__head">
-              <h3 class="pr-addon__name">Prenatal Extension</h3>
-              <span class="pr-addon__price">+$50</span>
-            </div>
-            <p class="pr-addon__body">Add 30 minutes to any prenatal session.</p>
-          </div>
+    <section class="band-dark">
+      <div class="cta-band container">
+        <h2 class="cta-band__heading" data-reveal>Ready to book?</h2>
+        <p class="cta-band__text" data-reveal>Select your service, pick a time that works, and we'll take care of the rest. Open daily 10am to 10pm. Same-day appointments are frequently available.</p>
+        <div class="cluster cluster--center" data-reveal>
+          <a class="btn btn--primary" href="/book" data-magnetic>Book Now</a>
+          <a class="btn btn--ghost btn--on-dark" href="tel:+18012881118">Call (801) 288-1118</a>
         </div>
       </div>
     </section>
-
-    <!-- GIFT CARDS -->
-    <section class="pr-section pr-gift">
-      <div class="container">
-        <div class="pr-gift__grid">
-          <div>
-            <span class="ed-eyebrow">Gift Cards</span>
-            <h2 class="pr-heading" style="margin-bottom: 1rem;">
-              Give the gift of <em>real relief</em>
-            </h2>
-            <p class="pr-gift__body">
-              J Massage SLC gift cards are available for any dollar amount or specific service. Perfect for birthdays, anniversaries, holidays, or just because. Never expire.
-            </p>
-            <a href="/gift-cards" class="ed-btn ed-btn--filled">Buy a Gift Card</a>
-          </div>
-          <div class="pr-gift__card">
-            <div class="pr-gift__card-mark">$</div>
-            <div class="pr-gift__card-label">Gift Card</div>
-            <div class="pr-gift__card-meta">Any amount · Never expires</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SAME-DAY NOTE -->
-    <section style="padding: 3rem 0; border-bottom: 1px solid var(--border);">
-      <div class="container pr-wrap--narrow">
-        <div class="pr-sameday">
-          <div style="flex: 1; min-width: 200px;">
-            <h3 class="pr-sameday__title">Same-day availability</h3>
-            <p class="pr-sameday__body">Same-day appointments are frequently available. Book online or call us, we'll get you in today.</p>
-          </div>
-          <a href="/book" class="ed-btn ed-btn--ghost" style="white-space: nowrap; min-width: auto;">Check Availability</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="pr-section">
-      <div class="container pr-wrap--faq">
-        <span class="ed-eyebrow" style="display: block; text-align: center;">FAQ</span>
-        <h2 class="pr-heading pr-heading--center" style="margin-bottom: 3rem;">
-          Pricing <em>questions</em>
-        </h2>
-
-        <div>
-          <details class="faq-item">
-            <summary>How much does a massage cost at J Massage SLC?</summary>
-            <div class="faq-body">
-              Standard massages are $105 for 60 minutes, $155 for 90 minutes, and $205 for 120 minutes. This covers Swedish, sports, Ashiatsu, Shiatsu, and myofascial. A 30-minute massage is $65; call us at <a href="tel:+18012881118" class="pr-cta__phone">(801) 288-1118</a> to book it. Deep tissue is $125 for 60 minutes, $175 for 90, and $245 for 120. Prenatal massage is $105 for 60 minutes, $155 for 90, and $205 for 120. Couples massage and 4-hand massage start at $205 for 60 minutes. All prices are listed in full above, no hidden fees.
-            </div>
-          </details>
-          <details class="faq-item">
-            <summary>Is there a fee for paying by card?</summary>
-            <div class="faq-body">
-              A small card processing fee may apply when paying by credit or debit card. There is no additional fee when paying with cash. This is confirmed at the time of booking so there are no surprises.
-            </div>
-          </details>
-          <details class="faq-item">
-            <summary>What add-ons can I include with my massage?</summary>
-            <div class="faq-body">
-              Five add-ons are available: hot stones, cupping and doTERRA essential oils for $20 each, plus infrared sauna (30 minutes) and CBD at $30 each. A 30-minute prenatal extension is $50. Select any of them when booking online or mention them when you call.
-            </div>
-          </details>
-          <details class="faq-item">
-            <summary>Are gift cards available?</summary>
-            <div class="faq-body">
-              Yes, J Massage SLC gift cards are available for any dollar amount or for a specific service. They never expire and make a thoughtful gift for any occasion. Visit our <a href="/gift-cards" class="pr-cta__phone">gift cards page</a> or call <a href="tel:+18012881118" class="pr-cta__phone">(801) 288-1118</a> to purchase.
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="pr-cta">
-      <div class="container">
-        <div class="pr-cta__inner">
-          <h2 class="pr-heading pr-heading--center" style="margin-bottom: 1.2rem;">
-            Ready to <em>book?</em>
-          </h2>
-          <p class="pr-cta__body">
-            Select your service, pick a time that works, and we'll take care of the rest. Open daily 10am to 10pm.
-          </p>
-          <a href="/book" class="ed-btn ed-btn--filled">Book Your Session Now</a>
-          <p style="margin-top: 1.5rem; color: var(--text-lo); font-size: 0.85rem;">
-            Questions? Call <a href="tel:+18012881118" class="pr-cta__phone">(801) 288-1118</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <footer class="footer">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <span class="footer__logo">J Massage <em>SLC</em></span>
-        <p>Salt Lake City massage therapy studio since 2017. Utah-licensed therapists, 500+ Google reviews, open every day.</p>
-        <div class="footer__rating">
-          <span class="stars">★★★★<span class="star-half" aria-hidden="true">★</span></span>
-          <span>4.4 &nbsp;·&nbsp; 500+ Verified Google Reviews</span>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid site-footer__grid--cols">
+        <div>
+          <p class="site-footer__brand">J Massage SLC</p>
+          <p style="max-width: 36ch;">Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+          <p class="site-footer__rating"><span class="stars" aria-hidden="true">★★★★<span class="star-half">★</span></span> 4.4 · 500+ Verified Google Reviews</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Treatments</p>
+          <ul class="site-footer__list">
+            <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+            <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+            <li><a href="/services/sports-massage">Sports Massage</a></li>
+            <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+            <li><a href="/services/couples-massage">Couples Massage</a></li>
+            <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+            <li><a href="/services/shiatsu">Shiatsu</a></li>
+            <li><a href="/services/reflexology">Reflexology</a></li>
+            <li><a href="/services/prenatal">Prenatal Massage</a></li>
+            <li><a href="/services/myofascial">Myofascial Release</a></li>
+            <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Quick Links</p>
+          <ul class="site-footer__list">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/gift-cards">Gift Cards</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="https://www.elitespautah.com" rel="noopener">Elite Spa Utah (sister location)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Areas We Serve</p>
+          <ul class="site-footer__list">
+            <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
+            <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
+            <li><a href="/massage-in-sugar-house">Sugar House</a></li>
+            <li><a href="/massage-in-millcreek">Millcreek</a></li>
+            <li><a href="/massage-in-the-avenues">The Avenues</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Visit Us</p>
+          <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
+          <ul class="site-footer__list" style="margin-top: var(--space-1);">
+            <li><a href="tel:+18012881118">(801) 288-1118</a></li>
+            <li>Open Daily · 10am–10pm</li>
+            <li><a href="/book">Book online</a></li>
+            <li><a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a></li>
+          </ul>
         </div>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Treatments</h2>
-        <ul>
-          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-          <li><a href="/services/sports-massage">Sports Massage</a></li>
-          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-          <li><a href="/services/couples-massage">Couples Massage</a></li>
-          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-        </ul>
+      <div class="site-footer__legal">
+        <span>© 2026 J Massage SLC · All rights reserved · <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--></span>
+        <span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a></span>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Areas We Serve</h2>
-        <ul>
-          <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
-          <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
-          <li><a href="/massage-in-sugar-house">Sugar House</a></li>
-          <li><a href="/massage-in-millcreek">Millcreek</a></li>
-          <li><a href="/massage-in-the-avenues">The Avenues</a></li>
-        </ul>
-      </div>
-      <div class="footer__contact">
-        <h2 class="footer__heading">Visit Us</h2>
-        <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
-        <a href="tel:+18012881118">(801) 288-1118</a><br>
-        <!--email_off--><a href="mailto:jmassage677@gmail.com" style="display: block; margin-top: 0.3rem; color: var(--text-lo); font-size: 0.85rem;">jmassage677@gmail.com</a><!--/email_off-->
-        <p>Open Daily &nbsp;·&nbsp; 10am – 10pm</p>
-        <a href="/book" class="btn btn--gold btn--sm">Book Now</a>
-      </div>
-    </div>
-    <div class="footer__bottom container">
-      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
-        <a href="https://www.google.com/maps/place/J+Massage+SLC" target="_blank" rel="noopener">Get Directions</a>
-        &nbsp;·&nbsp;
-        <a href="tel:+18012881118">(801) 288-1118</a>
-        &nbsp;·&nbsp;
-        <a href="/about">About</a>
-        &nbsp;·&nbsp;
-        <a href="/contact">Contact</a>
-        &nbsp;·&nbsp;
-        <a href="/pricing">Pricing</a> &nbsp;·&nbsp; <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--> &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
-    </p>
     </div>
   </footer>
 
-  <script src="js/vendor/gsap.min.js" defer></script>
-  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js" defer></script>
-  <script src="js/motion.js" defer></script>
   <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
        The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
-  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
+  <script src="/js/nav.js?v=1" defer></script>
+  <script src="/js/defer-load.js?v=2" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
-  <!-- Sticky mobile Book/Call bar (P1 CRO) -->
-  <style>
-    .m-cta{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;gap:.5rem;padding:.5rem calc(.6rem + 72px) .5rem .6rem;background:rgba(20,17,14,.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid rgba(250,247,243,.14);box-shadow:0 -6px 20px rgba(0,0,0,.30)}
-    .m-cta a{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;padding:.8rem .5rem;border-radius:10px;text-decoration:none;font-family:var(--font-ui,'DM Sans',system-ui,sans-serif);font-weight:600;font-size:.98rem;letter-spacing:.02em}
-    .m-cta__book{background:var(--lantern,#c9a86a);color:var(--ember,#fffdfb)}
-    .m-cta__call{background:transparent;color:#faf7f3;border:1px solid rgba(250,247,243,.45)}
-    @media (max-width:820px){.m-cta{display:flex}body{padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}}
-  </style>
   <nav class="m-cta" aria-label="Book or call">
-    <a class="m-cta__book" href="/book">Book</a>
-    <a class="m-cta__call" href="tel:+18012881118">Call</a>
+    <a class="btn btn--primary" href="/book">Book</a>
+    <a class="btn btn--secondary" href="tel:+18012881118">Call</a>
   </nav>
 </body>
 </html>

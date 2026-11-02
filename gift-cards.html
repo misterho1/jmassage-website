@@ -32,8 +32,7 @@
   <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/styles.css?v=24">
-  <link rel="stylesheet" href="css/service-page.css?v=6">
+  <link rel="stylesheet" href="/css/site.css?v=1">
 
   <script type="application/ld+json">
   {
@@ -415,445 +414,186 @@
 
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <header id="header" class="header">
-    <div class="header__inner container">
-      <a href="/" class="logo" aria-label="J Massage SLC, home">
-        <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <ul class="nav__list" id="navList">
-          <li class="nav__item nav__item--dropdown">
-            <a href="/#services" class="nav__link">Services <span class="nav__dropdown-caret">›</span></a>
-            <ul class="nav__dropdown">
-              <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-              <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-              <li><a href="/services/sports-massage">Sports Massage</a></li>
-              <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-              <li><a href="/services/couples-massage">Couples Massage</a></li>
-              <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-              <li><a href="/services/shiatsu">Shiatsu</a></li>
-              <li><a href="/services/reflexology">Reflexology</a></li>
-              <li><a href="/services/prenatal">Prenatal Massage</a></li>
-              <li><a href="/services/myofascial">Myofascial Release</a></li>
-              <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
-            </ul>
-          </li>
-          <li><a href="/about" class="nav__link">About</a></li>
-          <li><a href="/pricing" class="nav__link">Pricing</a></li>
-          <li><a href="/reviews" class="nav__link">Reviews</a></li>
-          <li><a href="/gift-cards" class="nav__link" aria-current="page">Gift Cards</a></li>
-          <li><a href="/faq" class="nav__link">FAQ</a></li>
-          <li><a href="/blog" class="nav__link">Blog</a></li>
-          <li><a href="/contact" class="nav__link">Contact</a></li>
-          <li><a href="/book" class="nav__cta" data-magnetic>Book Now</a></li>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="/">J Massage SLC</a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav__menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+        <ul class="site-nav__list" id="primary-nav">
+          <li><a class="site-nav__link" href="/services">Services</a></li>
+          <li><a class="site-nav__link" href="/pricing">Pricing</a></li>
+          <li><a class="site-nav__link" href="/reviews">Reviews</a></li>
+          <li><a class="site-nav__link" href="/about">About</a></li>
+          <li><a class="site-nav__link" href="/gift-cards">Gift Cards</a></li>
+          <li><a class="site-nav__link" href="/faq">FAQ</a></li>
+          <li><a class="site-nav__link" href="/blog">Blog</a></li>
+          <li><a class="site-nav__link" href="/contact">Contact</a></li>
+          <li class="site-nav__item--tel"><a class="site-nav__link" href="tel:+18012881118">(801) 288-1118</a></li>
+          <li><a class="btn btn--primary" href="/book" data-magnetic>Book Now</a></li>
         </ul>
-        <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
       </nav>
     </div>
   </header>
 
   <main id="main">
-
-    <!-- HERO -->
-    <section class="gc-hero">
-      <div class="gc-hero__inner container">
-        <span class="gc-hero__eyebrow">Digital Gift Cards · Instant Delivery</span>
-        <h1 class="gc-hero__h1">The gift that actually<br><em>gets used.</em></h1>
-        <p class="gc-hero__sub">
-          No re-gifting. No regrets. A J Massage SLC gift card is delivered instantly by email, redeemable for any massage on our menu, and never expires. The most thoughtful gift you can give, and the most eagerly redeemed.
-        </p>
-        <div class="gc-hero__actions">
-          <a href="#purchase" class="btn btn--gold">Buy a Gift Card</a>
-          <a href="/#services" class="btn btn--ghost">Explore Services</a>
+    <section class="page-header" data-hero>
+      <div class="container container--narrow">
+        <p class="eyebrow">Digital Gift Cards · Instant Delivery</p>
+        <h1><span class="line"><span class="line-inner">The gift that actually gets used.</span></span></h1>
+        <p class="lead">A J Massage SLC gift card is delivered instantly by email, redeemable for any massage on our menu, and never expires.</p>
+        <div class="cluster cluster--center" style="margin-block: var(--space-3)" data-hero-cta>
+          <a class="btn btn--primary" href="https://microsite.talech.com/gift-card/JMASSAGE-SALT-LAKE-CITY-UT/lRzV8wqp7la9E3Q7" target="_blank" rel="noopener" data-magnetic>Buy a Gift Card</a>
+          <a class="btn btn--secondary" href="/#services">Explore Services</a>
         </div>
       </div>
     </section>
 
-    <!-- MAIN PURCHASE SECTION -->
-    <section id="purchase" class="gc-main">
-      <div class="container gc-main__grid">
-
-        <!-- Visual -->
-        <div class="gc-visual reveal">
-          <div class="gc-card-3d">
-            <div class="gift-card-mock" id="giftMock">
-              <div class="gift-card-mock__noise"></div>
-              <div class="gift-card-mock__top">
-                <span class="gift-card-mock__brand">J Massage <em>SLC</em></span>
-                <svg class="gift-card-mock__logo-icon" viewBox="0 0 40 40" fill="none">
-                  <path d="M6 20C6 20 11 12 20 12C29 12 34 20 34 20" stroke="rgba(160, 77, 44, 0.6)" stroke-width="1.5" stroke-linecap="round"/>
-                  <path d="M6 26C6 26 11 18 20 18C29 18 34 26 34 26" stroke="rgba(160, 77, 44, 0.6)" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="gift-card-mock__mid">
-                <span class="gift-card-mock__amount" id="giftDisplayAmt">$75</span>
-              </div>
-              <div class="gift-card-mock__btm">
-                <span class="gift-card-mock__tag">GIFT CARD</span>
-                <span class="gift-card-mock__sub">Salt Lake City, UT</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="gc-trust">
-            <div class="gc-trust-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              Delivered instantly by email
-            </div>
-            <div class="gc-trust-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-              Never expires, use it anytime
-            </div>
-            <div class="gc-trust-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-              Valid for any service or add-on
-            </div>
-            <div class="gc-trust-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-              Secure online checkout
-            </div>
-          </div>
+    <section id="purchase" class="container container--content section">
+      <div class="cols-2">
+        <div>
+          <h2 data-reveal>Give restoration. Starting at $25.</h2>
+          <p class="lead" data-reveal>You will confirm your amount on the secure checkout page. Email delivery in minutes. No expiration. Redeemable for any service or add-on at J Massage SLC, Salt Lake City, UT.</p>
+          <p style="margin-top: var(--space-3)" data-reveal><a class="btn btn--primary" href="https://microsite.talech.com/gift-card/JMASSAGE-SALT-LAKE-CITY-UT/lRzV8wqp7la9E3Q7" target="_blank" rel="noopener">Continue to secure checkout</a></p>
         </div>
-
-        <!-- Form -->
-        <div class="gc-form reveal">
-          <span class="section-label">Choose Your Amount</span>
-          <h2 class="section-title" style="text-align:left;margin-bottom:2rem;">Give restoration.<br><em>Starting at $25.</em></h2>
-
-          <label class="gc-form__label">Select a Preset Amount</label>
-          <div class="gift-amounts" id="giftAmounts">
-            <button class="gift-amt" data-amount="50">$50</button>
-            <button class="gift-amt gift-amt--active" data-amount="75">$75</button>
-            <button class="gift-amt" data-amount="100">$100</button>
-            <button class="gift-amt" data-amount="150">$150</button>
-            <button class="gift-amt" data-amount="200">$200</button>
-          </div>
-
-          <div class="gift-custom">
-            <label for="customAmt">Or Enter a Custom Amount</label>
-            <div class="gift-custom__input-wrap">
-              <span>$</span>
-              <input type="number" id="customAmt" placeholder="Any amount · $25 – $500" min="25" max="500" aria-label="Custom gift card amount">
-            </div>
-          </div>
-
-          <div class="gc-form__cta">
-            <a href="https://microsite.talech.com/gift-card/JMASSAGE-SALT-LAKE-CITY-UT/lRzV8wqp7la9E3Q7" id="giftPurchaseBtn" class="btn btn--gold btn--full" target="_blank" rel="noopener" style="font-size:0.9rem;padding:1.1rem 2rem;">
-              Continue to secure checkout
-            </a>
-          </div>
-
-          <p class="gc-form__legal">You will confirm your amount on the secure checkout page. Email delivery in minutes. No expiration. Redeemable for any service or add-on at J Massage SLC, Salt Lake City, UT.</p>
-
-          <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);">
-            <p style="font-size:0.82rem;color:var(--text-lo);margin-bottom:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">Questions? We're here.</p>
-            <a href="tel:+18012881118" style="font-family:var(--font-head);font-size:1.2rem;color:var(--lantern);font-style:italic;">(801) 288-1118</a>
-            <span style="display:block;font-size:0.8rem;color:var(--text-dim);margin-top:0.25rem;">Open daily · 10am – 10pm</span>
-          </div>
+        <div>
+          <ul class="svc-best-for" data-reveal-stagger>
+            <li>Delivered instantly by email</li>
+            <li>Never expires, use it anytime</li>
+            <li>Valid for any service or add-on</li>
+            <li>Secure online checkout</li>
+          </ul>
+          <h3 style="margin-top: var(--space-4)" data-reveal>Questions? We're here.</h3>
+          <p data-reveal><a href="tel:+18012881118">(801) 288-1118</a><br>Open daily · 10am – 10pm</p>
         </div>
-
       </div>
     </section>
 
-    <!-- HOW IT WORKS -->
-    <section class="gc-how">
+    <section class="section section--cream">
       <div class="container">
-        <header class="section-head reveal">
-          <span class="section-label">How It Works</span>
-          <h2 class="section-title">Three steps.<br><em>Infinite gratitude.</em></h2>
-        </header>
-        <div class="gc-how__steps">
-          <div class="gc-how__step reveal-card">
-            <div class="gc-how__step-num">1</div>
-            <h3 class="gc-how__step-title">Choose Your Amount</h3>
-            <p class="gc-how__step-desc">Select any preset amount between $50–$200, or enter a custom amount from $25 to $500. The right gift for every budget.</p>
-          </div>
-          <div class="gc-how__step reveal-card">
-            <div class="gc-how__step-num">2</div>
-            <h3 class="gc-how__step-title">Instant Email Delivery</h3>
-            <p class="gc-how__step-desc">Your recipient gets their gift card code by email within minutes of purchase, ready to book immediately or save for whenever they're ready.</p>
-          </div>
-          <div class="gc-how__step reveal-card">
-            <div class="gc-how__step-num">3</div>
-            <h3 class="gc-how__step-title">They Book &amp; Enjoy</h3>
-            <p class="gc-how__step-desc">Redeem online at jmassageslc.com or by calling (801) 288-1118. Valid for any service, Swedish, deep tissue, couples, <a href="/services/4-hand-massage">4-hand</a>, and all add-ons.</p>
-          </div>
+        <p class="eyebrow" data-reveal>How It Works</p>
+        <h2 data-reveal>Three steps. Infinite gratitude.</h2>
+        <div class="service-grid" style="margin-top: var(--space-3);" data-reveal-stagger>
+          <div class="service-card"><h3 class="service-card__title">Choose Your Amount</h3><p class="service-card__desc">Select any preset amount between $50–$200, or enter a custom amount from $25 to $500. The right gift for every budget.</p></div>
+          <div class="service-card"><h3 class="service-card__title">Instant Email Delivery</h3><p class="service-card__desc">Your recipient gets their gift card code by email within minutes of purchase, ready to book immediately or save for whenever they're ready.</p></div>
+          <div class="service-card"><h3 class="service-card__title">They Book &amp; Enjoy</h3><p class="service-card__desc">Redeem online at jmassageslc.com or by calling (801) 288-1118. Valid for any service, Swedish, deep tissue, couples, <a href="/services/4-hand-massage">4-hand</a>, and all add-ons.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- GIFT IDEAS -->
-    <section class="gc-ideas">
-      <div class="container">
-        <header class="section-head reveal">
-          <span class="section-label">Perfect For</span>
-          <h2 class="section-title">Every occasion.<br><em>Every person.</em></h2>
-          <p class="section-sub">When you don't know what to give, give something they'll genuinely use, and genuinely thank you for.</p>
-        </header>
-        <div class="gc-ideas__grid">
-          <div class="gc-idea-card reveal-card">
-            <div class="gc-idea-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><path d="M20 6C20 6 28 12 28 20C28 28 20 34 20 34C20 34 12 28 12 20C12 12 20 6 20 6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </div>
-            <h3 class="gc-idea-card__title">Anniversaries</h3>
-            <p class="gc-idea-card__desc">Give the couple's massage they've been talking about, or let them each choose their own treatment. Either way, unforgettable.</p>
-          </div>
-          <div class="gc-idea-card reveal-card">
-            <div class="gc-idea-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><path d="M20 8l2.39 7.26H30l-6.19 4.5 2.39 7.26L20 22.52l-6.2 4.5 2.39-7.26L10 15.26h7.61L20 8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <h3 class="gc-idea-card__title">Birthdays</h3>
-            <p class="gc-idea-card__desc">Skip the candle they won't burn and the book they won't read. Give a <a href="/services/deep-tissue">60-minute deep tissue</a>, a birthday gift that actually delivers.</p>
-          </div>
-          <div class="gc-idea-card reveal-card">
-            <div class="gc-idea-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><path d="M14 8C14 8 10 10 10 16C10 22 14 24 14 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M26 8C26 8 30 10 30 16C30 22 26 24 26 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 24C14 24 16 28 20 28C24 28 26 24 26 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </div>
-            <h3 class="gc-idea-card__title">Mother's &amp; Father's Day</h3>
-            <p class="gc-idea-card__desc">They gave you everything. Give them 90 minutes of nothing, total restoration at Salt Lake City's experienced massage studio.</p>
-          </div>
-          <div class="gc-idea-card reveal-card">
-            <div class="gc-idea-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><rect x="8" y="10" width="24" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 16h24" stroke="currentColor" stroke-width="1.5"/><path d="M14 8v4M26 8v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </div>
-            <h3 class="gc-idea-card__title">Corporate Gifting</h3>
-            <p class="gc-idea-card__desc">Reward your top performers with something they'll actually use. Bulk gift card orders available, call us at (801) 288-1118.</p>
-          </div>
-          <div class="gc-idea-card reveal-card">
-            <div class="gc-idea-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><path d="M20 10v5M10 20h5M25 20h5M20 25v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="1.5"/></svg>
-            </div>
-            <h3 class="gc-idea-card__title">Holiday Gifts</h3>
-            <p class="gc-idea-card__desc">Stress peaks during the holidays. A J Massage SLC gift card says: you deserve a break. And you mean it. No assembly required.</p>
-          </div>
-          <div class="gc-idea-card reveal-card">
-            <div class="gc-idea-card__icon">
-              <svg viewBox="0 0 40 40" fill="none"><path d="M20 8C15 8 10 12 10 18C10 24 20 32 20 32C20 32 30 24 30 18C30 12 25 8 20 8Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </div>
-            <h3 class="gc-idea-card__title">"Just Because"</h3>
-            <p class="gc-idea-card__desc">The most powerful gift is the unexpected one. No occasion required, just someone you care about who deserves to feel extraordinary.</p>
-          </div>
+    <section class="container section">
+      <p class="eyebrow" data-reveal>Perfect For</p>
+      <h2 data-reveal>Every occasion. Every person.</h2>
+      <p class="lead" data-reveal>When you don't know what to give, give something they'll genuinely use, and genuinely thank you for.</p>
+      <div class="service-grid" style="margin-top: var(--space-3);" data-reveal-stagger>
+        <div class="service-card"><h3 class="service-card__title">Anniversaries</h3><p class="service-card__desc">Give the couple's massage they've been talking about, or let them each choose their own treatment. Either way, unforgettable.</p></div>
+        <div class="service-card"><h3 class="service-card__title">Birthdays</h3><p class="service-card__desc">Skip the candle they won't burn and the book they won't read. Give a <a href="/services/deep-tissue">60-minute deep tissue</a>, a birthday gift that actually delivers.</p></div>
+        <div class="service-card"><h3 class="service-card__title">Mother's &amp; Father's Day</h3><p class="service-card__desc">They gave you everything. Give them 90 minutes of nothing, total restoration at Salt Lake City's experienced massage studio.</p></div>
+        <div class="service-card"><h3 class="service-card__title">Corporate Gifting</h3><p class="service-card__desc">Reward your top performers with something they'll actually use. Bulk gift card orders available, call us at (801) 288-1118.</p></div>
+        <div class="service-card"><h3 class="service-card__title">Holiday Gifts</h3><p class="service-card__desc">Stress peaks during the holidays. A J Massage SLC gift card says: you deserve a break. And you mean it. No assembly required.</p></div>
+        <div class="service-card"><h3 class="service-card__title">"Just Because"</h3><p class="service-card__desc">The most powerful gift is the unexpected one. No occasion required, just someone you care about who deserves to feel extraordinary.</p></div>
+      </div>
+    </section>
+
+    <section class="section section--cream">
+      <div class="container container--narrow">
+        <p class="eyebrow" data-reveal>Gift Card FAQ</p>
+        <h2 data-reveal>Questions? We have answers.</h2>
+        <div class="faq" data-reveal>
+          <details class="faq__item"><summary>How do J Massage SLC gift cards work?</summary><div class="faq__answer"><p>Purchase any amount online and your recipient receives an email with their gift card code immediately. They use that code when booking any service at J Massage SLC, either online at jmassageslc.com or by calling us at (801) 288-1118.</p></div></details>
+          <details class="faq__item"><summary>Do gift cards expire?</summary><div class="faq__answer"><p>Never. J Massage SLC gift cards have no expiration date. Your recipient can book their session six months from now or six years from now, whenever the moment is right.</p></div></details>
+          <details class="faq__item"><summary>What services can a gift card be used for?</summary><div class="faq__answer"><p>Gift cards are valid for every service we offer: Swedish massage, deep tissue, sports massage, Ashiatsu, <a href="/services/shiatsu">shiatsu</a>, couples massage, and 4-hand massage. They're also valid for add-ons: hot stones, cupping or doTERRA essential oils (+$20 each), infrared sauna or CBD (+$30 each).</p></div></details>
+          <details class="faq__item"><summary>Can I purchase a gift card for any amount?</summary><div class="faq__answer"><p>Yes. Choose a preset amount ($50, $75, $100, $150, or $200) or enter any custom amount from $25 to $500. For corporate bulk orders, call us at (801) 288-1118.</p></div></details>
+          <details class="faq__item"><summary>How quickly is a gift card delivered?</summary><div class="faq__answer"><p>Delivery is essentially instant. Most recipients receive their gift card email within 2–5 minutes of purchase. It's the perfect last-minute gift when you've run out of time but not thoughtfulness.</p></div></details>
+          <details class="faq__item"><summary>Is my payment secure?</summary><div class="faq__answer"><p>All payments are processed securely.</p></div></details>
         </div>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="gc-faq">
-      <div class="container">
-        <header class="section-head reveal">
-          <span class="section-label">Gift Card FAQ</span>
-          <h2 class="section-title">Questions?<br><em>We have answers.</em></h2>
-        </header>
-        <div class="faq-list">
-          <div class="faq-item">
-            <div class="faq-q" role="button" aria-expanded="false">
-              How do J Massage SLC gift cards work?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            </div>
-            <div class="faq-a">Purchase any amount online and your recipient receives an email with their gift card code immediately. They use that code when booking any service at J Massage SLC, either online at jmassageslc.com or by calling us at (801) 288-1118.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q" role="button" aria-expanded="false">
-              Do gift cards expire?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            </div>
-            <div class="faq-a">Never. J Massage SLC gift cards have no expiration date. Your recipient can book their session six months from now or six years from now, whenever the moment is right.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q" role="button" aria-expanded="false">
-              What services can a gift card be used for?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            </div>
-            <div class="faq-a">Gift cards are valid for every service we offer: Swedish massage, deep tissue, sports massage, Ashiatsu, <a href="/services/shiatsu">shiatsu</a>, couples massage, and 4-hand massage. They're also valid for add-ons: hot stones, cupping or doTERRA essential oils (+$20 each), infrared sauna or CBD (+$30 each).</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q" role="button" aria-expanded="false">
-              Can I purchase a gift card for any amount?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            </div>
-            <div class="faq-a">Yes. Choose a preset amount ($50, $75, $100, $150, or $200) or enter any custom amount from $25 to $500. For corporate bulk orders, call us at (801) 288-1118.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q" role="button" aria-expanded="false">
-              How quickly is a gift card delivered?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            </div>
-            <div class="faq-a">Delivery is essentially instant. Most recipients receive their gift card email within 2–5 minutes of purchase. It's the perfect last-minute gift when you've run out of time but not thoughtfulness.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q" role="button" aria-expanded="false">
-              Is my payment secure?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            </div>
-            <div class="faq-a">All payments are processed securely.</div>
-          </div>
-        </div>
+    <section class="band-dark">
+      <div class="cta-band container">
+      <h2 class="cta-band__heading" data-reveal>The best gifts are experiences, not things.</h2>
+      <p class="cta-band__text" data-reveal>Salt Lake City's experienced massage studio. Instant delivery. Never expires. Any amount.</p>
+      <div class="cluster cluster--center" data-reveal>
+        <a class="btn btn--primary" href="https://microsite.talech.com/gift-card/JMASSAGE-SALT-LAKE-CITY-UT/lRzV8wqp7la9E3Q7" target="_blank" rel="noopener" data-magnetic>Buy a Gift Card</a>
+        <a class="btn btn--ghost btn--on-dark" href="/book">Book for Yourself</a>
+      </div>
       </div>
     </section>
-
-    <!-- CTA -->
-    <section class="gc-cta-band">
-      <div class="container gc-cta-band__inner">
-        <h2 class="gc-cta-band__title">The best gifts are<br><em>experiences, not things.</em></h2>
-        <p class="gc-cta-band__sub">Salt Lake City's experienced massage studio. Instant delivery. Never expires. Any amount.</p>
-        <div class="gc-cta-band__actions">
-          <a href="#purchase" class="btn btn--gold">Buy a Gift Card</a>
-          <a href="/book" class="btn btn--ghost">Book for Yourself</a>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <footer class="footer">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <span class="footer__logo">J Massage <em>SLC</em></span>
-        <p>Experienced massage studio in Salt Lake County. Open every day, 10am to 10pm. Same-day appointments available.</p>
-        <div class="footer__rating"><span class="stars">★★★★<span class="star-half" aria-hidden="true">★</span></span><span>4.4 · 500+ Google Reviews</span></div>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid site-footer__grid--cols">
+        <div>
+          <p class="site-footer__brand">J Massage SLC</p>
+          <p style="max-width: 36ch;">Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+          <p class="site-footer__rating"><span class="stars" aria-hidden="true">★★★★<span class="star-half">★</span></span> 4.4 · 500+ Verified Google Reviews</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Treatments</p>
+          <ul class="site-footer__list">
+            <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+            <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+            <li><a href="/services/sports-massage">Sports Massage</a></li>
+            <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+            <li><a href="/services/couples-massage">Couples Massage</a></li>
+            <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+            <li><a href="/services/shiatsu">Shiatsu</a></li>
+            <li><a href="/services/reflexology">Reflexology</a></li>
+            <li><a href="/services/prenatal">Prenatal Massage</a></li>
+            <li><a href="/services/myofascial">Myofascial Release</a></li>
+            <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Quick Links</p>
+          <ul class="site-footer__list">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/gift-cards">Gift Cards</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="https://www.elitespautah.com" rel="noopener">Elite Spa Utah (sister location)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Areas We Serve</p>
+          <ul class="site-footer__list">
+            <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
+            <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
+            <li><a href="/massage-in-sugar-house">Sugar House</a></li>
+            <li><a href="/massage-in-millcreek">Millcreek</a></li>
+            <li><a href="/massage-in-the-avenues">The Avenues</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Visit Us</p>
+          <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
+          <ul class="site-footer__list" style="margin-top: var(--space-1);">
+            <li><a href="tel:+18012881118">(801) 288-1118</a></li>
+            <li>Open Daily · 10am–10pm</li>
+            <li><a href="/book">Book online</a></li>
+            <li><a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Treatments</h2>
-        <ul>
-          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-          <li><a href="/services/sports-massage">Sports Massage</a></li>
-          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-          <li><a href="/services/couples-massage">Couples Massage</a></li>
-          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-        </ul>
+      <div class="site-footer__legal">
+        <span>© 2026 J Massage SLC · All rights reserved · <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--></span>
+        <span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a></span>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Areas We Serve</h2>
-        <ul>
-          <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
-          <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
-          <li><a href="/massage-in-sugar-house">Sugar House</a></li>
-          <li><a href="/massage-in-millcreek">Millcreek</a></li>
-          <li><a href="/massage-in-the-avenues">The Avenues</a></li>
-        </ul>
-      </div>
-      <div class="footer__contact">
-        <h2 class="footer__heading">Visit Us</h2>
-        <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
-        <a href="tel:+18012881118">(801) 288-1118</a>
-        <p>Open Daily · 10am – 10pm</p>
-        <a href="/book" class="btn btn--gold btn--sm">Book Now</a>
-      </div>
-    </div>
-    <div class="footer__bottom container">
-      <p>© 2026 J Massage SLC · All rights reserved ·
-        <a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a> &nbsp;·&nbsp; <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--> &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
-    </p>
     </div>
   </footer>
 
-  <script>
-    // Scoped so these names stay out of the global scope: the GHL chat loader
-    // (added by /js/defer-load.js) declares top-level functions (o, h, ...) and
-    // fails to run on any name clash.
-    (function () {
-    // Header scroll
-    const h = document.getElementById('header');
-    window.addEventListener('scroll', () => h.classList.toggle('scrolled', window.scrollY > 60), {passive:true});
-
-    // Mobile nav
-    const burger = document.getElementById('burger');
-    const navList = document.getElementById('navList');
-    burger.addEventListener('click', () => {
-      const open = navList.classList.toggle('open');
-      burger.classList.toggle('open', open);
-      burger.setAttribute('aria-expanded', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-    navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      navList.classList.remove('open');
-      burger.classList.remove('open');
-      document.body.style.overflow = '';
-    }));
-
-    // Scroll reveals
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, {threshold: 0.07, rootMargin: '0px 0px -40px 0px'});
-    document.querySelectorAll('.reveal, .reveal-card').forEach(el => io.observe(el));
-
-    // FAQ
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.querySelector('.faq-q').addEventListener('click', () => {
-        const isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-        if (!isOpen) item.classList.add('open');
-      });
-    });
-    const firstFaq = document.querySelector('.faq-item');
-    if (firstFaq) firstFaq.classList.add('open');
-
-    // Gift card UI
-    const amtBtns = document.querySelectorAll('.gift-amt');
-    const customAmt = document.getElementById('customAmt');
-    const displayAmt = document.getElementById('giftDisplayAmt');
-    const purchaseBtn = document.getElementById('giftPurchaseBtn');
-    const mockCard = document.getElementById('giftMock');
-
-    let selected = 75;
-    const updateDisplay = (amount) => {
-      selected = amount;
-      if (displayAmt) {
-        displayAmt.style.transform = 'scale(1.15)';
-        displayAmt.textContent = `$${amount}`;
-        setTimeout(() => { displayAmt.style.transform = ''; }, 220);
-      }
-      if (purchaseBtn) {
-        purchaseBtn.href = 'https://microsite.talech.com/gift-card/JMASSAGE-SALT-LAKE-CITY-UT/lRzV8wqp7la9E3Q7';
-        purchaseBtn.textContent = `Purchase Gift Card, $${amount}`;
-      }
-    };
-
-    amtBtns.forEach(btn => btn.addEventListener('click', () => {
-      amtBtns.forEach(b => b.classList.remove('gift-amt--active'));
-      btn.classList.add('gift-amt--active');
-      if (customAmt) customAmt.value = '';
-      updateDisplay(parseInt(btn.dataset.amount, 10));
-    }));
-
-    customAmt?.addEventListener('input', () => {
-      const val = parseInt(customAmt.value, 10);
-      if (val >= 10 && val <= 500) {
-        amtBtns.forEach(b => b.classList.remove('gift-amt--active'));
-        updateDisplay(val);
-      }
-    });
-
-    // 3D tilt
-    if (mockCard) {
-      mockCard.addEventListener('mousemove', e => {
-        const rect = mockCard.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        mockCard.style.transform = `perspective(900px) rotateY(${x * 10}deg) rotateX(${-y * 6}deg) translateZ(12px)`;
-      });
-      mockCard.addEventListener('mouseleave', () => { mockCard.style.transform = ''; });
-    }
-    })();
-  </script>
   <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
        The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
-  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
+  <script src="/js/nav.js?v=1" defer></script>
+  <script src="/js/defer-load.js?v=2" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
-  <!-- Sticky mobile Book/Call bar (P1 CRO) -->
-  <style>
-    .m-cta{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;gap:.5rem;padding:.5rem calc(.6rem + 72px) .5rem .6rem;background:rgba(20,17,14,.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid rgba(250,247,243,.14);box-shadow:0 -6px 20px rgba(0,0,0,.30)}
-    .m-cta a{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;padding:.8rem .5rem;border-radius:10px;text-decoration:none;font-family:var(--font-ui,'DM Sans',system-ui,sans-serif);font-weight:600;font-size:.98rem;letter-spacing:.02em}
-    .m-cta__book{background:var(--lantern,#c9a86a);color:var(--ember,#fffdfb)}
-    .m-cta__call{background:transparent;color:#faf7f3;border:1px solid rgba(250,247,243,.45)}
-    @media (max-width:820px){.m-cta{display:flex}body{padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}}
-  </style>
   <nav class="m-cta" aria-label="Book or call">
-    <a class="m-cta__book" href="/book">Book</a>
-    <a class="m-cta__call" href="tel:+18012881118">Call</a>
+    <a class="btn btn--primary" href="/book">Book</a>
+    <a class="btn btn--secondary" href="tel:+18012881118">Call</a>
   </nav>
 </body>
 </html>
