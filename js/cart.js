@@ -102,9 +102,14 @@
     clearTimeout(reload);
     if ($date.value) reload = setTimeout(loadTimes, 700);
   }
-  function deepLabel(kind) {
-    if (kindOf(kind).picks) return ' (+' + money(menu.deepPerHour) + ')';           // packages: one massage hour
-    return ' (+' + money(menu.deepPerHour * (kind === 'fourhand' ? 2 : 1)) + '/hr)'; // 4-hand: two therapists
+  // Deep tissue surcharge for this line, exact for its length: packages use one massage hour,
+  // 4-hand has two therapists.
+  function deepLabel(line) {
+    var single = kindOf('single');
+    if (!single || !single.deepPrices) return '';
+    var m = kindOf(line.kind).picks ? 60 : line.minutes;
+    var extra = (single.deepPrices[m] - single.prices[m]) * (line.kind === 'fourhand' ? 2 : 1);
+    return extra > 0 ? ' (+' + money(extra) + ')' : '';
   }
 
   // ---------- rendering ----------
@@ -134,7 +139,7 @@
     if (styled(line, g)) {
       var sid = 'c' + li + 'g' + gi + 's';
       var sel = el('select', { id: sid, on: { change: function (e) { g.style = e.target.value; changed(); } } },
-        k.styles.map(function (s) { return el('option', { value: s, selected: (g.style || k.styles[0]) === s, text: menu.styleNames[s] + (s === 'deep' ? deepLabel(line.kind) : '') }); }));
+        k.styles.map(function (s) { return el('option', { value: s, selected: (g.style || k.styles[0]) === s, text: menu.styleNames[s] + (s === 'deep' ? deepLabel(line) : '') }); }));
       box.appendChild(el('label', { for: sid, class: 'cart__field' }, [el('span', { text: 'Massage style' }), sel]));
     }
     var adds = menu.addons.filter(function (a) { return !a.only || a.only.indexOf(line.kind) >= 0; });
@@ -232,20 +237,20 @@
     });
   }
 
-  function loadTimes() {
-    if (!$date.value) { say('Pick a date.', 'error'); return; }
-    say('Finding times…');
+  function loadTimes(keep) { // keep: leave the current message (after a refusal)
+    if (!$date.value) { if (!keep) say('Pick a date.', 'error'); return; }
+    if (!keep) say('Finding times…');
     var seq = ++timesSeq;
     var path = '/api/cart/times?spa=' + SPA + '&date=' + $date.value + '&cart=' + encodeURIComponent(JSON.stringify(cartJSON()));
     var withPass = pass ? Promise.resolve({ 'X-Cart-Pass': pass }) : turnstileToken().then(function (t) { return { 'X-Turnstile': t }; });
     withPass.then(function (h) { return api(path, { headers: h }); }).then(function (r) {
       if (seq !== timesSeq) return; // an older date or cart: a newer request owns the page
-      if (r.status === 401 && pass) { pass = ''; return loadTimes(); }
-      if (!r.ok) { times = []; start = ''; total = null; render(); say(r.message || 'We could not load times. Please try again.', 'error'); return; }
+      if (r.status === 401 && pass) { pass = ''; return loadTimes(keep); }
+      if (!r.ok) { times = []; start = ''; total = null; render(); if (!keep) say(r.message || 'We could not load times. Please try again.', 'error'); return; }
       pass = r.pass || ''; times = r.times; total = r.total; start = '';
       render();
-      say(times.length ? 'Pick a start time for everyone.' : 'No time fits your whole group that day. Try another day, or call us at ' + menu.phone + '.', times.length ? '' : 'error');
-    }).catch(function () { if (seq === timesSeq) say('We could not load times. Please try again.', 'error'); });
+      if (!keep) say(times.length ? 'Pick a start time for everyone.' : 'No time fits your whole group that day. Try another day, or call us at ' + menu.phone + '.', times.length ? '' : 'error');
+    }).catch(function () { if (seq === timesSeq && !keep) say('We could not load times. Please try again.', 'error'); });
   }
 
   // ---------- pay: Authorize.Net hosted form, then one checkout ----------
@@ -263,14 +268,32 @@
     document.body.appendChild(s);
   }
 
+  function remember(id) { try { sessionStorage.setItem('cart-order', JSON.stringify({ id: id, spa: SPA, at: Date.now() })); } catch (e) {} }
+  function forget() { try { sessionStorage.removeItem('cart-order'); } catch (e) {} }
+  function savedOrder() {
+    try { var o = JSON.parse(sessionStorage.getItem('cart-order')); return o && o.spa === SPA && Date.now() - o.at < 30 * 60000 ? o : null; } catch (e) { return null; }
+  }
+  // After a refresh or a closed tab: the outcome of the saved order id. Never pays again.
+  function resume(id) {
+    order = { id: id }; busy = true; render(); say('Checking your order…');
+    api('/api/cart/order/' + id).then(function (r) {
+      if (r.status === 404) { forget(); busy = false; render(); say(''); return; } // never reached the Worker: nothing charged
+      if (r.pending) return poll(id, 0);
+      show(r);
+    }).catch(function () { poll(id, 0); });
+  }
+
   function show(r) {
     busy = false;
+    if (!r.pending) forget();
     if (r.ok && r.thankYouUrl) { location.href = r.thankYouUrl; return; }
     if (r.pending) return poll(order.id, 0);
     if (r.stage === 'price' && r.total != null) { total = r.total; render(); say(r.message, 'error'); return; }
-    if (r.stage === 'time') { times = []; start = ''; render(); say(r.message || 'That time just filled. Pick another time.', 'error'); return; }
+    if (r.stage === 'time') { times = []; start = ''; render(); say(r.message || 'That time just filled. Pick another time.', 'error'); loadTimes(true); return; }
+    if (r.reversed) start = '';
     render();
     say(r.message || 'Something went wrong. Please call us before paying again.', r.reversed || r.paid ? 'notice' : 'error');
+    if (r.reversed) loadTimes(true);
   }
 
   // A lost response: ask the Worker what happened to this order id. Never pays again.
@@ -297,6 +320,7 @@
       return;
     }
     order = { id: uid() }; // one id per payment attempt; a lost response is looked up by it
+    remember(order.id);
     busy = true; render();
     say('Paying and booking…');
     var f = $contact.elements;
@@ -311,6 +335,7 @@
 
   function pay() {
     if (busy) return;
+    if (!$contact.reportValidity()) return;
     var f = $contact.elements;
     if (!f.name.value.trim() || f.phone.value.replace(/\D/g, '').length < 10) { say('Enter your name and a 10-digit phone number.', 'error'); f.name.focus(); return; }
     busy = true; order = null; render(); say('');
@@ -332,7 +357,7 @@
     $contact = el('form', { class: 'cart__contact', hidden: true, on: { submit: function (e) { e.preventDefault(); pay(); } } }, [
       el('label', { for: 'cart-name', class: 'cart__field' }, [el('span', { text: 'Name' }), el('input', { id: 'cart-name', name: 'name', autocomplete: 'name', required: true })]),
       el('label', { for: 'cart-phone', class: 'cart__field' }, [el('span', { text: 'Phone' }), el('input', { id: 'cart-phone', name: 'phone', type: 'tel', autocomplete: 'tel', required: true })]),
-      el('label', { for: 'cart-email', class: 'cart__field' }, [el('span', { text: 'Email' }), el('input', { id: 'cart-email', name: 'email', type: 'email', autocomplete: 'email' })])]);
+      el('label', { for: 'cart-email', class: 'cart__field' }, [el('span', { text: 'Email' }), el('input', { id: 'cart-email', name: 'email', type: 'email', autocomplete: 'email', pattern: '[^@\\s]+@[^@\\s]+\\.[^@\\s]+', title: 'An email like name@example.com' })])]);
     $pay = el('button', { type: 'button', class: BTN + ' cart__pay', text: 'Pay and book', on: { click: pay } });
     root.appendChild(el('div', { class: 'cart__inner' }, [
       el('h2', { class: 'cart__title', text: 'Book one or more massages' }),
@@ -355,6 +380,8 @@
       menu = r; menu.phone = root.getAttribute('data-phone') || '';
       lines = [newLine()];
       build();
+      var saved = savedOrder();
+      if (saved) resume(saved.id);
     }).catch(function () {});
   }
 
