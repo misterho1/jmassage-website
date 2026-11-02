@@ -48,7 +48,7 @@
   <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/styles.css?v=24">
+  <link rel="stylesheet" href="/css/site.css?v=1">
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <script type="application/ld+json">
@@ -61,43 +61,24 @@
 <body>
 
   <a href="#main" class="skip-link">Skip to content</a>
-  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-  <header id="header" class="header">
-    <div class="header__inner container">
-      <a href="/" class="logo" aria-label="J Massage SLC, home">
-        <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <ul class="nav__list" id="navList">
-          <li class="nav__item nav__item--dropdown">
-            <a href="/#services" class="nav__link">Services <span class="nav__dropdown-caret">›</span></a>
-            <ul class="nav__dropdown">
-              <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-              <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-              <li><a href="/services/sports-massage">Sports Massage</a></li>
-              <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-              <li><a href="/services/couples-massage">Couples Massage</a></li>
-              <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-              <li><a href="/services/shiatsu">Shiatsu</a></li>
-              <li><a href="/services/reflexology">Reflexology</a></li>
-              <li><a href="/services/prenatal">Prenatal Massage</a></li>
-              <li><a href="/services/myofascial">Myofascial Release</a></li>
-              <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
-            </ul>
-          </li>
-          <li><a href="/about" class="nav__link">About</a></li>
-          <li><a href="/pricing" class="nav__link">Pricing</a></li>
-          <li><a href="/reviews" class="nav__link">Reviews</a></li>
-          <li><a href="/gift-cards" class="nav__link">Gift Cards</a></li>
-          <li><a href="/faq" class="nav__link">FAQ</a></li>
-          <li><a href="/blog" class="nav__link">Blog</a></li>
-          <li><a href="/contact" class="nav__link">Contact</a></li>
-          <li><a href="/book" class="nav__cta" aria-current="page">Book Now</a></li>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="/">J Massage SLC</a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav__menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+        <ul class="site-nav__list" id="primary-nav">
+          <li><a class="site-nav__link" href="/services">Services</a></li>
+          <li><a class="site-nav__link" href="/pricing">Pricing</a></li>
+          <li><a class="site-nav__link" href="/reviews">Reviews</a></li>
+          <li><a class="site-nav__link" href="/about">About</a></li>
+          <li><a class="site-nav__link" href="/gift-cards">Gift Cards</a></li>
+          <li><a class="site-nav__link" href="/faq">FAQ</a></li>
+          <li><a class="site-nav__link" href="/blog">Blog</a></li>
+          <li><a class="site-nav__link" href="/contact">Contact</a></li>
+          <li class="site-nav__item--tel"><a class="site-nav__link" href="tel:+18012881118">(801) 288-1118</a></li>
+          <li><a class="btn btn--primary" href="/book" data-magnetic>Book Now</a></li>
         </ul>
-        <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
       </nav>
     </div>
   </header>
@@ -105,28 +86,40 @@
   <main id="main">
 
     <!-- Page hero -->
-    <section class="book-hero">
-      <div class="container">
-        <nav aria-label="Breadcrumb" class="book-hero__crumbs">
-          <a href="/">Home</a> <span>›</span> <span>Book</span>
-        </nav>
-        <h1 class="book-hero__title">Book your session.</h1>
-        <p class="book-hero__sub">Open daily, 10am to 10pm. Same-day appointments often available.<br>Choose your service, pick a time, confirm instantly.</p>
+    <section class="page-header" data-hero>
+      <div class="container container--narrow">
+        <h1><span class="line"><span class="line-inner">Book your session.</span></span></h1>
+        <p class="lead">Open daily, 10am to 10pm. Same-day appointments often available. Choose your service, pick a time, confirm instantly.</p>
       </div>
     </section>
 
     <!-- Online booking (GoHighLevel) — pick a service, the scheduler loads below -->
-    <section class="book-embed">
+    <section class="section" style="padding-block: var(--space-3) var(--space-6)">
       <div class="container" style="max-width:1080px;margin:0 auto;padding-block:1rem 2rem;">
 
         <style>
+          /* Booking page UI on Elite's tokens (menu and buttons as on elitespautah.com/book). Cart styling lives in css/cart.css only. */
           .book-menu__group{margin-bottom:1.35rem;}
-          .book-menu__title{font-family:'Marcellus',serif;font-size:1.1rem;font-weight:500;margin:0 0 .55rem;color:#2a2622;}
-          .book-menu__title small{font-weight:400;opacity:.55;font-size:.74em;}
+          .book-menu__title{font-family:var(--type-display);font-size:1.15rem;margin:0 0 .55rem;color:var(--ink);}
+          .book-menu__title small{opacity:.55;font-size:.72em;font-family:var(--type-ui);}
           .book-menu__row{display:flex;flex-wrap:wrap;gap:.55rem;}
-          .book-pick{cursor:pointer;opacity:1;transition:box-shadow .15s,transform .15s;}
+          .book-pick{cursor:pointer;opacity:1;transition:box-shadow .15s,transform .15s;padding:.6rem 1.1rem;font-size:.82rem;}
           .book-pick:hover{transform:translateY(-1px);}
-          .book-pick.is-active{box-shadow:inset 0 0 0 2px #fffdfb,0 0 0 2px #2a2622;}
+          .book-pick.is-active{box-shadow:inset 0 0 0 2px #fff,0 0 0 2px var(--brand-orange-deep);}
+          .book-reassure{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.4rem 1rem;max-width:1080px;margin:0 auto 1.1rem;font-family:var(--type-ui);font-size:.82rem;color:var(--ink-muted);}
+          .book-reassure__item strong{color:var(--ink);font-weight:600;}
+          .book-reassure__star{color:var(--brand-orange);}
+          .book-reassure__sep{color:var(--line);}
+          .book-firsttimer{max-width:820px;margin:0 auto 1.4rem;padding:.85rem 1.2rem;background:var(--brand-cream-soft);border:1px solid var(--line);border-radius:var(--radius-md);font-size:.9rem;line-height:1.55;color:var(--ink-muted);text-align:center;}
+          .book-firsttimer strong{color:var(--ink);font-weight:600;}
+          .book-embed__fallback{font-family:var(--type-ui);font-size:.85rem;color:var(--ink-muted);}
+          .book-frame{position:relative;max-width:1080px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);box-shadow:0 28px 70px -34px rgba(20,12,4,.32);overflow:hidden;}
+          .book-frame__loader{position:absolute;inset:0;z-index:2;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1rem;background:var(--surface);color:var(--ink-muted);font-family:var(--type-ui);font-size:.85rem;letter-spacing:.04em;}
+          .book-frame.is-loading .book-frame__loader{display:flex;}
+          .book-frame__loading-text{letter-spacing:.04em;}
+          .book-frame__spinner{width:2rem;height:2rem;border-radius:50%;border:2px solid var(--brand-orange-soft);border-top-color:var(--brand-orange);animation:book-spin .7s linear infinite;}
+          @keyframes book-spin{to{transform:rotate(360deg);}}
+          @media (prefers-reduced-motion:reduce){.book-frame__spinner{animation:none;}}
           /* Price notice (effective 2026-11-01). Hidden unless html[data-price-notice] is set.
              In page, above the service buttons, at every width. Remove in December 2026
              together with its head script, the card markup and the card script. */
@@ -134,15 +127,15 @@
           html[data-price-notice] .price-notice{display:block}
           html[data-price-notice="pre"] .price-notice [data-pn="post"],
           html[data-price-notice="post"] .price-notice [data-pn="pre"]{display:none}
-          .price-notice{position:relative;max-width:820px;margin:0 auto 1.5rem;padding:1rem 3rem 1rem 1.25rem;background:var(--ember);border:1px solid var(--border-mid);border-radius:var(--r);color:var(--text-hi);text-align:left}
-          .price-notice__title{margin:0 0 .375rem;font-family:var(--font-head);font-size:1.125rem;line-height:1.3;color:var(--text-hi)}
-          .price-notice__body{margin:0 0 .625rem;font-family:var(--font-body);font-size:.9375rem;line-height:1.55;color:var(--text-mid)}
+          .price-notice{position:relative;max-width:820px;margin:0 auto 1.5rem;padding:1rem 3rem 1rem 1.25rem;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);color:var(--ink);text-align:left}
+          .price-notice__title{margin:0 0 .375rem;font-family:var(--type-display);font-size:1.125rem;line-height:1.3;color:var(--ink)}
+          .price-notice__body{margin:0 0 .625rem;font-family:var(--type-body);font-size:.9375rem;line-height:1.55;color:var(--ink-muted)}
           .price-notice__cta{margin:0}
-          .price-notice__link{font-family:var(--font-ui);font-size:.875rem;font-weight:600;color:var(--lantern);text-decoration:underline;text-underline-offset:3px}
-          .price-notice__link:hover{color:var(--amber)}
-          .price-notice__close{position:absolute;top:.25rem;right:.25rem;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;background:none;border:0;border-radius:var(--r-sm);font-size:1.5rem;line-height:1;color:var(--text-mid);cursor:pointer}
-          .price-notice__close:hover{color:var(--text-hi)}
-          .price-notice__link:focus-visible,.price-notice__close:focus-visible{outline:2px solid var(--lantern);outline-offset:2px}
+          .price-notice__link{font-family:var(--type-ui);font-size:.875rem;font-weight:600;color:var(--brand-orange);text-decoration:underline;text-underline-offset:3px}
+          .price-notice__link:hover{color:var(--brand-orange-deep)}
+          .price-notice__close{position:absolute;top:.25rem;right:.25rem;display:flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;background:none;border:0;border-radius:var(--radius-sm);font-size:1.5rem;line-height:1;color:var(--ink-muted);cursor:pointer}
+          .price-notice__close:hover{color:var(--ink)}
+          .price-notice__link:focus-visible,.price-notice__close:focus-visible{outline:2px solid var(--brand-orange);outline-offset:2px}
         </style>
 
         <div class="book-reassure">
@@ -195,7 +188,7 @@
              spa-phone-booking Worker (js/cart.js, shared with elitespautah.com). Hidden: visitors see
              today's page and load nothing for it; a staff preview link (#cartpreview=) opens it.
              Going public = remove `hidden`. -->
-        <section id="cart" class="cart" data-spa="jm" data-api="https://spa-phone-booking.andrew-86d.workers.dev" data-phone="801-288-1118" data-css="/css/cart.css?v=1" data-btn="btn btn--gold" data-btn-secondary="btn btn--outline" aria-label="Book several massages" hidden></section>
+        <section id="cart" class="cart" data-spa="jm" data-api="https://spa-phone-booking.andrew-86d.workers.dev" data-phone="801-288-1118" data-css="/css/cart.css?v=2" aria-label="Book several massages" hidden></section>
         <script>
           // Loads js/cart.js only when the cart is public or a staff preview link opened it.
           (function () {
@@ -214,9 +207,9 @@
             <p class="book-menu__title">Single Massage <small>· Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Myofascial</small></p>
             <p style="margin:-.3rem 0 .55rem;font-size:.85rem;color:#6b6259;">Deep tissue is $20 more for 60 or 90 minutes, $40 more for 120.</p>
             <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick is-active" data-cal="iYzZ0GbCUpIqrpaCbswy" aria-pressed="true" aria-label="Single massage, 60 minutes, $105">60 min · $105</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="g5R2qijQXBq7TRN4ySKJ" aria-pressed="false" aria-label="Single massage, 90 minutes, $155">90 min · $155</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="nPGP7qVKUf8ChBsd39dY" aria-pressed="false" aria-label="Single massage, 120 minutes, $205">120 min · $205</button>
+              <button type="button" class="btn btn--primary book-pick is-active" data-cal="iYzZ0GbCUpIqrpaCbswy" aria-pressed="true" aria-label="Single massage, 60 minutes, $105">60 min · $105</button>
+              <button type="button" class="btn btn--primary book-pick" data-cal="g5R2qijQXBq7TRN4ySKJ" aria-pressed="false" aria-label="Single massage, 90 minutes, $155">90 min · $155</button>
+              <button type="button" class="btn btn--primary book-pick" data-cal="nPGP7qVKUf8ChBsd39dY" aria-pressed="false" aria-label="Single massage, 120 minutes, $205">120 min · $205</button>
             </div>
           </div>
           <!-- Prenatal (side-lying) calendars created 2026-09-07:
@@ -225,26 +218,26 @@
           <div class="book-menu__group" data-service="prenatal">
             <p class="book-menu__title">Prenatal Massage <small>· second &amp; third trimester</small></p>
             <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="nqIDCIwXpxbj2u7zoTfl" aria-pressed="false" aria-label="Prenatal massage, 60 minutes, $105">60 min · $105</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="NMqagEYm3cxWj8vXgzcJ" aria-pressed="false" aria-label="Prenatal massage, 90 minutes, $155">90 min · $155</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="tlLFTHvmSJHdFoVx39mH" aria-pressed="false" aria-label="Prenatal massage, 120 minutes, $205">120 min · $205</button>
+              <button type="button" class="btn btn--primary book-pick" data-cal="nqIDCIwXpxbj2u7zoTfl" aria-pressed="false" aria-label="Prenatal massage, 60 minutes, $105">60 min · $105</button>
+              <button type="button" class="btn btn--primary book-pick" data-cal="NMqagEYm3cxWj8vXgzcJ" aria-pressed="false" aria-label="Prenatal massage, 90 minutes, $155">90 min · $155</button>
+              <button type="button" class="btn btn--primary book-pick" data-cal="tlLFTHvmSJHdFoVx39mH" aria-pressed="false" aria-label="Prenatal massage, 120 minutes, $205">120 min · $205</button>
             </div>
           </div>
           <div class="book-menu__group" data-service="couples">
             <p class="book-menu__title">Couples Massage <small>· side by side</small></p>
             <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="rICCpj4eRyVstN1WRZ79" aria-pressed="false" aria-label="Couples massage, 60 minutes, $205">60 min · $205</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="Xt5skgfbFw3i2aqAymAg" aria-pressed="false" aria-label="Couples massage, 90 minutes, $305">90 min · $305</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="9up7NwJ9Zq9C8TYtKTyr" aria-pressed="false" aria-label="Couples massage, 120 minutes, $405">120 min · $405</button>
+              <button type="button" class="btn btn--primary book-pick" data-cal="rICCpj4eRyVstN1WRZ79" aria-pressed="false" aria-label="Couples massage, 60 minutes, $205">60 min · $205</button>
+              <button type="button" class="btn btn--primary book-pick" data-cal="Xt5skgfbFw3i2aqAymAg" aria-pressed="false" aria-label="Couples massage, 90 minutes, $305">90 min · $305</button>
+              <button type="button" class="btn btn--primary book-pick" data-cal="9up7NwJ9Zq9C8TYtKTyr" aria-pressed="false" aria-label="Couples massage, 120 minutes, $405">120 min · $405</button>
             </div>
             <p class="book-menu__note" style="margin:.5rem 0 0;font-size:.82rem;opacity:.7;">Also available as a couples head spa or couples foot massage, same booking, no separate calendar. Pick a time above and note your preference.</p>
           </div>
           <div class="book-menu__group" data-service="4hand">
             <p class="book-menu__title">4-Hand Massage <small>· two therapists</small></p>
             <div class="book-menu__row">
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="7MOTfueYlSBJVB7VeyGm" aria-pressed="false" aria-label="4-hand massage, 60 minutes, $205">60 min · $205</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="61Y2h3xEJEvx8W1u8CaY" aria-pressed="false" aria-label="4-hand massage, 90 minutes, $305">90 min · $305</button>
-              <button type="button" class="btn btn--gold btn--sm book-pick" data-cal="0uwvyTaLs96plJocptuH" aria-pressed="false" aria-label="4-hand massage, 120 minutes, $405">120 min · $405</button>
+              <button type="button" class="btn btn--primary book-pick" data-cal="7MOTfueYlSBJVB7VeyGm" aria-pressed="false" aria-label="4-hand massage, 60 minutes, $205">60 min · $205</button>
+              <button type="button" class="btn btn--primary book-pick" data-cal="61Y2h3xEJEvx8W1u8CaY" aria-pressed="false" aria-label="4-hand massage, 90 minutes, $305">90 min · $305</button>
+              <button type="button" class="btn btn--primary book-pick" data-cal="0uwvyTaLs96plJocptuH" aria-pressed="false" aria-label="4-hand massage, 120 minutes, $405">120 min · $405</button>
             </div>
           </div>
         </div>
@@ -362,73 +355,79 @@
 
   </main>
 
-  <footer class="footer">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <span class="footer__logo">J Massage <em>SLC</em></span>
-        <p>Salt Lake City massage therapy studio. Utah-licensed therapists, 500+ Google reviews, open every day.</p>
-        <div class="footer__rating">
-          <span class="stars">★★★★<span class="star-half" aria-hidden="true">★</span></span>
-          <span>4.4 &nbsp;·&nbsp; 500+ Verified Google Reviews</span>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid site-footer__grid--cols">
+        <div>
+          <p class="site-footer__brand">J Massage SLC</p>
+          <p style="max-width: 36ch;">Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+          <p class="site-footer__rating"><span class="stars" aria-hidden="true">★★★★<span class="star-half">★</span></span> 4.4 · 500+ Verified Google Reviews</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Treatments</p>
+          <ul class="site-footer__list">
+            <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+            <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+            <li><a href="/services/sports-massage">Sports Massage</a></li>
+            <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+            <li><a href="/services/couples-massage">Couples Massage</a></li>
+            <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+            <li><a href="/services/shiatsu">Shiatsu</a></li>
+            <li><a href="/services/reflexology">Reflexology</a></li>
+            <li><a href="/services/prenatal">Prenatal Massage</a></li>
+            <li><a href="/services/myofascial">Myofascial Release</a></li>
+            <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Quick Links</p>
+          <ul class="site-footer__list">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/gift-cards">Gift Cards</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="https://www.elitespautah.com" rel="noopener">Elite Spa Utah (sister location)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Areas We Serve</p>
+          <ul class="site-footer__list">
+            <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
+            <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
+            <li><a href="/massage-in-sugar-house">Sugar House</a></li>
+            <li><a href="/massage-in-millcreek">Millcreek</a></li>
+            <li><a href="/massage-in-the-avenues">The Avenues</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Visit Us</p>
+          <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
+          <ul class="site-footer__list" style="margin-top: var(--space-1);">
+            <li><a href="tel:+18012881118">(801) 288-1118</a></li>
+            <li>Open Daily · 10am–10pm</li>
+            <li><a href="/book">Book online</a></li>
+            <li><a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a></li>
+          </ul>
         </div>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Treatments</h2>
-        <ul>
-          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-          <li><a href="/services/sports-massage">Sports Massage</a></li>
-          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-          <li><a href="/services/couples-massage">Couples Massage</a></li>
-          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-        </ul>
+      <div class="site-footer__legal">
+        <span>© 2026 J Massage SLC · All rights reserved · <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--></span>
+        <span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a></span>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Areas We Serve</h2>
-        <ul>
-          <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
-          <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
-          <li><a href="/massage-in-sugar-house">Sugar House</a></li>
-          <li><a href="/massage-in-millcreek">Millcreek</a></li>
-          <li><a href="/massage-in-the-avenues">The Avenues</a></li>
-        </ul>
-      </div>
-      <div class="footer__contact">
-        <h2 class="footer__heading">Visit Us</h2>
-        <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
-        <a href="tel:+18012881118">(801) 288-1118</a>
-        <p>Open Daily &nbsp;·&nbsp; 10am – 10pm</p>
-        <a href="/book" class="btn btn--gold btn--sm">Book Now</a>
-      </div>
-    </div>
-    <div class="footer__bottom container">
-      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
-        <a href="https://www.google.com/maps/place/J+Massage+SLC" target="_blank" rel="noopener">Get Directions</a>
-        &nbsp;·&nbsp;
-        <a href="tel:+18012881118">(801) 288-1118</a> &nbsp;·&nbsp; <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--> &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
-    </p>
     </div>
   </footer>
 
-  <script src="js/vendor/gsap.min.js" defer></script>
-  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js" defer></script>
-  <script src="js/motion.js" defer></script>
   <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
        The widget id stays literal on this tag (tools/chat-widget.py keys on it). form_embed.js loads with the calendar. -->
-  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
+  <script src="/js/nav.js?v=1" defer></script>
+  <script src="/js/defer-load.js?v=2" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
-  <!-- Sticky mobile Book/Call bar (P1 CRO) -->
-  <style>
-    .m-cta{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;gap:.5rem;padding:.5rem calc(.6rem + 72px) .5rem .6rem;background:rgba(20,17,14,.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid rgba(250,247,243,.14);box-shadow:0 -6px 20px rgba(0,0,0,.30)}
-    .m-cta a{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;padding:.8rem .5rem;border-radius:10px;text-decoration:none;font-family:var(--font-ui,'DM Sans',system-ui,sans-serif);font-weight:600;font-size:.98rem;letter-spacing:.02em}
-    .m-cta__book{background:var(--lantern,#c9a86a);color:var(--ember,#fffdfb)}
-    .m-cta__call{background:transparent;color:#faf7f3;border:1px solid rgba(250,247,243,.45)}
-    @media (max-width:820px){.m-cta{display:flex}body{padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}}
-  </style>
   <nav class="m-cta" aria-label="Book or call">
-    <a class="m-cta__book" href="/book">Book</a>
-    <a class="m-cta__call" href="tel:+18012881118">Call</a>
+    <a class="btn btn--primary" href="/book">Book</a>
+    <a class="btn btn--secondary" href="tel:+18012881118">Call</a>
   </nav>
 </body>
 </html>
