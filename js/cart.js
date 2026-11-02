@@ -28,7 +28,7 @@
   if (root.hidden && !preview) return; // staff-only for now: nothing to load for guests
 
   var menu = null, lines = [], times = [], start = '', total = null, pass = '';
-  var busy = false, ts = null;
+  var busy = false, ts = null, timesSeq = 0; // timesSeq: only the newest times request may update the page
 
   // ---------- helpers ----------
   function el(tag, attrs, kids) {
@@ -98,7 +98,7 @@
   // Any cart edit drops the old times and total; with a date picked, fresh ones load shortly after.
   var reload = null;
   function changed() {
-    times = []; start = ''; total = null; say(''); render();
+    times = []; start = ''; total = null; timesSeq++; say(''); render();
     clearTimeout(reload);
     if ($date.value) reload = setTimeout(loadTimes, 700);
   }
@@ -235,15 +235,17 @@
   function loadTimes() {
     if (!$date.value) { say('Pick a date.', 'error'); return; }
     say('Finding times…');
+    var seq = ++timesSeq;
     var path = '/api/cart/times?spa=' + SPA + '&date=' + $date.value + '&cart=' + encodeURIComponent(JSON.stringify(cartJSON()));
     var withPass = pass ? Promise.resolve({ 'X-Cart-Pass': pass }) : turnstileToken().then(function (t) { return { 'X-Turnstile': t }; });
     withPass.then(function (h) { return api(path, { headers: h }); }).then(function (r) {
+      if (seq !== timesSeq) return; // an older date or cart: a newer request owns the page
       if (r.status === 401 && pass) { pass = ''; return loadTimes(); }
       if (!r.ok) { times = []; start = ''; total = null; render(); say(r.message || 'We could not load times. Please try again.', 'error'); return; }
       pass = r.pass || ''; times = r.times; total = r.total; start = '';
       render();
       say(times.length ? 'Pick a start time for everyone.' : 'No time fits your whole group that day. Try another day, or call us at ' + menu.phone + '.', times.length ? '' : 'error');
-    }).catch(function () { say('We could not load times. Please try again.', 'error'); });
+    }).catch(function () { if (seq === timesSeq) say('We could not load times. Please try again.', 'error'); });
   }
 
   // ---------- pay: Authorize.Net hosted form, then one checkout ----------
@@ -279,7 +281,11 @@
         if (r.pending && n < 8) return poll(id, n + 1);
         if (r.pending || r.status === 404) { busy = false; render(); say('We could not confirm your order yet. Please do not pay again. Call us at ' + menu.phone + '.', 'error'); return; }
         show(r);
-      }).catch(function () { if (n < 8) poll(id, n + 1); });
+      }).catch(function () {
+        if (n < 8) return poll(id, n + 1);
+        busy = false; render();
+        say('We could not confirm your order yet. Please do not pay again. Call us at ' + menu.phone + '.', 'error');
+      });
     }, 2500);
   }
 

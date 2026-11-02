@@ -37,20 +37,20 @@
         // /thank-you?value=105, and that wins: it needs no browser storage, which
         // often did not reach this page. Fallback: the price book.html stored in
         // localStorage (jm_book_value) for the tapped pill. Neither valid -> no
-        // value, so the action default applies. Valid = plain number, 0 < n <= 3000
-        // (a group cart can pass $1,000). Online cart (2026-11-01): ?order=<id> is the
+        // value, so the action default applies. Valid = plain number, 0 < n <= 5000
+        // (a group cart can pass $1,000; the largest is about $3,630). Online cart (2026-11-01): ?order=<id> is the
         // transaction_id on every event, so a reload never counts the order twice.
         function price(raw) {
           if (!/^\d+(\.\d+)?$/.test(raw || '')) return 0;
           var n = Number(raw);
-          return n > 0 && n <= 3000 ? n : 0;
+          return n > 0 && n <= 5000 ? n : 0;
         }
         var val = 0;
         try { val = price(new URLSearchParams(location.search).get('value')); } catch (e) {}
         var order = null;
         try { var o = new URLSearchParams(location.search).get('order'); if (/^[A-Za-z0-9_-]{16,80}$/.test(o || '')) order = o; } catch (e) {}
         try {
-          if (!val) val = price(localStorage.getItem('jm_book_value'));
+          if (!val && !order) val = price(localStorage.getItem('jm_book_value')); // a cart order never borrows a calendar price
           localStorage.removeItem('jm_book_value');
         } catch (e) {}
         // GA4 key event (import to Google Ads as PRIMARY conversion)
