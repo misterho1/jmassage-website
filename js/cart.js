@@ -219,21 +219,45 @@
   }
 
   // ---------- bot check (Turnstile), loaded on first need ----------
+  // Every run settles: a token, or a failure after an error, Turnstile's own timeout, or 20 s without
+  // an answer, loading Cloudflare's script included (unless Cloudflare asks the guest to tap the box).
+  // Each run gets its own widget, so an answer from a run the page gave up on is dropped, never used.
+  var TS_WAIT = 20000, tsScript = null;
+  function loadTurnstile() { // one load, shared by every run
+    if (!tsScript) tsScript = new Promise(function (ok, fail) {
+      var s = el('script', { src: 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit', async: true });
+      s.onload = ok; s.onerror = function () { tsScript = null; fail(); };
+      document.head.appendChild(s);
+    });
+    return tsScript;
+  }
   function turnstileToken() {
     return new Promise(function (resolve, reject) {
+      var timer, run = {
+        done: function (t) {
+          if (turnstileToken.pending !== run) return;
+          turnstileToken.pending = null; clearTimeout(timer);
+          if (t) resolve(t); else reject(new Error('turnstile'));
+        }
+      };
+      if (turnstileToken.pending) turnstileToken.pending.done(null); // an older run never hangs
+      turnstileToken.pending = run;
+      timer = setTimeout(function () { run.done(null); }, TS_WAIT);
+      var mine = function (fn) { return function (x) { if (turnstileToken.pending === run) fn(x); }; };
       var go = function () {
-        if (ts == null) {
-          ts = window.turnstile.render($tsBox, { sitekey: menu.turnstileSiteKey, execution: 'execute', appearance: 'interaction-only',
-            callback: function (t) { var r = turnstileToken.pending; turnstileToken.pending = null; if (r) r.resolve(t); },
-            'error-callback': function () { var r = turnstileToken.pending; turnstileToken.pending = null; if (r) r.reject(new Error('turnstile')); } });
-        } else window.turnstile.reset(ts);
-        turnstileToken.pending = { resolve: resolve, reject: reject };
+        if (turnstileToken.pending !== run) return; // given up while the script loaded
+        if (ts != null) window.turnstile.remove(ts);
+        ts = window.turnstile.render($tsBox, { sitekey: menu.turnstileSiteKey, execution: 'execute', appearance: 'interaction-only',
+          callback: mine(function (t) { run.done(t); }),
+          'error-callback': mine(function () { run.done(null); }), 'expired-callback': mine(function () { run.done(null); }),
+          'timeout-callback': mine(function () { run.done(null); }),
+          'before-interactive-callback': mine(function () {
+            clearTimeout(timer); $tsBox.scrollIntoView({ block: 'center' });
+            say('Tap the check box to confirm you are not a robot.');
+          }) });
         window.turnstile.execute(ts);
       };
-      if (window.turnstile) return go();
-      var s = el('script', { src: 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit', async: true });
-      s.onload = go; s.onerror = function () { reject(new Error('turnstile')); };
-      document.head.appendChild(s);
+      (window.turnstile ? Promise.resolve() : loadTurnstile()).then(go, function () { run.done(null); });
     });
   }
 
@@ -325,12 +349,15 @@
     say('Paying and booking…');
     var f = $contact.elements;
     turnstileToken().then(function (token) {
-      return api('/api/cart/checkout', { method: 'POST', body: { orderId: order.id, spa: SPA, cart: cartJSON(), start: start, shownTotal: total,
-        customer: { name: f.name.value, phone: f.phone.value, email: f.email.value }, opaqueData: res.opaqueData, turnstileToken: token } });
-    }).then(function (r) {
-      if (r.status >= 500 && !r.message) return poll(order.id, 0);
-      show(r);
-    }).catch(function () { poll(order.id, 0); });
+      api('/api/cart/checkout', { method: 'POST', body: { orderId: order.id, spa: SPA, cart: cartJSON(), start: start, shownTotal: total,
+        customer: { name: f.name.value, phone: f.phone.value, email: f.email.value }, opaqueData: res.opaqueData, turnstileToken: token } }).then(function (r) {
+        if (r.status >= 500 && !r.message) return poll(order.id, 0);
+        show(r);
+      }).catch(function () { poll(order.id, 0); });
+    }, function () { // the robot check did not finish, so the order was never sent
+      forget(); busy = false; render();
+      say('The robot check did not finish, so nothing was charged. Tap Pay and book to try again.', 'error');
+    });
   };
 
   function pay() {
