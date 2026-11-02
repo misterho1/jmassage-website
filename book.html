@@ -206,7 +206,7 @@
             if (m) history.replaceState(null, '', location.pathname + location.search);
             try { if (m) sessionStorage.setItem('cartpreview', window.__cartPreview); p = !!sessionStorage.getItem('cartpreview'); } catch (e) {}
             p = p || !!m;
-            if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=1'; document.body.appendChild(s); }
+            if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=2'; document.body.appendChild(s); }
           })();
         </script>
         <div class="book-menu" id="book-one" style="margin-bottom:1.9rem;">

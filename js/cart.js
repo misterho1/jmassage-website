@@ -219,15 +219,35 @@
   }
 
   // ---------- bot check (Turnstile), loaded on first need ----------
+  // Every run settles: a token, or a failure after an error, Turnstile's own timeout, or 20 s without
+  // an answer (unless Cloudflare asks the guest to tap the box). A token that comes after the page gave
+  // up, or for an older run, is dropped and never used.
+  var TS_WAIT = 20000;
   function turnstileToken() {
     return new Promise(function (resolve, reject) {
+      var timer, run = {
+        done: function (t) {
+          if (turnstileToken.pending !== run) return;
+          turnstileToken.pending = null; clearTimeout(timer);
+          if (t) resolve(t); else reject(new Error('turnstile'));
+        },
+        wait: function () { clearTimeout(timer); }
+      };
+      var now = function (fn) { return function (x) { var r = turnstileToken.pending; if (r) fn(r, x); }; };
       var go = function () {
         if (ts == null) {
           ts = window.turnstile.render($tsBox, { sitekey: menu.turnstileSiteKey, execution: 'execute', appearance: 'interaction-only',
-            callback: function (t) { var r = turnstileToken.pending; turnstileToken.pending = null; if (r) r.resolve(t); },
-            'error-callback': function () { var r = turnstileToken.pending; turnstileToken.pending = null; if (r) r.reject(new Error('turnstile')); } });
+            callback: now(function (r, t) { r.done(t); }),
+            'error-callback': now(function (r) { r.done(null); }), 'expired-callback': now(function (r) { r.done(null); }),
+            'timeout-callback': now(function (r) { r.done(null); }),
+            'before-interactive-callback': now(function (r) {
+              r.wait(); $tsBox.scrollIntoView({ block: 'center' });
+              say('Tap the check box to confirm you are not a robot.');
+            }) });
         } else window.turnstile.reset(ts);
-        turnstileToken.pending = { resolve: resolve, reject: reject };
+        if (turnstileToken.pending) turnstileToken.pending.done(null); // an older run never hangs
+        turnstileToken.pending = run;
+        timer = setTimeout(function () { run.done(null); }, TS_WAIT);
         window.turnstile.execute(ts);
       };
       if (window.turnstile) return go();
@@ -325,12 +345,15 @@
     say('Paying and booking…');
     var f = $contact.elements;
     turnstileToken().then(function (token) {
-      return api('/api/cart/checkout', { method: 'POST', body: { orderId: order.id, spa: SPA, cart: cartJSON(), start: start, shownTotal: total,
-        customer: { name: f.name.value, phone: f.phone.value, email: f.email.value }, opaqueData: res.opaqueData, turnstileToken: token } });
-    }).then(function (r) {
-      if (r.status >= 500 && !r.message) return poll(order.id, 0);
-      show(r);
-    }).catch(function () { poll(order.id, 0); });
+      api('/api/cart/checkout', { method: 'POST', body: { orderId: order.id, spa: SPA, cart: cartJSON(), start: start, shownTotal: total,
+        customer: { name: f.name.value, phone: f.phone.value, email: f.email.value }, opaqueData: res.opaqueData, turnstileToken: token } }).then(function (r) {
+        if (r.status >= 500 && !r.message) return poll(order.id, 0);
+        show(r);
+      }).catch(function () { poll(order.id, 0); });
+    }, function () { // the robot check did not finish, so the order was never sent
+      forget(); busy = false; render();
+      say('The robot check did not finish, so nothing was charged. Tap Pay and book to try again.', 'error');
+    });
   };
 
   function pay() {
