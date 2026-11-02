@@ -191,7 +191,25 @@
             for (var i = 0; i < links.length; i++) links[i].addEventListener('click', function () { close(false); });
           })();
         </script>
-        <div class="book-menu" style="margin-bottom:1.9rem;">
+        <!-- Online cart (2026-11): several massages, one start time, one card payment, through the
+             spa-phone-booking Worker (js/cart.js, shared with elitespautah.com). Hidden: visitors see
+             today's page and load nothing for it; a staff preview link (#cartpreview=) opens it.
+             Going public = remove `hidden`. -->
+        <section id="cart" class="cart" data-spa="jm" data-api="https://spa-phone-booking.andrew-86d.workers.dev" data-phone="801-288-1118" data-css="/css/cart.css?v=1" data-btn="btn btn--gold" data-btn-secondary="btn btn--outline" aria-label="Book several massages" hidden></section>
+        <script>
+          // Loads js/cart.js only when the cart is public or a staff preview link opened it.
+          (function () {
+            // A staff preview token rides in the fragment; keep it for this tab and strip it from the
+            // address bar before analytics loads, so it never reaches page_location or a referrer.
+            var c = document.getElementById('cart'), m = /[#&]cartpreview=([^&]+)/.exec(location.hash), p = false;
+            window.__cartPreview = m ? decodeURIComponent(m[1]) : null;
+            if (m) history.replaceState(null, '', location.pathname + location.search);
+            try { if (m) sessionStorage.setItem('cartpreview', window.__cartPreview); p = !!sessionStorage.getItem('cartpreview'); } catch (e) {}
+            p = p || !!m;
+            if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=1'; document.body.appendChild(s); }
+          })();
+        </script>
+        <div class="book-menu" id="book-one" style="margin-bottom:1.9rem;">
           <div class="book-menu__group" data-service="single">
             <p class="book-menu__title">Single Massage <small>· Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Myofascial</small></p>
             <p style="margin:-.3rem 0 .55rem;font-size:.85rem;color:#6b6259;">Deep tissue is $20 more for 60 or 90 minutes, $40 more for 120.</p>
