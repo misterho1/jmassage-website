@@ -220,9 +220,17 @@
 
   // ---------- bot check (Turnstile), loaded on first need ----------
   // Every run settles: a token, or a failure after an error, Turnstile's own timeout, or 20 s without
-  // an answer (unless Cloudflare asks the guest to tap the box). A token that comes after the page gave
-  // up, or for an older run, is dropped and never used.
-  var TS_WAIT = 20000;
+  // an answer, loading Cloudflare's script included (unless Cloudflare asks the guest to tap the box).
+  // Each run gets its own widget, so an answer from a run the page gave up on is dropped, never used.
+  var TS_WAIT = 20000, tsScript = null;
+  function loadTurnstile() { // one load, shared by every run
+    if (!tsScript) tsScript = new Promise(function (ok, fail) {
+      var s = el('script', { src: 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit', async: true });
+      s.onload = ok; s.onerror = function () { tsScript = null; fail(); };
+      document.head.appendChild(s);
+    });
+    return tsScript;
+  }
   function turnstileToken() {
     return new Promise(function (resolve, reject) {
       var timer, run = {
@@ -230,30 +238,26 @@
           if (turnstileToken.pending !== run) return;
           turnstileToken.pending = null; clearTimeout(timer);
           if (t) resolve(t); else reject(new Error('turnstile'));
-        },
-        wait: function () { clearTimeout(timer); }
+        }
       };
-      var now = function (fn) { return function (x) { var r = turnstileToken.pending; if (r) fn(r, x); }; };
+      if (turnstileToken.pending) turnstileToken.pending.done(null); // an older run never hangs
+      turnstileToken.pending = run;
+      timer = setTimeout(function () { run.done(null); }, TS_WAIT);
+      var mine = function (fn) { return function (x) { if (turnstileToken.pending === run) fn(x); }; };
       var go = function () {
-        if (ts == null) {
-          ts = window.turnstile.render($tsBox, { sitekey: menu.turnstileSiteKey, execution: 'execute', appearance: 'interaction-only',
-            callback: now(function (r, t) { r.done(t); }),
-            'error-callback': now(function (r) { r.done(null); }), 'expired-callback': now(function (r) { r.done(null); }),
-            'timeout-callback': now(function (r) { r.done(null); }),
-            'before-interactive-callback': now(function (r) {
-              r.wait(); $tsBox.scrollIntoView({ block: 'center' });
-              say('Tap the check box to confirm you are not a robot.');
-            }) });
-        } else window.turnstile.reset(ts);
-        if (turnstileToken.pending) turnstileToken.pending.done(null); // an older run never hangs
-        turnstileToken.pending = run;
-        timer = setTimeout(function () { run.done(null); }, TS_WAIT);
+        if (turnstileToken.pending !== run) return; // given up while the script loaded
+        if (ts != null) window.turnstile.remove(ts);
+        ts = window.turnstile.render($tsBox, { sitekey: menu.turnstileSiteKey, execution: 'execute', appearance: 'interaction-only',
+          callback: mine(function (t) { run.done(t); }),
+          'error-callback': mine(function () { run.done(null); }), 'expired-callback': mine(function () { run.done(null); }),
+          'timeout-callback': mine(function () { run.done(null); }),
+          'before-interactive-callback': mine(function () {
+            clearTimeout(timer); $tsBox.scrollIntoView({ block: 'center' });
+            say('Tap the check box to confirm you are not a robot.');
+          }) });
         window.turnstile.execute(ts);
       };
-      if (window.turnstile) return go();
-      var s = el('script', { src: 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit', async: true });
-      s.onload = go; s.onerror = function () { reject(new Error('turnstile')); };
-      document.head.appendChild(s);
+      (window.turnstile ? Promise.resolve() : loadTurnstile()).then(go, function () { run.done(null); });
     });
   }
 
