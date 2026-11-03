@@ -23,40 +23,126 @@
   <link rel="preload" href="/fonts/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
-  <link rel="stylesheet" href="/css/styles.css?v=24">
+  <link rel="stylesheet" href="/css/site.css?v=1">
   <style>
-    .nf-wrap{min-height:72vh;display:flex;align-items:center;justify-content:center;padding:6rem 1.5rem;font-family:'PT Serif', Georgia, serif;color:#2b2622;background:#f4efe9}
-    .nf-card{max-width:34rem;text-align:center}
-    .nf-eyebrow{letter-spacing:.2em;text-transform:uppercase;font-size:.72rem;font-weight:500;opacity:.55;margin:0 0 1.1rem}
-    .nf-title{font-family:'Marcellus',Georgia,serif;font-size:clamp(2rem,4.5vw,2.8rem);font-weight:400;line-height:1.12;margin:0 0 1rem;color:#1f1b18}
-    .nf-text{font-size:1.05rem;line-height:1.65;opacity:.78;margin:0 0 2.2rem}
-    .nf-links{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-bottom:2.2rem}
-    .nf-links a{display:inline-block;padding:.7rem 1.35rem;border:1px solid rgba(43,38,34,.35);border-radius:999px;text-decoration:none;color:#2b2622;font-size:.95rem;font-weight:500;transition:background .2s,color .2s}
-    .nf-links a:hover{background:#2b2622;color:#f4efe9}
-    .nf-call{font-size:.95rem;opacity:.7}
-    .nf-call a{font-weight:500;text-decoration:none;color:#1f1b18;border-bottom:1px solid rgba(43,38,34,.4)}
+    .nf{min-height:72vh;display:flex;align-items:center;justify-content:center;padding:6rem 1.5rem;font-family:"DM Sans",system-ui,sans-serif;color:#2a2622;background:#f6f2ec}
+    .nf__card{max-width:34rem;text-align:center}
+    .nf__eyebrow{letter-spacing:.22em;text-transform:uppercase;font-size:.72rem;font-weight:600;opacity:.55;margin:0 0 1.1rem}
+    .nf__title{font-family:"Marcellus",Georgia,serif;font-size:clamp(2rem,4.5vw,2.7rem);line-height:1.14;margin:0 0 1rem;color:#1d1a17}
+    .nf__text{font-size:1.05rem;line-height:1.65;opacity:.78;margin:0 0 2.2rem}
+    .nf__links{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-bottom:2.1rem}
+    .nf__links a{display:inline-block;padding:.7rem 1.35rem;border:1px solid rgba(42,38,34,.35);border-radius:2px;text-decoration:none;color:#2a2622;font-size:.95rem;font-weight:500;transition:background .2s,color .2s}
+    .nf__links a:hover{background:#2a2622;color:#f6f2ec}
+    .nf__call{font-size:.95rem;opacity:.72}
+    .nf__call a{font-weight:600;text-decoration:none;color:#1d1a17}
   </style>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
-  <main class="nf-wrap">
-    <div class="nf-card">
-      <p class="nf-eyebrow">404</p>
-      <h1 class="nf-title">This page has drifted off the table.</h1>
-      <p class="nf-text">The page you were looking for is not here. It may have moved, or the link may be incomplete. Let us guide you back.</p>
-      <nav class="nf-links" aria-label="Helpful links">
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="/">J Massage SLC</a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav__menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+        <ul class="site-nav__list" id="primary-nav">
+          <li><a class="site-nav__link" href="/services">Services</a></li>
+          <li><a class="site-nav__link" href="/pricing">Pricing</a></li>
+          <li><a class="site-nav__link" href="/reviews">Reviews</a></li>
+          <li><a class="site-nav__link" href="/about">About</a></li>
+          <li><a class="site-nav__link" href="/gift-cards">Gift Cards</a></li>
+          <li><a class="site-nav__link" href="/faq">FAQ</a></li>
+          <li><a class="site-nav__link" href="/blog">Blog</a></li>
+          <li><a class="site-nav__link" href="/contact">Contact</a></li>
+          <li class="site-nav__item--tel"><a class="site-nav__link" href="tel:+18012881118">(801) 288-1118</a></li>
+          <li><a class="btn btn--primary" href="/book" data-magnetic>Book Now</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="nf">
+    <div class="nf__card">
+      <p class="nf__eyebrow">404</p>
+      <h1 class="nf__title">This page has drifted off the table.</h1>
+      <p class="nf__text">The page you were looking for is not here. It may have moved, or the link may be incomplete. Let us guide you back.</p>
+      <nav class="nf__links" aria-label="Helpful links">
         <a href="/">Home</a>
         <a href="/massage-salt-lake-city">Our Massage</a>
         <a href="/pricing">Pricing</a>
         <a href="/services/deep-tissue">Services</a>
         <a href="/contact">Contact</a>
       </nav>
-      <p class="nf-call">Open daily, 10am to 10pm. Call or text <a href="tel:+18012881118">(801) 288-1118</a>.</p>
+      <p class="nf__call">Open daily, 10am to 10pm. Call or text <a href="tel:+18012881118">(801) 288-1118</a>.</p>
     </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid site-footer__grid--cols">
+        <div>
+          <p class="site-footer__brand">J Massage SLC</p>
+          <p style="max-width: 36ch;">Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+          <p class="site-footer__rating"><span class="stars" aria-hidden="true">★★★★<span class="star-half">★</span></span> 4.4 · 500+ Verified Google Reviews</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Treatments</p>
+          <ul class="site-footer__list">
+            <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+            <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+            <li><a href="/services/sports-massage">Sports Massage</a></li>
+            <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+            <li><a href="/services/couples-massage">Couples Massage</a></li>
+            <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+            <li><a href="/services/shiatsu">Shiatsu</a></li>
+            <li><a href="/services/reflexology">Reflexology</a></li>
+            <li><a href="/services/prenatal">Prenatal Massage</a></li>
+            <li><a href="/services/myofascial">Myofascial Release</a></li>
+            <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Quick Links</p>
+          <ul class="site-footer__list">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/gift-cards">Gift Cards</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="https://www.elitespautah.com" rel="noopener">Elite Spa Utah (sister location)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Areas We Serve</p>
+          <ul class="site-footer__list">
+            <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
+            <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
+            <li><a href="/massage-in-sugar-house">Sugar House</a></li>
+            <li><a href="/massage-in-millcreek">Millcreek</a></li>
+            <li><a href="/massage-in-the-avenues">The Avenues</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Visit Us</p>
+          <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
+          <ul class="site-footer__list" style="margin-top: var(--space-1);">
+            <li><a href="tel:+18012881118">(801) 288-1118</a></li>
+            <li>Open Daily · 10am–10pm</li>
+            <li><a href="/book">Book online</a></li>
+            <li><a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__legal">
+        <span>© 2026 J Massage SLC · All rights reserved · <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--></span>
+        <span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a></span>
+      </div>
+    </div>
+  </footer>
   <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
        The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
-  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
+  <script src="/js/nav.js?v=1" defer></script>
+  <script src="/js/defer-load.js?v=2" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
 </body>
 </html>

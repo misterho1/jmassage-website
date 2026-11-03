@@ -1,22 +1,40 @@
-/* After-first-paint consumers for J Massage /book and /pricing (2026-09-25),
-   the homepage (2026-09-29) and every other page with the chat (2026-10-16).
-   The GoHighLevel chat widget (~215KB) loads on the first tap, scroll or key,
-   or 6 s after first paint: the same rule as elitespautah.com defer-load.js.
+/* Defer heavy, non-critical scripts until after first paint (same rules as elitespautah.com assets/defer-load.js).
+   The page is fully visible and usable without any of these:
+   - Motion (GSAP + ScrollTrigger + motion.js, ~116KB) only adds reveal/parallax
+     animation, so it loads on the first idle moment after first paint.
+   - The GoHighLevel chat widget (~215KB) loads on the first tap, scroll or key,
+     or 6 s after first paint.
    The widget id stays literal in the HTML on this file's tag
    (data-chat-widget-id), because tools/chat-widget.py keys on it.
-   Motion is not here: gsap, ScrollTrigger, main.js and motion.js stay plain
-   defer scripts so the once-per-session intro still covers the first frame.
+   First paint comes from the gate in /js/after-paint.js. A page without
+   the gate starts this work at once.
    Vanilla, no deps. */
 (function () {
   'use strict';
 
   var self = document.currentScript || document.querySelector('script[src*="/js/defer-load.js"]');
   var WIDGET_ID = self && self.getAttribute('data-chat-widget-id');
-  if (!WIDGET_ID) return;
+
+  var motionLoaded = false;
+  function loadMotion() {
+    if (motionLoaded) return;
+    motionLoaded = true;
+    var srcs = [
+      '/js/vendor/gsap.min.js?v=1',
+      '/js/vendor/ScrollTrigger.min.js?v=1',
+      '/js/motion.js?v=3'
+    ];
+    srcs.forEach(function (src) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = false; // preserve execution order so motion.js sees gsap
+      document.head.appendChild(s);
+    });
+  }
 
   var chatLoaded = false;
   function loadChat() {
-    if (chatLoaded) return;
+    if (chatLoaded || !WIDGET_ID) return;
     chatLoaded = true;
     var s = document.createElement('script');
     s.src = 'https://widgets.leadconnectorhq.com/loader.js';
@@ -32,7 +50,13 @@
   });
 
   function start() {
-    // No interaction yet: load it 6 s after first paint.
+    // Motion: first idle moment (short fallback for browsers without rIC).
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadMotion, { timeout: 2000 });
+    } else {
+      setTimeout(loadMotion, 200);
+    }
+    // Chat: no interaction yet, so load it 6 s later.
     setTimeout(loadChat, 6000);
   }
 

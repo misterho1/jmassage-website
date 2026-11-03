@@ -25,7 +25,7 @@ brand
 
 **Three words: quiet luxury, considered, warm.**
 
-**Reference family:** shared design language with elitespautah.com — one candlelit room-world (terracotta clay plaster, cream linen, amber glass, walnut), Marcellus display + PT Serif body + DM Sans chrome, cream/ink/terracotta palette. The two studios must read as siblings, JM with its own facts and massage-only menu.
+**Reference family:** visual twin of elitespautah.com (2026-11-02 redesign): the same design system, page layouts and motion (css/site.css is a port of Elite's styles), Marcellus display + PT Serif body + DM Sans chrome, cream/ink/terracotta palette. The two studios must read as siblings, JM with its own words, facts and massage-only menu.
 
 **Tone:** confident without bragging. Specific over generic. Massage is a therapeutic craft, not a "tranquility journey." Says less to mean more. Sentence-case headlines with terminal periods. No emojis, no exclamation points, we/you.
 
@@ -44,7 +44,7 @@ The site must explicitly NOT look like:
 
 1. **Massage Envy / chain-spa corporate.** Soft pastels + bland sans-serif + "membership" framing + corporate stock photography.
 2. **Goop / new-age wellness woo.** Crystals, chakras, "energy alignment," script fonts, ethereal photography.
-3. **Getty-stock spa clichés.** Lavender stems, orchid-on-towel, generic oil-drop close-ups from every other spa site. Our imagery is one continuous room-world, seeded from a single anchor shot; every image belongs to the same place and light. (Current set is AI-interim — replace with a real shoot of the actual rooms when it lands; never fabricate "real client" photos or reviews.)
+3. **Getty-stock spa clichés.** Lavender stems, orchid-on-towel, generic oil-drop close-ups from every other spa site. Our imagery is one continuous room-world, seeded from a single anchor shot; every image belongs to the same place and light. (Interim since 2026-11-02: inner pages are text-only and the homepage hero is generated, until a real shoot of the actual rooms lands; never fabricate "real client" photos or reviews.)
 4. **Programmatic local-SEO filler.** Demographic statistics, incorporation dates, "serves both groups" third-person profiling on neighborhood pages.
 
 ## Design Principles
@@ -61,7 +61,7 @@ The site must explicitly NOT look like:
 **Target:** WCAG 2.2 AA.
 
 Standing rules from the 2026-08-26 audit:
-- Hover states deepen (--amber), never lighten past text contrast; button text on terracotta uses --ember.
+- Hover states deepen (--brand-orange-deep), never lighten past text contrast; button text on terracotta follows Elite's .btn--primary.
 - prefers-reduced-motion collapses the motion layer to the vanilla path (verified by harness).
 - All imagery carries real alt text; footer headings are h3 under page h2s; UTF-8 with ★ U+2605 only.
 - Known gaps (external): GHL booking iframe and chat widget are third-party chrome — keyboard access inside them is GHL's surface; phone fallback stays visible beside the scheduler.

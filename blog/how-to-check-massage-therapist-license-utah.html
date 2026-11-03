@@ -30,7 +30,7 @@
   <link rel="preload" href="/fonts/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
-  <link rel="stylesheet" href="/css/styles.css?v=24">
+  <link rel="stylesheet" href="/css/site.css?v=1">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <script type="application/ld+json">
   {
@@ -66,144 +66,164 @@
     {"@type": "Question", "name": "Are the therapists at J Massage SLC licensed?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every therapist at J Massage SLC is licensed by the State of Utah, and we will give you a therapist's name before your appointment so you can look them up yourself. We are at 677 S 200 W Suite C in downtown Salt Lake City, open daily from 10am to 10pm, with massage from $105 for 60 minutes."}}
   ]}
   </script>
-  <style>
-    .article { max-width: 46rem; margin: 0 auto; padding: 3rem 0 4rem; }
-    .article__eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; opacity: .7; }
-    .article h1 { font-family: 'Marcellus', Georgia, serif; font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.1; margin: .4rem 0 1rem; }
-    .article__meta { opacity: .65; font-size: .9rem; margin-bottom: 2rem; }
-    .article h2 { font-family: 'Marcellus', Georgia, serif; font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 2.2rem 0 .6rem; }
-    .article p, .article li { line-height: 1.75; }
-    .article ul { padding-left: 1.2em; }
-    .article__cta { margin: 2.5rem 0 0; padding: 1.5rem; border: 1px solid var(--rule, #e5ded3); border-radius: 12px; }
-    .article__note { font-size: .9rem; opacity: .75; border-left: 3px solid var(--gold, #b08d57); padding-left: 1rem; margin: 2rem 0; }
-    .article details { border-bottom: 1px solid var(--rule, #e5ded3); padding: .9rem 0; }
-    .article summary { cursor: pointer; font-weight: 600; line-height: 1.5; }
-    .article details p { margin: .6rem 0 0; }
-  </style>
 </head>
 <body>
 
   <a href="#main" class="skip-link">Skip to content</a>
-  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-  <header id="header" class="header">
-    <div class="header__inner container">
-      <a href="/" class="logo" aria-label="J Massage SLC, home">
-        <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <ul class="nav__list" id="navList">
-          <li><a href="/services/swedish-massage" class="nav__link">Services</a></li>
-          <li><a href="/about" class="nav__link">About</a></li>
-          <li><a href="/pricing" class="nav__link">Pricing</a></li>
-          <li><a href="/reviews" class="nav__link">Reviews</a></li>
-          <li><a href="/blog" class="nav__link">Blog</a></li>
-          <li><a href="/contact" class="nav__link">Contact</a></li>
-          <li><a href="/book" class="nav__cta" data-magnetic>Book Now</a></li>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="/">J Massage SLC</a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav__menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+        <ul class="site-nav__list" id="primary-nav">
+          <li><a class="site-nav__link" href="/services">Services</a></li>
+          <li><a class="site-nav__link" href="/pricing">Pricing</a></li>
+          <li><a class="site-nav__link" href="/reviews">Reviews</a></li>
+          <li><a class="site-nav__link" href="/about">About</a></li>
+          <li><a class="site-nav__link" href="/gift-cards">Gift Cards</a></li>
+          <li><a class="site-nav__link" href="/faq">FAQ</a></li>
+          <li><a class="site-nav__link" href="/blog">Blog</a></li>
+          <li><a class="site-nav__link" href="/contact">Contact</a></li>
+          <li class="site-nav__item--tel"><a class="site-nav__link" href="tel:+18012881118">(801) 288-1118</a></li>
+          <li><a class="btn btn--primary" href="/book" data-magnetic>Book Now</a></li>
         </ul>
-        <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <article class="article container">
-      <p class="article__eyebrow">Guide</p>
-      <h1>How to Check a Massage Therapist's License in Utah</h1>
-      <p class="article__meta">By J Massage SLC · Updated September 2026</p>
+    <section class="page-header" data-hero>
+      <div class="container container--narrow">
+        <p class="eyebrow">Guide</p>
+        <h1><span class="line"><span class="line-inner">How to Check a Massage Therapist's License in Utah</span></span></h1>
+        <p class="svc-note">By J Massage SLC · Updated September 2026</p>
+      </div>
+    </section>
 
+    <article class="container container--content section">
       <p>Every few weeks someone in a Salt Lake City forum asks a version of the same question: where can I find a legitimate, licensed massage therapist. Sometimes it is a car-accident client who needs real soft-tissue work and does not want to gamble. Sometimes it is someone who had a bad experience somewhere else and wants to know how to avoid a repeat. It is a fair question, and the good news is that Utah gives you a free public way to answer it in about two minutes.</p>
       <p>Here is how the lookup works, what it does and does not tell you, and the other things worth screening before you hand over a card.</p>
-
       <h2>The two-minute license lookup</h2>
       <p>Utah licenses massage therapists through the Division of Professional Licensing, part of the Department of Commerce. Anyone can search the register for free at <a href="https://secure.utah.gov/llv/search/index.html" rel="nofollow">secure.utah.gov/llv</a>, no account needed.</p>
       <p>Type the therapist's first and last name, or search the business name if that is all you have. Then read three things on the result:</p>
-      <ul>
-        <li><strong>Profession.</strong> It should read Massage Therapist. Utah also issues massage apprentice and massage assistant credentials, which are legitimate but are not the same thing as a full license.</li>
-        <li><strong>Status.</strong> Active is what you want. Expired means exactly what it says.</li>
-        <li><strong>The name matches.</strong> Sounds obvious, and it is the step people skip. If the studio will not tell you which therapist you are booked with, that is information too.</li>
-      </ul>
+      <ul> <li><strong>Profession.</strong> It should read Massage Therapist. Utah also issues massage apprentice and massage assistant credentials, which are legitimate but are not the same thing as a full license.</li> <li><strong>Status.</strong> Active is what you want. Expired means exactly what it says.</li> <li><strong>The name matches.</strong> Sounds obvious, and it is the step people skip. If the studio will not tell you which therapist you are booked with, that is information too.</li> </ul>
       <p>The Division also publishes a disciplinary actions and citations search, so a licence that has been sanctioned is not hidden from you. If you would rather ask a person, the Division's number is (801) 530-6628.</p>
-
       <h2>The part most people do not know: establishments are registered too</h2>
       <p>Checking the individual therapist is the common advice. There is a second layer that almost nobody mentions.</p>
       <p>Under Utah Code 58-47b-302.2, massage establishments in Utah must register with the Division of Professional Licensing, and the Division has opened that application process. That means the business itself is accountable to the state, not just the person with their hands on your back.</p>
       <p>Practically, this gives you two independent things to check rather than one. A studio operating properly will have no trouble with either question, and will not be strange about you asking.</p>
-
       <h2>What the license does and does not tell you</h2>
       <p>A license is a floor, not a ceiling. It tells you the therapist met the state's training and examination requirements, passed a background check, and has not lost the right to practise. That is genuinely worth confirming, and it rules out the situations people are actually worried about.</p>
       <p>What it does not tell you is whether they are any good for what you need. Licensing does not grade technique, and it does not tell you whether someone who is excellent at relaxation work is the right choice for a stubborn shoulder. That part comes from what they specialise in, how they run an intake, and how they handle the first ten minutes.</p>
-
       <h2>What else to screen before you book</h2>
       <p>Once the license checks out, a short list separates a professional studio from a coin flip.</p>
-      <ul>
-        <li><strong>Published pricing.</strong> Real rates on a real page, not "call for details." Ours are on the <a href="/pricing">pricing page</a>.</li>
-        <li><strong>A named modality list.</strong> A studio that offers <a href="/services/deep-tissue">deep tissue</a>, <a href="/services/swedish-massage">Swedish</a>, <a href="/services/sports-massage">sports massage</a>, prenatal and the rest as distinct services has therapists trained in them, not one generic hour with a different label.</li>
-        <li><strong>An intake step.</strong> Someone should ask what is going on with your body before the session, especially after a collision, a surgery, or during pregnancy.</li>
-        <li><strong>Clear boundaries in writing.</strong> Draping policy, what to expect, what is not offered. Vagueness here is the single biggest warning sign in this industry.</li>
-        <li><strong>Reviews that mention people by name.</strong> Specific reviews are harder to fake than generic five-star lines. Ours are on the <a href="/reviews">reviews page</a>.</li>
-      </ul>
-
+      <ul> <li><strong>Published pricing.</strong> Real rates on a real page, not "call for details." Ours are on the <a href="/pricing">pricing page</a>.</li> <li><strong>A named modality list.</strong> A studio that offers <a href="/services/deep-tissue">deep tissue</a>, <a href="/services/swedish-massage">Swedish</a>, <a href="/services/sports-massage">sports massage</a>, prenatal and the rest as distinct services has therapists trained in them, not one generic hour with a different label.</li> <li><strong>An intake step.</strong> Someone should ask what is going on with your body before the session, especially after a collision, a surgery, or during pregnancy.</li> <li><strong>Clear boundaries in writing.</strong> Draping policy, what to expect, what is not offered. Vagueness here is the single biggest warning sign in this industry.</li> <li><strong>Reviews that mention people by name.</strong> Specific reviews are harder to fake than generic five-star lines. Ours are on the <a href="/reviews">reviews page</a>.</li> </ul>
       <h2>Green flags in the first ten minutes</h2>
       <p>You can tell a great deal before any real work starts. A therapist who asks what you do all day, where you feel it, and whether anything is off limits is building a session for you. A therapist who checks pressure early and then again once they are into the deeper work is paying attention. Proper draping, without you having to ask, is standard practice and not a courtesy.</p>
       <p>The other green flag is willingness to say no. If you ask for deep pressure on an area that should not take it that week, a good therapist tells you and offers something better. That answer is worth more than an hour of agreeable silence.</p>
-
       <h2>Red flags, and what to do about them</h2>
       <p>Trust the obvious ones. A studio that will not name your therapist, will not quote a price, or gets evasive about draping is telling you something. So is a session where the pressure never gets checked, or where you feel you cannot speak up.</p>
       <p>If something happens during a session that crosses a line, you can end it. Say stop, and a professional therapist stops immediately, no explanation owed. Afterward you can file a complaint with the Division of Professional Licensing, which is what the disciplinary record is built from. If you believe a crime occurred, contact the police. Reporting is also how the next person avoids the same experience, which is the part people tend to underweight when they decide it is not worth the trouble.</p>
-
       <h2>Special cases worth naming</h2>
       <p>Two situations come up often enough in local threads to deserve their own note.</p>
       <p><strong>After a car accident.</strong> Soft-tissue work after a collision should start with what your doctor has said and what imaging showed. A licensed therapist will ask about that and will work around anything acute. Massage of neck musculature is not the same as cervical manipulation, which is a chiropractic technique, and conflating the two is behind a lot of the fear people carry into a first appointment.</p>
       <p><strong>During pregnancy.</strong> Prenatal work is its own training, with side-lying positioning and areas that are avoided. It is not a regular massage with a pillow. We wrote a full guide to <a href="/blog/prenatal-massage-third-trimester-salt-lake-city">prenatal massage in the third trimester</a> if you are weighing it, and the short version is that you want someone who does it regularly and who will tell you to check with your provider first.</p>
-
-      <div class="article__note">If you are unsure which session you need rather than who to book it with, our <a href="/blog/deep-tissue-vs-swedish-massage-salt-lake-city">deep tissue and Swedish comparison</a> is the better starting point.</div>
-
+      <aside class="post-note">If you are unsure which session you need rather than who to book it with, our <a href="/blog/deep-tissue-vs-swedish-massage-salt-lake-city">deep tissue and Swedish comparison</a> is the better starting point.</aside>
       <h2>How we handle it at J Massage SLC</h2>
       <p>Every therapist here is licensed by the State of Utah, and we will give you a name before your appointment so you can run the lookup yourself. Rates are published, draping is standard, and pressure gets checked during the session rather than assumed. You can read more about the studio on our <a href="/about">about page</a>.</p>
       <p>We are at 677 S 200 W Suite C in downtown Salt Lake City, open every day from 10am to 10pm, with same-day appointments most days. Massage starts at $105 for 60 minutes across our modalities. If you have a question about your situation before booking, the <a href="/contact">contact page</a> reaches us directly.</p>
-
       <h2>Common questions</h2>
-      <details><summary>How do I check if a massage therapist is licensed in Utah?</summary><p>Use the state license verification tool at secure.utah.gov/llv, run by the Utah Division of Professional Licensing. Search the therapist's name, then check that the profession reads Massage Therapist and the status reads active. The lookup is free, public, and takes about two minutes.</p></details>
-      <details><summary>What does LMT mean in Utah?</summary><p>LMT stands for licensed massage therapist. In Utah the license is issued by the Division of Professional Licensing, part of the Department of Commerce. The state also issues separate credentials for massage apprentices and massage assistants, which is why the profession line on the lookup matters as much as the name.</p></details>
-      <details><summary>Do massage businesses have to be licensed in Utah?</summary><p>Yes. Under Utah Code 58-47b-302.2, massage establishments in Utah must register with the Division of Professional Licensing, and the Division has opened that application. So there are two things you can check: the individual therapist's license and the establishment itself.</p></details>
-      <details><summary>What should I do if something feels wrong during a massage?</summary><p>End the session. You can say stop at any point, and a professional therapist will stop immediately. Afterward you can file a complaint with the Utah Division of Professional Licensing, which also publishes a disciplinary actions and citations search. If you believe a crime occurred, contact the police.</p></details>
-      <details><summary>Are the therapists at J Massage SLC licensed?</summary><p>Yes. Every therapist at J Massage SLC is licensed by the State of Utah, and we will give you a therapist's name before your appointment so you can look them up yourself. We are at 677 S 200 W Suite C in downtown Salt Lake City, open daily from 10am to 10pm, with massage from $105 for 60 minutes.</p></details>
-
-      <div class="article__cta">
-        <p><strong>Book with confidence.</strong> Utah-licensed therapists, published rates from $105 for 60 minutes, downtown Salt Lake City.</p>
-        <p><a href="/book" class="btn btn--gold" data-magnetic>Book Now</a> &nbsp; or call <a href="tel:+18012881118">(801) 288-1118</a></p>
+      <div class="faq">
+        <details class="faq__item"><summary>How do I check if a massage therapist is licensed in Utah?</summary><div class="faq__answer"><p>Use the state license verification tool at secure.utah.gov/llv, run by the Utah Division of Professional Licensing. Search the therapist's name, then check that the profession reads Massage Therapist and the status reads active. The lookup is free, public, and takes about two minutes.</p></div></details>
+        <details class="faq__item"><summary>What does LMT mean in Utah?</summary><div class="faq__answer"><p>LMT stands for licensed massage therapist. In Utah the license is issued by the Division of Professional Licensing, part of the Department of Commerce. The state also issues separate credentials for massage apprentices and massage assistants, which is why the profession line on the lookup matters as much as the name.</p></div></details>
+        <details class="faq__item"><summary>Do massage businesses have to be licensed in Utah?</summary><div class="faq__answer"><p>Yes. Under Utah Code 58-47b-302.2, massage establishments in Utah must register with the Division of Professional Licensing, and the Division has opened that application. So there are two things you can check: the individual therapist's license and the establishment itself.</p></div></details>
+        <details class="faq__item"><summary>What should I do if something feels wrong during a massage?</summary><div class="faq__answer"><p>End the session. You can say stop at any point, and a professional therapist will stop immediately. Afterward you can file a complaint with the Utah Division of Professional Licensing, which also publishes a disciplinary actions and citations search. If you believe a crime occurred, contact the police.</p></div></details>
+        <details class="faq__item"><summary>Are the therapists at J Massage SLC licensed?</summary><div class="faq__answer"><p>Yes. Every therapist at J Massage SLC is licensed by the State of Utah, and we will give you a therapist's name before your appointment so you can look them up yourself. We are at 677 S 200 W Suite C in downtown Salt Lake City, open daily from 10am to 10pm, with massage from $105 for 60 minutes.</p></div></details>
       </div>
     </article>
+
+    <section class="band-dark">
+      <div class="cta-band container">
+      <h2 class="cta-band__heading" data-reveal>Book with confidence.</h2>
+      <p class="cta-band__text" data-reveal>Utah-licensed therapists, published rates from $105 for 60 minutes, downtown Salt Lake City.</p>
+      <div class="cluster cluster--center" data-reveal>
+        <a class="btn btn--primary" href="/book" data-magnetic>Book Now</a>
+        <a class="btn btn--ghost btn--on-dark" href="tel:+18012881118">Call (801) 288-1118</a>
+      </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <span class="footer__logo">J Massage <em>SLC</em></span>
-        <p>Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid site-footer__grid--cols">
+        <div>
+          <p class="site-footer__brand">J Massage SLC</p>
+          <p style="max-width: 36ch;">Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+          <p class="site-footer__rating"><span class="stars" aria-hidden="true">★★★★<span class="star-half">★</span></span> 4.4 · 500+ Verified Google Reviews</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Treatments</p>
+          <ul class="site-footer__list">
+            <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+            <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+            <li><a href="/services/sports-massage">Sports Massage</a></li>
+            <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+            <li><a href="/services/couples-massage">Couples Massage</a></li>
+            <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+            <li><a href="/services/shiatsu">Shiatsu</a></li>
+            <li><a href="/services/reflexology">Reflexology</a></li>
+            <li><a href="/services/prenatal">Prenatal Massage</a></li>
+            <li><a href="/services/myofascial">Myofascial Release</a></li>
+            <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Quick Links</p>
+          <ul class="site-footer__list">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/gift-cards">Gift Cards</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="https://www.elitespautah.com" rel="noopener">Elite Spa Utah (sister location)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Areas We Serve</p>
+          <ul class="site-footer__list">
+            <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
+            <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
+            <li><a href="/massage-in-sugar-house">Sugar House</a></li>
+            <li><a href="/massage-in-millcreek">Millcreek</a></li>
+            <li><a href="/massage-in-the-avenues">The Avenues</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Visit Us</p>
+          <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
+          <ul class="site-footer__list" style="margin-top: var(--space-1);">
+            <li><a href="tel:+18012881118">(801) 288-1118</a></li>
+            <li>Open Daily · 10am–10pm</li>
+            <li><a href="/book">Book online</a></li>
+            <li><a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer__contact">
-        <h2 class="footer__heading">Visit Us</h2>
-        <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
-        <a href="tel:+18012881118">(801) 288-1118</a>
-        <p>Open Daily &nbsp;·&nbsp; 10am – 10pm</p>
-        <a href="/book" class="btn btn--gold btn--sm">Book Now</a>
+      <div class="site-footer__legal">
+        <span>© 2026 J Massage SLC · All rights reserved · <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--></span>
+        <span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a></span>
       </div>
-    </div>
-    <div class="footer__bottom container">
-      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
-        <a href="tel:+18012881118">(801) 288-1118</a> &nbsp;·&nbsp; <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--> &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
-    </p>
     </div>
   </footer>
 
-  <script src="/js/main.js" defer></script>
   <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
        The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
-  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
+  <script src="/js/nav.js?v=1" defer></script>
+  <script src="/js/defer-load.js?v=2" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
 </body>
 </html>

@@ -9,24 +9,6 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://jmassageslc.com/terms">
 
-  <!-- Runs before any stylesheet, so the parser never waits on CSS for it. -->
-  <script>
-    (function () {
-      var root = document.documentElement;
-      // Intro cover (once per session): paint the intro's backdrop from the first frame so the
-      // hero never shows before the intro. js/motion.js builds the intro after that frame and
-      // removes the class; if motion.js never takes over, DOMContentLoaded removes it.
-      // Keep this test in step with motion.js's playIntro (same 'jm-intro' key, same query).
-      try {
-        if (matchMedia('(prefers-reduced-motion: no-preference)').matches && !sessionStorage.getItem('jm-intro')) {
-          root.classList.add('cine-pending');
-          document.addEventListener('DOMContentLoaded', function () {
-            if (!window.__introCover) root.classList.remove('cine-pending');
-          });
-        }
-      } catch (e) {}
-    })();
-  </script>
   <!-- Google tag (gtag.js) - G-W8JB6XPYH9: injected by /js/after-paint.js on the first tap, scroll or key after first paint, or 5 s after it (data-gtag="interaction"); ad-click URLs load it at parse below -->
   <script src="/js/after-paint.js?v=1" defer data-gtag="interaction"></script>
   <script>
@@ -42,70 +24,45 @@
   <link rel="preload" href="/fonts/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/styles.css?v=24">
+  <link rel="stylesheet" href="/css/site.css?v=1">
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-  <style>
-    .legal{max-width:760px;margin:0 auto;padding:7rem 1.25rem 4rem}
-    .legal h1{font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin:0 0 .35em}
-    .legal .updated{opacity:.6;font-size:.95rem;margin:0 0 2.5rem}
-    .legal h2{font-size:1.4rem;margin:2.4rem 0 .6rem}
-    .legal p,.legal li{line-height:1.7;font-size:1.02rem}
-    .legal ul{padding-left:1.2rem;margin:.4rem 0 1rem}
-    .legal li{margin:.3rem 0}
-    .legal a{text-decoration:underline}
-  </style>
 </head>
 <body>
 
   <a href="#main" class="skip-link">Skip to content</a>
-  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-  <header id="header" class="header">
-    <div class="header__inner container">
-      <a href="/" class="logo" aria-label="J Massage SLC, home">
-        <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <ul class="nav__list" id="navList">
-          <li class="nav__item nav__item--dropdown">
-            <a href="#services" class="nav__link">Services <span class="nav__dropdown-caret">›</span></a>
-            <ul class="nav__dropdown">
-              <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-              <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-              <li><a href="/services/sports-massage">Sports Massage</a></li>
-              <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-              <li><a href="/services/couples-massage">Couples Massage</a></li>
-              <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-              <li><a href="/services/shiatsu">Shiatsu</a></li>
-              <li><a href="/services/reflexology">Reflexology</a></li>
-              <li><a href="/services/prenatal">Prenatal Massage</a></li>
-              <li><a href="/services/myofascial">Myofascial Release</a></li>
-              <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
-            </ul>
-          </li>
-          <li><a href="/about" class="nav__link">About</a></li>
-          <li><a href="/pricing" class="nav__link">Pricing</a></li>
-          <li><a href="/reviews" class="nav__link">Reviews</a></li>
-          <li><a href="/gift-cards" class="nav__link">Gift Cards</a></li>
-          <li><a href="/faq" class="nav__link">FAQ</a></li>
-          <li><a href="/blog" class="nav__link">Blog</a></li>
-          <li><a href="/contact" class="nav__link">Contact</a></li>
-          <li><a href="/book" class="nav__cta" data-magnetic>Book Now</a></li>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="/">J Massage SLC</a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav__menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+        <ul class="site-nav__list" id="primary-nav">
+          <li><a class="site-nav__link" href="/services">Services</a></li>
+          <li><a class="site-nav__link" href="/pricing">Pricing</a></li>
+          <li><a class="site-nav__link" href="/reviews">Reviews</a></li>
+          <li><a class="site-nav__link" href="/about">About</a></li>
+          <li><a class="site-nav__link" href="/gift-cards">Gift Cards</a></li>
+          <li><a class="site-nav__link" href="/faq">FAQ</a></li>
+          <li><a class="site-nav__link" href="/blog">Blog</a></li>
+          <li><a class="site-nav__link" href="/contact">Contact</a></li>
+          <li class="site-nav__item--tel"><a class="site-nav__link" href="tel:+18012881118">(801) 288-1118</a></li>
+          <li><a class="btn btn--primary" href="/book" data-magnetic>Book Now</a></li>
         </ul>
-        <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <article class="legal">
-      <h1>Terms of Service</h1>
-      <p class="updated">Last updated: June 19, 2026</p>
+    <section class="page-header" data-hero>
+      <div class="container container--narrow">
+        <h1><span class="line"><span class="line-inner">Terms of Service</span></span></h1>
+        <p class="svc-note">Last updated: June 19, 2026</p>
+      </div>
+    </section>
 
+    <article class="container container--narrow section">
       <p>These Terms of Service ("Terms") govern your use of <a href="https://jmassageslc.com">jmassageslc.com</a> and the services provided by J Massage SLC ("we," "us," or "our"). By using our website or booking an appointment, you agree to these Terms.</p>
 
       <h2>Appointments &amp; Booking</h2>
@@ -150,79 +107,75 @@
     </article>
   </main>
 
-  <footer class="footer">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <span class="footer__logo">J Massage <em>SLC</em></span>
-        <p>Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
-        <div class="footer__rating">
-          <span class="stars">★★★★<span class="star-half" aria-hidden="true">★</span></span>
-          <span>4.4 &nbsp;·&nbsp; 500+ Verified Google Reviews</span>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid site-footer__grid--cols">
+        <div>
+          <p class="site-footer__brand">J Massage SLC</p>
+          <p style="max-width: 36ch;">Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+          <p class="site-footer__rating"><span class="stars" aria-hidden="true">★★★★<span class="star-half">★</span></span> 4.4 · 500+ Verified Google Reviews</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Treatments</p>
+          <ul class="site-footer__list">
+            <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+            <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+            <li><a href="/services/sports-massage">Sports Massage</a></li>
+            <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+            <li><a href="/services/couples-massage">Couples Massage</a></li>
+            <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+            <li><a href="/services/shiatsu">Shiatsu</a></li>
+            <li><a href="/services/reflexology">Reflexology</a></li>
+            <li><a href="/services/prenatal">Prenatal Massage</a></li>
+            <li><a href="/services/myofascial">Myofascial Release</a></li>
+            <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Quick Links</p>
+          <ul class="site-footer__list">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/gift-cards">Gift Cards</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="https://www.elitespautah.com" rel="noopener">Elite Spa Utah (sister location)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Areas We Serve</p>
+          <ul class="site-footer__list">
+            <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
+            <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
+            <li><a href="/massage-in-sugar-house">Sugar House</a></li>
+            <li><a href="/massage-in-millcreek">Millcreek</a></li>
+            <li><a href="/massage-in-the-avenues">The Avenues</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Visit Us</p>
+          <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
+          <ul class="site-footer__list" style="margin-top: var(--space-1);">
+            <li><a href="tel:+18012881118">(801) 288-1118</a></li>
+            <li>Open Daily · 10am–10pm</li>
+            <li><a href="/book">Book online</a></li>
+            <li><a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a></li>
+          </ul>
         </div>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Treatments</h2>
-        <ul>
-          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-          <li><a href="/services/sports-massage">Sports Massage</a></li>
-          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-          <li><a href="/services/couples-massage">Couples Massage</a></li>
-          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-        </ul>
+      <div class="site-footer__legal">
+        <span>© 2026 J Massage SLC · All rights reserved · <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--></span>
+        <span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a></span>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Quick Links</h2>
-        <ul>
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/pricing">Pricing</a></li>
-          <li><a href="/reviews">Reviews</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/gift-cards">Gift Cards</a></li>
-          <li><a href="/faq">FAQ</a></li>
-        </ul>
-      </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Areas We Serve</h2>
-        <ul>
-          <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
-          <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
-          <li><a href="/massage-in-sugar-house">Sugar House</a></li>
-          <li><a href="/massage-in-millcreek">Millcreek</a></li>
-          <li><a href="/massage-in-the-avenues">The Avenues</a></li>
-        </ul>
-      </div>
-      <div class="footer__contact">
-        <h2 class="footer__heading">Visit Us</h2>
-        <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
-        <a href="tel:+18012881118">(801) 288-1118</a>
-        <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off-->
-        <p>Open Daily &nbsp;·&nbsp; 10am – 10pm</p>
-        <a href="/book" class="btn btn--gold btn--sm">Book Now</a>
-      </div>
-    </div>
-    <div class="footer__bottom container">
-      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
-        <a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a>
-        &nbsp;·&nbsp;
-        <a href="tel:+18012881118">(801) 288-1118</a>
-        &nbsp;·&nbsp;
-        <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off-->
-        &nbsp;·&nbsp;
-        <a href="/privacy-policy">Privacy Policy</a>
-        &nbsp;·&nbsp;
-        <a href="/terms">Terms</a>
-      </p>
     </div>
   </footer>
 
-  <script src="js/vendor/gsap.min.js" defer></script>
-  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js" defer></script>
-  <script src="js/motion.js" defer></script>
   <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
        The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
-  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
+  <script src="/js/nav.js?v=1" defer></script>
+  <script src="/js/defer-load.js?v=2" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
 </body>
 </html>

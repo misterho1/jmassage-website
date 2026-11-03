@@ -18,24 +18,6 @@
   <meta property="og:image" content="https://jmassageslc.com/og-image-v6.jpg">
   <meta property="og:site_name" content="J Massage SLC">
 
-  <!-- Runs before any stylesheet, so the parser never waits on CSS for it. -->
-  <script>
-    (function () {
-      var root = document.documentElement;
-      // Intro cover (once per session): paint the intro's backdrop from the first frame so the
-      // hero never shows before the intro. js/motion.js builds the intro after that frame and
-      // removes the class; if motion.js never takes over, DOMContentLoaded removes it.
-      // Keep this test in step with motion.js's playIntro (same 'jm-intro' key, same query).
-      try {
-        if (matchMedia('(prefers-reduced-motion: no-preference)').matches && !sessionStorage.getItem('jm-intro')) {
-          root.classList.add('cine-pending');
-          document.addEventListener('DOMContentLoaded', function () {
-            if (!window.__introCover) root.classList.remove('cine-pending');
-          });
-        }
-      } catch (e) {}
-    })();
-  </script>
   <!-- Google tag (gtag.js) - G-W8JB6XPYH9: injected by /js/after-paint.js on the first tap, scroll or key after first paint, or 5 s after it (data-gtag="interaction"); ad-click URLs load it at parse below -->
   <script src="/js/after-paint.js?v=1" defer data-gtag="interaction"></script>
   <script>
@@ -51,7 +33,7 @@
   <link rel="preload" href="/fonts/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
-  <link rel="stylesheet" href="css/styles.css?v=24">
+  <link rel="stylesheet" href="/css/site.css?v=1">
 
   <script type="application/ld+json">
   {
@@ -80,376 +62,231 @@
 <body>
 
   <a href="#main" class="skip-link">Skip to content</a>
-  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-  <header id="header" class="header">
-    <div class="header__inner container">
-      <a href="/" class="logo" aria-label="J Massage SLC, home">
-        <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <ul class="nav__list" id="navList">
-          <li class="nav__item nav__item--dropdown">
-            <a href="/#services" class="nav__link">Services <span class="nav__dropdown-caret">›</span></a>
-            <ul class="nav__dropdown">
-              <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-              <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-              <li><a href="/services/sports-massage">Sports Massage</a></li>
-              <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-              <li><a href="/services/couples-massage">Couples Massage</a></li>
-              <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-              <li><a href="/services/shiatsu">Shiatsu</a></li>
-              <li><a href="/services/reflexology">Reflexology</a></li>
-              <li><a href="/services/prenatal">Prenatal Massage</a></li>
-              <li><a href="/services/myofascial">Myofascial Release</a></li>
-              <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
-            </ul>
-          </li>
-          <li><a href="/about" class="nav__link">About</a></li>
-          <li><a href="/pricing" class="nav__link">Pricing</a></li>
-          <li><a href="/reviews" class="nav__link" aria-current="page">Reviews</a></li>
-          <li><a href="/gift-cards" class="nav__link">Gift Cards</a></li>
-          <li><a href="/faq" class="nav__link">FAQ</a></li>
-          <li><a href="/blog" class="nav__link">Blog</a></li>
-          <li><a href="/contact" class="nav__link">Contact</a></li>
-          <li><a href="/book" class="nav__cta" data-magnetic>Book Now</a></li>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="/">J Massage SLC</a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav__menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+        <ul class="site-nav__list" id="primary-nav">
+          <li><a class="site-nav__link" href="/services">Services</a></li>
+          <li><a class="site-nav__link" href="/pricing">Pricing</a></li>
+          <li><a class="site-nav__link" href="/reviews">Reviews</a></li>
+          <li><a class="site-nav__link" href="/about">About</a></li>
+          <li><a class="site-nav__link" href="/gift-cards">Gift Cards</a></li>
+          <li><a class="site-nav__link" href="/faq">FAQ</a></li>
+          <li><a class="site-nav__link" href="/blog">Blog</a></li>
+          <li><a class="site-nav__link" href="/contact">Contact</a></li>
+          <li class="site-nav__item--tel"><a class="site-nav__link" href="tel:+18012881118">(801) 288-1118</a></li>
+          <li><a class="btn btn--primary" href="/book" data-magnetic>Book Now</a></li>
         </ul>
-        <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
       </nav>
     </div>
   </header>
 
   <main id="main">
-
-    <!-- HERO -->
-    <section style="padding: 9rem 0 5rem; background: linear-gradient(160deg, var(--soot) 0%, var(--timber) 60%); border-bottom: 1px solid var(--border);">
-      <div class="container" style="text-align: center; max-width: 800px; margin: 0 auto;">
-        <nav aria-label="Breadcrumb" style="margin-bottom: 1.5rem;">
-          <ol style="list-style: none; display: flex; gap: 0.5rem; justify-content: center; font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); text-transform: uppercase; letter-spacing: 0.08em;">
-            <li><a href="/" style="color: var(--lantern); text-decoration: none;">Home</a></li>
-            <li style="opacity: 0.4;">›</li>
-            <li style="color: var(--text-lo);">Reviews</li>
-          </ol>
-        </nav>
-        <h1 style="font-family: var(--font-head); font-size: clamp(2rem, 4.5vw, 3.4rem); font-weight: 300; color: var(--text-hi); line-height: 1.15; margin-bottom: 1.2rem;">
-          J Massage SLC reviews.<br><em style="color: var(--lantern);">500+ Google Reviews · 4.4 Stars</em>
-        </h1>
-
-        <!-- Stats Hero -->
-        <div style="display: inline-flex; gap: 2.5rem; align-items: center; background: var(--soot); border: 1px solid var(--border-mid); border-radius: var(--r-lg); padding: 1.5rem 2.5rem; margin: 1.5rem auto 2rem; flex-wrap: wrap; justify-content: center;">
-          <div style="text-align: center;">
-            <div style="color: var(--star); font-size: 1.6rem; letter-spacing: 0.05em; line-height: 1;">★★★★<span class="star-half" aria-hidden="true">★</span></div>
-            <div style="font-family: var(--font-head); font-size: 2.2rem; color: var(--lantern); font-weight: 300; line-height: 1.1; margin-top: 0.3rem;">4.4</div>
-            <div style="font-family: var(--font-body); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-lo); margin-top: 0.2rem;">Star Rating</div>
-          </div>
-          <div style="width: 1px; height: 60px; background: var(--border);"></div>
-          <div style="text-align: center;">
-            <div style="font-family: var(--font-head); font-size: 2.2rem; color: var(--lantern); font-weight: 300; line-height: 1.1;">500+</div>
-            <div style="font-family: var(--font-body); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-lo); margin-top: 0.2rem;">Google Reviews</div>
-          </div>
-          <div style="width: 1px; height: 60px; background: var(--border);"></div>
-          <div style="text-align: center;">
-            <div style="font-family: var(--font-head); font-size: 1.5rem; color: var(--lantern); font-weight: 300; line-height: 1.1;">Since 2017</div>
-            <div style="font-family: var(--font-body); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-lo); margin-top: 0.2rem;">Serving SLC</div>
-          </div>
-        </div>
-
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <a href="https://www.google.com/maps/place/J+Massage+SLC" target="_blank" rel="noopener" class="btn btn--ghost">Read All Reviews on Google</a>
-          <a href="/book" class="btn btn--gold">Book Now</a>
-        </div>
+    <section class="page-header" data-hero>
+      <div class="container container--narrow">
+        <p class="eyebrow">Since 2017 · Serving SLC</p>
+        <h1 style="font-size: var(--type-2); text-wrap: balance"><span class="line"><span class="line-inner">J Massage SLC reviews.</span></span>
+          <span class="line"><span class="line-inner">500+ Google Reviews&nbsp;· 4.4 Stars</span></span></h1>
+        <p class="lead">These are just a sample. Read every review directly on our Google listing.</p>
+        <p class="reviews-summary" role="img" aria-label="4.4 out of 5 stars" style="font-size: 1.5rem; margin-top: var(--space-2)"><span class="stars" aria-hidden="true">★★★★<span class="star-half">★</span></span></p>
       </div>
     </section>
 
-    <!-- REVIEWS GRID -->
-    <section style="padding: var(--section-y) 0;">
-      <div class="container" style="max-width: 1100px; margin: 0 auto;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
+    <section class="container container--content section">
+      <div class="reviews" data-reveal-stagger>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"Very happy with the massage, great pressure and it felt amazing. My therapist hit all the right spots, including a scalp massage. I'll be back."</p>
+          <p class="review__meta">
+            <span class="review__author">Cassie C.</span>
+            <span class="review__when">Verified Google review</span>
+          </p>
+        </article>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"My boyfriend and I got fully relaxed here after skiing. So professional at treating muscle tension, the best choice for recovery after intense exercise."</p>
+          <p class="review__meta">
+            <span class="review__author">Sunny</span>
+            <span class="review__when">Post-Ski Recovery</span>
+          </p>
+        </article>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"Jaiden is incredible, I've honestly never had a better massage. She knew exactly what was going on when I explained my painful points. I left feeling so much better."</p>
+          <p class="review__meta">
+            <span class="review__author">Emma H.</span>
+            <span class="review__when">Deep Tissue</span>
+          </p>
+        </article>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"Not just the massage you want, but the massage your body needs. Tony's combination of pressure, stretching, and massage bordered on chiropractic physical therapy."</p>
+          <p class="review__meta">
+            <span class="review__author">Tanner B.</span>
+            <span class="review__when">Deep Tissue</span>
+          </p>
+        </article>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"I've been here several times over the years and they give the best massage around, whether relaxation, deep tissue, or shiatsu. Well worth it."</p>
+          <p class="review__meta">
+            <span class="review__author">Eric</span>
+            <span class="review__when">Regular Client</span>
+          </p>
+        </article>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"My friends and I unanimously agreed these were the best massages of our lives, and we've had massages around the world. 100% recommend."</p>
+          <p class="review__meta">
+            <span class="review__author">Michele T.</span>
+            <span class="review__when">Group Visit</span>
+          </p>
+        </article>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"One of the best places I've had a massage, and I'm a massage therapist myself. From the front desk to the therapist, they always do a great job."</p>
+          <p class="review__meta">
+            <span class="review__author">Osmin Z.</span>
+            <span class="review__when">90-Minute · Regular</span>
+          </p>
+        </article>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"After a day of skiing in Salt Lake City, I had a deep tissue massage and Tony's technique was fantastic. Very professional, accurately locating my sore muscles."</p>
+          <p class="review__meta">
+            <span class="review__author">Qin T.</span>
+            <span class="review__when">Deep Tissue</span>
+          </p>
+        </article>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"Golfed 36 holes and could barely move the next day. Found this gem and they worked my back and arms. Best massage I've had in years."</p>
+          <p class="review__meta">
+            <span class="review__author">Mason A.</span>
+            <span class="review__when">Sports Recovery</span>
+          </p>
+        </article>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"Brought my husband in for a massage and he said it was the best he has ever gotten. The masseuse was very experienced and got the knots out of his back."</p>
+          <p class="review__meta">
+            <span class="review__author">Britney N.</span>
+            <span class="review__when">Gift · Couples</span>
+          </p>
+        </article>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"They were able to get me in early and did a wonderful job on the hand and foot combo. Felt relaxing and so good."</p>
+          <p class="review__meta">
+            <span class="review__author">Anabel F.</span>
+            <span class="review__when">Hand &amp; Foot Combo</span>
+          </p>
+        </article>
+        <article class="review review--live">
+          <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review__quote">"Exceeded all my expectations. The spa was so nice and peaceful. I went with a group of four, and each of us left feeling completely satisfied."</p>
+          <p class="review__meta">
+            <span class="review__author">J M.</span>
+            <span class="review__when">Group of Four</span>
+          </p>
+        </article>
+      </div>
+      <p class="reviews-attribution" style="margin-inline: auto">Reviews from Google</p>
 
-          <!-- Review 1: Deep Tissue -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "Very happy with the massage, great pressure and it felt amazing. My therapist hit all the right spots, including a scalp massage. I'll be back."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">Cassie C.</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">Verified Google review</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-          <!-- Review 2: Traveler from Airport -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "My boyfriend and I got fully relaxed here after skiing. So professional at treating muscle tension, the best choice for recovery after intense exercise."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">Sunny</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">Post-Ski Recovery</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-          <!-- Review 3: Couples -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "Jaiden is incredible, I've honestly never had a better massage. She knew exactly what was going on when I explained my painful points. I left feeling so much better."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">Emma H.</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">Deep Tissue</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-          <!-- Review 4: Sports / Athlete -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "Not just the massage you want, but the massage your body needs. Tony's combination of pressure, stretching, and massage bordered on chiropractic physical therapy."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">Tanner B.</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">Deep Tissue</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-          <!-- Review 5: Ashiatsu -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "I've been here several times over the years and they give the best massage around, whether relaxation, deep tissue, or shiatsu. Well worth it."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">Eric</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">Regular Client</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-          <!-- Review 6: 4-Hand -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "My friends and I unanimously agreed these were the best massages of our lives, and we've had massages around the world. 100% recommend."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">Michele T.</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">Group Visit</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-          <!-- Review 7: First-Timer -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "One of the best places I've had a massage, and I'm a massage therapist myself. From the front desk to the therapist, they always do a great job."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">Osmin Z.</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">90-Minute · Regular</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-          <!-- Review 8: Regular / Value -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "After a day of skiing in Salt Lake City, I had a deep tissue massage and Tony's technique was fantastic. Very professional, accurately locating my sore muscles."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">Qin T.</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">Deep Tissue</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-          <!-- Review 9: Hot Stone -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "Golfed 36 holes and could barely move the next day. Found this gem and they worked my back and arms. Best massage I've had in years."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">Mason A.</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">Sports Recovery</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-          <!-- Review 10: Prenatal -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "Brought my husband in for a massage and he said it was the best he has ever gotten. The masseuse was very experienced and got the knots out of his back."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">Britney N.</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">Gift · Couples</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-          <!-- Review 11: Airport Traveler -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "They were able to get me in early and did a wonderful job on the hand and foot combo. Felt relaxing and so good."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">Anabel F.</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">Hand &amp; Foot Combo</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-          <!-- Review 12: Swedish / Stress -->
-          <article style="background: var(--soot); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 2rem; position: relative;">
-            <div style="position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--lantern-mid), transparent);"></div>
-            <div style="color: var(--star); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.1em;">★★★★★</div>
-            <p style="font-family: var(--font-head); font-size: 1.1rem; color: var(--text-hi); line-height: 1.7; margin-bottom: 1.2rem; font-style: normal;">
-              "Exceeded all my expectations. The spa was so nice and peaceful. I went with a group of four, and each of us left feeling completely satisfied."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-family: var(--font-body); font-size: 0.88rem; color: var(--text-hi); font-weight: 500;">J M.</div>
-                <div style="font-family: var(--font-body); font-size: 0.78rem; color: var(--text-lo); margin-top: 0.15rem;">Group of Four</div>
-              </div>
-              <div style="font-family: var(--font-body); font-size: 0.75rem; color: var(--lantern); opacity: 0.7;">Google</div>
-            </div>
-          </article>
-
-        </div><!-- end grid -->
-
-        <!-- Google CTA -->
-        <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: var(--soot); border: 1px solid var(--border-mid); border-radius: var(--r-lg);">
-          <div style="color: var(--star); font-size: 1.8rem; margin-bottom: 0.8rem;">★★★★<span class="star-half" aria-hidden="true">★</span></div>
-          <h2 style="font-family: var(--font-head); font-size: 1.8rem; font-weight: 300; color: var(--text-hi); margin-bottom: 0.8rem;">500+ reviews on Google</h2>
-          <p style="color: var(--text-lo); font-size: 0.9rem; margin-bottom: 1.8rem;">These are just a sample. Read every review directly on our Google listing.</p>
-          <a href="https://www.google.com/maps/place/J+Massage+SLC" target="_blank" rel="noopener" class="btn btn--ghost" style="margin-right: 1rem;">Read All Google Reviews</a>
-          <a href="/book" class="btn btn--gold">Book Now</a>
-        </div>
-
+      <div class="cluster cluster--center" style="margin-top: var(--space-4)">
+        <a class="btn btn--primary" href="https://www.google.com/maps/place/J+Massage+SLC" target="_blank" rel="noopener">Read All Reviews on Google</a>
+        <a class="btn btn--ghost" href="/book">Book Now</a>
       </div>
     </section>
 
+    <section class="band-dark">
+      <div class="cta-band container">
+      <h2 class="cta-band__heading" data-reveal>Ready when you are.</h2>
+      <p class="cta-band__text" data-reveal>Open daily, 10am to 10pm.</p>
+      <div class="cluster cluster--center" data-reveal>
+        <a class="btn btn--primary" href="/book" data-magnetic>Book Now</a>
+        <a class="btn btn--ghost btn--on-dark" href="tel:+18012881118">Call (801) 288-1118</a>
+      </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <span class="footer__logo">J Massage <em>SLC</em></span>
-        <p>Salt Lake City massage therapy studio since 2017. Utah-licensed therapists, 500+ Google reviews, open every day.</p>
-        <div class="footer__rating">
-          <span class="stars">★★★★<span class="star-half" aria-hidden="true">★</span></span>
-          <span>4.4 &nbsp;·&nbsp; 500+ Verified Google Reviews</span>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid site-footer__grid--cols">
+        <div>
+          <p class="site-footer__brand">J Massage SLC</p>
+          <p style="max-width: 36ch;">Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+          <p class="site-footer__rating"><span class="stars" aria-hidden="true">★★★★<span class="star-half">★</span></span> 4.4 · 500+ Verified Google Reviews</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Treatments</p>
+          <ul class="site-footer__list">
+            <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+            <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+            <li><a href="/services/sports-massage">Sports Massage</a></li>
+            <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+            <li><a href="/services/couples-massage">Couples Massage</a></li>
+            <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+            <li><a href="/services/shiatsu">Shiatsu</a></li>
+            <li><a href="/services/reflexology">Reflexology</a></li>
+            <li><a href="/services/prenatal">Prenatal Massage</a></li>
+            <li><a href="/services/myofascial">Myofascial Release</a></li>
+            <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Quick Links</p>
+          <ul class="site-footer__list">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/gift-cards">Gift Cards</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="https://www.elitespautah.com" rel="noopener">Elite Spa Utah (sister location)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Areas We Serve</p>
+          <ul class="site-footer__list">
+            <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
+            <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
+            <li><a href="/massage-in-sugar-house">Sugar House</a></li>
+            <li><a href="/massage-in-millcreek">Millcreek</a></li>
+            <li><a href="/massage-in-the-avenues">The Avenues</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Visit Us</p>
+          <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
+          <ul class="site-footer__list" style="margin-top: var(--space-1);">
+            <li><a href="tel:+18012881118">(801) 288-1118</a></li>
+            <li>Open Daily · 10am–10pm</li>
+            <li><a href="/book">Book online</a></li>
+            <li><a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a></li>
+          </ul>
         </div>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Treatments</h2>
-        <ul>
-          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-          <li><a href="/services/sports-massage">Sports Massage</a></li>
-          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-          <li><a href="/services/couples-massage">Couples Massage</a></li>
-          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-        </ul>
+      <div class="site-footer__legal">
+        <span>© 2026 J Massage SLC · All rights reserved · <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--></span>
+        <span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a></span>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Areas We Serve</h2>
-        <ul>
-          <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
-          <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
-          <li><a href="/massage-in-sugar-house">Sugar House</a></li>
-          <li><a href="/massage-in-millcreek">Millcreek</a></li>
-          <li><a href="/massage-in-the-avenues">The Avenues</a></li>
-        </ul>
-      </div>
-      <div class="footer__contact">
-        <h2 class="footer__heading">Visit Us</h2>
-        <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
-        <a href="tel:+18012881118">(801) 288-1118</a><br>
-        <!--email_off--><a href="mailto:jmassage677@gmail.com" style="display: block; margin-top: 0.3rem; color: var(--text-lo); font-size: 0.85rem;">jmassage677@gmail.com</a><!--/email_off-->
-        <p>Open Daily &nbsp;·&nbsp; 10am – 10pm</p>
-        <a href="/book" class="btn btn--gold btn--sm">Book Now</a>
-      </div>
-    </div>
-    <div class="footer__bottom container">
-      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
-        <a href="https://www.google.com/maps/place/J+Massage+SLC" target="_blank" rel="noopener">Get Directions</a>
-        &nbsp;·&nbsp;
-        <a href="tel:+18012881118">(801) 288-1118</a>
-        &nbsp;·&nbsp;
-        <a href="/about">About</a>
-        &nbsp;·&nbsp;
-        <a href="/contact">Contact</a>
-        &nbsp;·&nbsp;
-        <a href="/pricing">Pricing</a> &nbsp;·&nbsp; <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--> &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
-    </p>
     </div>
   </footer>
 
-  <script src="js/vendor/gsap.min.js" defer></script>
-  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js" defer></script>
-  <script src="js/motion.js" defer></script>
   <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
        The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
-  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
+  <script src="/js/nav.js?v=1" defer></script>
+  <script src="/js/defer-load.js?v=2" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
-  <!-- Sticky mobile Book/Call bar (P1 CRO) -->
-  <style>
-    .m-cta{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;gap:.5rem;padding:.5rem calc(.6rem + 72px) .5rem .6rem;background:rgba(20,17,14,.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid rgba(250,247,243,.14);box-shadow:0 -6px 20px rgba(0,0,0,.30)}
-    .m-cta a{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;padding:.8rem .5rem;border-radius:10px;text-decoration:none;font-family:var(--font-ui,'DM Sans',system-ui,sans-serif);font-weight:600;font-size:.98rem;letter-spacing:.02em}
-    .m-cta__book{background:var(--lantern,#c9a86a);color:var(--ember,#fffdfb)}
-    .m-cta__call{background:transparent;color:#faf7f3;border:1px solid rgba(250,247,243,.45)}
-    @media (max-width:820px){.m-cta{display:flex}body{padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}}
-  </style>
   <nav class="m-cta" aria-label="Book or call">
-    <a class="m-cta__book" href="/book">Book</a>
-    <a class="m-cta__call" href="tel:+18012881118">Call</a>
+    <a class="btn btn--primary" href="/book">Book</a>
+    <a class="btn btn--secondary" href="tel:+18012881118">Call</a>
   </nav>
 </body>
 </html>

@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Massage Salt Lake City | J Massage SLC, Open Daily</title>
-  <meta name="description" content="Massage in Salt Lake City at 677 S 200 W Suite #C. Swedish, deep tissue, Ashiatsu and couples, from $105. Open daily 10AM to 10PM.">
+  <title>Massage Salt Lake City, Open Daily to 10pm | J Massage SLC</title>
+  <meta name="description" content="Full body massage in Salt Lake City at 677 S 200 W. Swedish, deep tissue, Ashiatsu and couples, from $105. Open every day 10am to 10pm.">
   <link rel="canonical" href="https://jmassageslc.com/">
   <meta name="robots" content="index, follow">
   <meta name="geo.region" content="US-UT">
@@ -14,8 +14,8 @@
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jmassageslc.com/">
-  <meta property="og:title" content="J Massage SLC | Salt Lake City's Experienced Massage Studio">
-  <meta property="og:description" content="500+ Google reviews. Swedish to Ashiatsu. Utah-licensed therapists. Open every day 10am–10pm.">
+  <meta property="og:title" content="Massage Salt Lake City, Open Daily to 10pm | J Massage SLC">
+  <meta property="og:description" content="Full body massage in Salt Lake City at 677 S 200 W. Swedish, deep tissue, Ashiatsu and couples, from $105. Open every day 10am to 10pm.">
   <meta property="og:image" content="https://jmassageslc.com/og-image-v6.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -23,24 +23,6 @@
   <meta property="og:site_name" content="J Massage SLC">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Runs before any stylesheet, so the parser never waits on CSS for it. -->
-  <script>
-    (function () {
-      var root = document.documentElement;
-      // Intro cover (once per session): paint the intro's backdrop from the first frame so the
-      // hero never shows before the intro. js/motion.js builds the intro after that frame and
-      // removes the class; if motion.js never takes over, DOMContentLoaded removes it.
-      // Keep this test in step with motion.js's playIntro (same 'jm-intro' key, same query).
-      try {
-        if (matchMedia('(prefers-reduced-motion: no-preference)').matches && !sessionStorage.getItem('jm-intro')) {
-          root.classList.add('cine-pending');
-          document.addEventListener('DOMContentLoaded', function () {
-            if (!window.__introCover) root.classList.remove('cine-pending');
-          });
-        }
-      } catch (e) {}
-    })();
-  </script>
   <!-- Google tag (gtag.js) - G-W8JB6XPYH9: injected by /js/after-paint.js on the first tap, scroll or key after first paint, or 5 s after it (data-gtag="interaction"); ad-click URLs load it at parse below -->
   <script src="/js/after-paint.js?v=1" defer data-gtag="interaction"></script>
   <script>
@@ -58,118 +40,8 @@
   <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
 
-  <link rel="stylesheet" href="css/styles.css?v=24">
-  <style>
-    /* Service photos start after first paint (script before </body>); until then they stay blank. */
-    picture[data-after-paint] img:not([src]) { visibility: hidden; }
-  </style>
-  <!-- Without JS the service photos come from their <noscript> copies. -->
-  <noscript><style>picture[data-after-paint] { display: none; }</style></noscript>
+  <link rel="stylesheet" href="/css/site.css?v=1">
 
-  <!-- Live Google reviews widget (homepage) — scoped, uses shared design tokens -->
-  <style>
-    #reviews { background: var(--pool); color: var(--timber); padding: 7rem 0; }
-    #reviews[hidden] { display: none !important; }
-    #reviews .ed-eyebrow { color: var(--glow); }
-    #reviews .ed-section-title { color: var(--timber); }
-    #reviews .ed-section-title em { color: var(--glow); }
-
-    .rev__head { text-align: center; max-width: 720px; margin: 0 auto 3.4rem; }
-    .rev__summary {
-      font-family: var(--font-ui);
-      font-size: 0.92rem;
-      letter-spacing: 0.02em;
-      color: rgba(250, 247, 243, 0.75);
-      line-height: 1.6;
-      margin-top: 1.3rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-      justify-content: center;
-      align-items: baseline;
-    }
-    .rev__stars { color: var(--glow); letter-spacing: 0.15em; }
-    .rev__rating { color: var(--timber); font-weight: 600; }
-    .rev__dot { color: rgba(250, 247, 243, 0.4); }
-    .rev__summary a[data-all] {
-      color: rgba(250, 247, 243, 0.92);
-      border-bottom: 1px solid rgba(250, 247, 243, 0.3);
-      padding-bottom: 1px;
-      transition: color var(--t), border-color var(--t);
-    }
-    .rev__summary a[data-all]:hover { color: var(--glow); border-color: var(--glow); }
-
-    .rev__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.4rem;
-    }
-    .rev-card {
-      background: rgba(250, 247, 243, 0.05);
-      border: 1px solid rgba(250, 247, 243, 0.12);
-      border-radius: var(--r);
-      padding: 1.9rem 1.7rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.95rem;
-    }
-    .rev-card__stars { color: var(--glow); letter-spacing: 0.18em; font-size: 0.95rem; }
-    .rev-card__text {
-      font-family: var(--font-body);
-      font-size: 1rem;
-      line-height: 1.65;
-      color: rgba(250, 247, 243, 0.88);
-      display: -webkit-box;
-      -webkit-line-clamp: 7;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .rev-card__meta {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-      margin-top: auto;
-      padding-top: 0.35rem;
-    }
-    .rev-card__author {
-      font-family: var(--font-ui);
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      color: var(--timber);
-    }
-    .rev-card__when {
-      font-family: var(--font-ui);
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(250, 247, 243, 0.5);
-    }
-    .rev__attribution {
-      text-align: center;
-      margin-top: 2.6rem;
-      font-family: var(--font-ui);
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(250, 247, 243, 0.45);
-    }
-
-    @keyframes revFadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: none; }
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      #reviews:not([hidden]) { animation: revFadeIn 0.8s var(--ease-out) both; }
-    }
-    @media (max-width: 900px) {
-      .rev__grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 600px) {
-      #reviews { padding: 5rem 0; }
-      .rev__grid { grid-template-columns: 1fr; }
-    }
-  </style>
 
   <script type="application/ld+json">
   {
@@ -213,194 +85,118 @@
 <body>
 
   <a href="#main" class="skip-link">Skip to content</a>
-  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
-  <header id="header" class="header">
-    <div class="header__inner container">
-      <a href="/" class="logo" aria-label="J Massage SLC, home">
-        <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <ul class="nav__list" id="navList">
-          <li class="nav__item nav__item--dropdown">
-            <a href="#services" class="nav__link">Services <span class="nav__dropdown-caret">›</span></a>
-            <ul class="nav__dropdown">
-              <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-              <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-              <li><a href="/services/sports-massage">Sports Massage</a></li>
-              <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-              <li><a href="/services/couples-massage">Couples Massage</a></li>
-              <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-              <li><a href="/services/shiatsu">Shiatsu</a></li>
-              <li><a href="/services/reflexology">Reflexology</a></li>
-              <li><a href="/services/prenatal">Prenatal Massage</a></li>
-              <li><a href="/services/myofascial">Myofascial Release</a></li>
-              <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
-            </ul>
-          </li>
-          <li><a href="/about" class="nav__link">About</a></li>
-          <li><a href="/pricing" class="nav__link">Pricing</a></li>
-          <li><a href="/reviews" class="nav__link">Reviews</a></li>
-          <li><a href="/gift-cards" class="nav__link">Gift Cards</a></li>
-          <li><a href="/faq" class="nav__link">FAQ</a></li>
-          <li><a href="/blog" class="nav__link">Blog</a></li>
-          <li><a href="/contact" class="nav__link">Contact</a></li>
-          <li><a href="/book" class="nav__cta" data-magnetic>Book Now</a></li>
+
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="/">J Massage SLC</a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav__menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+        <ul class="site-nav__list" id="primary-nav">
+          <li><a class="site-nav__link" href="/services">Services</a></li>
+          <li><a class="site-nav__link" href="/pricing">Pricing</a></li>
+          <li><a class="site-nav__link" href="/reviews">Reviews</a></li>
+          <li><a class="site-nav__link" href="/about">About</a></li>
+          <li><a class="site-nav__link" href="/gift-cards">Gift Cards</a></li>
+          <li><a class="site-nav__link" href="/faq">FAQ</a></li>
+          <li><a class="site-nav__link" href="/blog">Blog</a></li>
+          <li><a class="site-nav__link" href="/contact">Contact</a></li>
+          <li class="site-nav__item--tel"><a class="site-nav__link" href="tel:+18012881118">(801) 288-1118</a></li>
+          <li><a class="btn btn--primary" href="/book" data-magnetic>Book Now</a></li>
         </ul>
-        <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
       </nav>
     </div>
   </header>
 
   <main id="main">
-
-    <!-- 1. EDITORIAL HERO -->
-    <section class="ed-hero">
-      <div class="ed-hero__media" aria-hidden="true">
+    <section class="hero" data-hero>
+      <div class="hero__media" aria-hidden="true" data-hero-media>
         <picture>
-          <!-- Portrait phones get a purpose-framed 9:16 cut — the landscape
-               16:9 center-crop reads wrong on a tall screen. -->
-          <source media="(orientation: portrait)" srcset="images/editorial/hero-room-portrait.webp">
-          <source srcset="images/editorial/hero-room.webp" type="image/webp">
-          <img src="images/editorial/hero-room.webp" alt="Massage room at J Massage SLC, Salt Lake City" loading="eager" fetchpriority="high" width="2752" height="1536">
+          <source media="(orientation: portrait)" srcset="/images/editorial/hero-room-portrait.webp">
+          <img src="/images/editorial/hero-room.webp" alt="Massage room at J Massage SLC, Salt Lake City" loading="eager" fetchpriority="high" width="2752" height="1536">
         </picture>
-        <video class="ed-hero__video" data-src="/videos/hero-ambient.mp4" data-src-portrait="/videos/hero-ambient-portrait.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
-        <div class="ed-hero__scrim"></div>
+        <!-- Ambient loop continues the hero photo. Lazy-attached post-load by js/ambient-video.js;
+             phones get the 9:16 cut; reduced-motion / Save-Data visitors keep the still. -->
+        <video class="ambient-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
+               data-src="/videos/hero-ambient.mp4"
+               data-src-portrait="/videos/hero-ambient-portrait.mp4"></video>
       </div>
-      <div class="ed-hero__content container">
-        <p class="ed-hero__eyebrow">Salt Lake City · Open daily 10am–10pm</p>
-        <h1 class="ed-hero__title">
-          <span class="line"><span class="line-inner">Hard week?</span></span>
-          <span class="line"><span class="line-inner"><em>Harder hands.</em></span></span>
-        </h1>
-        <p class="ed-hero__sub">
-          Salt Lake City's experienced massage studio. Swedish to Ashiatsu,
-          Utah-licensed therapists, open every day until 10pm.
-        </p>
-        <div class="ed-hero__actions">
-          <a href="/book" class="ed-btn ed-btn--filled">Book Now</a>
-          <a href="#services" class="ed-btn ed-btn--ghost">Explore Treatments</a>
-        </div>
-        <p class="ed-hero__meta">
-          <span>★ 4.4 · 500+ Google Reviews</span>
-          <span class="ed-hero__dot">·</span>
-          <span>Open Today, 10am–10pm</span>
-          <span class="ed-hero__dot">·</span>
-          <span>Same-Day Available</span>
-        </p>
-      </div>
-    </section>
-
-    <!-- 2. INTRO / PHILOSOPHY -->
-    <section class="ed-intro section">
-      <div class="container">
-        <div class="ed-intro__inner" data-reveal>
-          <p class="ed-intro__quote">
-            Massage is not a luxury. It is regular maintenance for a body
-            that runs hard, sleeps less than it should, and asks too much
-            of itself.
-          </p>
-          <p class="ed-intro__byline">A note from the studio</p>
+      <div class="container hero__inner">
+        <p class="eyebrow hero__eyebrow">Salt Lake City · Open daily 10am–10pm</p>
+        <h1 class="hero__heading"><span class="line"><span class="line-inner">Hard week?</span></span>
+          <span class="line"><span class="line-inner">Harder hands.</span></span></h1>
+        <p class="hero__lead">Salt Lake City's experienced massage studio. Swedish to Ashiatsu, Utah-licensed therapists, open every day until 10pm, Sundays included.</p>
+        <div class="hero__actions" data-hero-cta>
+          <a class="btn btn--primary" href="/book">Book Now</a>
+          <a class="btn btn--ghost btn--on-dark" href="#services">Explore Treatments</a>
         </div>
       </div>
     </section>
 
-    <!-- 2b. THE SESSION — single editorial band (Elite-style, no pin/scrub). -->
-    <section class="ed-still section" id="session" aria-label="What a session here feels like">
+    <section class="band-dark">
       <div class="container">
-        <span class="ed-eyebrow" data-reveal>The session</span>
-        <figure class="ed-still__media" data-reveal>
-          <picture>
-            <source media="(orientation: portrait)" srcset="images/photos/home-session-portrait.webp" width="802" height="1428">
-            <img src="images/photos/home-session.webp" alt="A therapist works a client's back by the window at J Massage SLC" loading="lazy" width="2560" height="1428">
-          </picture>
-        </figure>
-        <h2 class="ed-still__caption" data-reveal>And then, the exhale.</h2>
+      <div class="trust-bar" data-reveal-stagger>
+        <div>
+          <span class="trust-bar__item-label">4.4★</span>
+          <span class="trust-bar__item-text">500+ Google reviews</span>
+        </div>
+        <div>
+          <span class="trust-bar__item-label">Open daily</span>
+          <span class="trust-bar__item-text">10am–10pm</span>
+        </div>
+        <div>
+          <span class="trust-bar__item-label">Same-day</span>
+          <span class="trust-bar__item-text">Available</span>
+        </div>
+        <div>
+          <span class="trust-bar__item-label">Utah-licensed</span>
+          <span class="trust-bar__item-text">Therapists</span>
+        </div>
+      </div>
       </div>
     </section>
 
-    <!-- 3. SERVICES — three editorial cards with photography -->
-    <section id="services" class="ed-services section">
-      <div class="container">
-        <header class="ed-section-head" data-reveal>
-          <span class="ed-eyebrow">What we offer</span>
-          <h2 class="ed-section-title">A treatment <em>for every body.</em></h2>
-          <p class="ed-section-sub">
-            Swedish to Ashiatsu, organized into three families. Pick what your
-            body needs, or call and we will help you choose.
-          </p>
-        </header>
-
-        <div class="ed-services__grid" data-reveal-stagger>
-
-          <article class="ed-svc ed-svc--featured">
-            <a href="/services/swedish-massage" class="ed-svc__link">
-              <div class="ed-svc__media">
-                <picture data-after-paint>
-                  <img data-src="images/photos/home-body.webp" alt="Therapist working on a client's back at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture>
-                <noscript><picture>
-                  <source srcset="images/photos/home-body.webp" type="image/webp">
-                  <img src="images/photos/home-body.webp" alt="Therapist working on a client's back at J Massage SLC" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture></noscript>
-              </div>
-              <span class="ed-svc__num">01</span>
-              <h3 class="ed-svc__name">Body Massage</h3>
-              <p class="ed-svc__desc">
-                Swedish, deep tissue, sports, Ashiatsu, prenatal, Shiatsu, myofascial.
-                For everyday tension and chronic patterns.
-              </p>
-              <span class="ed-svc__cta">From $105 / 60 min &nbsp;·&nbsp; See modalities →</span>
-            </a>
-          </article>
-
-          <article class="ed-svc">
-            <a href="/services/foot-massage-head-spa" class="ed-svc__link">
-              <div class="ed-svc__media">
-                <picture data-after-paint>
-                  <img data-src="images/photos/home-head.webp" alt="Japanese head spa at the basin at Elite Spa Utah, our sister location" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture>
-                <noscript><picture>
-                  <source srcset="images/photos/home-head.webp" type="image/webp">
-                  <img src="images/photos/home-head.webp" alt="Japanese head spa at the basin at Elite Spa Utah, our sister location" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture></noscript>
-              </div>
-              <span class="ed-svc__num">02</span>
-              <h3 class="ed-svc__name">Head &amp; Scalp Spa</h3>
-              <p class="ed-svc__desc">
-                A guided scalp treatment that releases jaw, neck, and forehead
-                tension. Quiet the mind without doing anything.
-              </p>
-              <span class="ed-svc__cta">At Elite Spa Utah, sister location &nbsp;·&nbsp; Learn more →</span>
-            </a>
-          </article>
-
-          <article class="ed-svc">
-            <a href="/services/reflexology" class="ed-svc__link">
-              <div class="ed-svc__media">
-                <picture data-after-paint>
-                  <img data-src="images/photos/home-foot.webp" alt="Foot reflexology at Elite Spa Utah, our sister location" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture>
-                <noscript><picture>
-                  <source srcset="images/photos/home-foot.webp" type="image/webp">
-                  <img src="images/photos/home-foot.webp" alt="Foot reflexology at Elite Spa Utah, our sister location" loading="lazy" width="928" height="1152" data-parallax="0.06">
-                </picture></noscript>
-              </div>
-              <span class="ed-svc__num">03</span>
-              <h3 class="ed-svc__name">Foot &amp; Reflexology</h3>
-              <p class="ed-svc__desc">
-                Pressure-point work on the feet that travels through the body.
-                A whole-body reset delivered through your extremities.
-              </p>
-              <span class="ed-svc__cta">At Elite Spa Utah, sister location &nbsp;·&nbsp; Learn more →</span>
-            </a>
-          </article>
-
+    <section id="services" class="container section">
+      <p class="eyebrow" data-reveal>What we offer</p>
+      <h2 data-reveal>A treatment for every body.</h2>
+      <p class="lead" data-reveal>Full body massage in Salt Lake City, Swedish to Ashiatsu, organized into three families. Pick what your body needs, or call and we will help you choose.</p>
+      <div class="svc-editorial">
+        <a class="svc-feature svc-feature--a" href="/services/swedish-massage" data-reveal>
+          <div>
+            <h3 class="svc-feature__title">Body Massage</h3>
+            <p class="service-card__price">From $105 / 60 min</p>
+            <p class="svc-feature__desc">Swedish, deep tissue, sports, Ashiatsu, prenatal, Shiatsu, myofascial. For everyday tension and chronic patterns.</p>
+          </div>
+        </a>
+        <a class="svc-feature svc-feature--b" href="/services/couples-massage" data-reveal>
+          <div>
+            <h3 class="svc-feature__title">Couples Massage</h3>
+            <p class="service-card__price">From $205</p>
+            <p class="svc-feature__desc">Couples massage is the most-requested experience in our studio.</p>
+          </div>
+        </a>
+        <div class="svc-editorial__rest svc-editorial__rest--3" data-reveal-stagger>
+        <a class="service-card" href="/services/4-hand-massage">
+          <h3 class="service-card__title">4-Hand Massage</h3>
+          <p class="service-card__price">From $205</p>
+          <p class="service-card__desc">Our 4-hand massage pairs two therapists on one client.</p>
+        </a>
+        <a class="service-card" href="/services/foot-massage-head-spa">
+          <h3 class="service-card__title">Head &amp; Scalp Spa</h3>
+          <p class="service-card__price">At Elite Spa Utah, sister location</p>
+          <p class="service-card__desc">A guided scalp treatment that releases jaw, neck, and forehead tension. Quiet the mind without doing anything.</p>
+        </a>
+        <a class="service-card" href="/services/reflexology">
+          <h3 class="service-card__title">Foot &amp; Reflexology</h3>
+          <p class="service-card__price">At Elite Spa Utah, sister location</p>
+          <p class="service-card__desc">Pressure-point work on the feet that travels through the body. A whole-body reset delivered through your extremities.</p>
+        </a>
         </div>
-
-        <p class="ed-services__modalities">
+      </div>
+      <div class="svc-notes" data-reveal>
+        <p>Not sure which? Start with Swedish if it's your first visit. For chronic knots, book <a href="/services/deep-tissue">deep tissue massage in Salt Lake City</a>. Or tell our scheduler what hurts and we'll route you correctly.</p>
+        <p>
           Explore each modality:
           <a href="/services/swedish-massage">Swedish massage</a>,
           <a href="/services/deep-tissue">deep tissue massage</a>,
@@ -413,273 +209,161 @@
           <a href="/services/reflexology">reflexology</a>
           &mdash; all in Salt Lake City.
         </p>
-
-        <div class="ed-services__more">
-          <a href="/pricing" class="ed-link">See our full menu &amp; pricing →</a>
-        </div>
       </div>
+      <p class="text-center" style="margin-top: var(--space-4)" data-reveal>
+        <a class="btn btn--secondary" href="/pricing">See our full menu &amp; pricing</a>
+      </p>
     </section>
 
-    <!-- 4. EDITORIAL PAIR — Couples / 4-Hand feature -->
-    <section class="ed-pair band-warm" data-reveal>
-      <div class="container ed-pair__grid">
-        <div class="ed-pair__media">
-          <picture>
-            <source srcset="images/photos/home-couples.webp" type="image/webp">
-            <img src="images/photos/home-couples.webp" alt="Two clients get side-by-side massages from two therapists at J Massage SLC" loading="lazy" width="1376" height="768" data-parallax="0.05">
-          </picture>
-          <video class="ed-ambient-video" data-src="/videos/couples-ambient.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
-        </div>
-        <div class="ed-pair__content">
-          <span class="ed-eyebrow">Together</span>
-          <h2 class="ed-section-title">Two tables.<br><em>One private suite.</em></h2>
-          <p class="ed-pair__body">
-            <a href="/services/couples-massage">Couples massage</a> is the most-requested experience in our studio.
-            Two licensed therapists work in parallel: same start time, same
-            finish, no coordinating logistics. Book it for an occasion, or
-            book it for a Tuesday.
-          </p>
-          <p class="ed-pair__body">
-            Looking for something more unusual? Our 4-hand massage pairs two
-            therapists on one client. The body stops anticipating; the nervous
-            system finally lets go.
-          </p>
-          <div class="ed-pair__actions">
-            <a href="/services/couples-massage" class="ed-btn ed-btn--filled">Couples · From $205</a>
-            <a href="/services/4-hand-massage" class="ed-btn ed-btn--ghost">4-Hand · From $205</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. PROCESS — 01 / 02 / 03 -->
-    <section class="ed-process section">
+    <!-- Google reviews. The live feed from /api/reviews reveals #reviews and hides the static
+         fallback below; if the fetch is empty or fails, the attributed fallback stays visible.
+         Real numbers + verbatim Google quotes only. -->
+    <section class="section section--cream" aria-labelledby="reviews-title">
       <div class="container">
-        <header class="ed-section-head ed-section-head--left" data-reveal>
-          <span class="ed-eyebrow">How it works</span>
-          <h2 class="ed-section-title">Three steps.<br><em>No friction.</em></h2>
-        </header>
+        <p class="eyebrow text-center">In their words</p>
+        <h2 class="text-center" id="reviews-title">What our clients say.</h2>
 
-        <ol class="ed-process__list" data-reveal-stagger>
-          <li class="ed-process__step">
-            <span class="ed-process__num">01</span>
-            <h3 class="ed-process__title">Choose your modality.</h3>
-            <p class="ed-process__body">
-              Not sure which? Start with Swedish if it's your first visit, or
-              tell our scheduler what hurts and we'll route you correctly.
-            </p>
-          </li>
-          <li class="ed-process__step">
-            <span class="ed-process__num">02</span>
-            <h3 class="ed-process__title">Book a time.</h3>
-            <p class="ed-process__body">
-              Online, in seconds. Open every day from 10am to 10pm. Same-day
-              slots are often available. Confirm instantly. Reschedule freely.
-            </p>
-          </li>
-          <li class="ed-process__step">
-            <span class="ed-process__num">03</span>
-            <h3 class="ed-process__title">Walk in. Restore.</h3>
-            <p class="ed-process__body">
-              Arrive five minutes early. Free parking. Leave better than you
-              came. Most clients book their next session before they leave.
-            </p>
-          </li>
-        </ol>
-
-        <div class="ed-process__cta">
-          <a href="/book" class="ed-btn ed-btn--filled">Begin →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. LIVE GOOGLE REVIEWS — starts hidden; revealed only when /api/reviews returns real reviews -->
-    <section id="reviews" class="rev section" aria-labelledby="reviews-title" hidden>
-      <div class="container">
-        <header class="rev__head">
-          <span class="ed-eyebrow">In their words</span>
-          <h2 class="ed-section-title" id="reviews-title">What our <em>clients say.</em></h2>
-          <p class="rev__summary">
-            <span class="rev__stars" data-stars aria-hidden="true"></span>
-            <span><span class="rev__rating" data-rating></span> on Google</span>
-            <span class="rev__dot" aria-hidden="true">·</span>
+        <div id="reviews" hidden>
+          <p class="reviews-summary">
+            <span class="reviews-summary__stars" data-stars aria-hidden="true"></span>
+            <span><span data-rating></span> on Google</span>
+            <span class="reviews-summary__dot" aria-hidden="true">·</span>
             <span data-review-count></span>
-            <span class="rev__dot" aria-hidden="true">·</span>
+            <span class="reviews-summary__dot" aria-hidden="true">·</span>
             <a data-all href="/reviews" rel="noopener">read them on Google</a>
           </p>
-        </header>
-
-        <div class="rev__grid" data-list></div>
-
-        <p class="rev__attribution">Reviews from Google</p>
-      </div>
-    </section>
-
-    <template id="review-card-tpl">
-      <article class="rev-card">
-        <span class="rev-card__stars" data-c-stars aria-hidden="true"></span>
-        <p class="rev-card__text" data-c-text></p>
-        <p class="rev-card__meta">
-          <span class="rev-card__author" data-c-author></span>
-          <span class="rev-card__when" data-c-when></span>
-        </p>
-      </article>
-    </template>
-
-    <!-- P1.6 Durable static reviews fallback: visible when the live /api/reviews widget cannot load; hidden once live reviews render. Quotes are real, attributed Google reviews reused from /reviews. -->
-    <style>@media(max-width:900px){.rev-fb__grid{grid-template-columns:repeat(2,1fr)!important}}@media(max-width:600px){.rev-fb__grid{grid-template-columns:1fr!important}}</style>
-    <section id="reviews-fallback" class="section" aria-labelledby="reviews-fb-title" style="background:var(--pool);color:var(--timber);padding:7rem 0;">
-      <div class="container">
-        <header style="text-align:center;max-width:720px;margin:0 auto 3.4rem;">
-          <span class="ed-eyebrow" style="color:var(--glow);">In their words</span>
-          <h2 class="ed-section-title" id="reviews-fb-title" style="color:var(--timber);">What our <em style="color:var(--glow);">clients say.</em></h2>
-          <p style="font-family:var(--font-ui);font-size:.92rem;color:rgba(250,247,243,.75);margin-top:1.3rem;">4.4 on Google &middot; <a href="/reviews" style="color:rgba(250,247,243,.92);border-bottom:1px solid rgba(250,247,243,.3);text-decoration:none;">read our reviews</a></p>
-        </header>
-        <div class="rev-fb__grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;">
-          <article style="background:rgba(250,247,243,.05);border:1px solid rgba(250,247,243,.12);border-radius:var(--r);padding:1.9rem 1.7rem;display:flex;flex-direction:column;gap:.95rem;">
-            <span style="color:var(--glow);letter-spacing:.18em;font-size:.95rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-            <p style="font-family:var(--font-body);font-size:1rem;line-height:1.65;color:rgba(250,247,243,.88);margin:0;">"Very happy with the massage, great pressure and it felt amazing. My therapist hit all the right spots, including a scalp massage. I'll be back."</p>
-            <span style="font-family:var(--font-ui);font-weight:600;font-size:.82rem;letter-spacing:.03em;margin-top:auto;">Cassie C. &middot; Google review</span>
-          </article>
-          <article style="background:rgba(250,247,243,.05);border:1px solid rgba(250,247,243,.12);border-radius:var(--r);padding:1.9rem 1.7rem;display:flex;flex-direction:column;gap:.95rem;">
-            <span style="color:var(--glow);letter-spacing:.18em;font-size:.95rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-            <p style="font-family:var(--font-body);font-size:1rem;line-height:1.65;color:rgba(250,247,243,.88);margin:0;">"Jaiden is incredible, I've honestly never had a better massage. She knew exactly what was going on when I explained my painful points. I left feeling so much better."</p>
-            <span style="font-family:var(--font-ui);font-weight:600;font-size:.82rem;letter-spacing:.03em;margin-top:auto;">Emma H. &middot; Google review</span>
-          </article>
-          <article style="background:rgba(250,247,243,.05);border:1px solid rgba(250,247,243,.12);border-radius:var(--r);padding:1.9rem 1.7rem;display:flex;flex-direction:column;gap:.95rem;">
-            <span style="color:var(--glow);letter-spacing:.18em;font-size:.95rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-            <p style="font-family:var(--font-body);font-size:1rem;line-height:1.65;color:rgba(250,247,243,.88);margin:0;">"My friends and I unanimously agreed these were the best massages of our lives, and we've had massages around the world. 100% recommend."</p>
-            <span style="font-family:var(--font-ui);font-weight:600;font-size:.82rem;letter-spacing:.03em;margin-top:auto;">Michele T. &middot; Google review</span>
-          </article>
+          <div class="reviews reviews--live" style="margin-top: var(--space-4)" data-list></div>
+          <p class="reviews-attribution">Reviews from Google</p>
         </div>
-      </div>
-    </section>
-    <script>
-    (function(){var fb=document.getElementById('reviews-fallback');var live=document.getElementById('reviews');if(!fb||!live){return;}function sync(){if(!live.hasAttribute('hidden')){fb.hidden=true;}}try{new MutationObserver(sync).observe(live,{attributes:true,attributeFilter:['hidden']});}catch(e){}sync();})();
-    </script>
 
-    <!-- 7. ABOUT / DETAIL -->
-    <section class="ed-about section">
-      <div class="container ed-about__grid">
-        <div class="ed-about__content">
-          <span class="ed-eyebrow">The studio</span>
-          <h2 class="ed-section-title">Therapy,<br><em>not theatre.</em></h2>
-          <p class="ed-about__body">
-            Most studios offer one thing. We offer the full range, because no two
-            bodies are the same and no single technique solves every problem.
-            J Massage was built for people who take their body seriously: a
-            studio that's open when you need it, and a therapist who knows
-            what they're doing.
+        <template id="review-card-tpl">
+          <article class="review review--live">
+            <p class="review__stars" data-c-stars aria-hidden="true"></p>
+            <p class="review__quote" data-c-text></p>
+            <p class="review__meta">
+              <span class="review__author" data-c-author></span>
+              <span class="review__when" data-c-when></span>
+            </p>
+          </article>
+        </template>
+
+        <div id="reviews-fallback">
+          <p class="reviews-summary" style="margin-bottom: var(--space-4)">
+            <span class="stars" aria-hidden="true">★★★★<span class="star-half">★</span></span>
+            <span>4.4 on Google</span>
+            <span class="reviews-summary__dot" aria-hidden="true">·</span>
+            <a href="/reviews">read our reviews</a>
           </p>
-          <dl class="ed-about__facts">
-            <div><dt>Located</dt><dd>677 S 200 W, Salt Lake City</dd></div>
-            <div><dt>Hours</dt><dd>Every day · 10am – 10pm</dd></div>
-            <div><dt>Therapists</dt><dd>Utah-licensed, modality-specialized</dd></div>
-            <div><dt>Reviews</dt><dd>4.4 · 500+ on Google</dd></div>
-          </dl>
-          <a href="/about" class="ed-btn ed-btn--ghost">More about the studio →</a>
-        </div>
-        <div class="ed-about__media">
-          <picture>
-            <source srcset="images/photos/home-detail.webp" type="image/webp">
-            <img src="images/photos/home-detail.webp" alt="Massage oils and folded towels on a side table at J Massage SLC" loading="lazy" width="928" height="1152">
-          </picture>
-        </div>
-      </div>
-    </section>
-
-    <!-- 8. FINAL CTA -->
-    <section id="book" class="booking band-warm section">
-      <div class="booking__media" aria-hidden="true">
-        <video class="ed-ambient-video" data-src="/videos/cta-afterglow.mp4" muted loop playsinline preload="none" tabindex="-1"></video>
-        <div class="booking__scrim"></div>
-      </div>
-      <div class="container">
-        <div class="booking__cta-center reveal">
-          <h2 class="booking__cta-heading">Ready when you are.</h2>
-          <p class="booking__cta-body">Open daily, 10am to 10pm. Same-day appointments available.<br>Book your massage today.</p>
-          <div class="booking__btn-row">
-            <a href="/book" class="booking__btn booking__btn--primary">Schedule Appointment</a>
-            <a href="tel:+18012881118" class="booking__btn booking__btn--secondary">Call +1 (801) 288-1118</a>
+          <div class="reviews">
+            <article class="review pull-quote">
+              <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+              <p class="review__quote">"Very happy with the massage, great pressure and it felt amazing. My therapist hit all the right spots, including a scalp massage. I'll be back."</p>
+              <p class="review__author">Cassie C. · Google review</p>
+            </article>
+            <article class="review pull-quote">
+              <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+              <p class="review__quote">"Jaiden is incredible, I've honestly never had a better massage. She knew exactly what was going on when I explained my painful points. I left feeling so much better."</p>
+              <p class="review__author">Emma H. · Google review</p>
+            </article>
+            <article class="review pull-quote">
+              <p class="review__stars" aria-label="5 out of 5 stars">★★★★★</p>
+              <p class="review__quote">"My friends and I unanimously agreed these were the best massages of our lives, and we've had massages around the world. 100% recommend."</p>
+              <p class="review__author">Michele T. · Google review</p>
+            </article>
           </div>
+          <p class="reviews-attribution">Reviews from Google</p>
         </div>
       </div>
     </section>
 
+    <section id="book" class="band-dark">
+      <div class="cta-band container">
+      <h2 class="cta-band__heading" data-reveal>Ready when you are.</h2>
+      <p class="cta-band__text" data-reveal>Open daily, 10am to 10pm. Same-day appointments available. Book your massage today.</p>
+      <div class="cluster cluster--center" data-reveal>
+        <a class="btn btn--primary" href="/book" data-magnetic>Book Now</a>
+        <a class="btn btn--ghost btn--on-dark" href="tel:+18012881118">Call (801) 288-1118</a>
+      </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <span class="footer__logo">J Massage <em>SLC</em></span>
-        <p>Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
-        <div class="footer__rating">
-          <span class="stars">★★★★<span class="star-half" aria-hidden="true">★</span></span>
-          <span>4.4 &nbsp;·&nbsp; 500+ Verified Google Reviews</span>
+
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid site-footer__grid--cols">
+        <div>
+          <p class="site-footer__brand">J Massage SLC</p>
+          <p style="max-width: 36ch;">Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+          <p class="site-footer__rating"><span class="stars" aria-hidden="true">★★★★<span class="star-half">★</span></span> 4.4 · 500+ Verified Google Reviews</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Treatments</p>
+          <ul class="site-footer__list">
+            <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+            <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+            <li><a href="/services/sports-massage">Sports Massage</a></li>
+            <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+            <li><a href="/services/couples-massage">Couples Massage</a></li>
+            <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+            <li><a href="/services/shiatsu">Shiatsu</a></li>
+            <li><a href="/services/reflexology">Reflexology</a></li>
+            <li><a href="/services/prenatal">Prenatal Massage</a></li>
+            <li><a href="/services/myofascial">Myofascial Release</a></li>
+            <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Quick Links</p>
+          <ul class="site-footer__list">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/gift-cards">Gift Cards</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="https://www.elitespautah.com" rel="noopener">Elite Spa Utah (sister location)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Areas We Serve</p>
+          <ul class="site-footer__list">
+            <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
+            <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
+            <li><a href="/massage-in-sugar-house">Sugar House</a></li>
+            <li><a href="/massage-in-millcreek">Millcreek</a></li>
+            <li><a href="/massage-in-the-avenues">The Avenues</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Visit Us</p>
+          <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
+          <ul class="site-footer__list" style="margin-top: var(--space-1);">
+            <li><a href="tel:+18012881118">(801) 288-1118</a></li>
+            <li>Open Daily · 10am–10pm</li>
+            <li><a href="/book">Book online</a></li>
+            <li><a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a></li>
+          </ul>
         </div>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Treatments</h2>
-        <ul>
-          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-          <li><a href="/services/sports-massage">Sports Massage</a></li>
-          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-          <li><a href="/services/couples-massage">Couples Massage</a></li>
-          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-        </ul>
+      <div class="site-footer__legal">
+        <span>© 2026 J Massage SLC · All rights reserved · <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--></span>
+        <span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a></span>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Quick Links</h2>
-        <ul>
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/pricing">Pricing</a></li>
-          <li><a href="/reviews">Reviews</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/gift-cards">Gift Cards</a></li>
-          <li><a href="/faq">FAQ</a></li>
-          <li><a href="/massage-salt-lake-city">Massage in Salt Lake City</a></li>
-          <li><a href="https://www.elitespautah.com" rel="noopener">Elite Spa Utah (sister location)</a></li>
-        </ul>
-      </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Areas We Serve</h2>
-        <ul>
-          <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
-          <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
-          <li><a href="/massage-in-sugar-house">Sugar House</a></li>
-          <li><a href="/massage-in-millcreek">Millcreek</a></li>
-          <li><a href="/massage-in-the-avenues">The Avenues</a></li>
-        </ul>
-      </div>
-      <div class="footer__contact">
-        <h2 class="footer__heading">Visit Us</h2>
-        <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
-        <a href="tel:+18012881118">(801) 288-1118</a>
-        <p>Open Daily &nbsp;·&nbsp; 10am – 10pm</p>
-        <a href="/book" class="btn btn--gold btn--sm">Book Now</a>
-      </div>
-    </div>
-    <div class="footer__bottom container">
-      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp;
-        <a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a>
-        &nbsp;·&nbsp;
-        <a href="tel:+18012881118">(801) 288-1118</a> &nbsp;·&nbsp; <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--> &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
-    </p>
     </div>
   </footer>
 
-  <script src="js/vendor/gsap.min.js" defer></script>
-  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/vendor/lenis.min.js" defer></script>
-  <script src="js/main.js" defer></script>
-  <script src="js/motion.js" defer></script>
   <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
        The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
-  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
+  <script src="/js/nav.js?v=1" defer></script>
+  <script src="/js/ambient-video.js?v=1" defer></script>
+  <script src="/js/defer-load.js?v=2" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
 
-  <!-- Live Google reviews: fetch /api/reviews after first paint (js/after-paint.js), reveal only if >=1 real review -->
+  <!-- Live Google reviews: fetch /api/reviews after first paint (js/after-paint.js) and reveal #reviews only
+       when there is real content. On success the static fallback hides; otherwise it stays visible. -->
   <script>
   (window.__afterPaint = window.__afterPaint || []).push(async () => {
     const s = document.getElementById('reviews'); if (!s) return;
@@ -687,7 +371,7 @@
     try {
       const res = await fetch('/api/reviews'); if (!res.ok) return;
       const d = await res.json();
-      if (!d || !Array.isArray(d.reviews) || d.reviews.length === 0) return; // stay hidden
+      if (!d || !Array.isArray(d.reviews) || d.reviews.length === 0) return; // keep static fallback
       const q = (sel) => s.querySelector(sel);
       if (d.rating != null) { const el=q('[data-rating]'); if(el) el.textContent = Number(d.rating).toFixed(1); const st=q('[data-stars]'); if(st) st.textContent = stars(d.rating); }
       if (d.count) { const c=q('[data-review-count]'); if(c) c.textContent = 'across ' + d.count + ' reviews'; }
@@ -700,55 +384,15 @@
         node.querySelector('[data-c-when]').textContent = rv.when || '';
         list.appendChild(node); });
       s.hidden = false;
+      const fb = document.getElementById('reviews-fallback'); if (fb) fb.hidden = true;
     } catch {}
   });
   </script>
-  <!-- Service photos: start after first paint (on phones they sit inside Chrome's lazy-load distance).
-       The 6 s timer covers js/after-paint.js failing or stalling (a stalled deferred script also holds
-       back the load event). They keep loading="lazy". -->
-  <script>
-  (function () {
-    var done = false;
-    function swap() {
-      if (done) return;
-      done = true;
-      document.querySelectorAll('picture[data-after-paint] img[data-src]').forEach(function (img) {
-        img.src = img.getAttribute('data-src');
-      });
-    }
-    (window.__afterPaint = window.__afterPaint || []).push(swap);
-    setTimeout(swap, 6000);
-  })();
-  </script>
-  <!-- Scroll reveals: the page can change height after load (the live reviews replace the taller static
-       fallback). ScrollTrigger only re-measures on its own events, so ask it to whenever the height really
-       changed; otherwise reveals below fire late. refresh(true) takes ScrollTrigger's own resize path:
-       batched over 200 ms and held until scrolling stops, so a window drag or a scroll in progress is left alone. -->
-  <script>
-  (function () {
-    if (!('ResizeObserver' in window)) return;
-    window.addEventListener('load', function () {
-      var measured = document.documentElement.scrollHeight; // ScrollTrigger refreshes itself on load
-      new ResizeObserver(function () {
-        var h = document.documentElement.scrollHeight;
-        if (h === measured || !window.ScrollTrigger) return;
-        measured = h;
-        ScrollTrigger.refresh(true);
-      }).observe(document.body);
-    });
-  })();
-  </script>
-  <!-- Sticky mobile Book/Call bar (P1 CRO) -->
-  <style>
-    .m-cta{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;gap:.5rem;padding:.5rem calc(.6rem + 72px) .5rem .6rem;background:rgba(20,17,14,.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid rgba(250,247,243,.14);box-shadow:0 -6px 20px rgba(0,0,0,.30)}
-    .m-cta a{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;padding:.8rem .5rem;border-radius:10px;text-decoration:none;font-family:var(--font-ui,'DM Sans',system-ui,sans-serif);font-weight:600;font-size:.98rem;letter-spacing:.02em}
-    .m-cta__book{background:var(--lantern,#c9a86a);color:var(--ember,#fffdfb)}
-    .m-cta__call{background:transparent;color:#faf7f3;border:1px solid rgba(250,247,243,.45)}
-    @media (max-width:820px){.m-cta{display:flex}body{padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}}
-  </style>
+
+
   <nav class="m-cta" aria-label="Book or call">
-    <a class="m-cta__book" href="/book">Book</a>
-    <a class="m-cta__call" href="tel:+18012881118">Call</a>
+    <a class="btn btn--primary" href="/book">Book</a>
+    <a class="btn btn--secondary" href="tel:+18012881118">Call</a>
   </nav>
 </body>
 </html>

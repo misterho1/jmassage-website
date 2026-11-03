@@ -18,24 +18,6 @@
   <meta property="og:url" content="https://jmassageslc.com/services/ashiatsu">
   <meta property="og:site_name" content="J Massage SLC">
 
-  <!-- Runs before any stylesheet, so the parser never waits on CSS for it. -->
-  <script>
-    (function () {
-      var root = document.documentElement;
-      // Intro cover (once per session): paint the intro's backdrop from the first frame so the
-      // hero never shows before the intro. js/motion.js builds the intro after that frame and
-      // removes the class; if motion.js never takes over, DOMContentLoaded removes it.
-      // Keep this test in step with motion.js's playIntro (same 'jm-intro' key, same query).
-      try {
-        if (matchMedia('(prefers-reduced-motion: no-preference)').matches && !sessionStorage.getItem('jm-intro')) {
-          root.classList.add('cine-pending');
-          document.addEventListener('DOMContentLoaded', function () {
-            if (!window.__introCover) root.classList.remove('cine-pending');
-          });
-        }
-      } catch (e) {}
-    })();
-  </script>
   <!-- Google tag (gtag.js) - G-W8JB6XPYH9: injected by /js/after-paint.js on the first tap, scroll or key after first paint, or 5 s after it (data-gtag="interaction"); ad-click URLs load it at parse below -->
   <script src="/js/after-paint.js?v=1" defer data-gtag="interaction"></script>
   <script>
@@ -55,8 +37,7 @@
   <link rel="stylesheet" href="/css/fonts.css?v=1">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="../css/styles.css?v=24">
-  <link rel="stylesheet" href="../css/service-page.css?v=6">
+  <link rel="stylesheet" href="/css/site.css?v=1">
 
   <!-- Schema: LocalBusiness + MassageTherapist -->
   <script type="application/ld+json">
@@ -159,476 +140,179 @@
   <a href="#main" class="skip-link">Skip to content</a>
 
   <!-- --- HEADER --- -->
-  <header id="header" class="header">
-    <div class="header__inner container">
-      <a href="/" class="logo">
-        <span class="logo__j">J</span><span class="logo__rest"> Massage <em>SLC</em></span>
-      </a>
-      <nav class="nav">
-        <ul class="nav__list" id="navList">
-          <li class="nav__item nav__item--dropdown">
-            <a href="../#services" class="nav__link">Services <span class="nav__dropdown-caret">›</span></a>
-            <ul class="nav__dropdown">
-              <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-              <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-              <li><a href="/services/sports-massage">Sports Massage</a></li>
-              <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-              <li><a href="/services/couples-massage">Couples Massage</a></li>
-              <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-              <li><a href="/services/shiatsu">Shiatsu</a></li>
-              <li><a href="/services/reflexology">Reflexology</a></li>
-              <li><a href="/services/prenatal">Prenatal Massage</a></li>
-              <li><a href="/services/myofascial">Myofascial Release</a></li>
-              <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
-            </ul>
-          </li>
-          <li><a href="/about" class="nav__link">About</a></li>
-          <li><a href="/pricing" class="nav__link">Pricing</a></li>
-          <li><a href="/reviews" class="nav__link">Reviews</a></li>
-          <li><a href="/gift-cards" class="nav__link">Gift Cards</a></li>
-          <li><a href="/faq" class="nav__link">FAQ</a></li>
-          <li><a href="/blog" class="nav__link">Blog</a></li>
-          <li><a href="/contact" class="nav__link">Contact</a></li>
-          <li><a href="/book" class="nav__cta" data-magnetic>Book Now</a></li>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="site-header__brand" href="/">J Massage SLC</a>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav__menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">☰</button>
+        <ul class="site-nav__list" id="primary-nav">
+          <li><a class="site-nav__link" href="/services">Services</a></li>
+          <li><a class="site-nav__link" href="/pricing">Pricing</a></li>
+          <li><a class="site-nav__link" href="/reviews">Reviews</a></li>
+          <li><a class="site-nav__link" href="/about">About</a></li>
+          <li><a class="site-nav__link" href="/gift-cards">Gift Cards</a></li>
+          <li><a class="site-nav__link" href="/faq">FAQ</a></li>
+          <li><a class="site-nav__link" href="/blog">Blog</a></li>
+          <li><a class="site-nav__link" href="/contact">Contact</a></li>
+          <li class="site-nav__item--tel"><a class="site-nav__link" href="tel:+18012881118">(801) 288-1118</a></li>
+          <li><a class="btn btn--primary" href="/book" data-magnetic>Book Now</a></li>
         </ul>
-        <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
       </nav>
     </div>
   </header>
 
   <main id="main">
-
-    <!-- --- HERO --- -->
-    <section class="svc-hero svc-hero--ashiatsu">
-      <div class="svc-hero__inner container">
-        <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a>
-          <span aria-hidden="true">›</span>
-          <a href="../#services">Services</a>
-          <span aria-hidden="true">›</span>
-          <span>Ashiatsu</span>
-        </nav>
-        <p class="svc-hero__eyebrow">Pressure Like You've Never Felt.</p>
-        <h1 class="svc-hero__h1">Ashiatsu Barefoot Massage in <em>Salt Lake City</em></h1>
-        <p class="svc-hero__intro">Ashiatsu uses controlled foot pressure for deeper, broader strokes than hands can deliver. Overhead bars for balance, body weight calibrated to you. The only studio in Salt Lake County trained to offer it. Ask for it specifically.</p>
-        <div class="svc-hero__meta">
-          <span class="svc-hero__pill">From $105 / 60 min</span>
-          <span class="svc-hero__pill">Gravitational Depth</span>
-          <span class="svc-hero__pill">Barefoot Technique</span>
-          <span class="svc-hero__pill">Same-Day Available</span>
+    <section class="page-header" data-hero>
+      <div class="container container--narrow">
+        <p class="eyebrow">Pressure Like You've Never Felt.</p>
+        <h1><span class="line"><span class="line-inner">Ashiatsu Barefoot Massage in Salt Lake City</span></span></h1>
+        <p class="svc-pills"><span class="svc-pill svc-pill--price">From $105 / 60 min</span><span class="svc-pill">Gravitational Depth</span><span class="svc-pill">Barefoot Technique</span><span class="svc-pill">Same-Day Available</span></p>
+        <div class="cluster cluster--center" style="margin-block: var(--space-3)" data-hero-cta>
+          <a class="btn btn--primary" href="/book" data-magnetic>Book Your Ashiatsu Session</a>
+          <a class="btn btn--secondary" href="tel:+18012881118">Call (801) 288-1118</a>
         </div>
-        <div class="svc-hero__actions">
-          <a href="/book" class="btn btn--gold">Book Your Ashiatsu Session</a>
-          <a href="../#services" class="btn btn--ghost">Explore All Services</a>
+        <p class="lead">Ashiatsu uses controlled foot pressure for deeper, broader strokes than hands can deliver. Overhead bars for balance, body weight calibrated to you. The only studio in Salt Lake County trained to offer it. Ask for it specifically.</p>
+      </div>
+    </section>
+
+    <section class="container container--content section">
+      <div class="cols-2">
+        <div>
+          <p class="eyebrow" data-reveal>Ancient Pressure, Modern Precision</p>
+          <h2 data-reveal>What Is Ashiatsu?</h2>
+          <p data-reveal>Ashiatsu has roots in Ayurvedic, Thai, Japanese, and Chinese bodywork traditions. The modern Western version uses an overhead bar system so a Utah-licensed therapist can stand above the table, using the bars to calibrate how much body weight reaches the tissue, from light brushing contact to full gravitational depth. J Massage SLC is the only studio in Salt Lake County trained to offer it.</p>
+          <p data-reveal>The physics: the sole of the foot has three to four times the surface area of a thumb. The same depth of fascial penetration spreads across a much wider contact zone, so the pressure feels broad and consuming, not sharp. Long strokes along the spine and posterior chain produce a traction effect that decompresses the lumbar in a way deep tissue can't replicate. Most clients describe the sensation as warm water moving through them, not a tool working against them.</p>
+          <h3 data-reveal>The Benefits of Ashiatsu</h3>
+          <p data-reveal>Six reasons Ashiatsu reaches what other modalities miss, and why it's worth asking for by name.</p>
+          <h4 class="svc-subhead" data-reveal>Broader, Deeper Reach</h4>
+          <p data-reveal>The foot delivers three to four times more contact area than any hand technique. Greater gravitational pressure with less concentrated discomfort. Not deeper as in more painful, deeper as in more complete, reaching tissue layers thumbs and elbows can't access with the same sustained force.</p>
+          <h4 class="svc-subhead" data-reveal>Fascial Release</h4>
+          <p data-reveal>Sustained gravitational pressure held across broad fascial planes creates the slow, progressive unwinding that myofascial tissue requires. Unlike the quick, focused force of elbow techniques that drives through fascia without fully releasing it, Ashiatsu holds depth long enough for the viscoelastic tissue to yield at its own pace, producing genuine structural change that persists well beyond the session.</p>
+          <h4 class="svc-subhead" data-reveal>Spinal Decompression</h4>
+          <p data-reveal>The long, gliding strokes that Ashiatsu produces along the paraspinal muscles, from the sacrum through the thoracic spine, create a gentle but profound traction effect. Clients frequently report a sense of the lumbar spine lengthening and opening during treatment.</p>
+        </div>
+        <div class="svc-price-col">
+          <h2 data-reveal>Pricing</h2>
+          <div class="price-table" data-reveal>
+            <a class="price-row" href="/book"><p class="price-row__name">60 Minutes</p><span class="price-row__time"></span><span class="price-row__amount">$105</span></a>
+            <a class="price-row price-row--featured" href="/book?service=single&len=90"><p class="price-row__name">90 Minutes</p><span class="price-row__time">Recommended</span><span class="price-row__amount">$155</span></a>
+            <a class="price-row" href="/book?service=single&len=120"><p class="price-row__name">120 Minutes</p><span class="price-row__time"></span><span class="price-row__amount">$205</span></a>
+          </div>
+          <p class="svc-note">No membership required. No hidden fees. SLC's only Ashiatsu studio, same honest pricing as every service we offer.</p>
+          <p style="margin-top: var(--space-3)"><a class="btn btn--primary" href="/book">Book Your Ashiatsu Session</a></p>
         </div>
       </div>
     </section>
 
-
-    <!-- --- WHAT IS IT --- -->
-    <section class="svc-what">
-      <div class="svc-what__grid container">
-
-        <!-- Abstract visual -->
-        <div class="svc-abstract svc-abstract--ashiatsu reveal">
-          <div class="svc-abstract__bg"></div>
-          <div class="svc-abstract__ring svc-abstract__ring--1"></div>
-          <div class="svc-abstract__ring svc-abstract__ring--2"></div>
-          <div class="svc-abstract__ring svc-abstract__ring--3"></div>
-          <div class="svc-abstract__icon">
-            <!-- Foot / wave icon suggesting barefoot gravitational contact -->
-            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <!-- Foot silhouette abstract -->
-              <ellipse cx="40" cy="52" rx="14" ry="9" stroke="currentColor" stroke-width="2.2"/>
-              <path d="M30 52 Q32 42 40 38 Q48 42 50 52" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-              <!-- Toes -->
-              <circle cx="30" cy="44" r="2" stroke="currentColor" stroke-width="1.8" opacity="0.8"/>
-              <circle cx="35" cy="40" r="2.2" stroke="currentColor" stroke-width="1.8" opacity="0.8"/>
-              <circle cx="40" cy="38.5" r="2.2" stroke="currentColor" stroke-width="1.8" opacity="0.8"/>
-              <circle cx="45" cy="40" r="2" stroke="currentColor" stroke-width="1.8" opacity="0.8"/>
-              <circle cx="49.5" cy="44" r="1.8" stroke="currentColor" stroke-width="1.8" opacity="0.8"/>
-              <!-- Gravity waves below -->
-              <path d="M24 64 Q32 60 40 64 Q48 68 56 64" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.45"/>
-              <path d="M20 72 Q30 67 40 72 Q50 77 60 72" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.2"/>
-            </svg>
-          </div>
-          <div class="svc-abstract__price">From $105</div>
-        </div>
-
-        <!-- Copy -->
-        <div class="svc-what__content reveal">
-          <div class="section-head">
-            <span class="section-label">Ancient Pressure, Modern Precision</span>
-            <h2 class="section-title">What Is <em>Ashiatsu</em>?</h2>
-          </div>
-
-          <p class="svc-what__p">Ashiatsu has roots in Ayurvedic, Thai, Japanese, and Chinese bodywork traditions. The modern Western version uses an overhead bar system so a Utah-licensed therapist can stand above the table, using the bars to calibrate how much body weight reaches the tissue, from light brushing contact to full gravitational depth. J Massage SLC is the only studio in Salt Lake County trained to offer it.</p>
-
-          <p class="svc-what__p">The physics: the sole of the foot has three to four times the surface area of a thumb. The same depth of fascial penetration spreads across a much wider contact zone, so the pressure feels broad and consuming, not sharp. Long strokes along the spine and posterior chain produce a traction effect that decompresses the lumbar in a way deep tissue can't replicate. Most clients describe the sensation as warm water moving through them, not a tool working against them.</p>
-
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- --- PRICING --- -->
-    <section class="svc-pricing">
+    <section class="section section--cream">
       <div class="container">
-        <div class="section-head section-head--center reveal">
-          <span class="section-label">Transparent Pricing</span>
-          <h2 class="section-title">Ashiatsu <em>Rates</em></h2>
-          <p class="section-sub">No membership required. No hidden fees. SLC's only Ashiatsu studio, same honest pricing as every service we offer.</p>
-        </div>
-        <div class="svc-pricing__grid">
-
-          <div class="price-card reveal-card">
-            <div class="price-card__label">60 Minutes</div>
-            <div class="price-card__amount">$105</div>
-            <div class="price-card__duration">Focused posterior chain work, ideal for your first Ashiatsu experience</div>
-            <a href="/book" class="price-card__cta btn btn--outline">Book 60 Min</a>
-          </div>
-
-          <div class="price-card price-card--featured reveal-card">
-            <div class="price-card__tag">Recommended</div>
-            <div class="price-card__label">90 Minutes</div>
-            <div class="price-card__amount">$155</div>
-            <div class="price-card__duration">Full-body Ashiatsu, complete posterior chain integration and fascial work</div>
-            <a href="/book" class="price-card__cta btn btn--gold">Book 90 Min</a>
-          </div>
-
-          <div class="price-card reveal-card">
-            <div class="price-card__label">120 Minutes</div>
-            <div class="price-card__amount">$205</div>
-            <div class="price-card__duration">Maximum depth, full integration, chronic pain focus</div>
-            <a href="/book" class="price-card__cta btn btn--outline">Book 120 Min</a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-    <div class="reveal" style="text-align:center;padding:2.5rem 0 1rem;">
-      <a href="/book" class="btn btn--gold btn--lg">Book Your Session Now →</a>
-    </div>
-
-    <!-- ---------------------------------------------------
-         EDITORIAL BANNER
-    --------------------------------------------------- -->
-    <section class="svc-banner">
-      <div class="svc-banner__media">
-        <img src="../images/photos/ashiatsu-2.webp" alt="Ashiatsu barefoot massage - therapist using feet with overhead bars - detail view" loading="lazy" width="1376" height="768">
-      </div>
-    </section>
-
-
-
-    <!-- --- BENEFITS --- -->
-    <section class="svc-benefits">
-      <div class="container">
-        <div class="section-head section-head--center reveal">
-          <span class="section-label">Why It Goes Deeper</span>
-          <h2 class="section-title">The Benefits of <em>Ashiatsu</em></h2>
-          <p class="section-sub">Six reasons Ashiatsu reaches what other modalities miss, and why it's worth asking for by name.</p>
-        </div>
-        <div class="svc-benefits__grid">
-
-          <div class="benefit-card reveal-card">
-            <div class="benefit-card__icon"></div>
-            <h3 class="benefit-card__title">Broader, Deeper Reach</h3>
-            <p class="benefit-card__desc">The foot delivers three to four times more contact area than any hand technique. Greater gravitational pressure with less concentrated discomfort. Not deeper as in more painful, deeper as in more complete, reaching tissue layers thumbs and elbows can't access with the same sustained force.</p>
-          </div>
-
-          <div class="benefit-card reveal-card">
-            <div class="benefit-card__icon"></div>
-            <h3 class="benefit-card__title">Fascial Release</h3>
-            <p class="benefit-card__desc">Sustained gravitational pressure held across broad fascial planes creates the slow, progressive unwinding that myofascial tissue requires. Unlike the quick, focused force of elbow techniques that drives through fascia without fully releasing it, Ashiatsu holds depth long enough for the viscoelastic tissue to yield at its own pace, producing genuine structural change that persists well beyond the session.</p>
-          </div>
-
-          <div class="benefit-card reveal-card">
-            <div class="benefit-card__icon"></div>
-            <h3 class="benefit-card__title">Spinal Decompression</h3>
-            <p class="benefit-card__desc">The long, gliding strokes that Ashiatsu produces along the paraspinal muscles, from the sacrum through the thoracic spine, create a gentle but profound traction effect. Clients frequently report a sense of the lumbar spine lengthening and opening during treatment.</p>
-          </div>
-
-
-
-        </div>
-      </div>
-    </section>
-    <div class="reveal" style="text-align:center;padding:2.5rem 0 1rem;">
-      <a href="/book" class="btn btn--gold btn--lg">Book Your Session Now →</a>
-    </div>
-
-
-    <!-- --- FAQ --- -->
-    <section class="svc-faq">
-      <div class="container">
-        <div class="section-head section-head--center reveal">
-          <span class="section-label">Common Questions</span>
-          <h2 class="section-title">Ashiatsu <em>FAQs</em></h2>
-        </div>
-        <div class="faq-list">
-
-          <div class="faq-item reveal">
-            <div class="faq-q" role="button" aria-expanded="false">
-              What exactly is Ashiatsu massage?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-            </div>
-            <div class="faq-a">Ashiatsu is a form of barefoot massage in which a licensed therapist uses an overhead bar system for balance and support, then applies pressure using the broad, flat surface of their feet rather than hands, thumbs, or elbows. The word combines the Japanese "ashi" (foot) and "atsu" (pressure). It is not the same as <a href="/services/shiatsu">shiatsu, the Japanese finger-pressure massage</a> we also offer. The technique has roots in both Asian and Ayurvedic bodywork traditions and has been practiced in various forms for centuries. The modern Western version uses a ceiling-mounted bar system that allows the therapist to precisely control how much of their body weight they deliver, making it both deeply effective and entirely safe. The result is the broadest, deepest, most consistent pressure available in therapeutic massage, a sensation clients frequently describe as unlike anything they've experienced from any other modality.</div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-q" role="button" aria-expanded="false">
-              Is Ashiatsu safe? Are there contraindications?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-            </div>
-            <div class="faq-a">Ashiatsu is very safe when performed by a trained, licensed therapist on appropriate candidates. Your intake assessment will screen for contraindications before any session begins. Ashiatsu is not recommended during pregnancy, for clients with osteoporosis, recent spinal surgery, or unhealed fractures, for those with certain cardiovascular conditions, for anyone with active blood clots or severe varicose veins, or over areas of active inflammation or open wounds. For the vast majority of clients, including those with chronic back pain, muscle tension, and postural issues, Ashiatsu is not only safe but often produces results that other modalities cannot. When in doubt, we will consult with you carefully and, if necessary, recommend starting with a different treatment.</div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-q" role="button" aria-expanded="false">
-              Does Ashiatsu hurt? Is it too deep?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-            </div>
-            <div class="faq-a">Ashiatsu is deep, meaningfully, profoundly deep, but the experience is surprisingly comfortable for most clients, including those who normally find deep tissue massage too intense. The reason is geometry: the broad, flat surface of the foot distributes pressure across a much larger area than a thumb or elbow, which means the same depth of tissue penetration feels far less concentrated and sharp. The sensation is often described as heavy, sustained, and wonderfully consuming rather than painful. Your therapist maintains full control over the pressure applied at all times by shifting their body weight, and they will continuously check in to ensure the experience stays within your therapeutic window. Many clients who have given up on deep tissue because of its sharpness find Ashiatsu to be the answer they had been looking for.</div>
-          </div>
-
-          <div class="faq-item reveal">
-            <div class="faq-q" role="button" aria-expanded="false">
-              How is Ashiatsu different from deep tissue massage?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-            </div>
-            <div class="faq-a">Both modalities work at depth, but the mechanism and the experience are fundamentally different. <a href="/services/deep-tissue">Deep tissue massage</a> uses the thumbs, knuckles, and elbows to access deep structures, tools that are inherently narrow and focused, which is effective but can feel sharp or intrusive at high pressure. Ashiatsu uses the entire foot surface, which is three to four times broader than any hand technique. This means the therapist can apply substantially more gravitational pressure while creating less discomfort, because that pressure is spread evenly across the tissue rather than concentrated at a point. The strokes themselves are also longer and more flowing, producing a traction effect along the spine and the posterior chain that deep tissue simply cannot replicate. Many clients who have plateaued on deep tissue, still in pain, still restricted, experience their first genuine structural shift with Ashiatsu.</div>
-          </div>
-
-
-
-        </div>
-      </div>
-    </section>
-    <div class="reveal" style="text-align:center;padding:2.5rem 0 1rem;">
-      <a href="/book" class="btn btn--gold btn--lg">Book Your Session Now →</a>
-    </div>
-
-
-    <!-- --- CTA BAND --- -->
-    <section class="svc-cta-band">
-      <div class="container">
-        <h2 class="svc-cta-band__title reveal">The Deepest Massage <em>You've Never Tried.</em></h2>
-        <p class="svc-cta-band__sub reveal">The only studio in Salt Lake County trained to offer Ashiatsu. Same-day appointments most days, 10am to 10pm.</p>
-        <div class="svc-cta-band__actions reveal">
-          <a href="/book" class="btn btn--gold">Book Now</a>
-          <a href="../#services" class="btn btn--ghost">View All Services</a>
+        <p class="eyebrow" data-reveal>Keep Exploring</p>
+        <h2 data-reveal>You Might Also Love</h2>
+        <div class="service-grid" style="margin-top: var(--space-3);" data-reveal-stagger>
+          <a class="service-card" href="/services/deep-tissue"><h3 class="service-card__title">Deep Tissue Massage</h3><p class="service-card__desc">Structural, methodical work on the deepest muscle layers. Powerful for chronic pain and postural correction.</p><p class="service-card__price">From $125</p></a>
+          <a class="service-card" href="/services/swedish-massage"><h3 class="service-card__title">Swedish Massage</h3><p class="service-card__desc">The foundation of therapeutic massage, deeply relaxing, circulation-boosting, and perfect for those new to bodywork.</p><p class="service-card__price">From $105</p></a>
+          <a class="service-card" href="/services/sports-massage"><h3 class="service-card__title">Sports Massage</h3><p class="service-card__desc">Pre-event activation, post-event recovery, and ongoing maintenance for athletes at every level.</p><p class="service-card__price">From $105</p></a>
         </div>
       </div>
     </section>
 
-
-    <!-- Gift Cards -->
-    <section class="gift section" style="background:var(--soot,#ebe2d2);">
-      <div class="container gift__grid">
-        <div class="gift__visual reveal">
-          <div class="gift-card-mock" id="giftMock">
-            <div class="gift-card-mock__noise"></div>
-            <div class="gift-card-mock__top">
-              <span class="gift-card-mock__brand">J Massage <em>SLC</em></span>
-              <svg class="gift-card-mock__logo-icon" viewBox="0 0 40 40" fill="none">
-                <path d="M6 20C6 20 11 12 20 12C29 12 34 20 34 20" stroke="rgba(160, 77, 44, 0.6)" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M6 26C6 26 11 18 20 18C29 18 34 26 34 26" stroke="rgba(160, 77, 44, 0.6)" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="gift-card-mock__mid">
-              <span class="gift-card-mock__amount" id="giftDisplayAmt">$75</span>
-            </div>
-            <div class="gift-card-mock__btm">
-              <span class="gift-card-mock__tag">GIFT CARD</span>
-              <span class="gift-card-mock__sub">Salt Lake City, UT</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="gift__form reveal">
-          <span class="section-label">Give Restoration</span>
-          <h2 class="section-title">The Gift That<br><em>Actually Gets Used.</em></h2>
-          <p class="gift__sub">No re-gifting. No regrets. A J Massage SLC gift card is the most thoughtful thing you can give, and the most eagerly redeemed. Delivered instantly by email. Never expires.</p>
-
-          <p class="gift__form-label">Choose an Amount</p>
-          <div class="gift-amounts" id="giftAmounts">
-            <button class="gift-amt" data-amount="50">$50</button>
-            <button class="gift-amt gift-amt--active" data-amount="75">$75</button>
-            <button class="gift-amt" data-amount="100">$100</button>
-            <button class="gift-amt" data-amount="150">$150</button>
-            <button class="gift-amt" data-amount="200">$200</button>
-          </div>
-
-          <div class="gift-custom">
-            <label for="customAmt">Or enter a custom amount</label>
-            <div class="gift-custom__input-wrap">
-              <span>$</span>
-              <input type="number" id="customAmt" placeholder="25 to 500" min="25" max="500" aria-label="Custom gift card amount">
-            </div>
-          </div>
-
-          <a href="https://microsite.talech.com/gift-card/JMASSAGE-SALT-LAKE-CITY-UT/lRzV8wqp7la9E3Q7" id="giftPurchaseBtn" class="btn btn--gold btn--full" target="_blank" rel="noopener">
-            Purchase Gift Card
-          </a>
-
-          <p class="gift__legal">Redeemable for any service or add-on. No expiration date. Email delivery in minutes.</p>
-        </div>
-      </div>
-    </section>
-    <script>
-    (function(){
-      var amounts = document.querySelectorAll('#giftAmounts .gift-amt');
-      var display = document.getElementById('giftDisplayAmt');
-      var purchaseBtn = document.getElementById('giftPurchaseBtn');
-      var customInput = document.getElementById('customAmt');
-      var selected = 75;
-      function update(val){
-        selected = val;
-        if(display) display.textContent = '$' + val;
-        if(purchaseBtn) purchaseBtn.href = 'https://microsite.talech.com/gift-card/JMASSAGE-SALT-LAKE-CITY-UT/lRzV8wqp7la9E3Q7';
-      }
-      amounts.forEach(function(btn){
-        btn.addEventListener('click', function(){
-          amounts.forEach(function(b){ b.classList.remove('gift-amt--active'); });
-          btn.classList.add('gift-amt--active');
-          customInput.value = '';
-          update(parseInt(btn.dataset.amount));
-        });
-      });
-      if(customInput){
-        customInput.addEventListener('input', function(){
-          var v = parseInt(customInput.value);
-          if(v >= 25 && v <= 500){
-            amounts.forEach(function(b){ b.classList.remove('gift-amt--active'); });
-            update(v);
-          }
-        });
-      }
-    })();
-    </script>
-
-
-    <!-- --- RELATED SERVICES --- -->
-    <section class="svc-related">
-      <div class="container">
-        <div class="section-head section-head--center reveal">
-          <span class="section-label">Keep Exploring</span>
-          <h2 class="section-title">You Might Also <em>Love</em></h2>
-        </div>
-        <div class="svc-related__grid">
-
-          <a href="/services/deep-tissue" class="related-card reveal-card">
-            <div class="related-card__icon">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.5" opacity="0.25"/>
-                <path d="M16 18 Q24 14 32 18 Q36 24 32 30 Q24 34 16 30 Q12 24 16 18Z" stroke="currentColor" stroke-width="1.8"/>
-                <path d="M20 22 Q24 18 28 22 Q30 26 28 28 Q24 30 20 28 Q18 24 20 22Z" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
-              </svg>
-            </div>
-            <h3 class="related-card__title">Deep Tissue Massage</h3>
-            <p class="related-card__desc">Structural, methodical work on the deepest muscle layers. Powerful for chronic pain and postural correction.</p>
-            <span class="related-card__link">Learn More →</span>
-          </a>
-
-          <a href="/services/swedish-massage" class="related-card reveal-card">
-            <div class="related-card__icon">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.5" opacity="0.25"/>
-                <path d="M14 24 Q16 18 24 18 Q32 18 34 24 Q32 30 24 30 Q16 30 14 24Z" stroke="currentColor" stroke-width="1.8"/>
-                <path d="M18 24 Q20 21 24 21 Q28 21 30 24" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
-              </svg>
-            </div>
-            <h3 class="related-card__title">Swedish Massage</h3>
-            <p class="related-card__desc">The foundation of therapeutic massage, deeply relaxing, circulation-boosting, and perfect for those new to bodywork.</p>
-            <span class="related-card__link">Learn More →</span>
-          </a>
-
-          <a href="/services/sports-massage" class="related-card reveal-card">
-            <div class="related-card__icon">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.5" opacity="0.25"/>
-                <path d="M24 32 L24 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M18 24 L24 18 L30 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M20 28 L24 24 L28 28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-              </svg>
-            </div>
-            <h3 class="related-card__title">Sports Massage</h3>
-            <p class="related-card__desc">Pre-event activation, post-event recovery, and ongoing maintenance for athletes at every level.</p>
-            <span class="related-card__link">Learn More →</span>
-          </a>
-
-        </div>
+    <section class="container container--narrow section">
+      <p class="eyebrow" data-reveal>Common Questions</p>
+      <h2 data-reveal>Ashiatsu FAQs</h2>
+      <div class="faq" data-reveal>
+        <details class="faq__item"><summary>What exactly is Ashiatsu massage?</summary><div class="faq__answer">Ashiatsu is a form of barefoot massage in which a licensed therapist uses an overhead bar system for balance and support, then applies pressure using the broad, flat surface of their feet rather than hands, thumbs, or elbows. The word combines the Japanese "ashi" (foot) and "atsu" (pressure). It is not the same as <a href="/services/shiatsu">shiatsu, the Japanese finger-pressure massage</a> we also offer. The technique has roots in both Asian and Ayurvedic bodywork traditions and has been practiced in various forms for centuries. The modern Western version uses a ceiling-mounted bar system that allows the therapist to precisely control how much of their body weight they deliver, making it both deeply effective and entirely safe. The result is the broadest, deepest, most consistent pressure available in therapeutic massage, a sensation clients frequently describe as unlike anything they've experienced from any other modality.</div></details>
+        <details class="faq__item"><summary>Is Ashiatsu safe? Are there contraindications?</summary><div class="faq__answer">Ashiatsu is very safe when performed by a trained, licensed therapist on appropriate candidates. Your intake assessment will screen for contraindications before any session begins. Ashiatsu is not recommended during pregnancy, for clients with osteoporosis, recent spinal surgery, or unhealed fractures, for those with certain cardiovascular conditions, for anyone with active blood clots or severe varicose veins, or over areas of active inflammation or open wounds. For the vast majority of clients, including those with chronic back pain, muscle tension, and postural issues, Ashiatsu is not only safe but often produces results that other modalities cannot. When in doubt, we will consult with you carefully and, if necessary, recommend starting with a different treatment.</div></details>
+        <details class="faq__item"><summary>Does Ashiatsu hurt? Is it too deep?</summary><div class="faq__answer">Ashiatsu is deep, meaningfully, profoundly deep, but the experience is surprisingly comfortable for most clients, including those who normally find deep tissue massage too intense. The reason is geometry: the broad, flat surface of the foot distributes pressure across a much larger area than a thumb or elbow, which means the same depth of tissue penetration feels far less concentrated and sharp. The sensation is often described as heavy, sustained, and wonderfully consuming rather than painful. Your therapist maintains full control over the pressure applied at all times by shifting their body weight, and they will continuously check in to ensure the experience stays within your therapeutic window. Many clients who have given up on deep tissue because of its sharpness find Ashiatsu to be the answer they had been looking for.</div></details>
+        <details class="faq__item"><summary>How is Ashiatsu different from deep tissue massage?</summary><div class="faq__answer">Both modalities work at depth, but the mechanism and the experience are fundamentally different. <a href="/services/deep-tissue">Deep tissue massage</a> uses the thumbs, knuckles, and elbows to access deep structures, tools that are inherently narrow and focused, which is effective but can feel sharp or intrusive at high pressure. Ashiatsu uses the entire foot surface, which is three to four times broader than any hand technique. This means the therapist can apply substantially more gravitational pressure while creating less discomfort, because that pressure is spread evenly across the tissue rather than concentrated at a point. The strokes themselves are also longer and more flowing, producing a traction effect along the spine and the posterior chain that deep tissue simply cannot replicate. Many clients who have plateaued on deep tissue, still in pain, still restricted, experience their first genuine structural shift with Ashiatsu.</div></details>
       </div>
     </section>
 
+    <section class="band-dark">
+      <div class="cta-band container">
+      <h2 class="cta-band__heading" data-reveal>The Deepest Massage You've Never Tried.</h2>
+      <p class="cta-band__text" data-reveal>The only studio in Salt Lake County trained to offer Ashiatsu. Same-day appointments most days, 10am to 10pm.</p>
+      <div class="cluster cluster--center" data-reveal>
+        <a class="btn btn--primary" href="/book" data-magnetic>Book Now</a>
+        <a class="btn btn--ghost btn--on-dark" href="tel:+18012881118">Call (801) 288-1118</a>
+      </div>
+      </div>
+    </section>
   </main>
 
   <!-- --- FOOTER --- -->
-  <footer class="footer">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <span class="footer__logo">J Massage <em>SLC</em></span>
-        <p>Experienced massage studio in Salt Lake County. Open every day, 10am to 10pm. Same-day appointments available.</p>
-        <div class="footer__rating"><span class="stars">★★★★<span class="star-half" aria-hidden="true">★</span></span><span>4.4 · 500+ Google Reviews</span></div>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__grid site-footer__grid--cols">
+        <div>
+          <p class="site-footer__brand">J Massage SLC</p>
+          <p style="max-width: 36ch;">Experienced massage studio in Salt Lake County. Swedish to Ashiatsu. Utah-licensed therapists. Open every day, 10am to 10pm.</p>
+          <p class="site-footer__rating"><span class="stars" aria-hidden="true">★★★★<span class="star-half">★</span></span> 4.4 · 500+ Verified Google Reviews</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Treatments</p>
+          <ul class="site-footer__list">
+            <li><a href="/services/swedish-massage">Swedish Massage</a></li>
+            <li><a href="/services/deep-tissue">Deep Tissue</a></li>
+            <li><a href="/services/sports-massage">Sports Massage</a></li>
+            <li><a href="/services/ashiatsu">Ashiatsu</a></li>
+            <li><a href="/services/couples-massage">Couples Massage</a></li>
+            <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
+            <li><a href="/services/shiatsu">Shiatsu</a></li>
+            <li><a href="/services/reflexology">Reflexology</a></li>
+            <li><a href="/services/prenatal">Prenatal Massage</a></li>
+            <li><a href="/services/myofascial">Myofascial Release</a></li>
+            <li><a href="/services/foot-massage-head-spa">Foot Massage &amp; Head Spa</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Quick Links</p>
+          <ul class="site-footer__list">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/gift-cards">Gift Cards</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="https://www.elitespautah.com" rel="noopener">Elite Spa Utah (sister location)</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Areas We Serve</p>
+          <ul class="site-footer__list">
+            <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
+            <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
+            <li><a href="/massage-in-sugar-house">Sugar House</a></li>
+            <li><a href="/massage-in-millcreek">Millcreek</a></li>
+            <li><a href="/massage-in-the-avenues">The Avenues</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="site-footer__heading">Visit Us</p>
+          <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
+          <ul class="site-footer__list" style="margin-top: var(--space-1);">
+            <li><a href="tel:+18012881118">(801) 288-1118</a></li>
+            <li>Open Daily · 10am–10pm</li>
+            <li><a href="/book">Book online</a></li>
+            <li><a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Treatments</h2>
-        <ul>
-          <li><a href="/services/swedish-massage">Swedish Massage</a></li>
-          <li><a href="/services/deep-tissue">Deep Tissue</a></li>
-          <li><a href="/services/sports-massage">Sports Massage</a></li>
-          <li><a href="/services/ashiatsu">Ashiatsu</a></li>
-          <li><a href="/services/couples-massage">Couples Massage</a></li>
-          <li><a href="/services/4-hand-massage">4-Hand Massage</a></li>
-        </ul>
+      <div class="site-footer__legal">
+        <span>© 2026 J Massage SLC · All rights reserved · <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--></span>
+        <span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms">Terms</a></span>
       </div>
-      <div class="footer__links">
-        <h2 class="footer__heading">Areas We Serve</h2>
-        <ul>
-          <li><a href="/massage-salt-lake-city">Salt Lake City</a></li>
-          <li><a href="/massage-in-downtown-slc">Downtown SLC</a></li>
-          <li><a href="/massage-in-sugar-house">Sugar House</a></li>
-          <li><a href="/massage-in-millcreek">Millcreek</a></li>
-          <li><a href="/massage-in-the-avenues">The Avenues</a></li>
-        </ul>
-      </div>
-      <div class="footer__contact">
-        <h2 class="footer__heading">Visit Us</h2>
-        <address>677 S 200 W Suite #C<br>Salt Lake City, UT 84101</address>
-        <a href="tel:+18012881118">(801) 288-1118</a>
-        <p>Open Daily · 10am to 10pm</p>
-        <a href="/book" class="btn btn--gold btn--sm">Book Now</a>
-      </div>
-    </div>
-    <div class="footer__bottom container">
-      <p>© 2026 J Massage SLC &nbsp;·&nbsp; All rights reserved &nbsp;·&nbsp; <a href="https://maps.google.com/?q=677+S+200+W+Suite+C+Salt+Lake+City+UT+84101" target="_blank" rel="noopener">Get Directions</a> &nbsp;·&nbsp; <!--email_off--><a href="mailto:jmassage677@gmail.com">jmassage677@gmail.com</a><!--/email_off--> &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms">Terms</a>
-    </p>
     </div>
   </footer>
 
-  <script src="../js/vendor/gsap.min.js" defer></script>
-  <script src="../js/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="../js/service-page.js?v=2" defer></script>
-  <script src="../js/motion.js" defer></script>
   <!-- GoHighLevel chat widget: loaded by /js/defer-load.js on the first tap, scroll or key, or 6 s after first paint.
        The widget id stays literal on this tag (tools/chat-widget.py keys on it). -->
-  <script src="/js/defer-load.js?v=1" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
+  <script src="/js/nav.js?v=1" defer></script>
+  <script src="/js/defer-load.js?v=2" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
-  <!-- Sticky mobile Book/Call bar (P1 CRO) -->
-  <style>
-    .m-cta{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;gap:.5rem;padding:.5rem calc(.6rem + 72px) .5rem .6rem;background:rgba(20,17,14,.97);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid rgba(250,247,243,.14);box-shadow:0 -6px 20px rgba(0,0,0,.30)}
-    .m-cta a{flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;padding:.8rem .5rem;border-radius:10px;text-decoration:none;font-family:var(--font-ui,'DM Sans',system-ui,sans-serif);font-weight:600;font-size:.98rem;letter-spacing:.02em}
-    .m-cta__book{background:var(--lantern,#c9a86a);color:var(--ember,#fffdfb)}
-    .m-cta__call{background:transparent;color:#faf7f3;border:1px solid rgba(250,247,243,.45)}
-    @media (max-width:820px){.m-cta{display:flex}body{padding-bottom:calc(58px + env(safe-area-inset-bottom,0px))}}
-  </style>
   <nav class="m-cta" aria-label="Book or call">
-    <a class="m-cta__book" href="/book">Book</a>
-    <a class="m-cta__call" href="tel:+18012881118">Call</a>
+    <a class="btn btn--primary" href="/book">Book</a>
+    <a class="btn btn--secondary" href="tel:+18012881118">Call</a>
   </nav>
 </body>
 </html>
