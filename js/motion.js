@@ -69,7 +69,9 @@
       gsap.utils.toArray('details.faq__item').forEach(function (d) {
         var summary = d.querySelector('summary');
         var body = d.querySelector('.faq__answer');
-        if (!summary || !body) return;
+        // This block reruns whenever the media query flips (crossing 800px); bind once or one click opens and closes.
+        if (!summary || !body || d.hasAttribute('data-faq-bound')) return;
+        d.setAttribute('data-faq-bound', '');
         summary.addEventListener('click', function (e) {
           e.preventDefault();
           if (d.open) {
