@@ -371,13 +371,16 @@
     try {
       const res = await fetch('/api/reviews'); if (!res.ok) return;
       const d = await res.json();
-      if (!d || !Array.isArray(d.reviews) || d.reviews.length === 0) return; // keep static fallback
+      if (!d || !Array.isArray(d.reviews)) return; // keep static fallback
+      // Cards show 4 and 5 star reviews only; the rating, count and Google link above stay the real totals.
+      const good = d.reviews.filter((rv) => Number(rv.rating) >= 4);
+      if (good.length === 0) return; // keep static fallback
       const q = (sel) => s.querySelector(sel);
       if (d.rating != null) { const el=q('[data-rating]'); if(el) el.textContent = Number(d.rating).toFixed(1); const st=q('[data-stars]'); if(st) st.textContent = stars(d.rating); }
       if (d.count) { const c=q('[data-review-count]'); if(c) c.textContent = 'across ' + d.count + ' reviews'; }
       const all = q('[data-all]'); if (all) { if (d.profileUrl) all.href = d.profileUrl; else all.remove(); }
       const list = q('[data-list]'); const tpl = document.getElementById('review-card-tpl');
-      d.reviews.slice(0,6).forEach((rv) => { const node = tpl.content.cloneNode(true);
+      good.slice(0,6).forEach((rv) => { const node = tpl.content.cloneNode(true);
         node.querySelector('[data-c-stars]').textContent = stars(rv.rating);
         node.querySelector('[data-c-text]').textContent = rv.text;
         node.querySelector('[data-c-author]').textContent = rv.author || 'Google user';
