@@ -1178,9 +1178,8 @@ p { margin: 0 0 var(--space-2); max-width: 65ch; }
 /* Centered utility paragraphs span the row (p max-width 65ch would hold them left). */
 p.text-center { max-width: none; }
 
-/* Header. Elite's nav overflows at 900-1239px and wraps "Gift Cards" and the phone number at 1240-1440px
-   (same on elitespautah.com). JM keeps every label on one line, shows the menu button up to 1239px, and on
-   wide screens leaves the phone number to the hero, footer and phone bar. */
+/* Header. JM keeps every label on one line and shows the menu button up to 1239px. From 1240px the full row
+   (8 links, phone number, Book Now) fits beside the brand with Elite's spacing: no list gap, the button set off. */
 .site-nav__link { white-space: nowrap; }
 @media (max-width: 1239px) {
   .site-nav__list {
@@ -1212,7 +1211,8 @@ p.text-center { max-width: none; }
   .site-nav__menu-toggle { display: inline-flex; }
 }
 @media (min-width: 1240px) {
-  .site-nav__item--tel { display: none; }
+  .site-nav__list { gap: 0; }
+  .site-nav__list .btn { margin-left: var(--space-1); padding-inline: 1.25rem; }
 }
 
 /* Footer: two columns on tablets; on desktop the four link columns size to their content (one line each)
@@ -1288,7 +1288,10 @@ a.price-row:focus-visible { background: var(--brand-cream-soft); }
 .post-note { background: var(--brand-cream-soft); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--space-3); margin-block: var(--space-4); color: var(--ink-muted); }
 /* Long button labels ("Book Foot Massage at Elite Spa Utah →") wrap instead of pushing the page sideways on small
    phones, and two-column sections may shrink below their widest unbreakable child. */
-.btn { white-space: normal; text-align: center; }
+.btn { white-space: normal; text-align: center; text-wrap: balance; }
+/* Phone numbers and hour ranges never break mid-number ("(801) 288-" / "1118"). */
+.nowrap,
+.site-footer__list a[href^="tel:"] { white-space: nowrap; }
 .cols-2 > * { min-width: 0; }
 /* Phones: the four footer link lists sit two by two under a full-width brand block (was one 1,400px column). */
 @media (max-width: 699px) {
