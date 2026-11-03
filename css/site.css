@@ -970,11 +970,12 @@ p { margin: 0 0 var(--space-2); max-width: 65ch; }
   pointer-events: none;
 }
 /* Feature photography from the real JM shoot (2026-11-01): --a = body massage, --b = couples massage.
-   Phones get the portrait body shot, closer to the card's shape; desktop gets the wide room shot. */
-.svc-feature--a { background-image: url("/images/photos/home-body.webp"); }
-.svc-feature--b { background-image: url("/images/photos/home-couples.webp"); }
+   Phones get the portrait body shot, closer to the card's shape; desktop gets the wide room shot. The photos
+   switch on (.photos-on, set by index.html) when the cards near the screen, so they never compete with the hero. */
+.photos-on .svc-feature--a { background-image: url("/images/photos/home-body.webp"); }
+.photos-on .svc-feature--b { background-image: url("/images/photos/home-couples.webp"); }
 @media (min-width: 800px) {
-  .svc-feature--a { background-image: url("/images/photos/home-session.webp"); }
+  .photos-on .svc-feature--a { background-image: url("/images/photos/home-session.webp"); }
 }
 .svc-feature > div { position: relative; z-index: 1; }
 .svc-feature:hover { transform: translateY(-4px); box-shadow: var(--shadow-bloom); }

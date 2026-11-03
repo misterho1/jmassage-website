@@ -362,6 +362,19 @@
   <script src="/js/defer-load.js?v=2" defer data-chat-widget-id="6a35ff645dcabc40b5934513"></script>
   <script src="/js/tracking.js" defer></script>
 
+  <!-- Feature-card photos: the CSS backgrounds switch on once the cards are within 300px of the screen, so the two
+       photos never compete with the hero image on first load. Without JS the cards stay dark with cream text. -->
+  <script>
+  (() => {
+    const grid = document.querySelector('.svc-editorial'); if (!grid) return;
+    if (!('IntersectionObserver' in window)) { grid.classList.add('photos-on'); return; }
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { grid.classList.add('photos-on'); io.disconnect(); }
+    }, { rootMargin: '300px 0px' });
+    io.observe(grid);
+  })();
+  </script>
+
   <!-- Live Google reviews: fetch /api/reviews after first paint (js/after-paint.js) and reveal #reviews only
        when there is real content. On success the static fallback hides; otherwise it stays visible. -->
   <script>
