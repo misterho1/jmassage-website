@@ -965,6 +965,13 @@ p { margin: 0 0 var(--space-2); max-width: 65ch; }
   background: linear-gradient(to top, rgba(31, 26, 22, 0.82) 0%, rgba(31, 26, 22, 0.45) 38%, rgba(31, 26, 22, 0.12) 70%, rgba(31, 26, 22, 0.05) 100%);
   pointer-events: none;
 }
+/* Feature photography from the real JM shoot (2026-11-01): --a = body massage, --b = couples massage.
+   Phones get the portrait body shot, closer to the card's shape; desktop gets the wide room shot. */
+.svc-feature--a { background-image: url("/images/photos/home-body.webp"); }
+.svc-feature--b { background-image: url("/images/photos/home-couples.webp"); }
+@media (min-width: 800px) {
+  .svc-feature--a { background-image: url("/images/photos/home-session.webp"); }
+}
 .svc-feature > div { position: relative; z-index: 1; }
 .svc-feature:hover { transform: translateY(-4px); box-shadow: var(--shadow-bloom); }
 .svc-feature:focus-visible { outline: 2px solid var(--brand-orange); outline-offset: 4px; }
@@ -1006,6 +1013,9 @@ p { margin: 0 0 var(--space-2); max-width: 65ch; }
 .photo-figure { margin-top: var(--space-4); }
 .photo-tour__item figcaption,
 .photo-figure figcaption { margin-top: var(--space-1); color: var(--ink-muted); font-size: var(--type-6); }
+/* A page's second photo, set inside the text column at its own portrait shape. */
+.photo-figure--portrait { max-width: 440px; margin-block: var(--space-4); }
+.photo-figure--portrait img { aspect-ratio: 928 / 1152; }
 
 /* Editorial pull-quote reviews. */
 .pull-quote { position: relative; border: 0; background: transparent; padding: var(--space-3) 0 0; }
@@ -1276,14 +1286,6 @@ a.price-row:focus-visible { background: var(--brand-cream-soft); }
    phones, and two-column sections may shrink below their widest unbreakable child. */
 .btn { white-space: normal; text-align: center; }
 .cols-2 > * { min-width: 0; }
-/* Feature panels without a photo yet (homepage, until the real shoot): a cream card that hugs its text instead of an
-   empty dark frame. The rules stop matching once a panel gets style="background-image:url(...)"; Elite's look returns. */
-.svc-feature:not([style*="background-image"]) { align-items: flex-start; min-height: 0; aspect-ratio: auto; background: var(--surface); color: var(--ink); box-shadow: none; border: 1px solid var(--line); }
-.svc-feature:not([style*="background-image"])::after { display: none; }
-.svc-feature:not([style*="background-image"]) .svc-feature__title,
-.svc-feature:not([style*="background-image"]) .svc-feature__desc { color: inherit; }
-.svc-feature:not([style*="background-image"]) .svc-feature__desc { color: var(--ink-muted); }
-.svc-feature:not([style*="background-image"]) .service-card__price { color: var(--brand-orange); opacity: 1; }
 /* Phones: the four footer link lists sit two by two under a full-width brand block (was one 1,400px column). */
 @media (max-width: 699px) {
   .site-footer__grid--cols { grid-template-columns: 1fr 1fr; column-gap: var(--space-3); }
