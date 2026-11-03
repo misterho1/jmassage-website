@@ -51,7 +51,7 @@ function apply(html) {
 
   // Scripts: old motion stack out; nav.js + defer-load (motion moves into defer-load) in.
   h = h.replace(/[ \t]*<script src="(?:\.\.\/|\/)?js\/(?:vendor\/(?:gsap|ScrollTrigger|lenis)\.min\.js|main\.js|motion\.js|service-page\.js)[^"]*"[^>]*><\/script>\r?\n/g, '');
-  h = h.replace(/\/js\/defer-load\.js\?v=1/g, '/js/defer-load.js?v=2');
+  h = h.replace(/\/js\/defer-load\.js\?v=[12]/g, '/js/defer-load.js?v=3');
   if (!h.includes('/js/nav.js')) {
     if (/<script src="\/js\/defer-load\.js/.test(h)) h = h.replace(/([ \t]*)(<script src="\/js\/defer-load\.js)/, `$1${NAV_JS}${nl}$1$2`);
     else h = h.replace(/([ \t]*)<\/body>/, `  ${NAV_JS}${nl}$1</body>`);
