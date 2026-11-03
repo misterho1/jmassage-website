@@ -1249,6 +1249,12 @@ p.text-center { max-width: none; }
 .reviews-summary .stars { color: var(--brand-orange); letter-spacing: 0.08em; }
 .reviews-summary .star-half { color: var(--line-strong); }
 .reviews-summary .star-half::before { color: var(--brand-orange); }
+/* Star rows on light sections (foot massage & head spa page): orange stars, the last one half filled. */
+.star-row { color: var(--brand-orange); letter-spacing: 0.08em; }
+.star-row .star-half { color: var(--line-strong); }
+.star-row .star-half::before { color: var(--brand-orange); }
+/* A heading that follows body text gets more room above than below, so it reads with the text it introduces. */
+main :is(p:not(.eyebrow), ul, ol, figure, blockquote) + :is(h2, h3) { margin-top: var(--space-4); }
 /* Feature panels: 16:10 plus a 340px minimum height forces 544px wide, wider than a half column below 1240px. */
 @media (min-width: 800px) and (max-width: 1239px) {
   .svc-feature--a,
