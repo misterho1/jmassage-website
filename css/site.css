@@ -1250,6 +1250,9 @@ p.text-center { max-width: none; }
 .reviews-summary .stars { color: var(--brand-orange); letter-spacing: 0.08em; }
 .reviews-summary .star-half { color: var(--line-strong); }
 .reviews-summary .star-half::before { color: var(--brand-orange); }
+/* Gift card amount tiles: two by two on phones, one row of four from 480px. */
+.service-grid[data-gift-tiles] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 480px) { .service-grid[data-gift-tiles] { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 /* Star rows on light sections (foot massage & head spa page): orange stars, the last one half filled. */
 .star-row { color: var(--brand-orange); letter-spacing: 0.08em; }
 .star-row .star-half { color: var(--line-strong); }
