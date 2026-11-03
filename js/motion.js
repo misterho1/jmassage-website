@@ -47,8 +47,13 @@
       });
       gsap.utils.toArray('[data-reveal-stagger]').forEach(function (group) {
         if (group.getBoundingClientRect().top < window.innerHeight) return;
+        /* Cards carry a CSS transform transition (the hover lift). Left on, it fights GSAP's inline
+           transform and the cards finish 28px low, overlapping what follows. Off for the reveal; when it
+           ends, transform and transition go back to the stylesheet. */
+        gsap.set(group.children, { transition: 'none' });
         gsap.from(group.children, {
           autoAlpha: 0, y: 28, duration: 1.0, ease: EASE, stagger: 0.1,
+          clearProps: 'transform,transition',
           scrollTrigger: { trigger: group, start: 'top 84%', once: true }
         });
       });

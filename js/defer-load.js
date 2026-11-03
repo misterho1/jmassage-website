@@ -22,7 +22,7 @@
     var srcs = [
       '/js/vendor/gsap.min.js?v=1',
       '/js/vendor/ScrollTrigger.min.js?v=1',
-      '/js/motion.js?v=3'
+      '/js/motion.js?v=4'
     ];
     srcs.forEach(function (src) {
       var s = document.createElement('script');
