@@ -123,14 +123,20 @@ body.cart-has-bar{padding-bottom:88px;} /* room under the page for the cart bar 
 /* pick a time */
 .cart__when{padding:28px 20px 0;}
 .cart__when-title,.cart__details-title{margin:0;font-family:var(--type-display);font-weight:400;font-size:21px;line-height:1.2;color:var(--ink);}
-.cart__days{display:flex;gap:8px;margin:0 -20px;padding:12px 20px 6px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding:0 20px;scrollbar-width:thin;}
-.cart__day{display:flex;flex:0 0 auto;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:62px;min-height:56px;padding:6px 10px;
-  border-radius:12px;scroll-snap-align:start;}
-.cart__day-wd{font-size:12px;}
-.cart__day-d{font-size:15px;}
-.cart__other-label{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;color:var(--ink-muted);}
-.cart__other{min-height:44px;padding:0 10px;border:1px solid var(--c-ctl);border-radius:10px;background:var(--surface);color:var(--ink);font-size:16px;}
-.cart__times{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px;}
+.cart__cal{margin-top:12px;}
+.cart__cal-head{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.cart__cal-title{margin:0;font-size:16px;font-weight:600;color:var(--ink);}
+.cart__cal-nav{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:44px;height:44px;padding:0;border:1px solid var(--c-ctl);border-radius:999px;
+  background:var(--surface);color:var(--ink);font-size:22px;line-height:1;cursor:pointer;}
+.cart__cal-nav:hover:not(:disabled){border-color:var(--ink);}
+.cart__cal-nav:disabled{border-color:transparent;background:#efe9e0;color:var(--ink-dim);cursor:not-allowed;}
+.cart__cal-week,.cart__days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;}
+.cart__cal-week{margin-top:8px;font-size:12px;text-align:center;color:var(--ink-muted);}
+.cart__days{margin-top:4px;}
+.cart__day{min-height:44px;padding:0;border-radius:10px;font-size:15px;}
+.cart__day:disabled:not([aria-pressed="true"]){border-color:transparent;background:transparent;font-weight:400;}
+.cart__day[aria-current="date"]{font-weight:700;text-decoration:underline;text-underline-offset:3px;}
+.cart__times{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px;scroll-margin-bottom:12px;}
 .cart__time{min-height:44px;padding:0 4px;border-radius:12px;font-size:15px;}
 .cart__times-msg{grid-column:1/-1;margin:0;font-size:14px;color:var(--ink-muted);}
 .cart__times-msg--error{color:var(--c-err);}

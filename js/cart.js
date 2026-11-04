@@ -22,7 +22,7 @@
   // Per-site look: each site's button classes and its copy of cart.css.
   var BTN = root.getAttribute('data-btn') || 'btn btn--primary';
   var BTN2 = root.getAttribute('data-btn-secondary') || 'btn btn--secondary';
-  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=3';
+  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=4';
 
   // Staff preview token: the page's inline loader takes it from #cartpreview= and strips it from
   // the address bar before analytics loads (never in the query string or a referrer).
@@ -44,13 +44,14 @@
   var day = null, start = null, screen = 'cards', notice = '';
   var inner = null, barEl = null, panelEl = null, orderEl = null;
   // The time step. `times` is the list for `day` and the current cart, null while it loads or after
-  // the cart changed; `timesErr` is the message when it could not load. `pass` is the Worker's
-  // 20-min browsing pass, so only the first times request needs a Turnstile run. timesSeq: only the
-  // newest times request may update the page. autoLeft: days the first open may still skip ahead.
-  var times = null, timesErr = '', timesLoading = false, timesSeq = 0, pass = '', reload = null, autoLeft = 0;
+  // the cart changed; `timesErr` is the message when it could not load. timesSeq: only the newest
+  // times request may update the page. autoLeft: days the first open may still skip ahead.
+  // shown: the calendar month the arrows moved to ('YYYY-MM'); empty means the picked day's month.
+  // reveal: a guest just picked a day, so its times are brought into view.
+  var times = null, timesErr = '', timesLoading = false, timesSeq = 0, reload = null, autoLeft = 0, shown = '', reveal = false;
   // The time, details and Pay sections: made once and moved into each new cart page, so what the
   // guest typed survives every redraw. tsBox holds the Turnstile widget.
-  var whenEl = null, daysEl = null, otherEl = null, timesEl = null, formEl = null, payboxEl = null, payEl = null, sayEl = null, tsBox = null;
+  var whenEl = null, calTitleEl = null, prevEl = null, nextEl = null, daysEl = null, timesEl = null, formEl = null, payboxEl = null, payEl = null, sayEl = null, tsBox = null;
   // busy: the card form is opening or a payment is under way. order: the payment attempt (checkout).
   // paying: from the card form's answer until that order's outcome is handled; the cart is locked.
   // ended: the message of an order that ended paid, held or unclear; the cart is cleared, Pay stays off.
@@ -463,7 +464,7 @@
   }
 
   // ---------- pick a time ----------
-  var DAYS = 14, AHEAD = 60; // day buttons; the furthest day Other date offers (today's range)
+  var AHEAD = 60; // the furthest day the calendar offers (today's range)
   function today() { return denverDate(new Date()); }
   // Calendar days after a Denver date (noon UTC never crosses a date line, so DST cannot skip a day).
   function addDays(ymd, n) { var d = new Date(ymd + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
@@ -476,8 +477,8 @@
     timesSeq++; timesLoading = false; times = null; timesErr = '';
     if (screen === 'cart') reload = setTimeout(function () { reload = null; loadTimes(); }, 700);
   }
-  // Times for `day` and the cart exactly as the Worker reads it. The first request runs Turnstile,
-  // later ones send the pass. On first open (no day yet) it starts today and skips ahead at most 2
+  // Times for `day` and the cart exactly as the Worker reads it, with no robot check: they show as
+  // soon as a day is picked. On first open (no day yet) it starts today and skips ahead at most 2
   // days to the first day with times, so the per-IP limit (30 times requests an hour) is not burned.
   // keep: leave the message under Pay as it is (after a refused checkout).
   function loadTimes(keep) {
@@ -485,16 +486,11 @@
     if (screen !== 'cart' || !lines.length || locked()) return; // loads when the cart page opens (or the order ends)
     if (!day) { day = today(); autoLeft = 2; save(); }
     if (!keep && !asking) say('');
-    var seq = ++timesSeq, d = day, sent = pass;
-    times = null; timesErr = ''; timesLoading = true;
+    var seq = ++timesSeq, d = day;
+    times = null; timesErr = ''; timesLoading = true; shown = '';
     paintWhen(); paintPay();
-    var path = '/api/cart/times?spa=' + SPA + '&date=' + d + '&cart=' + encodeURIComponent(JSON.stringify(toWorker()));
-    var withPass = sent ? Promise.resolve({ 'X-Cart-Pass': sent }) : turnstileToken().then(function (t) { return { 'X-Turnstile': t }; });
-    // A request that went stale while its robot check ran is not sent (each one counts against the limit).
-    withPass.then(function (h) { return seq === timesSeq ? api(path, { headers: h }) : null; }).then(function (r) {
-      if (r && r.ok && r.pass) pass = r.pass; // a pass is good for any day and cart
-      if (!r || seq !== timesSeq) return; // an older day or cart: a newer request owns the page
-      if (r.status === 401 && sent) { if (pass === sent) pass = ''; return loadTimes(keep); } // the pass expired
+    api('/api/cart/times?spa=' + SPA + '&date=' + d + '&cart=' + encodeURIComponent(JSON.stringify(toWorker()))).then(function (r) {
+      if (seq !== timesSeq) return; // an older day or cart: a newer request owns the page
       timesLoading = false;
       if (!r.ok) { autoLeft = 0; timesErr = r.message || 'We could not load times. Please try again.'; return timesFailed(); }
       var list = Array.isArray(r.times) ? r.times : [];
@@ -516,13 +512,13 @@
     if (start) { start = null; save(); }
     paintWhen(); paintPay();
   }
-  // A day button or Other date: a new day drops the picked time and loads that day's times. The same
-  // day again only reloads after an error.
+  // A day on the calendar: a new day drops the picked time and loads that day's times. The same day
+  // again only reloads after an error.
   function pickDay(date) {
     var t0 = today();
     if (locked() || !/^\d{4}-\d{2}-\d{2}$/.test(date || '') || date < t0 || date > addDays(t0, AHEAD)) return;
     if (date === day && !timesErr && (times || timesLoading || reload)) return;
-    day = date; start = null; autoLeft = 0;
+    day = date; start = null; autoLeft = 0; reveal = true;
     save();
     loadTimes();
   }
@@ -533,24 +529,38 @@
     paint();
     prerunTs();
   }
-  function dayButton(d, i) {
-    var at = new Date(d + 'T12:00:00Z'), on = d === day;
-    var fmt = function (o) { o.timeZone = 'UTC'; return at.toLocaleDateString('en-US', o); };
-    return el('button', { type: 'button', class: 'cart__day', 'data-date': d, 'aria-pressed': on ? 'true' : 'false', disabled: locked(),
-      'aria-label': fmt({ weekday: 'long', month: 'long', day: 'numeric' }), on: { click: function () { pickDay(d); } } }, [
-      el('span', { class: 'cart__day-wd', text: i === 0 ? 'Today' : fmt({ weekday: 'short' }) }), ' ',
-      el('span', { class: 'cart__day-d', text: fmt({ month: 'short', day: 'numeric' }) })]);
+  function dayButton(d, t0, last) {
+    var at = new Date(d + 'T12:00:00Z');
+    return el('button', { type: 'button', class: 'cart__day', 'data-date': d, 'aria-pressed': d === day ? 'true' : 'false', 'aria-current': d === t0 ? 'date' : null,
+      disabled: locked() || d < t0 || d > last, text: String(at.getUTCDate()),
+      'aria-label': at.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' }), on: { click: function () { pickDay(d); } } });
   }
-  // Redraw the day buttons and times in place, keeping focus on the button that had it.
+  function monthOf(ymd) { return ymd.slice(0, 7); }
+  function shownMonth() { return shown || monthOf(day || today()); }
+  // The arrows move the calendar only: the picked day and its times stay until another day is tapped.
+  function moveMonth(n) {
+    var d = new Date(shownMonth() + '-15T12:00:00Z');
+    d.setUTCMonth(d.getUTCMonth() + n);
+    shown = monthOf(d.toISOString());
+    paintWhen();
+  }
+  // The month on a Sunday-first grid, with a blank cell for each day before the 1st.
+  function paintCal(t0) {
+    var last = addDays(t0, AHEAD), ym = shownMonth(), first = new Date(ym + '-01T12:00:00Z');
+    calTitleEl.textContent = first.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+    prevEl.disabled = locked() || ym <= monthOf(t0);
+    nextEl.disabled = locked() || ym >= monthOf(last);
+    daysEl.textContent = '';
+    for (var i = 0; i < first.getUTCDay(); i++) daysEl.appendChild(el('span'));
+    for (var d = ym + '-01'; monthOf(d) === ym; d = addDays(d, 1)) daysEl.appendChild(dayButton(d, t0, last));
+  }
+  // Redraw the calendar and times in place, keeping focus on the button that had it.
   function paintWhen() {
     if (!whenEl) return;
     var a = document.activeElement, key = a && whenEl.contains(a) && a.tagName === 'BUTTON' ? keyOf(a) : '';
-    var t0 = today(), row = [];
-    for (var i = 0; i < DAYS; i++) row.push(addDays(t0, i));
-    daysEl.textContent = '';
-    row.forEach(function (d, i) { daysEl.appendChild(dayButton(d, i)); });
-    otherEl.min = t0; otherEl.max = addDays(t0, AHEAD); otherEl.disabled = locked();
-    if (document.activeElement !== otherEl) otherEl.value = day && row.indexOf(day) < 0 ? day : '';
+    paintCal(today());
+    // An arrow that just turned off cannot keep focus (the browser drops it to the page): keep it in the cart.
+    if ((a === prevEl || a === nextEl) && a.disabled && panelEl) panelEl.focus({ preventScroll: true });
     timesEl.textContent = '';
     if (times && times.length) times.forEach(function (iso) {
       var on = !!start && sameTime(iso, start);
@@ -560,6 +570,7 @@
     else timesEl.appendChild(el('p', { class: 'cart__times-msg' + (timesErr ? ' cart__times-msg--error' : ''), role: 'status',
       text: times == null ? 'Finding times…' : timesErr || 'No times left on this day. Try another day.' }));
     if (key && !whenEl.contains(document.activeElement)) refocus(panelEl || whenEl, key);
+    if (reveal) { if (times) reveal = false; timesEl.scrollIntoView({ block: 'nearest' }); }
   }
 
   // ---------- your details and the Pay button ----------
@@ -588,13 +599,17 @@
   }
   function checkoutEls() {
     if (whenEl) return [whenEl, formEl, payboxEl];
+    calTitleEl = el('p', { class: 'cart__cal-title', 'aria-live': 'polite' });
+    prevEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-prev', 'aria-label': 'Previous month', text: '‹', on: { click: function () { moveMonth(-1); } } });
+    nextEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-next', 'aria-label': 'Next month', text: '›', on: { click: function () { moveMonth(1); } } });
     daysEl = el('div', { class: 'cart__days', role: 'group', 'aria-label': 'Day' });
-    otherEl = el('input', { type: 'date', id: 'cart-other', class: 'cart__other', on: { change: function () { pickDay(otherEl.value); } } });
     timesEl = el('div', { class: 'cart__times', role: 'group', 'aria-label': 'Start times' });
-    whenEl = el('section', { class: 'cart__when', 'aria-label': 'Pick a time' }, [
-      el('h3', { class: 'cart__when-title', text: 'Pick a time' }),
-      daysEl,
-      el('label', { for: 'cart-other', class: 'cart__other-label' }, [el('span', { text: 'Other date' }), ' ', otherEl]),
+    whenEl = el('section', { class: 'cart__when', 'aria-label': 'Pick a day and time' }, [
+      el('h3', { class: 'cart__when-title', text: 'Pick a day and time' }),
+      el('div', { class: 'cart__cal' }, [
+        el('div', { class: 'cart__cal-head' }, [prevEl, calTitleEl, nextEl]),
+        el('div', { class: 'cart__cal-week', 'aria-hidden': 'true' }, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(function (w) { return el('span', { text: w }); })),
+        daysEl]),
       timesEl,
       el('p', { class: 'cart__same', text: 'Everyone in your order starts at the same time.' })]);
     var typed = { input: function () { paintPay(); } };
@@ -678,14 +693,13 @@
   }
 
   // ---------- the robot check before Pay ----------
-  // Checkout needs a fresh Turnstile token (the times pass never pays). The pre-run gets it once the
+  // Checkout needs a fresh Turnstile token. The pre-run gets it once the
   // cart is open and a time is picked, so it is ready when the card form answers. held: its answer,
   // good for 4.5 min (Turnstile keeps a token 5) and used once. prerun: the pre-run still going.
   var TOKEN_AGE = 270000, held = null, prerun = null;
   function fresh() { return !!held && Date.now() - held.at < TOKEN_AGE; }
   function prerunTs() {
     if (screen !== 'cart' || !start || prerun || fresh() || locked()) return; // locked: checkout's own takeToken owns the widget
-    if (turnstileToken.pending) return; // another run (times) owns the widget; its end calls this again
     held = null;
     prerun = turnstileToken().then(function (t) { return t; }, function () { return null; }).then(function (t) {
       prerun = null;

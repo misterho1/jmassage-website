@@ -188,7 +188,7 @@
              spa-phone-booking Worker (js/cart.js, shared with elitespautah.com). Hidden: visitors see
              today's page and load nothing for it; a staff preview link (#cartpreview=) opens it.
              Going public = remove `hidden`. -->
-        <section id="cart" class="cart" data-spa="jm" data-api="https://spa-phone-booking.andrew-86d.workers.dev" data-phone="801-288-1118" data-css="/css/cart.css?v=3" aria-label="Book several massages" hidden></section>
+        <section id="cart" class="cart" data-spa="jm" data-api="https://spa-phone-booking.andrew-86d.workers.dev" data-phone="801-288-1118" data-css="/css/cart.css?v=4" aria-label="Book several massages" hidden></section>
         <script>
           // Loads js/cart.js only when the cart is public or a staff preview link opened it.
           (function () {
@@ -199,7 +199,7 @@
             if (m) history.replaceState(null, '', location.pathname + location.search);
             try { if (m) sessionStorage.setItem('cartpreview', window.__cartPreview); p = !!sessionStorage.getItem('cartpreview'); } catch (e) {}
             p = p || !!m;
-            if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=3'; document.body.appendChild(s); }
+            if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=4'; document.body.appendChild(s); }
           })();
         </script>
         <div class="book-menu" id="book-one" style="margin-bottom:1.9rem;">
