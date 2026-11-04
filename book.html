@@ -314,10 +314,23 @@
           revealTimer=setTimeout(clearOverlay,4000);
         });}
         // Deep links land on the calendar, so show the choice beside it, with a way back to the menu.
+        // Deep tissue books on the single calendars at the pill price; the surcharge is paid at the visit.
         var selectedLine=document.getElementById('book-selected');
-        function showSelected(b,text){
+        var deepStyle=false;
+        var DEEP_PRICE={'60':125,'90':175,'120':245};
+        function selectedText(b){
+          var label=(b.getAttribute('aria-label')||b.textContent).trim();
+          var group=b.closest('.book-menu__group');
+          var mins=(label.match(/(\d+) minutes/)||[])[1];
+          if(group&&group.getAttribute('data-service')!=='single'){deepStyle=false;}
+          if(deepStyle&&DEEP_PRICE[mins]){
+            return mins+'-minute deep tissue, $'+DEEP_PRICE[mins]+'. You pay $'+jmPrice(b)+' when you book and $'+(DEEP_PRICE[mins]-jmPrice(b))+' at your visit.';
+          }
+          return label+'.';
+        }
+        function showSelected(b){
           if(!selectedLine) return;
-          selectedLine.textContent='Selected: '+(text||((b.getAttribute('aria-label')||b.textContent).trim()+'.'))+' ';
+          selectedLine.textContent='Selected: '+selectedText(b)+' ';
           var change=document.createElement('a');
           change.href='#book-one';
           change.textContent='Change';
@@ -354,9 +367,8 @@
             var pick=target||grp.querySelector('.book-pick');
             if(pick){
               pick.click();
-              // Deep tissue books on the single calendars at the pill price; the surcharge is paid at the visit.
-              var deepPrice=q.get('style')==='deep'&&svc==='single'&&{'60':125,'90':175,'120':245}[len];
-              showSelected(pick,deepPrice?(len+'-minute deep tissue, $'+deepPrice+'. You pay $'+jmPrice(pick)+' when you book and $'+(deepPrice-jmPrice(pick))+' at your visit.'):'');
+              deepStyle=q.get('style')==='deep'&&svc==='single';
+              showSelected(pick);
               selectedLine.style.scrollMarginTop='72px';
               selectedLine.scrollIntoView({block:'start'});
             }
