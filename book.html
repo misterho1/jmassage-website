@@ -148,7 +148,7 @@
           <span class="book-reassure__item">Reschedule freely</span>
         </div>
 
-        <p class="book-firsttimer">First time? A <strong>60-minute Swedish</strong> is the right first visit. It's already selected below, just pick a time.</p>
+        <p class="book-firsttimer">First time? A <strong>60-minute massage</strong> is already selected below. Pick a time. Choose Swedish or deep tissue when you arrive. Deep tissue is $20 more.</p>
 
         <!-- Price notice (effective 2026-11-01). Shown only when the head script sets html[data-price-notice].
              data-nosnippet keeps both variants out of search snippets. Remove in December 2026. -->
@@ -202,7 +202,7 @@
             if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=3'; document.body.appendChild(s); }
           })();
         </script>
-        <div class="book-menu" id="book-one" style="margin-bottom:1.9rem;">
+        <div class="book-menu" id="book-one" style="margin-bottom:1.9rem;scroll-margin-top:90px;">
           <div class="book-menu__group" data-service="single">
             <p class="book-menu__title">Single Massage <small>· Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Myofascial</small></p>
             <p style="margin:-.3rem 0 .55rem;font-size:.85rem;color:#6b6259;">Deep tissue is $20 more for 60 or 90 minutes, $40 more for 120.</p>
@@ -243,6 +243,8 @@
         </div>
 
         <p class="book-embed__fallback" style="margin-bottom:1rem;text-align:center;">Rather book by phone? Call <a href="tel:+18012881118">(801) 288-1118</a>, open daily 10am to 10pm.</p>
+
+        <p id="book-selected" hidden style="max-width:820px;margin:0 auto .75rem;text-align:center;font-size:.95rem;"></p>
 
         <!-- min-height: GHL's form_embed.js takes the iframe out of the flow until the calendar is ready; the box keeps its 760 px. -->
         <div class="book-frame is-loading" id="book-frame" style="min-height:760px;">
@@ -311,8 +313,34 @@
           revealMo.observe(frame,{attributes:true,attributeFilter:['style']});
           revealTimer=setTimeout(clearOverlay,4000);
         });}
+        // Deep links land on the calendar, so show the choice beside it, with a way back to the menu.
+        // Deep tissue books on the single calendars at the pill price; the surcharge is paid at the visit.
+        var selectedLine=document.getElementById('book-selected');
+        var deepStyle=false;
+        var deepLinkPick=false;
+        var DEEP_PRICE={'60':125,'90':175,'120':245};
+        function selectedText(b){
+          var label=(b.getAttribute('aria-label')||b.textContent).trim();
+          var group=b.closest('.book-menu__group');
+          var mins=(label.match(/(\d+) minutes/)||[])[1];
+          if(group&&group.getAttribute('data-service')!=='single'){deepStyle=false;}
+          if(deepStyle&&DEEP_PRICE[mins]){
+            return mins+'-minute deep tissue, $'+DEEP_PRICE[mins]+'. You pay $'+jmPrice(b)+' when you book and $'+(DEEP_PRICE[mins]-jmPrice(b))+' at your visit.';
+          }
+          return label+'.';
+        }
+        function showSelected(b){
+          if(!selectedLine) return;
+          selectedLine.textContent='Selected: '+selectedText(b)+' ';
+          var change=document.createElement('a');
+          change.href='#book-one';
+          change.textContent='Change';
+          selectedLine.appendChild(change);
+          selectedLine.hidden=false;
+        }
         document.querySelectorAll('.book-pick').forEach(function(b){
           b.addEventListener('click',function(){
+            if(selectedLine&&!selectedLine.hidden){showSelected(b);}
             document.querySelectorAll('.book-pick').forEach(function(x){x.classList.remove('is-active');x.setAttribute('aria-pressed','false');});
             b.classList.add('is-active');
             b.setAttribute('aria-pressed','true');
@@ -321,7 +349,7 @@
               // Show the skeleton loader while the iframe swaps to the new service.
               stopRevealWait();if(wrap){wrap.classList.add('is-loading');}
               loadCalendar(base+b.getAttribute('data-cal'));
-              frame.scrollIntoView({behavior:'smooth',block:'nearest'});
+              if(!deepLinkPick){frame.scrollIntoView({behavior:'smooth',block:'nearest'});}
             }
           });
         });
@@ -338,7 +366,21 @@
               if(x.textContent.indexOf(len+' min')===0){target=x;}
             });
             var pick=target||grp.querySelector('.book-pick');
-            if(pick){pick.click();}
+            if(pick){
+              deepLinkPick=true;
+              pick.click();
+              deepLinkPick=false;
+              deepStyle=q.get('style')==='deep'&&svc==='single';
+              showSelected(pick);
+              // The first-visit card speaks for the default 60-minute massage only.
+              var firstTimer=document.querySelector('.book-firsttimer');
+              if(firstTimer&&(deepStyle||len!=='60')){firstTimer.style.display='none';}
+              if(selectedLine){
+                window.__deepLinkScroll=true;
+                selectedLine.style.scrollMarginTop='90px';
+                selectedLine.scrollIntoView({block:'start',behavior:'instant'});
+              }
+            }
           }
           loadCalendar();
         }
