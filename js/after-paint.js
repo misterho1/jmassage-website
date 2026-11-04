@@ -67,6 +67,7 @@
   }
   if (tagOnInteraction) {
     INTERACTION_EVENTS.forEach(function (evt) {
+      if (evt === 'scroll' && window.__deepLinkScroll) return; // a /book deep link scrolls itself; not the visitor
       window.addEventListener(evt, onInteraction, { once: true, passive: true });
     });
   }

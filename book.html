@@ -202,7 +202,7 @@
             if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=3'; document.body.appendChild(s); }
           })();
         </script>
-        <div class="book-menu" id="book-one" style="margin-bottom:1.9rem;">
+        <div class="book-menu" id="book-one" style="margin-bottom:1.9rem;scroll-margin-top:90px;">
           <div class="book-menu__group" data-service="single">
             <p class="book-menu__title">Single Massage <small>· Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Myofascial</small></p>
             <p style="margin:-.3rem 0 .55rem;font-size:.85rem;color:#6b6259;">Deep tissue is $20 more for 60 or 90 minutes, $40 more for 120.</p>
@@ -317,6 +317,7 @@
         // Deep tissue books on the single calendars at the pill price; the surcharge is paid at the visit.
         var selectedLine=document.getElementById('book-selected');
         var deepStyle=false;
+        var deepLinkPick=false;
         var DEEP_PRICE={'60':125,'90':175,'120':245};
         function selectedText(b){
           var label=(b.getAttribute('aria-label')||b.textContent).trim();
@@ -348,7 +349,7 @@
               // Show the skeleton loader while the iframe swaps to the new service.
               stopRevealWait();if(wrap){wrap.classList.add('is-loading');}
               loadCalendar(base+b.getAttribute('data-cal'));
-              frame.scrollIntoView({behavior:'smooth',block:'nearest'});
+              if(!deepLinkPick){frame.scrollIntoView({behavior:'smooth',block:'nearest'});}
             }
           });
         });
@@ -366,11 +367,19 @@
             });
             var pick=target||grp.querySelector('.book-pick');
             if(pick){
+              deepLinkPick=true;
               pick.click();
+              deepLinkPick=false;
               deepStyle=q.get('style')==='deep'&&svc==='single';
               showSelected(pick);
-              selectedLine.style.scrollMarginTop='72px';
-              selectedLine.scrollIntoView({block:'start'});
+              // The first-visit card speaks for the default 60-minute massage only.
+              var firstTimer=document.querySelector('.book-firsttimer');
+              if(firstTimer&&(deepStyle||len!=='60')){firstTimer.style.display='none';}
+              if(selectedLine){
+                window.__deepLinkScroll=true;
+                selectedLine.style.scrollMarginTop='90px';
+                selectedLine.scrollIntoView({block:'start',behavior:'instant'});
+              }
             }
           }
           loadCalendar();
