@@ -547,7 +547,8 @@
   // The month on a Sunday-first grid, with a blank cell for each day before the 1st.
   function paintCal(t0) {
     var last = addDays(t0, AHEAD), ym = shownMonth(), first = new Date(ym + '-01T12:00:00Z');
-    calTitleEl.textContent = first.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+    var title = first.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+    if (calTitleEl.textContent !== title) calTitleEl.textContent = title; // a live region: only news is read out
     prevEl.disabled = locked() || ym <= monthOf(t0);
     nextEl.disabled = locked() || ym >= monthOf(last);
     daysEl.textContent = '';
@@ -640,6 +641,7 @@
   // times load again when the cart opens.
   function leftCart() {
     clearTimeout(reload); reload = null;
+    shown = ''; reveal = false;
     if (timesLoading) { timesSeq++; timesLoading = false; times = null; }
     if (turnstileToken.pending) turnstileToken.pending.done(null);
   }
