@@ -1,5 +1,5 @@
-/* Online cart on /book (assets/cart.js). cart.js loads this before it draws the cards, so nothing
-   paints unstyled. Site tokens from styles.css (colours, type); the look follows the approved mockup.
+/* Online cart on /book (cart.js). cart.js loads this before it draws the cards, so nothing
+   paints unstyled. Site tokens from the page's own stylesheet (colours, type); the look follows the approved mockup.
    Mobile first: the cart covers the screen below 768 px, a right-hand panel (440 px) from 768 px up.
    Every text and control colour here is at least 4.5:1 on its ground, and every button is 44 px or more. */
 .cart{--c-line:rgba(42,38,34,.12);--c-ctl:rgba(42,38,34,.25);--c-off:#756c62;--c-err:#9b2c1f;

@@ -9,7 +9,7 @@
 
    <section id="cart" data-spa="elite" data-api="https://..." hidden> — while the section
    is hidden the page makes no cart request at all, unless a staff preview link
-   (#cartpreview=) opened it. Shared with jmassageslc.com (same file, own CSS).
+   (#cartpreview=) opened it. One file for both spa sites, copied byte for byte, with the same cart.css.
    Vanilla, no deps. Matches nav.js / defer-load.js. */
 (function () {
   'use strict';
@@ -1138,6 +1138,6 @@
     }).catch(function () {});
   }
 
-  if (document.querySelector('script[src*="/assets/after-paint.js"]')) (window.__afterPaint = window.__afterPaint || []).push(startCart);
+  if (document.querySelector('script[src*="/after-paint.js"]')) (window.__afterPaint = window.__afterPaint || []).push(startCart);
   else startCart();
 })();
