@@ -819,13 +819,14 @@
   // Where an answer leads. Paid, held, unclear or unconfirmed: the cart is cleared and Pay stays off,
   // because a kept cart would invite a second charge (staff may still approve a held one). Anything
   // else charged nothing, or was reversed: back to the cart as it was, with the Worker's message.
+  // Unconfirmed (the checks ran out) keeps the saved order id: a refresh within its 30 min checks it again.
   function settle(r) {
     var o = order;
     if (!o || o.done) return;
     if (r.pending) { o.lost = true; progress(r); return; } // still running: the status checks carry on
     o.done = true; clearTimeout(o.timer);
     if (r.ok && r.thankYouUrl) return thank(o, r.thankYouUrl);
-    forget();
+    if (!r.unconfirmed) forget();
     if (r.ok || r.paid || r.held || r.uncertain || r.duplicate || r.unconfirmed) return stop(r.unconfirmed || !r.message ? unconfirmed() : r.message, r.paid ? 'notice' : 'error');
     var refill = r.stage === 'time' || !!r.reversed; // that time is gone: reload the times, keep the message
     if (refill) { start = null; save(); }
@@ -838,7 +839,8 @@
     say(msg, msg && (r.reversed ? 'notice' : 'error'));
   }
   // Paid and booked: clear the cart and the saved order, send the page's own time (card form answer to
-  // the redirect) beside the Worker's stage times, then go to the thank-you page.
+  // the redirect) beside the Worker's stage times, then go to the thank-you page. Back may bring this
+  // page out of the back-forward cache still locked on the paid order: then it reloads, fresh.
   function thank(o, url) {
     try { sessionStorage.removeItem(KEY); } catch (e) {}
     forget();
@@ -847,6 +849,7 @@
       try { navigator.sendBeacon(API + '/api/cart/order/' + o.id + '/timing', new Blob([JSON.stringify({ pageMs: ms })], { type: 'text/plain' })); } catch (e) {}
       if (window.console && console.info) console.info('cart timing page ' + ms + ' ms');
     }
+    window.addEventListener('pageshow', function (e) { if (e.persisted) location.reload(); });
     location.href = url;
   }
   // The order ended without a booking we can confirm: clear the cart and its storage, keep the message
