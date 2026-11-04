@@ -792,7 +792,7 @@
   // Status checks for the open order: every 700 ms while its checkout request is in flight, every
   // 2.5 s once that answer is lost or says pending, 9 at most, then "do not pay again". While the
   // request is in flight they only move the steps and its own answer decides: a status can be a
-  // passing state (during a reversal it reads paid until the refund lands).
+  // passing state (during a reversal it reads pending until the refund lands, then reversed).
   // After a refresh (resumed), a 404 for an order whose POST never went out means nothing was charged.
   // One whose POST went out may still be on its way (the Worker saves it within about a second of
   // receiving it), so its 404s are checked again every 700 ms for about 10 s, still locked, before
