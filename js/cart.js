@@ -51,7 +51,7 @@
   var times = null, timesErr = '', timesLoading = false, timesSeq = 0, reload = null, autoLeft = 0, shown = '', reveal = false;
   // The time, details and Pay sections: made once and moved into each new cart page, so what the
   // guest typed survives every redraw. tsBox holds the Turnstile widget.
-  var whenEl = null, calTitleEl = null, prevEl = null, nextEl = null, daysEl = null, timesEl = null, formEl = null, payboxEl = null, payEl = null, sayEl = null, tsBox = null;
+  var whenEl = null, calTitleEl = null, prevEl = null, nextEl = null, daysEl = null, timesDayEl = null, timesEl = null, formEl = null, payboxEl = null, payEl = null, sayEl = null, tsBox = null;
   // busy: the card form is opening or a payment is under way. order: the payment attempt (checkout).
   // paying: from the card form's answer until that order's outcome is handled; the cart is locked.
   // ended: the message of an order that ended paid, held or unclear; the cart is cleared, Pay stays off.
@@ -529,11 +529,11 @@
     paint();
     prerunTs();
   }
+  function longDay(d) { return new Date(d + 'T12:00:00Z').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' }); }
   function dayButton(d, t0, last) {
-    var at = new Date(d + 'T12:00:00Z');
     return el('button', { type: 'button', class: 'cart__day', 'data-date': d, 'aria-pressed': d === day ? 'true' : 'false', 'aria-current': d === t0 ? 'date' : null,
-      disabled: locked() || d < t0 || d > last, text: String(at.getUTCDate()),
-      'aria-label': at.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' }), on: { click: function () { pickDay(d); } } });
+      disabled: locked() || d < t0 || d > last, text: String(Number(d.slice(8))),
+      'aria-label': longDay(d), on: { click: function () { pickDay(d); } } });
   }
   function monthOf(ymd) { return ymd.slice(0, 7); }
   function shownMonth() { return shown || monthOf(day || today()); }
@@ -562,6 +562,8 @@
     paintCal(today());
     // An arrow that just turned off cannot keep focus (the browser drops it to the page): keep it in the cart.
     if ((a === prevEl || a === nextEl) && a.disabled && panelEl) panelEl.focus({ preventScroll: true });
+    // The arrows can show another month while these times stay bookable, so they always name their day.
+    timesDayEl.textContent = day ? 'Times for ' + longDay(day) : '';
     timesEl.textContent = '';
     if (times && times.length) times.forEach(function (iso) {
       var on = !!start && sameTime(iso, start);
@@ -604,6 +606,7 @@
     prevEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-prev', 'aria-label': 'Previous month', text: '‹', on: { click: function () { moveMonth(-1); } } });
     nextEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-next', 'aria-label': 'Next month', text: '›', on: { click: function () { moveMonth(1); } } });
     daysEl = el('div', { class: 'cart__days', role: 'group', 'aria-label': 'Day' });
+    timesDayEl = el('p', { class: 'cart__times-day' });
     timesEl = el('div', { class: 'cart__times', role: 'group', 'aria-label': 'Start times' });
     whenEl = el('section', { class: 'cart__when', 'aria-label': 'Pick a day and time' }, [
       el('h3', { class: 'cart__when-title', text: 'Pick a day and time' }),
@@ -611,6 +614,7 @@
         el('div', { class: 'cart__cal-head' }, [prevEl, calTitleEl, nextEl]),
         el('div', { class: 'cart__cal-week', 'aria-hidden': 'true' }, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(function (w) { return el('span', { text: w }); })),
         daysEl]),
+      timesDayEl,
       timesEl,
       el('p', { class: 'cart__same', text: 'Everyone in your order starts at the same time.' })]);
     var typed = { input: function () { paintPay(); } };

@@ -136,7 +136,8 @@ body.cart-has-bar{padding-bottom:88px;} /* room under the page for the cart bar 
 .cart__day{min-height:44px;padding:0;border-radius:10px;font-size:15px;}
 .cart__day:disabled:not([aria-pressed="true"]){border-color:transparent;background:transparent;font-weight:400;}
 .cart__day[aria-current="date"]{font-weight:700;text-decoration:underline;text-underline-offset:3px;}
-.cart__times{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px;scroll-margin-bottom:12px;}
+.cart__times-day{margin:12px 0 0;font-size:14px;font-weight:600;color:var(--ink);}
+.cart__times{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px;scroll-margin-bottom:12px;}
 .cart__time{min-height:44px;padding:0 4px;border-radius:12px;font-size:15px;}
 .cart__times-msg{grid-column:1/-1;margin:0;font-size:14px;color:var(--ink-muted);}
 .cart__times-msg--error{color:var(--c-err);}
