@@ -22,7 +22,7 @@
   // Per-site look: each site's button classes and its copy of cart.css.
   var BTN = root.getAttribute('data-btn') || 'btn btn--primary';
   var BTN2 = root.getAttribute('data-btn-secondary') || 'btn btn--secondary';
-  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=4';
+  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=5';
 
   // Staff preview token: the page's inline loader takes it from #cartpreview= and strips it from
   // the address bar before analytics loads (never in the query string or a referrer).
@@ -51,7 +51,7 @@
   var times = null, timesErr = '', timesLoading = false, timesSeq = 0, reload = null, autoLeft = 0, shown = '', reveal = false;
   // The time, details and Pay sections: made once and moved into each new cart page, so what the
   // guest typed survives every redraw. tsBox holds the Turnstile widget.
-  var whenEl = null, calTitleEl = null, prevEl = null, nextEl = null, daysEl = null, timesDayEl = null, timesEl = null, formEl = null, payboxEl = null, payEl = null, sayEl = null, tsBox = null;
+  var whenEl = null, calTitleEl = null, prevEl = null, nextEl = null, daysEl = null, timesDayEl = null, timesEl = null, formEl = null, payboxEl = null, payEl = null, paySpokenEl = null, sayEl = null, tsBox = null;
   // busy: the card form is opening or a payment is under way. order: the payment attempt (checkout).
   // paying: from the card form's answer until that order's outcome is handled; the cart is locked.
   // ended: the message of an order that ended paid, held or unclear; the cart is cleared, Pay stays off.
@@ -328,10 +328,11 @@
     attrs['class'] = 'cart__chip'; attrs.type = 'button'; attrs['aria-pressed'] = on ? 'true' : 'false'; attrs.on = { click: fn };
     return el('button', attrs, kids);
   }
-  function group(label, nodes) {
-    return el('div', { class: 'cart__group', role: 'group', 'aria-label': label }, [
+  // aria: what a screen reader hears, when it needs more than the label on screen. data-n sets the columns (cart.css).
+  function group(label, nodes, aria) {
+    return el('div', { class: 'cart__group', role: 'group', 'aria-label': aria || label }, [
       el('p', { class: 'cart__label', text: label }),
-      el('div', { class: 'cart__chips' }, nodes)]);
+      el('div', { class: 'cart__chips', 'data-n': nodes.length }, nodes)]);
   }
   function togglePick(g, id) {
     var at = g.picks.indexOf(id);
@@ -347,7 +348,9 @@
   function treatsOf(line) {
     var k = kindOf(line.kind);
     if (familyOf(baseOf(k)).length < 2) return null;
-    return k.picks ? line.guests[0].picks.slice() : ['massage'];
+    if (!k.picks) return ['massage'];
+    var first = line.guests[0].picks;
+    return line.guests.every(function (g) { return g.picks.join() === first.join(); }) ? first.slice() : [];
   }
   function treatKind() {
     var n = treats.length;
@@ -398,22 +401,27 @@
     var parts = [];
 
     if (treats) {
-      var treatBox = group('Treatments for both of you', Object.keys(PART).map(function (t) {
+      var treatBox = group('Treatments for both of you (pick any)', Object.keys(PART).map(function (t) {
         return chip([partName(t)], { 'data-treat': t }, treats.indexOf(t) >= 0, function () { toggleTreat(t); });
       }));
-      treatBox.appendChild(el('p', { class: 'cart__hint cart__treat-hint', text: familyOf(baseOf(k)).map(function (o) {
-        return (o.picks ? (o.pickCount === 2 ? 'Any two' : 'All three') : 'Massage') + ' from ' + money(lowestPrice(o)) + '.';
-      }).join(' ') }));
-      if (treats.length && !treatKind()) treatBox.appendChild(el('p', { class: 'cart__hint cart__treat-note', text: 'Head spa or foot alone for two books by phone. Call us at ' + menu.phone + '.' }));
+      treatBox.appendChild(el('p', { class: 'cart__hint cart__treat-hint' }, familyOf(baseOf(k)).reduce(function (out, o, i) {
+        if (i) out.push(' ');
+        out.push(el('span', { text: (o.picks ? (o.pickCount === 2 ? 'Any two' : 'All three') : 'Massage') + ' from ' + money(lowestPrice(o)) + '.' }));
+        return out;
+      }, [])));
+      if (treats.length && !treatKind()) treatBox.appendChild(el('p', { class: 'cart__hint cart__treat-note', role: 'status', text: 'Head spa or foot alone for two books by phone. Call us at ' + menu.phone + '.' }));
       parts.push(treatBox);
     }
 
-    parts.push(group('Length', k.minutes.map(function (n) {
+    // One length is not a choice, so it is a line of text, not a button already pressed.
+    parts.push(k.minutes.length > 1 ? group('Length', k.minutes.map(function (n) {
       return chip([el('span', { class: 'cart__chip-main', text: n + ' min' }), ' ', el('span', { class: 'cart__chip-sub', text: money(k.prices[n]) })],
         { 'data-len': n }, n === m, function () { draft.minutes = n; renderSheet(); });
-    })));
+    })) : el('div', { class: 'cart__group' }, [
+      el('p', { class: 'cart__label', text: 'Length' }),
+      el('p', { class: 'cart__only', 'data-len': k.minutes[0] }, [el('span', { text: k.minutes[0] + ' min' }), ' ', el('span', { class: 'cart__addon-price', text: money(k.prices[k.minutes[0]]) })])]));
 
-    if (k.formats && k.formats.length > 1) parts.push(group('Format', k.formats.map(function (f) {
+    if (k.formats && k.formats.length > 1) parts.push(group('Treatment', k.formats.map(function (f) {
       return chip([partName(f)], { 'data-format': f }, draft.format === f, function () {
         draft.format = f;
         draft.guests.forEach(function (g) { settleStyle(draft, g); });
@@ -424,24 +432,25 @@
     if (perPerson(k)) parts.push(el('div', { class: 'cart__group cart__qty', role: 'group', 'aria-label': 'How many people' }, [
       el('p', { class: 'cart__label', text: 'How many people' }),
       el('div', { class: 'cart__qty-row' }, [
-        el('button', { type: 'button', class: 'cart__qty-minus', 'aria-label': 'One fewer person', text: '−', disabled: draft.qty <= 1,
+        el('button', { type: 'button', class: 'cart__qty-minus', 'aria-label': 'One fewer person', disabled: draft.qty <= 1,
           on: { click: function () { if (draft.qty > 1) { draft.qty--; renderSheet(); } } } }),
         el('span', { class: 'cart__qty-n', text: String(draft.qty) }),
-        el('button', { type: 'button', class: 'cart__qty-plus', 'aria-label': 'One more person', text: '+', disabled: draft.qty >= qtyMax(k),
+        el('button', { type: 'button', class: 'cart__qty-plus', 'aria-label': 'One more person', disabled: draft.qty >= qtyMax(k),
           on: { click: function () { if (draft.qty < qtyMax(k)) { draft.qty++; renderSheet(); } } } })]),
-      el('p', { class: 'cart__hint', text: 'Same choices for each person. Want different ones? Add another line.' }),
+      el('p', { class: 'cart__hint', text: 'Same choices for each person. Want different ones? Add another massage.' }),
       peopleIn(lines, editIndex) + draft.qty >= menu.limits.guests ? guestLimitEl() : null]));
 
     draft.guests.forEach(function (g, gi) {
       var who = two ? ' for guest ' + (gi + 1) : '', box = [];
       if (two) box.push(el('p', { class: 'cart__guest-label', text: 'Guest ' + (gi + 1) }));
-      if (k.picks && !k.under && k.pickCount < k.picks.length) box.push(group('Pick two' + who, k.picks.map(function (p) {
+      if (k.picks && !k.under && k.pickCount < k.picks.length) box.push(group('Pick two', k.picks.map(function (p) {
         return chip([partName(p)], { 'data-pick': p, 'data-guest': gi }, g.picks.indexOf(p) >= 0, function () { togglePick(g, p); });
-      })));
-      if (getsMassage(draft, g)) box.push(group('Massage style' + who, k.styles.map(function (s) {
-        var label = (menu.styleNames[s] || s) + (s === 'deep' && k.deepAdd && k.deepAdd[m] != null ? ' +' + money(k.deepAdd[m]) : '');
-        return chip([label], { 'data-style': s, 'data-guest': gi }, g.style === s, function () { g.style = s; renderSheet(); });
-      })));
+      }), 'Pick two' + who));
+      if (getsMassage(draft, g)) box.push(group('Massage style', k.styles.map(function (s) {
+        var name = menu.styleNames[s] || s, extra = s === 'deep' && k.deepAdd && k.deepAdd[m] != null;
+        return chip(extra ? [el('span', { class: 'cart__chip-main', text: name }), ' ', el('span', { class: 'cart__chip-sub', text: '+' + money(k.deepAdd[m]) })] : [name],
+          { 'data-style': s, 'data-guest': gi }, g.style === s, function () { g.style = s; renderSheet(); });
+      }), 'Massage style' + who));
       var opts = menu.addons.filter(function (a) { return !a.only || a.only.indexOf(draft.kind) >= 0; });
       if (opts.length) box.push(el('div', { class: 'cart__group', role: 'group', 'aria-label': 'Add-ons' + who }, [
         el('p', { class: 'cart__label', text: 'Add-ons' }),
@@ -466,7 +475,7 @@
     sheetEl.appendChild(el('div', { class: 'cart__sheet-panel' }, [
       el('div', { class: 'cart__sheet-head' }, [
         el('h3', { class: 'cart__sheet-title', text: k.name }),
-        el('button', { type: 'button', class: 'cart__sheet-close', 'aria-label': 'Close', text: '×', on: { click: function () { closeSheet(true); } } })]),
+        el('button', { type: 'button', class: 'cart__sheet-close', 'aria-label': 'Close', on: { click: function () { closeSheet(true); } } })]),
       main,
       el('div', { class: 'cart__sheet-foot' }, [go])]));
     sheetEl.appendChild(trap('end'));
@@ -612,6 +621,7 @@
   // Redraw the calendar and times in place, keeping focus on the button that had it.
   function paintWhen() {
     if (!whenEl) return;
+    whenEl.querySelector('.cart__same').hidden = peopleIn(lines, -1) < 2;
     var a = document.activeElement, key = a && whenEl.contains(a) && a.tagName === 'BUTTON' ? keyOf(a) : '';
     paintCal(today());
     // An arrow that just turned off cannot keep focus (the browser drops it to the page): keep it in the cart.
@@ -635,15 +645,16 @@
     var f = formEl && formEl.elements;
     return !!start && offered(start) && !!f && !!f.name.value.trim() && f.phone.value.replace(/\D/g, '').length >= 10;
   }
-  // "Pick a time to continue" until a time, a name and a 10-digit phone are in; then "Pay $X and book".
+  // Says what is still missing: a time, then a name and a 10-digit phone; then "Pay $X and book".
   function paintPay() {
     if (!payEl) return;
     var had = document.activeElement === payEl;
     if (ended) payEl.disabled = true; // the order ended: Pay stays off
     else {
-      var ok = ready();
+      var ok = ready(), text = ok ? 'Pay ' + money(cartTotal()) + ' and book' : start && offered(start) ? 'Add your name and phone' : 'Pick a time to continue';
       payEl.disabled = !ok || busy || paying;
-      payEl.textContent = ok ? 'Pay ' + money(cartTotal()) + ' and book' : 'Pick a time to continue';
+      payEl.textContent = text;
+      if (paySpokenEl.textContent !== text) paySpokenEl.textContent = text; // a live region: only news is read out
     }
     // A disabled button cannot keep focus (the browser drops it to the page): keep it in the cart.
     if (had && payEl.disabled && panelEl) panelEl.focus({ preventScroll: true });
@@ -657,8 +668,8 @@
   function checkoutEls() {
     if (whenEl) return [whenEl, formEl, payboxEl];
     calTitleEl = el('p', { class: 'cart__cal-title', 'aria-live': 'polite' });
-    prevEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-prev', 'aria-label': 'Previous month', text: '‹', on: { click: function () { moveMonth(-1); } } });
-    nextEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-next', 'aria-label': 'Next month', text: '›', on: { click: function () { moveMonth(1); } } });
+    prevEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-prev', 'aria-label': 'Previous month', on: { click: function () { moveMonth(-1); } } });
+    nextEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-next', 'aria-label': 'Next month', on: { click: function () { moveMonth(1); } } });
     daysEl = el('div', { class: 'cart__days', role: 'group', 'aria-label': 'Day' });
     timesDayEl = el('p', { class: 'cart__times-day' });
     timesEl = el('div', { class: 'cart__times', role: 'group', 'aria-label': 'Start times' });
@@ -685,7 +696,8 @@
     tsBox = el('div', { class: 'cart__ts' });
     sayEl = el('p', { class: 'cart__say', role: 'status', 'aria-live': 'polite' });
     payEl = el('button', { type: 'button', class: BTN + ' cart__pay', disabled: true, text: 'Pick a time to continue', on: { click: function () { pay(); } } });
-    payboxEl = el('div', { class: 'cart__paybox' }, [tsBox, sayEl, payEl, el('p', { class: 'cart__pay-note', text: 'You enter your card on Authorize.Net\'s secure form.' })]);
+    paySpokenEl = el('p', { class: 'cart__spoken', role: 'status' }); // Tab skips a disabled button, so what it says is also said here
+    payboxEl = el('div', { class: 'cart__paybox' }, [tsBox, sayEl, paySpokenEl, payEl, el('p', { class: 'cart__pay-note', text: 'You enter your card on Authorize.Net\'s secure form.' })]);
     if (window.ResizeObserver) new ResizeObserver(fitPay).observe(payboxEl); // it grows with the robot-check box, a message, the steps
     return [whenEl, formEl, payboxEl];
   }
@@ -1031,13 +1043,14 @@
     var k = kindOf(l.kind), g = l.guests[0];
     return (l.kind === 'single' && g.style ? (menu.styleNames[g.style] || g.style) + ' ' : '') + k.name + (l.qty > 1 ? ' × ' + l.qty : '');
   }
-  // What a line shows under its title. Every amount comes from priceLine (nothing is priced here);
-  // rows without an amount only say what was chosen: a couples format other than Massage (the title
+  // What a line shows under its title. Every amount comes from priceLine (nothing is priced here). With no extras
+  // the title's price is the whole story, so the first row carries no amount of its own.
+  // Rows without an amount only say what was chosen: a couples format other than Massage (the title
   // says Massage), combo picks, a guest's style (the title already names a single massage's style),
   // each in its guest's turn.
   function lineRows(line, pl) {
     var k = kindOf(line.kind), q = line.qty, xq = q > 1 ? ' × ' + q : '', two = line.guests.length > 1;
-    var rows = [{ label: pl.rows[0].label + (exact(k) ? (line.kind === 'fourhand' ? ', 2 therapists' : ', 2 guests') : xq), amount: pl.rows[0].amount }];
+    var rows = [{ label: pl.rows[0].label + (exact(k) ? (line.kind === 'fourhand' ? ', 2 therapists' : ', 2 guests') : xq), amount: pl.rows.length > 1 ? pl.rows[0].amount : null }];
     if (line.format && line.format !== 'massage') rows.push({ label: partName(line.format) });
     // A package of all three is named by its title. The Couples card's one choice for both is one row, with no guest rows of its own.
     var allThree = k.picks && k.pickCount === k.picks.length;
@@ -1079,9 +1092,9 @@
       el('button', { type: 'button', class: 'cart__line-edit', 'data-line': i, 'aria-label': 'Edit ' + name, text: 'Edit', disabled: off, on: { click: function () { openSheet(i); } } }),
       el('button', { type: 'button', class: 'cart__line-remove', 'data-line': i, 'aria-label': 'Remove ' + name, text: 'Remove', disabled: off, on: { click: function () { removeLine(i); } } })];
     if (perPerson(k)) foot.push(el('div', { class: 'cart__line-qtybox', role: 'group', 'aria-label': 'How many people' }, [
-      el('button', { type: 'button', class: 'cart__line-minus', 'data-line': i, 'aria-label': 'One fewer person', text: '−', disabled: off || l.qty <= 1, on: { click: function () { setQty(i, l.qty - 1); } } }),
+      el('button', { type: 'button', class: 'cart__line-minus', 'data-line': i, 'aria-label': 'One fewer person', disabled: off || l.qty <= 1, on: { click: function () { setQty(i, l.qty - 1); } } }),
       el('span', { class: 'cart__line-qty', text: String(l.qty) }),
-      el('button', { type: 'button', class: 'cart__line-plus', 'data-line': i, 'aria-label': 'One more person', text: '+', disabled: off || l.qty >= qtyMax(k, i), on: { click: function () { setQty(i, l.qty + 1); } } })]));
+      el('button', { type: 'button', class: 'cart__line-plus', 'data-line': i, 'aria-label': 'One more person', disabled: off || l.qty >= qtyMax(k, i), on: { click: function () { setQty(i, l.qty + 1); } } })]));
     return el('div', { class: 'cart__line', 'data-line': i }, [
       el('div', { class: 'cart__line-head' }, [el('h3', { class: 'cart__line-title', text: name }), ' ', el('span', { class: 'cart__line-total', text: money(pl.total) })]),
       el('div', { class: 'cart__rows' }, lineRows(l, pl).map(rowEl)),
@@ -1113,7 +1126,7 @@
         trap('start'),
         el('div', { class: 'cart__panel-head' }, [
           el('h2', { class: 'cart__panel-title', text: 'Your cart' }),
-          el('button', { type: 'button', class: 'cart__panel-close', 'aria-label': 'Close cart', text: '×', on: { click: function () { closeCart(); } } })]),
+          el('button', { type: 'button', class: 'cart__panel-close', 'aria-label': 'Close cart', on: { click: function () { closeCart(); } } })]),
         el('div', { class: 'cart__panel-body' }, [orderEl].concat(checkoutEls())),
         trap('end')]);
       place(panelEl);
@@ -1125,9 +1138,7 @@
       el('div', { class: 'cart__lines' }, lines.map(lineEl)),
       el('button', { type: 'button', class: 'cart__more', text: 'Add another massage', disabled: locked(), on: { click: function () { closeCart(true); } } })
     ].concat(limitEls(), [
-      el('div', { class: 'cart__sum' }, [
-        sumRow('cart__subtotal', 'Subtotal (' + peopleLabel(peopleIn(lines, -1)) + ')', cartTotal()),
-        sumRow('cart__total', 'Total today', cartTotal())])
+      el('div', { class: 'cart__sum' }, [sumRow('cart__total', 'Total today (' + peopleLabel(peopleIn(lines, -1)) + ')', cartTotal())])
     ]).forEach(function (n) { if (n) orderEl.appendChild(n); });
     whenEl.hidden = formEl.hidden = !!ended;
     panelEl.querySelector('.cart__panel-close').disabled = paying; // the progress stays in view until the order is settled
