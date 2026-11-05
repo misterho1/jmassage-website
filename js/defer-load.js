@@ -46,6 +46,7 @@
 
   // Chat: first interaction loads it right away.
   ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (evt) {
+    if (evt === 'scroll' && window.__deepLinkScroll) return; // a /book deep link scrolls itself; not the visitor
     window.addEventListener(evt, loadChat, { once: true, passive: true });
   });
 
