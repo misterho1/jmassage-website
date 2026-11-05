@@ -116,6 +116,7 @@
           .book-frame{position:relative;max-width:1080px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);box-shadow:0 28px 70px -34px rgba(20,12,4,.32);overflow:hidden;}
           .book-frame__loader{position:absolute;inset:0;z-index:2;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1rem;background:var(--surface);color:var(--ink-muted);font-family:var(--type-ui);font-size:.85rem;letter-spacing:.04em;}
           .book-frame.is-loading .book-frame__loader{display:flex;}
+          .book-frame.is-loading #ghl-booking-jmassage{visibility:hidden!important;}
           .book-frame__loading-text{letter-spacing:.04em;}
           .book-frame__spinner{width:2rem;height:2rem;border-radius:50%;border:2px solid var(--brand-orange-soft);border-top-color:var(--brand-orange);animation:book-spin .7s linear infinite;}
           @keyframes book-spin{to{transform:rotate(360deg);}}
@@ -305,11 +306,14 @@
         var revealMo=null,revealTimer=0;
         function stopRevealWait(){if(revealMo){revealMo.disconnect();revealMo=null;}clearTimeout(revealTimer);}
         function clearOverlay(){stopRevealWait();if(wrap){wrap.classList.remove('is-loading');}}
+        // form_embed.js reveals the scheduler at about 105 px, then it grows to full size.
+        // Waiting for that keeps the growth behind the overlay (layout shift).
+        function calendarReady(){return frame.style.visibility!=='hidden'&&parseInt(frame.style.height,10)>=300;}
         if(frame){frame.addEventListener('load',function(){
           if(!calendarLoaded) return;
           stopRevealWait();
-          if(frame.style.visibility!=='hidden'||!window.MutationObserver){clearOverlay();return;}
-          revealMo=new MutationObserver(function(){if(frame.style.visibility!=='hidden'){clearOverlay();}});
+          if(calendarReady()||!window.MutationObserver){clearOverlay();return;}
+          revealMo=new MutationObserver(function(){if(calendarReady()){clearOverlay();}});
           revealMo.observe(frame,{attributes:true,attributeFilter:['style']});
           revealTimer=setTimeout(clearOverlay,4000);
         });}
