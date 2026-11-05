@@ -32,7 +32,7 @@
 
   // The cart. A line is { kind, minutes, format, qty, guests }; a guest is { style, addons: [], picks }.
   // Kinds booked per person (menu guests 1-8): ONE template guest, and qty people share its choices.
-  // Couples, Couples Spa Day Combo and 4-Hand: qty 1 and exactly guests.min guests.
+  // Couples (at any number of treatments) and 4-Hand: qty 1 and exactly guests.min guests.
   var menu = null, lines = [];
   // The Add panel: `draft` is the line being built (or edited), `editIndex` its place in `lines`
   // (-1 while adding). Edits stay in the draft until Save changes.
@@ -94,7 +94,7 @@
   // ---------- cart state and prices ----------
   function exact(k) { return k.guests.min === k.guests.max; }
   // Only a guest who gets a massage picks a style and can pay the deep surcharge: a styled kind,
-  // couples in the massage format, or a combo with Massage among its two picks.
+  // couples in the massage format, or a spa package with Massage among its picks.
   function getsMassage(line, g) {
     var k = kindOf(line.kind);
     if (!k || !k.styles) return false;
@@ -118,7 +118,7 @@
   function sumLines(ls) { return ls.reduce(function (s, l) { return s + priceLine(l).total; }, 0); }
   function cartTotal() { return sumLines(lines); }
   // The cart exactly as the Worker reads it, and the only shape ever sent: each guest repeated qty
-  // times, a style only for a guest who gets a massage, picks only on the combo kinds.
+  // times, a style only for a guest who gets a massage, picks only on the spa packages.
   function toWorker(ls) {
     return { lines: (ls || lines).map(function (l) {
       var k = kindOf(l.kind), guests = [];
@@ -150,7 +150,7 @@
         if (a.group) { if (groups[a.group]) return false; groups[a.group] = true; }
       }
       var p = g.picks;
-      if (k.picks && !(Array.isArray(p) && p.length === 2 && p[0] !== p[1] && k.picks.indexOf(p[0]) >= 0 && k.picks.indexOf(p[1]) >= 0)) return false;
+      if (k.picks && !(Array.isArray(p) && p.length === k.pickCount && p.every(function (x, i) { return k.picks.indexOf(x) >= 0 && p.indexOf(x) === i; }))) return false;
       return !getsMassage(l, g) || k.styles.indexOf(g.style) >= 0;
     });
   }
@@ -166,11 +166,11 @@
     if (!getsMassage(line, g)) g.style = null;
     else if (!g.style || k.styles.indexOf(g.style) < 0) g.style = k.styles[0];
   }
-  // A new line: shortest length, first style, one person. Combo picks start empty.
+  // A new line: shortest length, first style, one person. Picks start empty, or all of them on a package with no choice.
   function newLine(k) {
     var line = { kind: k.kind, minutes: Math.min.apply(null, k.minutes), format: k.formats && k.formats.length > 1 ? k.formats[0] : null, qty: 1, guests: [] };
     for (var i = 0; i < k.guests.min; i++) {
-      var g = { style: null, addons: [], picks: k.picks ? [] : null };
+      var g = { style: null, addons: [], picks: k.picks ? (k.pickCount === k.picks.length ? k.picks.slice() : []) : null };
       settleStyle(line, g);
       line.guests.push(g);
     }
@@ -187,6 +187,15 @@
     for (var m in k.prices) p.push(k.prices[m]);
     return Math.min.apply(null, p);
   }
+  // The card a kind is shown on, and every kind chosen on that card (Couples: massage, any two, all three).
+  function baseOf(k) { return k.under ? kindOf(k.under) : k; }
+  function familyOf(k) { return menu.kinds.filter(function (o) { return o.kind === k.kind || o.under === k.kind; }); }
+  function cardMinutes(k) {
+    var all = [];
+    familyOf(k).forEach(function (o) { o.minutes.forEach(function (m) { if (all.indexOf(m) < 0) all.push(m); }); });
+    return all.sort(function (a, b) { return a - b; });
+  }
+  function cardFrom(k) { return Math.min.apply(null, familyOf(k).map(lowestPrice)); }
 
   // ---------- limits (menu.limits: 6 lines, 8 guests; quantity and both couples guests count) ----------
   // People in the cart, leaving out the line at index `skip` (-1 leaves none out).
@@ -284,11 +293,11 @@
     if (locked()) return;
     if (typeof which === 'number') {
       if (!lines[which]) return;
-      draft = cloneLine(lines[which]); editIndex = which;
+      draft = cloneLine(lines[which]); editIndex = which; treats = treatsOf(draft);
     } else {
       var k = kindOf(which);
       if (!k || !canAdd(k)) return;
-      draft = newLine(k); editIndex = -1;
+      draft = newLine(k); editIndex = -1; treats = treatsOf(draft);
     }
     if (!sheetEl || !sheetEl.parentNode) {
       sheetFrom = typeof which === 'number' ? '.cart__panel .cart__line-edit[data-line="' + which + '"]' : cardAddSel(which);
@@ -302,13 +311,13 @@
   // back: give focus to the control that opened the panel (Escape, Close, a tap outside the panel).
   function closeSheet(back) {
     if (sheetEl && sheetEl.parentNode) sheetEl.parentNode.removeChild(sheetEl);
-    sheetEl = null; draft = null; editIndex = -1;
+    sheetEl = null; draft = null; editIndex = -1; treats = null;
     syncLock();
     if (back === true) focusBack(sheetFrom);
   }
   // Add to cart pushes the draft, Save changes replaces the line it came from. Either way the cart opens.
   function addDraft() {
-    if (locked() || !draft || !validLine(draft) || !fits(draft, editIndex)) return;
+    if (locked() || !draft || !draftReady() || !fits(draft, editIndex)) return;
     if (editIndex >= 0) lines[editIndex] = draft; else lines.push(draft);
     closeSheet();
     cartChanged();
@@ -330,6 +339,40 @@
     else { if (g.picks.length >= 2) g.picks.shift(); g.picks.push(id); }
     settleStyle(draft, g);
     renderSheet();
+  }
+  // The Couples card: one choice of treatments for both guests. How many decides the kind: massage alone,
+  // any two, or all three. treats: what is pressed now, null on a card without this choice. Head spa or
+  // foot alone has no kind here (it books by phone), so Add stays off until the choice has one.
+  var treats = null;
+  function treatsOf(line) {
+    var k = kindOf(line.kind);
+    if (familyOf(baseOf(k)).length < 2) return null;
+    return k.picks ? line.guests[0].picks.slice() : ['massage'];
+  }
+  function treatKind() {
+    var n = treats.length;
+    return familyOf(baseOf(kindOf(draft.kind))).filter(function (o) { return o.picks ? o.pickCount === n : n === 1 && treats[0] === 'massage'; })[0] || null;
+  }
+  function draftReady() { return validLine(draft) && (!treats || !!treatKind()); }
+  function toggleTreat(t) {
+    var at = treats.indexOf(t);
+    if (at >= 0) treats.splice(at, 1); else treats.push(t);
+    var o = treatKind();
+    if (o) moveDraft(o);
+    renderSheet();
+  }
+  // Put the draft on another kind of the card: the nearest length it offers, the add-ons it allows, a style only with massage.
+  function moveDraft(o) {
+    if (o.minutes.indexOf(draft.minutes) < 0) {
+      var up = o.minutes.filter(function (n) { return n >= draft.minutes; });
+      draft.minutes = up.length ? up[0] : o.minutes[o.minutes.length - 1];
+    }
+    draft.kind = o.kind;
+    draft.guests.forEach(function (g) {
+      g.picks = o.picks ? o.picks.filter(function (p) { return treats.indexOf(p) >= 0; }) : null;
+      g.addons = g.addons.filter(function (id) { var a = addonOf(id); return a && (!a.only || a.only.indexOf(o.kind) >= 0); });
+      settleStyle(draft, g);
+    });
   }
   // Within one add-on group (the foot add-ons) turning one on turns the other off.
   function toggleAddon(g, a) {
@@ -353,6 +396,17 @@
     var oldMain = sheetEl.querySelector('.cart__sheet-main'), scroll = oldMain ? oldMain.scrollTop : 0;
     var active = document.activeElement, key = active && sheetEl.contains(active) && active.tagName === 'BUTTON' ? keyOf(active) : '';
     var parts = [];
+
+    if (treats) {
+      var treatBox = group('Treatments for both of you', Object.keys(PART).map(function (t) {
+        return chip([partName(t)], { 'data-treat': t }, treats.indexOf(t) >= 0, function () { toggleTreat(t); });
+      }));
+      treatBox.appendChild(el('p', { class: 'cart__hint cart__treat-hint', text: familyOf(baseOf(k)).map(function (o) {
+        return (o.picks ? (o.pickCount === 2 ? 'Any two' : 'All three') : 'Massage') + ' from ' + money(lowestPrice(o)) + '.';
+      }).join(' ') }));
+      if (treats.length && !treatKind()) treatBox.appendChild(el('p', { class: 'cart__hint cart__treat-note', text: 'Head spa or foot alone for two books by phone. Call us at ' + menu.phone + '.' }));
+      parts.push(treatBox);
+    }
 
     parts.push(group('Length', k.minutes.map(function (n) {
       return chip([el('span', { class: 'cart__chip-main', text: n + ' min' }), ' ', el('span', { class: 'cart__chip-sub', text: money(k.prices[n]) })],
@@ -381,7 +435,7 @@
     draft.guests.forEach(function (g, gi) {
       var who = two ? ' for guest ' + (gi + 1) : '', box = [];
       if (two) box.push(el('p', { class: 'cart__guest-label', text: 'Guest ' + (gi + 1) }));
-      if (k.picks) box.push(group('Pick two' + who, k.picks.map(function (p) {
+      if (k.picks && !k.under && k.pickCount < k.picks.length) box.push(group('Pick two' + who, k.picks.map(function (p) {
         return chip([partName(p)], { 'data-pick': p, 'data-guest': gi }, g.picks.indexOf(p) >= 0, function () { togglePick(g, p); });
       })));
       if (getsMassage(draft, g)) box.push(group('Massage style' + who, k.styles.map(function (s) {
@@ -399,9 +453,9 @@
       parts.push(el('div', { class: 'cart__guest' }, box));
     });
 
-    var ready = validLine(draft);
+    var ready = draftReady();
     var go = el('button', { type: 'button', class: BTN + ' cart__sheet-go', disabled: !ready, on: { click: addDraft },
-      text: ready ? (edit ? 'Save changes' : 'Add to cart') + ' · ' + money(priceLine(draft).total) : 'Pick two' });
+      text: ready ? (edit ? 'Save changes' : 'Add to cart') + ' · ' + money(priceLine(draft).total) : treats ? 'Pick a treatment' : 'Pick two' });
 
     var main = el('div', { class: 'cart__sheet-main' }, parts);
     sheetEl.setAttribute('aria-label', k.name);
@@ -943,12 +997,12 @@
   // The root keeps its children in this order: cards, cart bar, cart page, Add panel.
   function place(node) { root.insertBefore(node, sheetEl && sheetEl.parentNode === root ? sheetEl : null); }
   function cards() {
-    return el('div', { class: 'cart__cards' }, menu.kinds.map(function (k) {
+    return el('div', { class: 'cart__cards' }, menu.kinds.filter(function (k) { return !k.under; }).map(function (k) {
       return el('div', { class: 'cart__card', 'data-kind': k.kind }, [
         el('div', { class: 'cart__card-info' }, [
           el('h3', { class: 'cart__card-name', text: k.name }),
-          el('p', { class: 'cart__card-sub', text: k.minutes.join(' · ') + ' min' }),
-          el('p', { class: 'cart__card-from', text: 'From ' + money(lowestPrice(k)) })]),
+          el('p', { class: 'cart__card-sub', text: cardMinutes(k).join(' · ') + ' min' }),
+          el('p', { class: 'cart__card-from', text: 'From ' + money(cardFrom(k)) })]),
         el('button', { type: 'button', class: BTN + ' cart__card-add', 'aria-label': 'Add ' + k.name, text: 'Add', disabled: locked() || !canAdd(k), on: { click: function () { openSheet(k.kind); } } })]);
     }));
   }
@@ -985,9 +1039,13 @@
     var k = kindOf(line.kind), q = line.qty, xq = q > 1 ? ' × ' + q : '', two = line.guests.length > 1;
     var rows = [{ label: pl.rows[0].label + (exact(k) ? (line.kind === 'fourhand' ? ', 2 therapists' : ', 2 guests') : xq), amount: pl.rows[0].amount }];
     if (line.format && line.format !== 'massage') rows.push({ label: partName(line.format) });
+    // A package of all three is named by its title. The Couples card's one choice for both is one row, with no guest rows of its own.
+    var allThree = k.picks && k.pickCount === k.picks.length;
+    var shared = !allThree && k.under && line.guests.every(function (g) { return g.picks.join() === line.guests[0].picks.join(); });
+    if (shared) rows.push({ label: line.guests[0].picks.map(partName).join(' + ') });
     line.guests.forEach(function (g, i) {
-      var who = two ? 'Guest ' + (i + 1) + ' · ' : '', said = false;
-      if (g.picks && g.picks.length) { rows.push({ label: who + g.picks.map(partName).join(' + ') }); said = true; }
+      var who = two ? 'Guest ' + (i + 1) + ' · ' : '', said = shared || allThree;
+      if (!said && g.picks && g.picks.length) { rows.push({ label: who + g.picks.map(partName).join(' + ') }); said = true; }
       if (getsMassage(line, g)) {
         if (g.style === 'deep') said = true;
         else if (two || line.kind !== 'single') { rows.push({ label: who + (menu.styleNames[g.style] || g.style) }); said = true; }
