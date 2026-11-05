@@ -22,7 +22,7 @@
   // Per-site look: each site's button classes and its copy of cart.css.
   var BTN = root.getAttribute('data-btn') || 'btn btn--primary';
   var BTN2 = root.getAttribute('data-btn-secondary') || 'btn btn--secondary';
-  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=4';
+  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=5';
 
   // Staff preview token: the page's inline loader takes it from #cartpreview= and strips it from
   // the address bar before analytics loads (never in the query string or a referrer).
@@ -32,7 +32,7 @@
 
   // The cart. A line is { kind, minutes, format, qty, guests }; a guest is { style, addons: [], picks }.
   // Kinds booked per person (menu guests 1-8): ONE template guest, and qty people share its choices.
-  // Couples, Couples Spa Day Combo and 4-Hand: qty 1 and exactly guests.min guests.
+  // Couples (at any number of treatments) and 4-Hand: qty 1 and exactly guests.min guests.
   var menu = null, lines = [];
   // The Add panel: `draft` is the line being built (or edited), `editIndex` its place in `lines`
   // (-1 while adding). Edits stay in the draft until Save changes.
@@ -51,7 +51,7 @@
   var times = null, timesErr = '', timesLoading = false, timesSeq = 0, reload = null, autoLeft = 0, shown = '', reveal = false;
   // The time, details and Pay sections: made once and moved into each new cart page, so what the
   // guest typed survives every redraw. tsBox holds the Turnstile widget.
-  var whenEl = null, calTitleEl = null, prevEl = null, nextEl = null, daysEl = null, timesDayEl = null, timesEl = null, formEl = null, payboxEl = null, payEl = null, sayEl = null, tsBox = null;
+  var whenEl = null, calTitleEl = null, prevEl = null, nextEl = null, daysEl = null, timesDayEl = null, timesEl = null, formEl = null, payboxEl = null, payEl = null, paySpokenEl = null, sayEl = null, tsBox = null;
   // busy: the card form is opening or a payment is under way. order: the payment attempt (checkout).
   // paying: from the card form's answer until that order's outcome is handled; the cart is locked.
   // ended: the message of an order that ended paid, held or unclear; the cart is cleared, Pay stays off.
@@ -94,7 +94,7 @@
   // ---------- cart state and prices ----------
   function exact(k) { return k.guests.min === k.guests.max; }
   // Only a guest who gets a massage picks a style and can pay the deep surcharge: a styled kind,
-  // couples in the massage format, or a combo with Massage among its two picks.
+  // couples in the massage format, or a spa package with Massage among its picks.
   function getsMassage(line, g) {
     var k = kindOf(line.kind);
     if (!k || !k.styles) return false;
@@ -118,7 +118,7 @@
   function sumLines(ls) { return ls.reduce(function (s, l) { return s + priceLine(l).total; }, 0); }
   function cartTotal() { return sumLines(lines); }
   // The cart exactly as the Worker reads it, and the only shape ever sent: each guest repeated qty
-  // times, a style only for a guest who gets a massage, picks only on the combo kinds.
+  // times, a style only for a guest who gets a massage, picks only on the spa packages.
   function toWorker(ls) {
     return { lines: (ls || lines).map(function (l) {
       var k = kindOf(l.kind), guests = [];
@@ -150,7 +150,7 @@
         if (a.group) { if (groups[a.group]) return false; groups[a.group] = true; }
       }
       var p = g.picks;
-      if (k.picks && !(Array.isArray(p) && p.length === 2 && p[0] !== p[1] && k.picks.indexOf(p[0]) >= 0 && k.picks.indexOf(p[1]) >= 0)) return false;
+      if (k.picks && !(Array.isArray(p) && p.length === k.pickCount && p.every(function (x, i) { return k.picks.indexOf(x) >= 0 && p.indexOf(x) === i; }))) return false;
       return !getsMassage(l, g) || k.styles.indexOf(g.style) >= 0;
     });
   }
@@ -166,11 +166,11 @@
     if (!getsMassage(line, g)) g.style = null;
     else if (!g.style || k.styles.indexOf(g.style) < 0) g.style = k.styles[0];
   }
-  // A new line: shortest length, first style, one person. Combo picks start empty.
+  // A new line: shortest length, first style, one person. Picks start empty, or all of them on a package with no choice.
   function newLine(k) {
     var line = { kind: k.kind, minutes: Math.min.apply(null, k.minutes), format: k.formats && k.formats.length > 1 ? k.formats[0] : null, qty: 1, guests: [] };
     for (var i = 0; i < k.guests.min; i++) {
-      var g = { style: null, addons: [], picks: k.picks ? [] : null };
+      var g = { style: null, addons: [], picks: k.picks ? (k.pickCount === k.picks.length ? k.picks.slice() : []) : null };
       settleStyle(line, g);
       line.guests.push(g);
     }
@@ -187,6 +187,15 @@
     for (var m in k.prices) p.push(k.prices[m]);
     return Math.min.apply(null, p);
   }
+  // The card a kind is shown on, and every kind chosen on that card (Couples: massage, any two, all three).
+  function baseOf(k) { return k.under ? kindOf(k.under) : k; }
+  function familyOf(k) { return menu.kinds.filter(function (o) { return o.kind === k.kind || o.under === k.kind; }); }
+  function cardMinutes(k) {
+    var all = [];
+    familyOf(k).forEach(function (o) { o.minutes.forEach(function (m) { if (all.indexOf(m) < 0) all.push(m); }); });
+    return all.sort(function (a, b) { return a - b; });
+  }
+  function cardFrom(k) { return Math.min.apply(null, familyOf(k).map(lowestPrice)); }
 
   // ---------- limits (menu.limits: 6 lines, 8 guests; quantity and both couples guests count) ----------
   // People in the cart, leaving out the line at index `skip` (-1 leaves none out).
@@ -284,11 +293,11 @@
     if (locked()) return;
     if (typeof which === 'number') {
       if (!lines[which]) return;
-      draft = cloneLine(lines[which]); editIndex = which;
+      draft = cloneLine(lines[which]); editIndex = which; treats = treatsOf(draft);
     } else {
       var k = kindOf(which);
       if (!k || !canAdd(k)) return;
-      draft = newLine(k); editIndex = -1;
+      draft = newLine(k); editIndex = -1; treats = treatsOf(draft);
     }
     if (!sheetEl || !sheetEl.parentNode) {
       sheetFrom = typeof which === 'number' ? '.cart__panel .cart__line-edit[data-line="' + which + '"]' : cardAddSel(which);
@@ -302,13 +311,13 @@
   // back: give focus to the control that opened the panel (Escape, Close, a tap outside the panel).
   function closeSheet(back) {
     if (sheetEl && sheetEl.parentNode) sheetEl.parentNode.removeChild(sheetEl);
-    sheetEl = null; draft = null; editIndex = -1;
+    sheetEl = null; draft = null; editIndex = -1; treats = null;
     syncLock();
     if (back === true) focusBack(sheetFrom);
   }
   // Add to cart pushes the draft, Save changes replaces the line it came from. Either way the cart opens.
   function addDraft() {
-    if (locked() || !draft || !validLine(draft) || !fits(draft, editIndex)) return;
+    if (locked() || !draft || !draftReady() || !fits(draft, editIndex)) return;
     if (editIndex >= 0) lines[editIndex] = draft; else lines.push(draft);
     closeSheet();
     cartChanged();
@@ -319,10 +328,11 @@
     attrs['class'] = 'cart__chip'; attrs.type = 'button'; attrs['aria-pressed'] = on ? 'true' : 'false'; attrs.on = { click: fn };
     return el('button', attrs, kids);
   }
-  function group(label, nodes) {
-    return el('div', { class: 'cart__group', role: 'group', 'aria-label': label }, [
+  // aria: what a screen reader hears, when it needs more than the label on screen. data-n sets the columns (cart.css).
+  function group(label, nodes, aria) {
+    return el('div', { class: 'cart__group', role: 'group', 'aria-label': aria || label }, [
       el('p', { class: 'cart__label', text: label }),
-      el('div', { class: 'cart__chips' }, nodes)]);
+      el('div', { class: 'cart__chips', 'data-n': nodes.length }, nodes)]);
   }
   function togglePick(g, id) {
     var at = g.picks.indexOf(id);
@@ -330,6 +340,42 @@
     else { if (g.picks.length >= 2) g.picks.shift(); g.picks.push(id); }
     settleStyle(draft, g);
     renderSheet();
+  }
+  // The Couples card: one choice of treatments for both guests. How many decides the kind: massage alone,
+  // any two, or all three. treats: what is pressed now, null on a card without this choice. Head spa or
+  // foot alone has no kind here (it books by phone), so Add stays off until the choice has one.
+  var treats = null;
+  function treatsOf(line) {
+    var k = kindOf(line.kind);
+    if (familyOf(baseOf(k)).length < 2) return null;
+    if (!k.picks) return ['massage'];
+    var first = line.guests[0].picks;
+    return line.guests.every(function (g) { return g.picks.join() === first.join(); }) ? first.slice() : [];
+  }
+  function treatKind() {
+    var n = treats.length;
+    return familyOf(baseOf(kindOf(draft.kind))).filter(function (o) { return o.picks ? o.pickCount === n : n === 1 && treats[0] === 'massage'; })[0] || null;
+  }
+  function draftReady() { return validLine(draft) && (!treats || !!treatKind()); }
+  function toggleTreat(t) {
+    var at = treats.indexOf(t);
+    if (at >= 0) treats.splice(at, 1); else treats.push(t);
+    var o = treatKind();
+    if (o) moveDraft(o);
+    renderSheet();
+  }
+  // Put the draft on another kind of the card: the nearest length it offers, the add-ons it allows, a style only with massage.
+  function moveDraft(o) {
+    if (o.minutes.indexOf(draft.minutes) < 0) {
+      var up = o.minutes.filter(function (n) { return n >= draft.minutes; });
+      draft.minutes = up.length ? up[0] : o.minutes[o.minutes.length - 1];
+    }
+    draft.kind = o.kind;
+    draft.guests.forEach(function (g) {
+      g.picks = o.picks ? o.picks.filter(function (p) { return treats.indexOf(p) >= 0; }) : null;
+      g.addons = g.addons.filter(function (id) { var a = addonOf(id); return a && (!a.only || a.only.indexOf(o.kind) >= 0); });
+      settleStyle(draft, g);
+    });
   }
   // Within one add-on group (the foot add-ons) turning one on turns the other off.
   function toggleAddon(g, a) {
@@ -354,12 +400,28 @@
     var active = document.activeElement, key = active && sheetEl.contains(active) && active.tagName === 'BUTTON' ? keyOf(active) : '';
     var parts = [];
 
-    parts.push(group('Length', k.minutes.map(function (n) {
+    if (treats) {
+      var treatBox = group('Treatments for both of you (pick any)', Object.keys(PART).map(function (t) {
+        return chip([partName(t)], { 'data-treat': t }, treats.indexOf(t) >= 0, function () { toggleTreat(t); });
+      }));
+      treatBox.appendChild(el('p', { class: 'cart__hint cart__treat-hint' }, familyOf(baseOf(k)).reduce(function (out, o, i) {
+        if (i) out.push(' ');
+        out.push(el('span', { text: (o.picks ? (o.pickCount === 2 ? 'Any two' : 'All three') : 'Massage') + ' from ' + money(lowestPrice(o)) + '.' }));
+        return out;
+      }, [])));
+      if (treats.length && !treatKind()) treatBox.appendChild(el('p', { class: 'cart__hint cart__treat-note', role: 'status', text: 'Head spa or foot alone for two books by phone. Call us at ' + menu.phone + '.' }));
+      parts.push(treatBox);
+    }
+
+    // One length is not a choice, so it is a line of text, not a button already pressed.
+    parts.push(k.minutes.length > 1 ? group('Length', k.minutes.map(function (n) {
       return chip([el('span', { class: 'cart__chip-main', text: n + ' min' }), ' ', el('span', { class: 'cart__chip-sub', text: money(k.prices[n]) })],
         { 'data-len': n }, n === m, function () { draft.minutes = n; renderSheet(); });
-    })));
+    })) : el('div', { class: 'cart__group' }, [
+      el('p', { class: 'cart__label', text: 'Length' }),
+      el('p', { class: 'cart__only', 'data-len': k.minutes[0] }, [el('span', { text: k.minutes[0] + ' min' }), ' ', el('span', { class: 'cart__addon-price', text: money(k.prices[k.minutes[0]]) })])]));
 
-    if (k.formats && k.formats.length > 1) parts.push(group('Format', k.formats.map(function (f) {
+    if (k.formats && k.formats.length > 1) parts.push(group('Treatment', k.formats.map(function (f) {
       return chip([partName(f)], { 'data-format': f }, draft.format === f, function () {
         draft.format = f;
         draft.guests.forEach(function (g) { settleStyle(draft, g); });
@@ -370,24 +432,25 @@
     if (perPerson(k)) parts.push(el('div', { class: 'cart__group cart__qty', role: 'group', 'aria-label': 'How many people' }, [
       el('p', { class: 'cart__label', text: 'How many people' }),
       el('div', { class: 'cart__qty-row' }, [
-        el('button', { type: 'button', class: 'cart__qty-minus', 'aria-label': 'One fewer person', text: '−', disabled: draft.qty <= 1,
+        el('button', { type: 'button', class: 'cart__qty-minus', 'aria-label': 'One fewer person', disabled: draft.qty <= 1,
           on: { click: function () { if (draft.qty > 1) { draft.qty--; renderSheet(); } } } }),
         el('span', { class: 'cart__qty-n', text: String(draft.qty) }),
-        el('button', { type: 'button', class: 'cart__qty-plus', 'aria-label': 'One more person', text: '+', disabled: draft.qty >= qtyMax(k),
+        el('button', { type: 'button', class: 'cart__qty-plus', 'aria-label': 'One more person', disabled: draft.qty >= qtyMax(k),
           on: { click: function () { if (draft.qty < qtyMax(k)) { draft.qty++; renderSheet(); } } } })]),
-      el('p', { class: 'cart__hint', text: 'Same choices for each person. Want different ones? Add another line.' }),
+      el('p', { class: 'cart__hint', text: 'Same choices for each person. Want different ones? Add another massage.' }),
       peopleIn(lines, editIndex) + draft.qty >= menu.limits.guests ? guestLimitEl() : null]));
 
     draft.guests.forEach(function (g, gi) {
       var who = two ? ' for guest ' + (gi + 1) : '', box = [];
       if (two) box.push(el('p', { class: 'cart__guest-label', text: 'Guest ' + (gi + 1) }));
-      if (k.picks) box.push(group('Pick two' + who, k.picks.map(function (p) {
+      if (k.picks && !k.under && k.pickCount < k.picks.length) box.push(group('Pick two', k.picks.map(function (p) {
         return chip([partName(p)], { 'data-pick': p, 'data-guest': gi }, g.picks.indexOf(p) >= 0, function () { togglePick(g, p); });
-      })));
-      if (getsMassage(draft, g)) box.push(group('Massage style' + who, k.styles.map(function (s) {
-        var label = (menu.styleNames[s] || s) + (s === 'deep' && k.deepAdd && k.deepAdd[m] != null ? ' +' + money(k.deepAdd[m]) : '');
-        return chip([label], { 'data-style': s, 'data-guest': gi }, g.style === s, function () { g.style = s; renderSheet(); });
-      })));
+      }), 'Pick two' + who));
+      if (getsMassage(draft, g)) box.push(group('Massage style', k.styles.map(function (s) {
+        var name = menu.styleNames[s] || s, extra = s === 'deep' && k.deepAdd && k.deepAdd[m] != null;
+        return chip(extra ? [el('span', { class: 'cart__chip-main', text: name }), ' ', el('span', { class: 'cart__chip-sub', text: '+' + money(k.deepAdd[m]) })] : [name],
+          { 'data-style': s, 'data-guest': gi }, g.style === s, function () { g.style = s; renderSheet(); });
+      }), 'Massage style' + who));
       var opts = menu.addons.filter(function (a) { return !a.only || a.only.indexOf(draft.kind) >= 0; });
       if (opts.length) box.push(el('div', { class: 'cart__group', role: 'group', 'aria-label': 'Add-ons' + who }, [
         el('p', { class: 'cart__label', text: 'Add-ons' }),
@@ -399,9 +462,9 @@
       parts.push(el('div', { class: 'cart__guest' }, box));
     });
 
-    var ready = validLine(draft);
+    var ready = draftReady();
     var go = el('button', { type: 'button', class: BTN + ' cart__sheet-go', disabled: !ready, on: { click: addDraft },
-      text: ready ? (edit ? 'Save changes' : 'Add to cart') + ' · ' + money(priceLine(draft).total) : 'Pick two' });
+      text: ready ? (edit ? 'Save changes' : 'Add to cart') + ' · ' + money(priceLine(draft).total) : treats ? 'Pick a treatment' : 'Pick two' });
 
     var main = el('div', { class: 'cart__sheet-main' }, parts);
     sheetEl.setAttribute('aria-label', k.name);
@@ -412,7 +475,7 @@
     sheetEl.appendChild(el('div', { class: 'cart__sheet-panel' }, [
       el('div', { class: 'cart__sheet-head' }, [
         el('h3', { class: 'cart__sheet-title', text: k.name }),
-        el('button', { type: 'button', class: 'cart__sheet-close', 'aria-label': 'Close', text: '×', on: { click: function () { closeSheet(true); } } })]),
+        el('button', { type: 'button', class: 'cart__sheet-close', 'aria-label': 'Close', on: { click: function () { closeSheet(true); } } })]),
       main,
       el('div', { class: 'cart__sheet-foot' }, [go])]));
     sheetEl.appendChild(trap('end'));
@@ -558,6 +621,7 @@
   // Redraw the calendar and times in place, keeping focus on the button that had it.
   function paintWhen() {
     if (!whenEl) return;
+    whenEl.querySelector('.cart__same').hidden = peopleIn(lines, -1) < 2;
     var a = document.activeElement, key = a && whenEl.contains(a) && a.tagName === 'BUTTON' ? keyOf(a) : '';
     paintCal(today());
     // An arrow that just turned off cannot keep focus (the browser drops it to the page): keep it in the cart.
@@ -581,15 +645,16 @@
     var f = formEl && formEl.elements;
     return !!start && offered(start) && !!f && !!f.name.value.trim() && f.phone.value.replace(/\D/g, '').length >= 10;
   }
-  // "Pick a time to continue" until a time, a name and a 10-digit phone are in; then "Pay $X and book".
+  // Says what is still missing: a time, then a name and a 10-digit phone; then "Pay $X and book".
   function paintPay() {
     if (!payEl) return;
     var had = document.activeElement === payEl;
     if (ended) payEl.disabled = true; // the order ended: Pay stays off
     else {
-      var ok = ready();
+      var ok = ready(), text = ok ? 'Pay ' + money(cartTotal()) + ' and book' : start && offered(start) ? 'Add your name and phone' : 'Pick a time to continue';
       payEl.disabled = !ok || busy || paying;
-      payEl.textContent = ok ? 'Pay ' + money(cartTotal()) + ' and book' : 'Pick a time to continue';
+      payEl.textContent = text;
+      if (paySpokenEl.textContent !== text) paySpokenEl.textContent = text; // a live region: only news is read out
     }
     // A disabled button cannot keep focus (the browser drops it to the page): keep it in the cart.
     if (had && payEl.disabled && panelEl) panelEl.focus({ preventScroll: true });
@@ -603,8 +668,8 @@
   function checkoutEls() {
     if (whenEl) return [whenEl, formEl, payboxEl];
     calTitleEl = el('p', { class: 'cart__cal-title', 'aria-live': 'polite' });
-    prevEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-prev', 'aria-label': 'Previous month', text: '‹', on: { click: function () { moveMonth(-1); } } });
-    nextEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-next', 'aria-label': 'Next month', text: '›', on: { click: function () { moveMonth(1); } } });
+    prevEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-prev', 'aria-label': 'Previous month', on: { click: function () { moveMonth(-1); } } });
+    nextEl = el('button', { type: 'button', class: 'cart__cal-nav cart__cal-next', 'aria-label': 'Next month', on: { click: function () { moveMonth(1); } } });
     daysEl = el('div', { class: 'cart__days', role: 'group', 'aria-label': 'Day' });
     timesDayEl = el('p', { class: 'cart__times-day' });
     timesEl = el('div', { class: 'cart__times', role: 'group', 'aria-label': 'Start times' });
@@ -631,7 +696,8 @@
     tsBox = el('div', { class: 'cart__ts' });
     sayEl = el('p', { class: 'cart__say', role: 'status', 'aria-live': 'polite' });
     payEl = el('button', { type: 'button', class: BTN + ' cart__pay', disabled: true, text: 'Pick a time to continue', on: { click: function () { pay(); } } });
-    payboxEl = el('div', { class: 'cart__paybox' }, [tsBox, sayEl, payEl, el('p', { class: 'cart__pay-note', text: 'You enter your card on Authorize.Net\'s secure form.' })]);
+    paySpokenEl = el('p', { class: 'cart__spoken', role: 'status' }); // Tab skips a disabled button, so what it says is also said here
+    payboxEl = el('div', { class: 'cart__paybox' }, [tsBox, sayEl, paySpokenEl, payEl, el('p', { class: 'cart__pay-note', text: 'You enter your card on Authorize.Net\'s secure form.' })]);
     if (window.ResizeObserver) new ResizeObserver(fitPay).observe(payboxEl); // it grows with the robot-check box, a message, the steps
     return [whenEl, formEl, payboxEl];
   }
@@ -943,12 +1009,12 @@
   // The root keeps its children in this order: cards, cart bar, cart page, Add panel.
   function place(node) { root.insertBefore(node, sheetEl && sheetEl.parentNode === root ? sheetEl : null); }
   function cards() {
-    return el('div', { class: 'cart__cards' }, menu.kinds.map(function (k) {
+    return el('div', { class: 'cart__cards' }, menu.kinds.filter(function (k) { return !k.under; }).map(function (k) {
       return el('div', { class: 'cart__card', 'data-kind': k.kind }, [
         el('div', { class: 'cart__card-info' }, [
           el('h3', { class: 'cart__card-name', text: k.name }),
-          el('p', { class: 'cart__card-sub', text: k.minutes.join(' · ') + ' min' }),
-          el('p', { class: 'cart__card-from', text: 'From ' + money(lowestPrice(k)) })]),
+          el('p', { class: 'cart__card-sub', text: cardMinutes(k).join(' · ') + ' min' }),
+          el('p', { class: 'cart__card-from', text: 'From ' + money(cardFrom(k)) })]),
         el('button', { type: 'button', class: BTN + ' cart__card-add', 'aria-label': 'Add ' + k.name, text: 'Add', disabled: locked() || !canAdd(k), on: { click: function () { openSheet(k.kind); } } })]);
     }));
   }
@@ -977,17 +1043,22 @@
     var k = kindOf(l.kind), g = l.guests[0];
     return (l.kind === 'single' && g.style ? (menu.styleNames[g.style] || g.style) + ' ' : '') + k.name + (l.qty > 1 ? ' × ' + l.qty : '');
   }
-  // What a line shows under its title. Every amount comes from priceLine (nothing is priced here);
-  // rows without an amount only say what was chosen: a couples format other than Massage (the title
+  // What a line shows under its title. Every amount comes from priceLine (nothing is priced here). With no extras
+  // the title's price is the whole story, so the first row carries no amount of its own.
+  // Rows without an amount only say what was chosen: a couples format other than Massage (the title
   // says Massage), combo picks, a guest's style (the title already names a single massage's style),
   // each in its guest's turn.
   function lineRows(line, pl) {
     var k = kindOf(line.kind), q = line.qty, xq = q > 1 ? ' × ' + q : '', two = line.guests.length > 1;
-    var rows = [{ label: pl.rows[0].label + (exact(k) ? (line.kind === 'fourhand' ? ', 2 therapists' : ', 2 guests') : xq), amount: pl.rows[0].amount }];
+    var rows = [{ label: pl.rows[0].label + (exact(k) ? (line.kind === 'fourhand' ? ', 2 therapists' : ', 2 guests') : xq), amount: pl.rows.length > 1 ? pl.rows[0].amount : null }];
     if (line.format && line.format !== 'massage') rows.push({ label: partName(line.format) });
+    // A package of all three is named by its title. The Couples card's one choice for both is one row, with no guest rows of its own.
+    var allThree = k.picks && k.pickCount === k.picks.length;
+    var shared = !allThree && k.under && line.guests.every(function (g) { return g.picks.join() === line.guests[0].picks.join(); });
+    if (shared) rows.push({ label: line.guests[0].picks.map(partName).join(' + ') });
     line.guests.forEach(function (g, i) {
-      var who = two ? 'Guest ' + (i + 1) + ' · ' : '', said = false;
-      if (g.picks && g.picks.length) { rows.push({ label: who + g.picks.map(partName).join(' + ') }); said = true; }
+      var who = two ? 'Guest ' + (i + 1) + ' · ' : '', said = shared || allThree;
+      if (!said && g.picks && g.picks.length) { rows.push({ label: who + g.picks.map(partName).join(' + ') }); said = true; }
       if (getsMassage(line, g)) {
         if (g.style === 'deep') said = true;
         else if (two || line.kind !== 'single') { rows.push({ label: who + (menu.styleNames[g.style] || g.style) }); said = true; }
@@ -1021,9 +1092,9 @@
       el('button', { type: 'button', class: 'cart__line-edit', 'data-line': i, 'aria-label': 'Edit ' + name, text: 'Edit', disabled: off, on: { click: function () { openSheet(i); } } }),
       el('button', { type: 'button', class: 'cart__line-remove', 'data-line': i, 'aria-label': 'Remove ' + name, text: 'Remove', disabled: off, on: { click: function () { removeLine(i); } } })];
     if (perPerson(k)) foot.push(el('div', { class: 'cart__line-qtybox', role: 'group', 'aria-label': 'How many people' }, [
-      el('button', { type: 'button', class: 'cart__line-minus', 'data-line': i, 'aria-label': 'One fewer person', text: '−', disabled: off || l.qty <= 1, on: { click: function () { setQty(i, l.qty - 1); } } }),
+      el('button', { type: 'button', class: 'cart__line-minus', 'data-line': i, 'aria-label': 'One fewer person', disabled: off || l.qty <= 1, on: { click: function () { setQty(i, l.qty - 1); } } }),
       el('span', { class: 'cart__line-qty', text: String(l.qty) }),
-      el('button', { type: 'button', class: 'cart__line-plus', 'data-line': i, 'aria-label': 'One more person', text: '+', disabled: off || l.qty >= qtyMax(k, i), on: { click: function () { setQty(i, l.qty + 1); } } })]));
+      el('button', { type: 'button', class: 'cart__line-plus', 'data-line': i, 'aria-label': 'One more person', disabled: off || l.qty >= qtyMax(k, i), on: { click: function () { setQty(i, l.qty + 1); } } })]));
     return el('div', { class: 'cart__line', 'data-line': i }, [
       el('div', { class: 'cart__line-head' }, [el('h3', { class: 'cart__line-title', text: name }), ' ', el('span', { class: 'cart__line-total', text: money(pl.total) })]),
       el('div', { class: 'cart__rows' }, lineRows(l, pl).map(rowEl)),
@@ -1055,7 +1126,7 @@
         trap('start'),
         el('div', { class: 'cart__panel-head' }, [
           el('h2', { class: 'cart__panel-title', text: 'Your cart' }),
-          el('button', { type: 'button', class: 'cart__panel-close', 'aria-label': 'Close cart', text: '×', on: { click: function () { closeCart(); } } })]),
+          el('button', { type: 'button', class: 'cart__panel-close', 'aria-label': 'Close cart', on: { click: function () { closeCart(); } } })]),
         el('div', { class: 'cart__panel-body' }, [orderEl].concat(checkoutEls())),
         trap('end')]);
       place(panelEl);
@@ -1067,9 +1138,7 @@
       el('div', { class: 'cart__lines' }, lines.map(lineEl)),
       el('button', { type: 'button', class: 'cart__more', text: 'Add another massage', disabled: locked(), on: { click: function () { closeCart(true); } } })
     ].concat(limitEls(), [
-      el('div', { class: 'cart__sum' }, [
-        sumRow('cart__subtotal', 'Subtotal (' + peopleLabel(peopleIn(lines, -1)) + ')', cartTotal()),
-        sumRow('cart__total', 'Total today', cartTotal())])
+      el('div', { class: 'cart__sum' }, [sumRow('cart__total', 'Total today (' + peopleLabel(peopleIn(lines, -1)) + ')', cartTotal())])
     ]).forEach(function (n) { if (n) orderEl.appendChild(n); });
     whenEl.hidden = formEl.hidden = !!ended;
     panelEl.querySelector('.cart__panel-close').disabled = paying; // the progress stays in view until the order is settled
