@@ -70,8 +70,8 @@ body.cart-has-bar{padding-bottom:88px;} /* room under the page for the cart bar 
 .cart__sheet-close,.cart__panel-close{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;
   width:var(--icon);height:var(--icon);padding:0;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer;}
 .cart__qty-minus::before,.cart__qty-plus::before,.cart__qty-plus::after,.cart__line-minus::before,.cart__line-plus::before,.cart__line-plus::after,
-.cart__sheet-close::before,.cart__sheet-close::after,.cart__panel-close::before,.cart__panel-close::after{content:'';position:absolute;left:50%;top:50%;width:14px;height:2px;
-  margin:-1px 0 0 -7px;border-radius:1px;background:currentColor;}
+.cart__sheet-close::before,.cart__sheet-close::after,.cart__panel-close::before,.cart__panel-close::after{content:'';position:absolute;left:50%;top:50%;width:14px;height:0;
+  margin:-1px 0 0 -7px;border-top:2px solid currentColor;border-radius:1px;}
 .cart__qty-plus::after,.cart__line-plus::after{transform:rotate(90deg);}
 .cart__sheet-close::before,.cart__panel-close::before{width:16px;margin-left:-8px;transform:rotate(45deg);}
 .cart__sheet-close::after,.cart__panel-close::after{width:16px;margin-left:-8px;transform:rotate(-45deg);}
@@ -197,6 +197,11 @@ body.cart-has-bar{padding-bottom:88px;} /* room under the page for the cart bar 
 .cart__step[data-state="done"]{color:var(--ink);}
 .cart__step[data-state="done"]::before{border-color:var(--brand-orange);background:var(--brand-orange);}
 .cart__step[data-state="done"]::after{content:'';position:absolute;left:9px;top:50%;width:6px;height:11px;border:solid var(--c-on);border-width:0 2px 2px 0;transform:translateY(-62%) rotate(45deg);}
+
+/* Windows High Contrast drops background colours, and a pressed choice is shown by its background. */
+@media (forced-colors:active){
+  .cart__chip[aria-pressed="true"],.cart__day[aria-pressed="true"],.cart__time[aria-pressed="true"]{forced-color-adjust:none;background:Highlight;border-color:Highlight;color:HighlightText;}
+}
 
 @media (min-width:768px){
   .cart__panel{left:auto;width:440px;}
