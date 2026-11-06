@@ -22,7 +22,7 @@
   // Per-site look: each site's button classes and its copy of cart.css.
   var BTN = root.getAttribute('data-btn') || 'btn btn--primary';
   var BTN2 = root.getAttribute('data-btn-secondary') || 'btn btn--secondary';
-  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=8';
+  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=9';
 
   // Staff preview token: the page's inline loader takes it from #cartpreview= and strips it from
   // the address bar before analytics loads (never in the query string or a referrer).
@@ -55,8 +55,8 @@
   // busy: the card form is opening or a payment is under way. order: the payment attempt (checkout).
   // paying: from the card form's answer until that order's outcome is handled; the cart is locked.
   // ended: the message of an order that ended paid, held or unclear; the cart is cleared, Pay stays off.
-  // progEl: the progress steps while an order runs.
-  var busy = false, order = null, paying = false, ended = '', progEl = null;
+  // progEl: the waiting screen while an order runs, with its steps, meter, title and note.
+  var busy = false, order = null, paying = false, ended = '', progEl = null, stepsEl = null, fillEl = null, workTitleEl = null, workNoteEl = null;
 
   // ---------- helpers ----------
   function el(tag, attrs, kids) {
@@ -331,11 +331,11 @@
     attrs['class'] = 'cart__chip'; attrs.type = 'button'; attrs['aria-pressed'] = on ? 'true' : 'false'; attrs.on = { click: fn };
     return el('button', attrs, kids);
   }
-  // aria: what a screen reader hears, when it needs more than the label on screen. data-n sets the columns (cart.css).
+  // aria: what a screen reader hears, when it needs more than the label on screen.
   function group(label, nodes, aria) {
     return el('div', { class: 'cart__group', role: 'group', 'aria-label': aria || label }, [
       el('p', { class: 'cart__label', text: label }),
-      el('div', { class: 'cart__chips', 'data-n': nodes.length }, nodes)]);
+      el('div', { class: 'cart__chips' }, nodes)]);
   }
   function togglePick(g, id) {
     var at = g.picks.indexOf(id);
@@ -839,9 +839,10 @@
   // for each couples, couples combo or 4-hand line.
   function appointments() { return lines.reduce(function (n, l) { return n + (exact(kindOf(l.kind)) ? 1 : l.qty); }, 0); }
 
-  // The steps follow the Worker: "Checking your time" until the card is charged (a 404 or
+  // The steps follow the Worker: "Confirming your time" until the card is charged (a 404 or
   // charged:false keeps it: the order may not be saved yet), then "Card approved" and "Booking
-  // massage k of N". booked only goes up: during a reversal the Worker's count falls.
+  // appointment k of N". booked only goes up: during a reversal the Worker's count falls.
+  // The promise is on the high side on purpose: real orders took 6 s for one appointment and 11.6 s for two, about 3 s more each.
   function progress(r) {
     var o = order;
     if (r && r.pending && r.charged) {
@@ -849,21 +850,36 @@
       o.booked = Math.max(o.booked, r.booked || 0);
       if (r.of) o.of = r.of;
     }
-    var n = o.of || appointments() || 1, k = Math.min(o.booked + 1, n), on = o.charged;
-    var steps = [['Checking your time', on ? 'done' : 'active'], ['Card approved', on ? 'done' : 'todo'],
-      ['Booking massage ' + k + ' of ' + n, on ? 'active' : 'todo']];
-    if (!progEl) progEl = el('ol', { class: 'cart__progress', 'aria-label': 'Order progress', 'aria-live': 'polite' },
-      steps.map(function () { return el('li', { class: 'cart__step' }); }));
+    var n = o.of || appointments() || 1, k = Math.min(o.booked + 1, n), on = o.charged, secs = 5 + 5 * n;
+    var steps = [[on ? 'Time confirmed' : 'Confirming your time', on ? 'done' : 'active'], ['Card approved', on ? 'done' : 'todo'],
+      ['Booking appointment ' + k + ' of ' + n, on ? 'active' : 'todo']];
+    if (!progEl) {
+      stepsEl = el('ol', { class: 'cart__progress', 'aria-label': 'Order progress', 'aria-live': 'polite' },
+        steps.map(function () { return el('li', { class: 'cart__step' }); }));
+      fillEl = el('span', { class: 'cart__meter-fill' });
+      workTitleEl = el('h3', { class: 'cart__working-title' });
+      workNoteEl = el('p', { class: 'cart__working-note' });
+      progEl = el('div', { class: 'cart__working' }, [workTitleEl,
+        start ? el('p', { class: 'cart__working-when', text: longDay(day) + ' at ' + timeLabel(start) }) : null,
+        el('div', { class: 'cart__meter', 'aria-hidden': 'true' }, [fillEl]), stepsEl, workNoteEl]);
+    }
     if (!progEl.parentNode && payboxEl) payboxEl.insertBefore(progEl, payboxEl.firstChild); // above the robot-check box, which stays usable
+    workTitleEl.textContent = n > 1 ? 'Booking your ' + n + ' appointments' : 'Booking your appointment';
+    workNoteEl.textContent = (o.t0 != null && performance.now() - o.t0 > secs * 1500 ? 'Taking a little longer than usual.' : 'About ' + secs + ' seconds.') + ' Please keep this page open.';
+    var share = on ? 0.5 + 0.45 * (o.booked + 0.7) / n : 0.42, fill = fillEl;
+    setTimeout(function () { fill.style.transform = 'scaleX(' + share.toFixed(3) + ')'; }, 30); // after the first paint, so it moves
     steps.forEach(function (s, i) { // only what changed, so a screen reader hears each change once
-      var li = progEl.children[i];
+      var li = stepsEl.children[i];
       if (li.textContent !== s[0]) li.textContent = s[0];
       if (li.getAttribute('data-state') === s[1]) return;
       li.setAttribute('data-state', s[1]);
       if (s[1] === 'active') li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
     });
   }
+  // The browser asks before a refresh or close while an order runs. Harmless if they go ahead: a refresh picks the order back up.
+  function stayHere(e) { e.preventDefault(); e.returnValue = ''; }
   function dropProgress() {
+    window.removeEventListener('beforeunload', stayHere);
     if (progEl && progEl.parentNode) progEl.parentNode.removeChild(progEl);
     progEl = null;
   }
@@ -872,6 +888,7 @@
   function begin(o) {
     o.charged = false; o.booked = 0; o.tries = 0; o.missed = 0;
     order = o; paying = busy = true;
+    window.addEventListener('beforeunload', stayHere);
     screen = 'cart'; // the steps are on the cart page: they must never start off screen
     paint();
     progress();
@@ -939,6 +956,8 @@
       if (window.console && console.info) console.info('cart timing page ' + ms + ' ms');
     }
     window.addEventListener('pageshow', function (e) { if (e.persisted) location.reload(); });
+    window.removeEventListener('beforeunload', stayHere);
+    if (fillEl) fillEl.style.transform = 'scaleX(1)';
     location.href = url;
   }
   // The order ended without a booking we can confirm: clear the cart and its storage, keep the message
@@ -1145,6 +1164,7 @@
     ]).forEach(function (n) { if (n) orderEl.appendChild(n); });
     whenEl.hidden = formEl.hidden = !!ended;
     panelEl.querySelector('.cart__panel-close').disabled = paying; // the progress stays in view until the order is settled
+    panelEl.setAttribute('data-paying', paying ? '1' : '0');
     paintWhen();
     paintPay();
     if (had && !panelEl.contains(document.activeElement)) refocus(panelEl, key);
