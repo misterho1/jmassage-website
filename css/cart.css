@@ -28,6 +28,7 @@ body.cart-lock{position:fixed;left:0;right:0;width:100%;box-sizing:border-box;}
 /* On a phone, at the top, so the whole form stays above the keyboard. */
 @media (max-width:550px) and (min-height:440px){#AcceptUIContainer{top:max(12px,env(safe-area-inset-top))!important;margin-top:0!important;}}
 body.cart-has-bar{padding-bottom:88px;} /* room under the page for the cart bar */
+body.cart-lock chat-widget,body.cart-has-bar chat-widget{display:none!important;} /* the GHL chat sits over Add and Pay and takes the taps */
 body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar sits in the same place */
 
 /* ---------- buttons shared with the site (.btn) ---------- */

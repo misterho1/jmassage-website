@@ -191,7 +191,7 @@
              off or the Worker cannot be reached. Putting `hidden` back on the section takes the cart off the page
              and brings them back. -->
         <style>#cart{min-height:415px}@media(min-width:375px){#cart{min-height:385px}}@media(min-width:430px){#cart{min-height:364px}}@media(min-width:640px){#cart{min-height:221px}}</style><noscript><style>#cart{display:none}#book-calendar{display:block!important}</style></noscript>
-        <section id="cart" class="cart" data-spa="jm" data-api="https://spa-phone-booking.andrew-86d.workers.dev" data-phone="801-288-1118" data-css="/css/cart.css?v=7" aria-label="Book several massages" style="scroll-margin-top:90px;"></section>
+        <section id="cart" class="cart" data-spa="jm" data-api="https://spa-phone-booking.andrew-86d.workers.dev" data-phone="801-288-1118" data-css="/css/cart.css?v=8" aria-label="Book several massages" style="scroll-margin-top:90px;"></section>
         <script>
           // Loads js/cart.js only when the cart is public or a staff preview link opened it.
           (function () {
@@ -202,7 +202,7 @@
             if (m) history.replaceState(null, '', location.pathname + location.search);
             try { if (m) sessionStorage.setItem('cartpreview', window.__cartPreview); p = !!sessionStorage.getItem('cartpreview'); } catch (e) {}
             p = p || !!m;
-            if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=8'; s.onerror = function () { c.hidden = true; if (window.__showCalendar) window.__showCalendar(); }; document.body.appendChild(s); }
+            if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=9'; s.onerror = function () { c.hidden = true; if (window.__showCalendar) window.__showCalendar(); }; document.body.appendChild(s); }
           })();
         </script>
         <div id="book-calendar" hidden>
