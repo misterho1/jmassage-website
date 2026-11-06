@@ -22,13 +22,13 @@
   // Per-site look: each site's button classes and its copy of cart.css.
   var BTN = root.getAttribute('data-btn') || 'btn btn--primary';
   var BTN2 = root.getAttribute('data-btn-secondary') || 'btn btn--secondary';
-  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=6';
+  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=7';
 
   // Staff preview token: the page's inline loader takes it from #cartpreview= and strips it from
   // the address bar before analytics loads (never in the query string or a referrer).
   var preview = window.__cartPreview || null;
   try { preview = preview || sessionStorage.getItem('cartpreview'); } catch (e) {}
-  if (root.hidden && !preview) return; // staff-only for now: nothing to load for guests
+  if (root.hidden && !preview) return; // `hidden` on the section takes the cart off the page for guests
 
   // The cart. A line is { kind, minutes, format, qty, guests }; a guest is { style, addons: [], picks }.
   // Kinds booked per person (menu guests 1-8): ONE template guest, and qty people share its choices.
@@ -195,6 +195,9 @@
     familyOf(k).forEach(function (o) { o.minutes.forEach(function (m) { if (all.indexOf(m) < 0) all.push(m); }); });
     return all.sort(function (a, b) { return a - b; });
   }
+  // The packages say what is in them; every other card's name already does.
+  var CARD_NOTES = { combo: 'Any two: head spa, foot reflexology, or massage.', toes: 'All three: head spa, foot reflexology, and massage.' };
+  function minutesRange(all) { return (all.length > 1 ? all[0] + '–' + all[all.length - 1] : all[0]) + ' min'; }
   function cardFrom(k) { return Math.min.apply(null, familyOf(k).map(lowestPrice)); }
 
   // ---------- limits (menu.limits: 6 lines, 8 guests; quantity and both couples guests count) ----------
@@ -1012,9 +1015,10 @@
     return el('div', { class: 'cart__cards' }, menu.kinds.filter(function (k) { return !k.under; }).map(function (k) {
       return el('div', { class: 'cart__card', 'data-kind': k.kind }, [
         el('div', { class: 'cart__card-info' }, [
-          el('h3', { class: 'cart__card-name', text: k.name }),
-          el('p', { class: 'cart__card-sub', text: cardMinutes(k).join(' · ') + ' min' }),
-          el('p', { class: 'cart__card-from', text: 'From ' + money(cardFrom(k)) })]),
+          el('h3', { class: 'cart__card-name', text: k.name })].concat(CARD_NOTES[k.kind] ? [el('p', { class: 'cart__card-note', text: CARD_NOTES[k.kind] })] : [], [
+          el('p', { class: 'cart__card-meta' }, [
+            el('span', { class: 'cart__card-from', text: 'From ' + money(cardFrom(k)) }),
+            el('span', { class: 'cart__card-sub', text: minutesRange(cardMinutes(k)) })])])),
         el('button', { type: 'button', class: BTN + ' cart__card-add', 'aria-label': 'Add ' + k.name, text: 'Add', disabled: locked() || !canAdd(k), on: { click: function () { openSheet(k.kind); } } })]);
     }));
   }
@@ -1025,8 +1029,7 @@
       el('p', { class: 'cart__lead', text: 'Add each massage to your cart. Pay once for everyone.' }),
       onCards && notice ? noticeEl() : null
     ].concat(onCards ? limitEls() : [], [
-      cards(),
-      el('p', { class: 'cart__alt' }, [el('a', { href: '#book-one', text: 'Booking one massage? Use the calendar below.' })])
+      cards()
     ]).forEach(function (n) { if (n) inner.appendChild(n); });
   }
   // "View cart (N people) · $total": only while the cart is closed and has lines.
@@ -1194,20 +1197,33 @@
       link.addEventListener('load', ok); link.addEventListener('error', ok); setTimeout(ok, 4000);
     });
   }
+  // The page's old calendar is the backup: it takes over when the cart is switched off or the Worker cannot be reached.
+  function useCalendar() {
+    root.hidden = true;
+    if (window.__showCalendar) window.__showCalendar();
+  }
+  // Service pages link to /book?service=<slug>, some with &len= and &style=. The link opens that massage's Add panel,
+  // ready to add. [kind, style]. Slugs on elitespautah.com and jmassageslc.com; any other value just shows the cards.
+  var SERVICE_LINKS = {
+    single: ['single'], 'swedish-massage': ['single', 'swedish'], 'deep-tissue-massage': ['single', 'deep'], 'sports-massage': ['single', 'sports'],
+    'ashiatsu-massage': ['single', 'ashiatsu'], 'shiatsu-massage': ['single', 'shiatsu'], 'individual-massage': ['single'], 'chair-massage': ['single'],
+    prenatal: ['prenatal'], 'prenatal-massage': ['prenatal'], couples: ['couples'], 'couples-massage': ['couples'], 'couples-spa': ['couplesCombo'],
+    '4hand': ['fourhand'], '4-hands-massage': ['fourhand'], 'head-spa-massage': ['headspa'], 'foot-reflexology-massage': ['reflex'], 'spa-combo': ['combo']
+  };
+  function openLinkedService() {
+    var q = new URLSearchParams(location.search), to = SERVICE_LINKS[q.get('service')], k = to && kindOf(to[0]);
+    if (!k) return;
+    openSheet(k.kind);
+    if (!draft) return;
+    var len = Number(q.get('len')), style = to[1] || q.get('style');
+    if (k.minutes.indexOf(len) >= 0) draft.minutes = len;
+    if (k.kind === 'single' && k.styles.indexOf(style) >= 0) draft.guests[0].style = style;
+    renderSheet();
+  }
   function startCart() {
     var css = styled();
     api('/api/cart/menu?spa=' + SPA).then(function (r) { return css.then(function () { return r; }); }).then(function (r) {
-      if (!r.ok) {
-        // A closed cart shows only its message and the phone, even on a staff preview where the section is still hidden.
-        if (r.closed || !root.hidden) {
-          var phone = root.getAttribute('data-phone') || '', msg = r.message || (r.closed ? 'Online booking is closed right now.' : 'Online group booking is not available right now.');
-          // The Worker's message already names the phone; if it does not, add this page's.
-          if (r.closed && phone && msg.replace(/\D/g, '').indexOf(phone.replace(/\D/g, '')) < 0) msg += ' Please call us at ' + phone + '.';
-          root.textContent = ''; root.appendChild(el('p', { class: 'cart__closed', text: msg }));
-          root.hidden = false;
-        }
-        return;
-      }
+      if (!r.ok) { useCalendar(); return; }
       menu = r; menu.phone = root.getAttribute('data-phone') || '';
       // Test hook for the browser harness (on the element, never a global).
       root.__cart = {
@@ -1226,8 +1242,8 @@
       document.addEventListener('keydown', onKey);
       build();
       var saved = savedOrder();
-      if (saved) resume(saved);
-    }).catch(function () {});
+      if (saved) resume(saved); else openLinkedService();
+    }).catch(useCalendar);
   }
 
   if (document.querySelector('script[src*="/after-paint.js"]')) (window.__afterPaint = window.__afterPaint || []).push(startCart);

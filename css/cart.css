@@ -19,7 +19,6 @@
 .cart .cart__panel:focus,.cart .cart__sheet:focus,.cart .cart__title:focus{outline:none;}
 /* Stops at each end of a dialog (cart.js sends focus round from them); nothing to see. */
 .cart__trap{position:fixed;top:0;left:0;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;}
-.cart__closed{max-width:1080px;margin:0 auto 1.5rem;color:var(--ink-muted);}
 
 /* The page behind an open dialog stays put (cart.js sets top to minus the scroll position). */
 body.cart-lock{position:fixed;left:0;right:0;width:100%;box-sizing:border-box;}
@@ -29,6 +28,7 @@ body.cart-lock{position:fixed;left:0;right:0;width:100%;box-sizing:border-box;}
 /* On a phone, at the top, so the whole form stays above the keyboard. */
 @media (max-width:550px) and (min-height:440px){#AcceptUIContainer{top:max(12px,env(safe-area-inset-top))!important;margin-top:0!important;}}
 body.cart-has-bar{padding-bottom:88px;} /* room under the page for the cart bar */
+body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar sits in the same place */
 
 /* ---------- buttons shared with the site (.btn) ---------- */
 .cart .btn{min-height:52px;padding:0 20px;border-radius:var(--r-ctl);font-family:var(--type-ui);font-size:16px;font-weight:600;
@@ -40,17 +40,18 @@ body.cart-has-bar{padding-bottom:88px;} /* room under the page for the cart bar 
 /* ---------- the cards ---------- */
 .cart__title{margin:0;font-family:var(--type-display);font-weight:400;font-size:clamp(1.6rem,4vw,1.9rem);line-height:1.15;color:var(--ink);}
 .cart__lead{margin:8px 0 0;font-size:15px;line-height:1.45;color:var(--ink-muted);}
-.cart__cards{display:grid;gap:12px;margin-top:20px;}
+.cart__cards{display:grid;gap:8px;margin-top:16px;}
 @media (min-width:640px){.cart__cards{grid-template-columns:repeat(2,minmax(0,1fr));}}
-.cart__card{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;padding:16px;
+.cart__card{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;padding:10px 12px 10px 14px;
   background:var(--surface);border:1px solid var(--c-line);border-radius:var(--r-box);}
-.cart__card-info{display:flex;flex-direction:column;gap:4px;min-width:0;}
+.cart__card-info{display:flex;flex-direction:column;gap:2px;min-width:0;}
 .cart__card-name{margin:0;font:600 17px/1.25 var(--type-ui);letter-spacing:0;text-transform:none;color:var(--ink);}
-.cart__card-sub{margin:0;font-size:13px;color:var(--ink-muted);}
-.cart__card-from{margin:0;font-size:14px;font-weight:600;color:var(--brand-orange-deep);}
+.cart__card-note{margin:0;font-size:13px;line-height:1.35;color:var(--ink-muted);}
+.cart__card-meta{margin:0;font-size:13px;line-height:1.4;color:var(--ink-muted);}
+.cart__card-from{font-size:14px;font-weight:600;color:var(--brand-orange-deep);}
+.cart__card-sub{white-space:nowrap;}
+.cart__card-sub::before{content:"·";margin:0 6px;}
 .cart .cart__card-add{flex:0 0 auto;width:72px;min-height:var(--icon);padding:0;font-size:14px;}
-.cart__alt{margin:20px 0 0;font-size:.9rem;}
-.cart__alt a{display:inline-block;padding:12px 0;color:var(--brand-orange-deep);text-underline-offset:3px;}
 .cart__notice,.cart__limit,.cart__treat-note{margin:12px 0 0;padding:12px;border-radius:var(--r-ctl);font-size:14px;line-height:1.4;color:var(--ink);background:var(--brand-orange-soft);}
 
 /* ---------- the cart bar (cart closed, something in it) ---------- */
