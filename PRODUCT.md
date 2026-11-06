@@ -54,7 +54,7 @@ The site must explicitly NOT look like:
 3. **Craft, not journey.** Lead with what each modality does, not what it feels like. Specificity converts this audience.
 4. **Same-day is the moat.** Open daily 10am–10pm with same-day availability belongs above the fold on every page.
 5. **Booking friction is enemy #1.** The GHL scheduler is embedded, never linked out. Prices appear on the duration buttons. Deep links carry service context from service pages to /book.
-6. **Honest numbers only.** 4.4/531 with a real half-star. No "#1 rated," no invented counts, no "approximate pricing" hedges that fight the transparent-pricing promise ($5 card fee stated plainly, cash no fee).
+6. **Honest numbers only.** 4.4/531 with a real half-star. No "#1 rated," no invented counts, no "approximate pricing" hedges that fight the transparent-pricing promise (listed prices are card prices, cash $5 less, stated plainly).
 
 ## Accessibility & Inclusion
 
