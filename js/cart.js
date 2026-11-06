@@ -22,7 +22,7 @@
   // Per-site look: each site's button classes and its copy of cart.css.
   var BTN = root.getAttribute('data-btn') || 'btn btn--primary';
   var BTN2 = root.getAttribute('data-btn-secondary') || 'btn btn--secondary';
-  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=7';
+  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=8';
 
   // Staff preview token: the page's inline loader takes it from #cartpreview= and strips it from
   // the address bar before analytics loads (never in the query string or a referrer).
