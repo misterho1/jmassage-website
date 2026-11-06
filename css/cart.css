@@ -4,12 +4,13 @@
    One system, top to bottom:
    - spacing is in multiples of 4, with one side gutter (--g), so every control lines up edge to edge with Pay;
    - controls share one height (--ctl) and one corner (--r-ctl); containers share --r-box;
-   - choices sit on an equal-column grid (.cart__chips, .cart__times, .cart__days), so buttons line up in rows and columns;
-   - circles are for icon buttons only (+, -, arrows, close), and those icons are drawn here so they sit dead centre.
+   - choices are square tiles (.cart__chips): every tile in a panel is the same height and every row fills gutter to gutter, with no gap at the end;
+   - times and days sit on equal-column grids too, so buttons line up in rows and columns;
+   - icons (+, -, arrows, close) are drawn here so they sit dead centre, and only close is round.
    All text is at least 4.5:1 on its ground. Every button is 44 px tall or more (calendar days narrow to 36 wide at 320 px, where seven must fit). Boxes that are empty until filled
    (name, phone, add-on ticks) have an edge of at least 3:1 (--c-field); buttons are named by their text. */
 .cart{--c-line:rgba(42,38,34,.12);--c-ctl:rgba(42,38,34,.25);--c-field:rgba(42,38,34,.55);--c-soft:#ece6dd;--c-err:#9b2c1f;--c-on:#fffdfb;
-  --g:20px;--ctl:48px;--icon:44px;--r-ctl:12px;--r-box:16px;
+  --g:20px;--ctl:56px;--icon:48px;--r-ctl:8px;--r-box:12px;
   max-width:1080px;margin:0 auto 2.2rem;font-family:var(--type-ui);color:var(--ink);}
 .cart *,.cart *::before,.cart *::after{box-sizing:border-box;}
 .cart [hidden]{display:none !important;}
@@ -32,7 +33,7 @@ body.cart-lock chat-widget,body.cart-has-bar chat-widget{display:none!important;
 body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar sits in the same place */
 
 /* ---------- buttons shared with the site (.btn) ---------- */
-.cart .btn{min-height:52px;padding:0 20px;border-radius:var(--r-ctl);font-family:var(--type-ui);font-size:16px;font-weight:600;
+.cart .btn{min-height:56px;padding:0 20px;border-radius:var(--r-ctl);font-family:var(--type-ui);font-size:16px;font-weight:600;
   letter-spacing:0;text-transform:none;white-space:normal;line-height:1.2;text-align:center;font-variant-numeric:tabular-nums;}
 .cart .btn--primary:hover:not(:disabled){box-shadow:none;}
 /* Off means "not yet": a quiet surface that reads as an instruction, not a button to press. */
@@ -43,21 +44,22 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 .cart__lead{margin:8px 0 0;font-size:15px;line-height:1.45;color:var(--ink-muted);}
 .cart__cards{display:grid;gap:8px;margin-top:16px;}
 @media (min-width:640px){.cart__cards{grid-template-columns:repeat(2,minmax(0,1fr));}}
-.cart__card{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;padding:10px 12px 10px 14px;
+.cart__card{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;padding:14px 14px 14px 16px;
   background:var(--surface);border:1px solid var(--c-line);border-radius:var(--r-box);}
-.cart__card-info{display:flex;flex-direction:column;gap:2px;min-width:0;}
+.cart__card-info{display:flex;flex-direction:column;gap:4px;min-width:0;}
 .cart__card-name{margin:0;font:600 17px/1.25 var(--type-ui);letter-spacing:0;text-transform:none;color:var(--ink);}
 .cart__card-note{margin:0;font-size:13px;line-height:1.35;color:var(--ink-muted);}
 .cart__card-meta{margin:0;font-size:13px;line-height:1.4;color:var(--ink-muted);}
 .cart__card-from{font-size:14px;font-weight:600;color:var(--brand-orange-deep);}
 .cart__card-sub{white-space:nowrap;}
 .cart__card-sub::before{content:"·";margin:0 6px;}
-.cart .cart__card-add{flex:0 0 auto;width:72px;min-height:var(--icon);padding:0;font-size:14px;}
+.cart .cart__card-add{flex:0 0 auto;width:80px;min-height:var(--icon);padding:0;font-size:15px;}
+@media (max-width:359px){.cart .cart__card-add{width:64px;}}
 .cart__notice,.cart__limit,.cart__treat-note{margin:12px 0 0;padding:12px;border-radius:var(--r-ctl);font-size:14px;line-height:1.4;color:var(--ink);background:var(--brand-orange-soft);}
 
 /* ---------- the cart bar (cart closed, something in it) ---------- */
 .cart__bar{position:fixed;left:0;right:0;bottom:max(16px,env(safe-area-inset-bottom));z-index:900;width:calc(100% - 32px);max-width:420px;
-  min-height:52px;margin:0 auto;padding:0 20px;border:0;border-radius:var(--r-ctl);background:var(--ink);color:var(--c-on);font-size:16px;font-weight:600;
+  min-height:56px;margin:0 auto;padding:0 20px;border:0;border-radius:var(--r-ctl);background:var(--ink);color:var(--c-on);font-size:16px;font-weight:600;
   font-variant-numeric:tabular-nums;cursor:pointer;box-shadow:0 12px 32px -8px rgba(20,12,4,.5);}
 .cart__bar:hover{background:var(--ink-deep);}
 
@@ -73,7 +75,7 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 
 /* ---------- icon buttons: +, -, arrows, close. The icons are drawn, so they sit dead centre. ---------- */
 .cart__qty-minus,.cart__qty-plus,.cart__line-minus,.cart__line-plus,.cart__cal-nav{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;
-  width:var(--icon);height:var(--icon);padding:0;border:1px solid var(--c-ctl);border-radius:50%;background:var(--surface);color:var(--ink);cursor:pointer;}
+  width:var(--icon);height:var(--icon);padding:0;border:1px solid var(--c-ctl);border-radius:var(--r-ctl);background:var(--surface);color:var(--ink);cursor:pointer;}
 .cart__sheet-close,.cart__panel-close{position:relative;display:flex;align-items:center;justify-content:center;flex:0 0 auto;
   width:var(--icon);height:var(--icon);padding:0;border:0;border-radius:50%;background:transparent;color:var(--ink);cursor:pointer;}
 .cart__qty-minus::before,.cart__qty-plus::before,.cart__qty-plus::after,.cart__line-minus::before,.cart__line-plus::before,.cart__line-plus::after,
@@ -94,25 +96,27 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 /* ---------- the Add panel: a sheet from the bottom, a centred panel from 768 px ---------- */
 .cart__sheet{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1010;display:flex;flex-direction:column;justify-content:flex-end;}
 .cart__sheet-scrim{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(42,38,34,.45);cursor:pointer;}
-.cart__sheet-panel{position:relative;display:flex;flex-direction:column;max-height:90%;background:var(--surface);border-radius:20px 20px 0 0;}
-/* The close icon is 16 px in a 44 px button: 6 px here puts its right edge on the gutter. */
-.cart__sheet-head,.cart__panel-head{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:8px 6px 8px var(--g);border-bottom:1px solid var(--c-line);}
+.cart__sheet-panel{position:relative;display:flex;flex-direction:column;max-height:90%;background:var(--surface);border-radius:var(--r-box) var(--r-box) 0 0;}
+/* The close icon is 16 px in a 48 px button: 4 px here puts its right edge on the gutter. */
+.cart__sheet-head,.cart__panel-head{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:8px 4px 8px var(--g);border-bottom:1px solid var(--c-line);}
 .cart__sheet-title,.cart__panel-title{margin:0;font-family:var(--type-display);font-weight:400;font-size:22px;line-height:1.2;color:var(--ink);}
-.cart__sheet-main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:24px;padding:20px var(--g) 24px;overflow-y:auto;overscroll-behavior:contain;}
+.cart__sheet-main{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;gap:28px;padding:24px var(--g) 28px;overflow-y:auto;overscroll-behavior:contain;}
 .cart__sheet-foot{flex:0 0 auto;padding:12px var(--g) max(16px,env(safe-area-inset-bottom));border-top:1px solid var(--c-line);}
 .cart__sheet-go{width:100%;}
 .cart__group{min-width:0;margin:0;padding:0;border:0;}
-.cart__label{margin:0 0 8px;font-size:14px;font-weight:600;line-height:1.3;color:var(--ink);}
-/* Equal columns, equal rows, gutter to gutter. cart.js says how many (data-n): 2 and 4 take two columns, the rest three. */
-.cart__chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;gap:8px;}
-.cart__chips[data-n="2"],.cart__chips[data-n="4"]{grid-template-columns:repeat(2,minmax(0,1fr));}
-.cart__chip{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:0;min-height:var(--ctl);padding:4px;border-radius:var(--r-ctl);
-  font-size:15px;line-height:1.2;text-align:center;}
-.cart__chip-main{font-size:15px;}
-.cart__chip-sub{font-size:13px;font-weight:400;}
+.cart__label{margin:0 0 12px;font-size:15px;font-weight:600;line-height:1.3;color:var(--ink);}
+/* Square tiles. Three to a row on a six-part grid, each as tall as a three-to-a-row tile is wide (cqw is this grid's own width),
+   so tiles match from group to group. With one over, the first tile takes its own row; with two over, the last two share a row. Every row runs gutter to gutter. */
+.cart__chips{container-type:inline-size;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;}
+.cart__chip{grid-column:span 2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;height:96px;height:calc((100cqw - 16px) / 3);padding:8px 4px;border-radius:var(--r-ctl);
+  font-size:16px;line-height:1.2;text-align:center;}
+.cart__chip:first-child:nth-last-child(3n+1){grid-column:1 / -1;}
+.cart__chip:nth-child(3n+1):nth-last-child(2),.cart__chip:nth-child(3n+1):nth-last-child(2)~.cart__chip{grid-column:span 3;}
+.cart__chip-main{font-size:16px;}
+.cart__chip-sub{font-size:14px;font-weight:400;}
 .cart__only{display:flex;justify-content:space-between;gap:12px;margin:0;font-size:15px;color:var(--ink);}
 .cart__qty-row{display:flex;align-items:center;gap:12px;}
-.cart__qty-n{min-width:24px;text-align:center;font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;}
+.cart__qty-n{min-width:32px;text-align:center;font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;}
 .cart__hint{margin:8px 0 0;font-size:13px;line-height:1.4;color:var(--ink-muted);}
 .cart__treat-hint span{white-space:nowrap;}
 .cart__guest{display:flex;flex-direction:column;gap:24px;min-width:0;}
@@ -122,10 +126,10 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 .cart__addon{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:var(--ctl);padding:0;border:0;border-bottom:1px solid var(--c-line);
   background:transparent;color:var(--ink);font-size:15px;text-align:left;cursor:pointer;}
 .cart__addon:last-child{border-bottom:0;}
-.cart__addon::before{content:'';flex:0 0 22px;width:22px;height:22px;border:2px solid var(--c-field);border-radius:6px;background:var(--surface);}
+.cart__addon::before{content:'';flex:0 0 24px;width:24px;height:24px;border:2px solid var(--c-field);border-radius:4px;background:var(--surface);}
 .cart__addon:hover::before{border-color:var(--ink);}
 .cart__addon[aria-pressed="true"]::before{border-color:var(--brand-orange);background:var(--brand-orange);}
-.cart__addon[aria-pressed="true"]::after{content:'';position:absolute;left:8px;top:50%;width:6px;height:11px;border:solid var(--c-on);border-width:0 2px 2px 0;transform:translateY(-62%) rotate(45deg);}
+.cart__addon[aria-pressed="true"]::after{content:'';position:absolute;left:9px;top:50%;width:6px;height:11px;border:solid var(--c-on);border-width:0 2px 2px 0;transform:translateY(-62%) rotate(45deg);}
 .cart__addon-name{flex:1 1 auto;min-width:0;}
 .cart__addon-price{flex:0 0 auto;color:var(--ink-muted);font-variant-numeric:tabular-nums;}
 
@@ -168,7 +172,7 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 .cart__cal-week,.cart__days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;}
 .cart__cal-week{margin-top:12px;font-size:12px;text-align:center;color:var(--ink-muted);}
 .cart__days{margin-top:8px;}
-.cart__day{position:relative;width:100%;aspect-ratio:1;min-height:var(--icon);padding:0;border-color:var(--c-line);border-radius:var(--r-ctl);font-size:15px;}
+.cart__day{position:relative;width:100%;aspect-ratio:1;min-height:44px;padding:0;border-color:var(--c-line);border-radius:var(--r-ctl);font-size:15px;}
 .cart__day:disabled:not([aria-pressed="true"]){border-color:transparent;background:transparent;font-weight:400;}
 .cart__day[aria-current="date"]::after{content:'';position:absolute;left:50%;bottom:5px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:currentColor;} /* today */
 .cart__times-day{margin:20px 0 0;font-size:14px;font-weight:600;color:var(--ink);}
@@ -195,8 +199,18 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 .cart__spoken{position:absolute;width:1px;height:1px;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
 .cart__pay-note{margin:8px 0 0;text-align:center;text-wrap:balance;font-size:12px;color:var(--ink-muted);}
 
-/* the order's steps: Checking your time, Card approved, Booking massage k of N */
-.cart__progress{display:flex;flex-direction:column;gap:12px;margin:0 0 12px;padding:12px 16px;list-style:none;background:var(--brand-cream);border:1px solid var(--c-line);border-radius:var(--r-ctl);}
+/* While an order runs the cart page shows only this: what is being booked, how far along, how long, and to stay put. */
+.cart__panel[data-paying="1"] .cart__panel-body>:not(.cart__paybox){display:none;}
+.cart__panel[data-paying="1"] .cart__paybox{position:static;flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;padding-top:24px;border-top:0;}
+.cart__panel[data-paying="1"] .cart__pay,.cart__panel[data-paying="1"] .cart__pay-note{display:none;}
+.cart__working{margin:0 0 16px;}
+.cart__working-title{margin:0;font-family:var(--type-display);font-weight:400;font-size:28px;line-height:1.15;color:var(--ink);}
+.cart__working-when{margin:8px 0 0;font-size:16px;line-height:1.4;color:var(--ink-muted);}
+.cart__meter{height:6px;margin:24px 0;overflow:hidden;border-radius:3px;background:var(--c-soft);}
+.cart__meter-fill{display:block;height:100%;background:var(--brand-orange);transform:scaleX(.04);transform-origin:0 50%;}
+.cart__working-note{margin:24px 0 0;font-size:16px;font-weight:600;line-height:1.4;color:var(--ink);}
+/* the order's steps: Confirming your time, Card approved, Booking appointment k of N */
+.cart__progress{display:flex;flex-direction:column;gap:16px;margin:0;padding:0;list-style:none;}
 .cart__step{position:relative;display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ink-dim);}
 .cart__step::before{content:'';flex:0 0 24px;width:24px;height:24px;border:2px solid var(--c-ctl);border-radius:50%;background:var(--surface);}
 .cart__step[data-state="active"]{color:var(--ink);font-weight:600;}
@@ -215,7 +229,7 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
   /* the dimmed page beside the panel: part of the panel's own box, so a tap on it closes the cart */
   .cart__panel::before{content:'';position:absolute;top:0;bottom:0;right:100%;width:100vw;background:rgba(42,38,34,.45);}
   .cart__sheet{justify-content:center;align-items:center;}
-  .cart__sheet-panel{width:480px;max-width:calc(100% - 32px);max-height:min(90%,800px);border-radius:20px;}
+  .cart__sheet-panel{width:440px;max-width:calc(100% - 32px);max-height:min(90%,800px);border-radius:var(--r-box);}
 }
 
 /* Motion only for people who allow it. The Add panel is redrawn on every tap, so only .cart__sheet (made once)
@@ -224,6 +238,7 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 @keyframes cart-rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
 @keyframes cart-slide{from{opacity:0;transform:translateX(28px);}to{opacity:1;transform:none;}}
 @media (prefers-reduced-motion:no-preference){
+  .cart__meter-fill{transition:transform 5s cubic-bezier(.25,1,.5,1);}
   .cart__sheet{animation:cart-fade .2s cubic-bezier(.25,1,.5,1);}
   .cart__panel{animation:cart-rise .24s cubic-bezier(.25,1,.5,1);}
   .cart .btn,.cart__chip,.cart__day,.cart__time,.cart__more,.cart__qty-minus,.cart__qty-plus,.cart__line-minus,.cart__line-plus,.cart__cal-nav,.cart__sheet-close,.cart__panel-close{
