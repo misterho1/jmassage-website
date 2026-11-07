@@ -143,7 +143,7 @@
         <div class="book-menu" id="book-one" style="margin-bottom:1.9rem;scroll-margin-top:90px;">
           <div class="book-menu__group" data-service="single">
             <p class="book-menu__title">Single Massage <small>· Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Myofascial</small></p>
-            <p style="margin:-.3rem 0 .55rem;font-size:.85rem;color:#6b6259;">Deep tissue is $20 more for 60 or 90 minutes, $40 more for 120.</p>
+            <p style="margin:-.3rem 0 .55rem;font-size:.85rem;color:#6b6259;">Deep tissue is $20 more for 60 minutes, $30 more for 90, $40 more for 120.</p>
             <div class="book-menu__row">
               <button type="button" class="btn btn--primary book-pick is-active" data-cal="iYzZ0GbCUpIqrpaCbswy" aria-pressed="true" aria-label="Single massage, 60 minutes, $105">60 min · $105</button>
               <button type="button" class="btn btn--primary book-pick" data-cal="g5R2qijQXBq7TRN4ySKJ" aria-pressed="false" aria-label="Single massage, 90 minutes, $155">90 min · $155</button>
@@ -268,7 +268,7 @@
         var selectedLine=document.getElementById('book-selected');
         var deepStyle=false;
         var deepLinkPick=false;
-        var DEEP_PRICE={'60':125,'90':175,'120':245};
+        var DEEP_PRICE={'60':125,'90':185,'120':245};
         function selectedText(b){
           var label=(b.getAttribute('aria-label')||b.textContent).trim();
           var group=b.closest('.book-menu__group');
