@@ -15,7 +15,7 @@ const part = (name) => shell.split(`<!--@@${name}-->`)[1].split('<!--@@')[0].rep
 const HEADER = part('header');
 const FOOTER = part('footer');
 const MCTA = part('mcta');
-const CSS = '<link rel="stylesheet" href="/css/site.css?v=2">';
+const CSS = '<link rel="stylesheet" href="/css/site.css?v=3">';
 const NAV_JS = '<script src="/js/nav.js?v=1" defer></script>';
 
 function apply(html) {
