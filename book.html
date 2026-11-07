@@ -31,7 +31,7 @@
   <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
-  <link rel="stylesheet" href="/css/site.css?v=2">
+  <link rel="stylesheet" href="/css/site.css?v=3">
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <script type="application/ld+json">
@@ -140,11 +140,11 @@
         </script>
         <p style="margin: var(--space-3) auto 0; max-width: 60ch; text-align: center; font-family: var(--type-ui); font-size: var(--type-6); color: var(--ink-muted);">Head spa or foot massage? Those are at our sister spa. <a href="/services/foot-massage-head-spa">See Elite Spa Utah</a>.</p>
         <div id="book-calendar" hidden>
-        <p class="book-firsttimer">First time? A <strong>60-minute massage</strong> is already selected below. Pick a time. Choose Swedish or deep tissue when you arrive. Deep tissue is $20 more.</p>
+        <p class="book-firsttimer">First time? A <strong>60-minute massage</strong> is already selected below. Pick a time. Choose Swedish or deep tissue when you arrive. Deep tissue: <s class="promo-was">+$20</s> <span class="promo-free">Free</span>.</p>
         <div class="book-menu" id="book-one" style="margin-bottom:1.9rem;scroll-margin-top:90px;">
           <div class="book-menu__group" data-service="single">
             <p class="book-menu__title">Single Massage <small>· Swedish · Deep Tissue · Sports · Ashiatsu · Shiatsu · Myofascial</small></p>
-            <p style="margin:-.3rem 0 .55rem;font-size:.85rem;color:#6b6259;">Deep tissue is $20 more for 60 minutes, $30 more for 90, $40 more for 120.</p>
+            <p style="margin:-.3rem 0 .55rem;font-size:.85rem;color:#6b6259;">Promotion: deep tissue at no extra charge. Deep tissue: <s class="promo-was">+$20</s> <span class="promo-free">Free</span> at 60 minutes, <s class="promo-was">+$30</s> <span class="promo-free">Free</span> at 90, <s class="promo-was">+$40</s> <span class="promo-free">Free</span> at 120.</p>
             <div class="book-menu__row">
               <button type="button" class="btn btn--primary book-pick is-active" data-cal="iYzZ0GbCUpIqrpaCbswy" aria-pressed="true" aria-label="Single massage, 60 minutes, $105">60 min · $105</button>
               <button type="button" class="btn btn--primary book-pick" data-cal="g5R2qijQXBq7TRN4ySKJ" aria-pressed="false" aria-label="Single massage, 90 minutes, $155">90 min · $155</button>
@@ -265,18 +265,18 @@
           revealTimer=setTimeout(clearOverlay,4000);
         });}
         // Deep links land on the calendar, so show the choice beside it, with a way back to the menu.
-        // Deep tissue books on the single calendars at the pill price; the surcharge is paid at the visit.
+        // Deep tissue books on the single calendars at the pill price (promotion since 2026-11-07: no extra charge).
         var selectedLine=document.getElementById('book-selected');
         var deepStyle=false;
         var deepLinkPick=false;
-        var DEEP_PRICE={'60':125,'90':185,'120':245};
+        var DEEP_PRICE={'60':105,'90':155,'120':205};
         function selectedText(b){
           var label=(b.getAttribute('aria-label')||b.textContent).trim();
           var group=b.closest('.book-menu__group');
           var mins=(label.match(/(\d+) minutes/)||[])[1];
           if(group&&group.getAttribute('data-service')!=='single'){deepStyle=false;}
           if(deepStyle&&DEEP_PRICE[mins]){
-            return mins+'-minute deep tissue, $'+DEEP_PRICE[mins]+'. You pay $'+jmPrice(b)+' when you book and $'+(DEEP_PRICE[mins]-jmPrice(b))+' at your visit.';
+            return mins+'-minute deep tissue, $'+DEEP_PRICE[mins]+'. Promotion: deep tissue at no extra charge.';
           }
           return label+'.';
         }

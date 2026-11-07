@@ -1311,3 +1311,8 @@ a.price-row:focus-visible { background: var(--brand-cream-soft); }
 /* Long SEO H1s and the hero facts line: balanced rag, full-width pill row (no lone orphan pill). */
 .page-header h1 { text-wrap: balance; }
 .svc-pills { max-width: none; }
+/* Deep tissue promotion (2026-11-07): the old price or extra struck in red, the new price or "Free" beside it.
+   #b42318 is 5.8:1 on cream-soft and 6.5:1 on surface; on dark bands #f97066 is 6.2:1 on --ink-deep. */
+.promo-was{color:#b42318;text-decoration:line-through;text-decoration-color:#b42318;text-decoration-thickness:2px}
+.promo-free{font-weight:600}
+.band-dark .promo-was{color:#f97066;text-decoration-color:#f97066}
