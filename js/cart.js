@@ -22,7 +22,7 @@
   // Per-site look: each site's button classes and its copy of cart.css.
   var BTN = root.getAttribute('data-btn') || 'btn btn--primary';
   var BTN2 = root.getAttribute('data-btn-secondary') || 'btn btn--secondary';
-  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=9';
+  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=10';
 
   // Staff preview token: the page's inline loader takes it from #cartpreview= and strips it from
   // the address bar before analytics loads (never in the query string or a referrer).
@@ -71,6 +71,12 @@
     return n;
   }
   function money(n) { return '$' + (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, ''); }
+  // Free Deep Tissue promotion (Andrew 2026-11-07): the Worker charges nothing extra and sends what it used to
+  // add (deepWas). The page strikes the old extra out and says Free. With no promotion this returns 0.
+  function deepWas(k, m) { return k.deepWas && k.deepWas[m] > 0 && !(k.deepAdd && k.deepAdd[m]) ? k.deepWas[m] : 0; }
+  function wasFree(amount) {
+    return [el('s', { class: 'cart__was', 'aria-hidden': 'true', text: '+' + money(amount) }), ' ', el('span', { class: 'cart__free', text: 'Free' })];
+  }
   function denverDate(d) { return new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(d); }
   function timeLabel(iso) { return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: TZ }); }
   function uid() {
@@ -110,7 +116,7 @@
     var rows = [{ label: m + ' min', amount: k.prices[m] * q }];
     line.guests.forEach(function (g, i) {
       var who = two ? 'Guest ' + (i + 1) + ' · ' : '';
-      if (g.style === 'deep' && getsMassage(line, g)) rows.push({ label: who + menu.styleNames.deep, amount: k.deepAdd[m] * q, guest: i });
+      if (g.style === 'deep' && getsMassage(line, g)) rows.push({ label: who + menu.styleNames.deep, amount: k.deepAdd[m] * q, was: deepWas(k, m) * q, guest: i });
       g.addons.forEach(function (id) { var a = addonOf(id); rows.push({ label: who + a.name, amount: a.price * q, guest: i }); });
     });
     return { rows: rows, total: rows.reduce(function (s, r) { return s + r.amount; }, 0) };
@@ -451,7 +457,8 @@
       }), 'Pick two' + who));
       if (getsMassage(draft, g)) box.push(group('Massage style', k.styles.map(function (s) {
         var name = menu.styleNames[s] || s, extra = s === 'deep' && k.deepAdd && k.deepAdd[m] != null;
-        return chip(extra ? [el('span', { class: 'cart__chip-main', text: name }), ' ', el('span', { class: 'cart__chip-sub', text: '+' + money(k.deepAdd[m]) })] : [name],
+        var sub = deepWas(k, m) ? el('span', { class: 'cart__chip-sub' }, wasFree(deepWas(k, m))) : el('span', { class: 'cart__chip-sub', text: '+' + money(k.deepAdd[m]) });
+        return chip(extra ? [el('span', { class: 'cart__chip-main', text: name }), ' ', sub] : [name],
           { 'data-style': s, 'data-guest': gi }, g.style === s, function () { g.style = s; renderSheet(); });
       }), 'Massage style' + who));
       var opts = menu.addons.filter(function (a) { return !a.only || a.only.indexOf(draft.kind) >= 0; });
@@ -1088,13 +1095,14 @@
       // Guests of a couples line are always listed: a guest with nothing to say (Head Spa or Foot
       // format, no extras) gets a bare "Guest N". A Deep Tissue guest is named by the surcharge row.
       if (two && !said) rows.push({ label: 'Guest ' + (i + 1) });
-      pl.rows.forEach(function (r) { if (r.guest === i) rows.push({ label: r.label + xq, amount: r.amount, plus: true }); });
+      pl.rows.forEach(function (r) { if (r.guest === i) rows.push({ label: r.label + xq, amount: r.amount, was: r.was, plus: true }); });
     });
     return rows;
   }
   function rowEl(r) {
-    return el('div', { class: 'cart__row' }, [el('span', { class: 'cart__row-label', text: r.label }),
-      r.amount == null ? null : ' ', r.amount == null ? null : el('span', { class: 'cart__row-amt', text: (r.plus ? '+' : '') + money(r.amount) })]);
+    var amt = r.amount == null ? null : !r.amount && r.was ? el('span', { class: 'cart__row-amt' }, wasFree(r.was))
+      : el('span', { class: 'cart__row-amt', text: (r.plus ? '+' : '') + money(r.amount) });
+    return el('div', { class: 'cart__row' }, [el('span', { class: 'cart__row-label', text: r.label }), amt ? ' ' : null, amt]);
   }
   function setQty(i, n) {
     if (locked()) return;

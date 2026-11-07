@@ -114,6 +114,11 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 .cart__chip:nth-child(3n+1):nth-last-child(2),.cart__chip:nth-child(3n+1):nth-last-child(2)~.cart__chip{grid-column:span 3;}
 .cart__chip-main{font-size:16px;}
 .cart__chip-sub{font-size:14px;font-weight:400;}
+/* Free Deep Tissue promotion: the old extra struck out with a red line, then Free. On a pressed chip the strike
+   keeps the chip's own text colour (red on the orange chip would not read). */
+.cart__was{color:#b42318;text-decoration:line-through;text-decoration-color:#b42318;text-decoration-thickness:2px;}
+.cart__free{font-weight:600;}
+.cart__chip[aria-pressed="true"] .cart__was{color:inherit;text-decoration-color:currentColor;}
 .cart__only{display:flex;justify-content:space-between;gap:12px;margin:0;font-size:15px;color:var(--ink);}
 .cart__qty-row{display:flex;align-items:center;gap:12px;}
 .cart__qty-n{min-width:32px;text-align:center;font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;}
