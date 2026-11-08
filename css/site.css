@@ -1316,3 +1316,86 @@ a.price-row:focus-visible { background: var(--brand-cream-soft); }
 .promo-was{color:#b42318;text-decoration:line-through;text-decoration-color:#b42318;text-decoration-thickness:2px}
 .promo-free{font-weight:600}
 .band-dark .promo-was{color:#f97066;text-decoration-color:#f97066}
+
+/* Photo service cards (2026-11-07): every /services, home and add-on card carries a photo, styled like .svc-feature.
+   Grid, not flex: the scrim ::after is a grid item over the three text rows, so its dark floor is exactly as tall as
+   the text and its fade starts at the title, however long the copy. --pad keeps the scrim's bleed equal to the padding. */
+.service-card--photo {
+  --pad: var(--space-3);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto auto; /* title, price, line: explicit, so the scrim's "-1" is the line under the last row */
+  align-content: end;
+  justify-self: stretch;   /* grid items with an aspect ratio otherwise size to their content (see the svc-feature note) */
+  align-self: stretch;     /* and the cards in a row share the tallest height */
+  aspect-ratio: 4 / 3;
+  min-width: 0; /* the ratio would otherwise turn the text height into a minimum width and overlap the next card */
+  overflow: hidden;
+  overflow: clip; /* clip, not hidden: no scroll container, so aspect-ratio keeps its content minimum
+                     and long text grows the card instead of spilling out (Chrome reads max-content as the ratio height) */
+  isolation: isolate;
+  overflow-wrap: break-word; /* a word wider than the card wraps instead of being clipped */
+  padding: var(--pad);
+  border: 0;
+  background: var(--ink-deep);
+  color: var(--cream-on-dark);
+  box-shadow: var(--shadow-soft);
+}
+@media (min-width: 640px) { .service-card--photo { aspect-ratio: 4 / 5; } }
+.service-card__img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Scrim: 0.84 of --ink-deep under every line of text, fading to nothing over the 8rem above the title. Over a pure
+   white photo pixel the floor composites to #433f3b: title 9.2:1, price 8.0:1, description 6.5:1, struck price 5.8:1. */
+.service-card--photo::after {
+  content: "";
+  grid-area: 1 / 1 / -1 / 2;
+  z-index: -1;
+  margin: -8rem calc(-1 * var(--pad)) calc(-1 * var(--pad));
+  background: linear-gradient(to top,
+    rgba(31, 26, 22, 0.84) 0,
+    rgba(31, 26, 22, 0.84) calc(100% - 8rem),
+    rgba(31, 26, 22, 0.38) calc(100% - 4rem),
+    rgba(31, 26, 22, 0) 100%);
+  pointer-events: none;
+}
+.service-card--photo .service-card__title { grid-area: 1 / 1; color: var(--cream-on-dark); }
+.service-card--photo .service-card__price { grid-area: 2 / 1; color: var(--cream-on-dark); }
+.service-card--photo .service-card__desc  { grid-area: 3 / 1; color: rgba(245, 239, 230, 0.8); }
+/* The struck deep tissue price: #b42318 is 1.6:1 on the scrim and the dark-band #f97066 only 3.8:1 over a bright
+   photo; #ffab9a is the same red lifted to 5.8:1 in the worst case. Only inside photo cards. */
+.service-card--photo .promo-was { color: #ffab9a; text-decoration-color: #ffab9a; }
+.service-card--photo:hover { color: var(--cream-on-dark); box-shadow: var(--shadow-bloom); }
+div.service-card--photo:hover { transform: none; box-shadow: var(--shadow-soft); } /* add-ons are not links: no lift */
+@media (prefers-reduced-motion: reduce) { .service-card--photo:hover { transform: none; } }
+
+/* Design audit 2026-11-07: phones show the photo (1:1, fade hugs the title), the home cards match the feature
+   pair, a lone last card on /services becomes a full-width band, and a two-card section takes the feature shape. */
+@media (max-width: 639px) {
+  .service-card--photo { aspect-ratio: 1 / 1; }
+  .service-card--photo::after {
+    margin-top: -3.5rem;
+    background: linear-gradient(to top,
+      rgba(31, 26, 22, 0.84) 0,
+      rgba(31, 26, 22, 0.84) calc(100% - 3.5rem),
+      rgba(31, 26, 22, 0.30) calc(100% - 1.5rem),
+      rgba(31, 26, 22, 0) 100%);
+  }
+}
+@media (max-width: 359px) { .service-card--photo { aspect-ratio: 4 / 5; } }
+@media (min-width: 640px) { .svc-editorial__rest .service-card--photo { aspect-ratio: 1 / 1; } }
+@media (min-width: 640px) and (max-width: 969px) {
+  .service-grid:has(> .service-card--photo) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .service-grid > .service-card--photo:last-child:nth-child(2n + 1) { grid-column: 1 / -1; aspect-ratio: 5 / 3; }
+}
+@media (min-width: 970px) {
+  .service-grid:has(> .service-card--photo) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .service-grid > .service-card--photo:last-child:nth-child(3n + 1) { grid-column: 1 / -1; aspect-ratio: 5 / 2; }
+  .service-grid:has(> .service-card--photo:last-child:nth-child(2)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .service-grid:has(> .service-card--photo:last-child:nth-child(2)) > .service-card--photo { aspect-ratio: 16 / 10; }
+}

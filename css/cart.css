@@ -44,8 +44,15 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 .cart__lead{margin:8px 0 0;font-size:15px;line-height:1.45;color:var(--ink-muted);}
 .cart__cards{display:grid;gap:8px;margin-top:16px;}
 @media (min-width:640px){.cart__cards{grid-template-columns:repeat(2,minmax(0,1fr));}}
-.cart__card{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;padding:14px 14px 14px 16px;
-  background:var(--surface);border:1px solid var(--c-line);border-radius:var(--r-box);}
+/* A card is a photo column on the left for the card's full height, then the words, then Add. Narrow cards (phones, and
+   two to a row up to 1023 px) put Add under the words at the right; from 1024 px the card is one row and Add is its own
+   column. Add keeps one size on every card: it is aligned, never stretched. The card clips its own rounded corners. */
+.cart__card{display:grid;grid-template-columns:clamp(96px,34%,160px) minmax(0,1fr);grid-template-rows:auto auto;column-gap:12px;row-gap:8px;min-width:0;
+  padding:12px 12px 12px 0;background:var(--surface);border:1px solid var(--c-line);border-radius:var(--r-box);overflow:hidden;}
+/* The photo comes from --cart-photo, set per kind in each site's book.html. Under it a warm gradient from the site's
+   own tokens, so a kind with no photo, or a photo that fails to load, shows that and never a broken image. */
+.cart__card-photo{grid-row:1 / -1;align-self:stretch;min-height:112px;margin:-12px 0;
+  background:var(--cart-photo,none) center/cover no-repeat,linear-gradient(160deg,var(--brand-cream-deep),var(--brand-orange) 170%);}
 .cart__card-info{display:flex;flex-direction:column;gap:4px;min-width:0;}
 .cart__card-name{margin:0;font:600 17px/1.25 var(--type-ui);letter-spacing:0;text-transform:none;color:var(--ink);}
 .cart__card-note{margin:0;font-size:13px;line-height:1.35;color:var(--ink-muted);}
@@ -53,8 +60,14 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 .cart__card-from{font-size:14px;font-weight:600;color:var(--brand-orange-deep);}
 .cart__card-sub{white-space:nowrap;}
 .cart__card-sub::before{content:"·";margin:0 6px;}
-.cart .cart__card-add{flex:0 0 auto;width:80px;min-height:var(--icon);padding:0;font-size:15px;}
+.cart__card-from{white-space:nowrap;}
+@media (max-width:359px){.cart__card-sub{display:block;}.cart__card-sub::before{content:none;}}
+.cart .cart__card-add{grid-column:2;grid-row:2;justify-self:end;align-self:end;width:80px;min-height:var(--icon);padding:0;font-size:15px;}
 @media (max-width:359px){.cart .cart__card-add{width:64px;}}
+@media (min-width:1024px){
+  .cart__card{grid-template-columns:clamp(160px,36%,220px) minmax(0,1fr) auto;grid-template-rows:auto;align-items:center;}
+  .cart .cart__card-add{grid-column:3;grid-row:1;align-self:center;}
+}
 .cart__notice,.cart__limit,.cart__treat-note{margin:12px 0 0;padding:12px;border-radius:var(--r-ctl);font-size:14px;line-height:1.4;color:var(--ink);background:var(--brand-orange-soft);}
 
 /* ---------- the cart bar (cart closed, something in it) ---------- */
