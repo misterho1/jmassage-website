@@ -1389,6 +1389,8 @@ div.service-card--photo:hover { transform: none; box-shadow: var(--shadow-soft);
 }
 @media (max-width: 359px) { .service-card--photo { aspect-ratio: 4 / 5; } }
 @media (min-width: 640px) { .svc-editorial__rest .service-card--photo { aspect-ratio: 1 / 1; } }
+/* Fixed columns and the lone-card band need :has(); older browsers keep the auto-fit grid. */
+@supports selector(:has(a)) {
 @media (min-width: 640px) and (max-width: 969px) {
   .service-grid:has(> .service-card--photo) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .service-grid > .service-card--photo:last-child:nth-child(2n + 1) { grid-column: 1 / -1; aspect-ratio: 5 / 3; }
@@ -1398,4 +1400,5 @@ div.service-card--photo:hover { transform: none; box-shadow: var(--shadow-soft);
   .service-grid > .service-card--photo:last-child:nth-child(3n + 1) { grid-column: 1 / -1; aspect-ratio: 5 / 2; }
   .service-grid:has(> .service-card--photo:last-child:nth-child(2)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .service-grid:has(> .service-card--photo:last-child:nth-child(2)) > .service-card--photo { aspect-ratio: 16 / 10; }
+}
 }
