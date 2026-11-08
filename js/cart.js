@@ -22,7 +22,7 @@
   // Per-site look: each site's button classes and its copy of cart.css.
   var BTN = root.getAttribute('data-btn') || 'btn btn--primary';
   var BTN2 = root.getAttribute('data-btn-secondary') || 'btn btn--secondary';
-  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=10';
+  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=11';
 
   // Staff preview token: the page's inline loader takes it from #cartpreview= and strips it from
   // the address bar before analytics loads (never in the query string or a referrer).
@@ -1039,7 +1039,7 @@
   function place(node) { root.insertBefore(node, sheetEl && sheetEl.parentNode === root ? sheetEl : null); }
   function cards() {
     return el('div', { class: 'cart__cards' }, menu.kinds.filter(function (k) { return !k.under; }).map(function (k) {
-      return el('div', { class: 'cart__card', 'data-kind': k.kind }, [
+      return el('div', { class: 'cart__card', 'data-kind': k.kind }, [el('span', { class: 'cart__card-photo', 'aria-hidden': 'true' }),
         el('div', { class: 'cart__card-info' }, [
           el('h3', { class: 'cart__card-name', text: k.name })].concat(CARD_NOTES[k.kind] ? [el('p', { class: 'cart__card-note', text: CARD_NOTES[k.kind] })] : [], [
           el('p', { class: 'cart__card-meta' }, [

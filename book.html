@@ -31,7 +31,7 @@
   <link rel="preload" href="/fonts/pt-serif-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
-  <link rel="stylesheet" href="/css/site.css?v=3">
+  <link rel="stylesheet" href="/css/site.css?v=4">
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <script type="application/ld+json">
@@ -123,8 +123,8 @@
              (#book-calendar) stay hidden and do not load; they come back by themselves when the cart is switched
              off or the Worker cannot be reached. Putting `hidden` back on the section takes the cart off the page
              and brings them back. -->
-        <style>#cart{min-height:463px}@media(min-width:375px){#cart{min-height:433px}}@media(min-width:430px){#cart{min-height:412px}}@media(min-width:640px){#cart{min-height:245px}}</style><noscript><style>#cart{display:none}#book-calendar{display:block!important}</style></noscript>
-        <section id="cart" class="cart" data-spa="jm" data-api="https://spa-phone-booking.andrew-86d.workers.dev" data-phone="801-288-1118" data-css="/css/cart.css?v=10" aria-label="Book several massages" style="scroll-margin-top:90px;"></section>
+        <style>#cart{min-height:735px}@media(min-width:360px){#cart{min-height:660px}}@media(min-width:375px){#cart{min-height:632px}}@media(min-width:430px){#cart{min-height:610px}}@media(min-width:640px){#cart{min-height:345px}}@media(min-width:1024px){#cart{min-height:320px}}.cart__card[data-kind="single"]{--cart-photo:url(/images/cards/cart-single.webp)}.cart__card[data-kind="prenatal"]{--cart-photo:url(/images/cards/cart-prenatal.webp)}.cart__card[data-kind="couples"]{--cart-photo:url(/images/cards/cart-couples.webp)}.cart__card[data-kind="fourhand"]{--cart-photo:url(/images/cards/cart-fourhand.webp)}</style><noscript><style>#cart{display:none}#book-calendar{display:block!important}</style></noscript>
+        <section id="cart" class="cart" data-spa="jm" data-api="https://spa-phone-booking.andrew-86d.workers.dev" data-phone="801-288-1118" data-css="/css/cart.css?v=11" aria-label="Book several massages" style="scroll-margin-top:90px;"></section>
         <script>
           // Loads js/cart.js only when the cart is public or a staff preview link opened it.
           (function () {
@@ -135,7 +135,7 @@
             if (m) history.replaceState(null, '', location.pathname + location.search);
             try { if (m) sessionStorage.setItem('cartpreview', window.__cartPreview); p = !!sessionStorage.getItem('cartpreview'); } catch (e) {}
             p = p || !!m;
-            if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=11'; s.onerror = function () { c.hidden = true; if (window.__showCalendar) window.__showCalendar(); }; document.body.appendChild(s); }
+            if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=12'; s.onerror = function () { c.hidden = true; if (window.__showCalendar) window.__showCalendar(); }; document.body.appendChild(s); }
           })();
         </script>
         <p style="margin: var(--space-3) auto 0; max-width: 60ch; text-align: center; font-family: var(--type-ui); font-size: var(--type-6); color: var(--ink-muted);">Head spa or foot massage? Those are at our sister spa. <a href="/services/foot-massage-head-spa">See Elite Spa Utah</a>.</p>
