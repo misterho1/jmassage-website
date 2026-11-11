@@ -315,12 +315,10 @@ p { margin: 0 0 var(--space-2); max-width: 65ch; }
   object-fit: cover;
   object-position: 30% 80%;
 }
-/* Mobile: a 16:9 hero over-crops inside a full-height portrait box and reads
-   off-center. Trim the height so more of the image shows, and center the crop. */
+/* Mobile: trim the hero height. The phone picture layout sits further down,
+   after the rules it overrides (search "Phones: the hero picture"). */
 @media (max-width: 640px) {
   .hero { min-height: 82svh; }
-  .hero__media img,
-  .hero__media video { object-position: 50% 42%; }
 }
 .hero__media::after {
   content: '';
@@ -1231,13 +1229,50 @@ p.text-center { max-width: none; }
   .trust-bar { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Phones: the hero copy runs full width, so the scrim also darkens top to bottom. */
-@media (max-width: 640px) {
-  .hero__media::after {
-    background:
-      linear-gradient(180deg, rgba(20, 18, 16, 0.30) 0%, rgba(20, 18, 16, 0.55) 45%, rgba(20, 18, 16, 0.80) 100%),
-      linear-gradient(90deg, rgba(20, 18, 16, 0.80) 0%, rgba(20, 18, 16, 0.55) 30%, rgba(20, 18, 16, 0.05) 65%, transparent 100%);
+/* Phones: the hero picture sits whole in a strip at the top of the hero (filling a
+   tall phone box would crop the 16:9 picture about 3x). The still and the loop share
+   that strip, so keep them in one rule. A blurred copy of the same file fills the
+   rest, and the words start below the strip on one light scrim. Upright tablets
+   take the same layout: filling their tall box would blow the face up the same way. */
+@media (max-width: 640px), (max-width: 1024px) and (orientation: portrait) {
+  .hero {
+    --hero-strip: 170px;
+    align-items: start;
   }
+  @supports (height: 1svh) {
+    .hero { --hero-strip: max(clamp(120px, 26svh, 170px), 36vw); }
+  }
+  .hero__media { background: #1c1511; }
+  .hero__media::before {
+    content: '';
+    position: absolute;
+    inset: -48px;
+    background: url(/images/editorial/hero-room.webp) 70% 30% / cover;
+    filter: blur(30px) brightness(0.9) saturate(1.1);
+  }
+  .hero__media img,
+  .hero__media .ambient-video {
+    position: absolute;
+    inset: 0 0 auto;
+    height: var(--hero-strip);
+    object-position: 50% 80%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+  }
+  .hero__media::after {
+    background: linear-gradient(180deg, rgba(20, 18, 16, 0) 0, rgba(20, 18, 16, 0) calc(var(--hero-strip) - 40px), rgba(20, 18, 16, 0.36) calc(var(--hero-strip) + 30px), rgba(20, 18, 16, 0.44) 100%);
+  }
+  .hero__inner {
+    padding-top: calc(var(--hero-strip) + 6px);
+    padding-bottom: 28px;
+  }
+  .hero__eyebrow { margin-bottom: 8px; }
+  .hero__heading { margin-bottom: 10px; }
+  .hero__lead { margin-bottom: 14px; }
+}
+/* Upright tablets: the strip is the whole 16:9 picture. */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
+  .hero { --hero-strip: 56.25vw; }
 }
 
 /* Homepage services: two feature panels (photos drop in later) then three cards; quiet notes under the grid. */
