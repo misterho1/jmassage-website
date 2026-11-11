@@ -23,7 +23,7 @@ One spa wins each shared service on Google (Andrew, 2026-11-10). J Massage wins 
 ## Performance: homepage (2026-11-02)
 index.html follows the /book pattern below (the tag, the chat, the live reviews fetch and the motion layer start after first paint), and the same don'ts apply. Its own contracts:
 - The email wrapper follows the every-page rule below.
-- The hero still (landscape and portrait preloads) is the LCP; js/ambient-video.js swaps in the hero loop after first paint. The loop has no `poster` (posters load before first paint). Give every `<img>` and portrait `<source>` its real `width`/`height`.
+- The hero still (one preload, the same picture on every screen) is the LCP; on phones and upright tablets the still and the loop share one strip at the top of the hero (`--hero-strip` in css/site.css), so keep them in the same box; js/ambient-video.js swaps in the hero loop after first paint. The loop has no `poster` (posters load before first paint). Give every `<img>` and portrait `<source>` its real `width`/`height`.
 
 ## Performance: every page (2026-10-16)
 Every page except /thank-you uses the /book loading pattern below: the tag loads through `js/after-paint.js` with `data-gtag="interaction"` (the inline gtag stub sits before the stylesheets, and ad-click URLs load the tag at parse), the chat and the motion layer (GSAP, ScrollTrigger, motion.js) through `js/defer-load.js`. /thank-you fires the Ads conversion, so it loads the tag at parse. A new page copies its `<head>` scripts and its chat tag from a page of the same template. Don't add sync scripts.
