@@ -40,7 +40,7 @@
   <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css?v=1">
 
-  <link rel="stylesheet" href="/css/site.css?v=4">
+  <link rel="stylesheet" href="/css/site.css?v=5">
 
 
   <script type="application/ld+json">
@@ -78,8 +78,7 @@
     ]}
   </script>
 
-  <link rel="preload" as="image" href="/images/editorial/hero-room.webp" fetchpriority="high" media="(orientation: landscape)">
-  <link rel="preload" as="image" href="/images/editorial/hero-room-portrait.webp" fetchpriority="high" media="(orientation: portrait)">
+  <link rel="preload" as="image" href="/images/editorial/hero-room.webp" fetchpriority="high">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>
@@ -112,15 +111,11 @@
   <main id="main">
     <section class="hero" data-hero>
       <div class="hero__media" aria-hidden="true" data-hero-media>
-        <picture>
-          <source media="(orientation: portrait)" srcset="/images/editorial/hero-room-portrait.webp">
-          <img src="/images/editorial/hero-room.webp" alt="Massage room at J Massage SLC, Salt Lake City" loading="eager" fetchpriority="high" width="2752" height="1536">
-        </picture>
+        <img src="/images/editorial/hero-room.webp" alt="Massage room at J Massage SLC, Salt Lake City" loading="eager" fetchpriority="high" width="2752" height="1536">
         <!-- Ambient loop continues the hero photo. Lazy-attached post-load by js/ambient-video.js;
-             phones get the 9:16 cut; reduced-motion / Save-Data visitors keep the still. -->
+             reduced-motion / Save-Data visitors keep the still. -->
         <video class="ambient-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
-               data-src="/videos/hero-ambient.mp4"
-               data-src-portrait="/videos/hero-ambient-portrait.mp4"></video>
+               data-src="/videos/hero-ambient.mp4"></video>
       </div>
       <div class="container hero__inner">
         <p class="eyebrow hero__eyebrow">Salt Lake City · Open daily 10am–10pm</p>
