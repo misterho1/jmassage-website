@@ -1260,7 +1260,7 @@ p.text-center { max-width: none; }
     mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
   }
   .hero__media::after {
-    background: linear-gradient(180deg, rgba(20, 18, 16, 0) 0, rgba(20, 18, 16, 0) calc(var(--hero-strip) - 40px), rgba(20, 18, 16, 0.36) calc(var(--hero-strip) + 30px), rgba(20, 18, 16, 0.44) 100%);
+    background: linear-gradient(180deg, rgba(20, 18, 16, 0) 0, rgba(20, 18, 16, 0) calc(var(--hero-strip) - 40px), rgba(20, 18, 16, 0.42) calc(var(--hero-strip) + 30px), rgba(20, 18, 16, 0.50) 100%);
   }
   .hero__inner {
     padding-top: calc(var(--hero-strip) + 6px);
@@ -1270,9 +1270,13 @@ p.text-center { max-width: none; }
   .hero__heading { margin-bottom: 10px; }
   .hero__lead { margin-bottom: 14px; }
 }
-/* Upright tablets: the strip is the whole 16:9 picture. */
+/* Upright tablets: the strip is the whole 16:9 picture. The fill behind the words is lighter
+   at this size, so the scrim is stronger and reaches full strength where the words start. */
 @media (min-width: 641px) and (max-width: 1024px) and (orientation: portrait) {
   .hero { --hero-strip: 56.25vw; }
+  .hero__media::after {
+    background: linear-gradient(180deg, rgba(20, 18, 16, 0) 0, rgba(20, 18, 16, 0) calc(var(--hero-strip) - 40px), rgba(20, 18, 16, 0.55) calc(var(--hero-strip) + 6px), rgba(20, 18, 16, 0.60) 100%);
+  }
 }
 
 /* Homepage services: two feature panels (photos drop in later) then three cards; quiet notes under the grid. */
