@@ -58,6 +58,20 @@
   // progEl: the waiting screen while an order runs, with its steps, meter, title and note.
   var busy = false, order = null, paying = false, ended = '', progEl = null, stepsEl = null, fillEl = null, workTitleEl = null, workNoteEl = null;
 
+  // Step events for analytics: one at each point a guest can leave the cart, so the step where people
+  // stop can be counted. Names, counts and menu keys only: never a name, phone, email, time, price or
+  // card detail. They go through the page's own gtag queue (nothing new loads) to the Analytics ID the
+  // page names in data-ga. No gtag on the page, or a staff preview: nothing is sent.
+  // once: sent the first time only on this page view.
+  var GA = root.getAttribute('data-ga'), tracked = {};
+  function track(name, params, once) {
+    if (preview || typeof window.gtag !== 'function' || (once && tracked[name])) return;
+    tracked[name] = true;
+    var p = params || {};
+    if (GA) p.send_to = GA;
+    try { window.gtag('event', name, p); } catch (e) {}
+  }
+
   // ---------- helpers ----------
   function el(tag, attrs, kids) {
     var n = document.createElement(tag);
@@ -327,7 +341,8 @@
   // Add to cart pushes the draft, Save changes replaces the line it came from. Either way the cart opens.
   function addDraft() {
     if (locked() || !draft || !draftReady() || !fits(draft, editIndex)) return;
-    if (editIndex >= 0) lines[editIndex] = draft; else lines.push(draft);
+    if (editIndex >= 0) lines[editIndex] = draft;
+    else { lines.push(draft); track('cart_add', { service: draft.kind, guests: people(draft), minutes: draft.minutes }); }
     closeSheet();
     cartChanged();
     openCart(sheetFrom);
@@ -570,6 +585,7 @@
       if (!list.length && autoLeft > 0) { autoLeft--; day = addDays(d, 1); save(); return loadTimes(keep); }
       autoLeft = 0;
       times = list;
+      track(list.length ? 'cart_times' : 'cart_no_times', { count: list.length }, true);
       if (start && !offered(start)) { start = null; save(); }
       paintWhen(); paintPay();
       prerunTs();
@@ -598,6 +614,7 @@
   function pickTime(iso) {
     if (locked() || !offered(iso)) return;
     start = iso; notice = '';
+    track('cart_time_pick', null, true);
     save();
     paint();
     prerunTs();
@@ -651,10 +668,11 @@
   }
 
   // ---------- your details and the Pay button ----------
-  function ready() {
+  function detailsIn() {
     var f = formEl && formEl.elements;
-    return !!start && offered(start) && !!f && !!f.name.value.trim() && f.phone.value.replace(/\D/g, '').length >= 10;
+    return !!f && !!f.name.value.trim() && f.phone.value.replace(/\D/g, '').length >= 10;
   }
+  function ready() { return !!start && offered(start) && detailsIn(); }
   // Says what is still missing: a time, then a name and a 10-digit phone; then "Pay $X and book".
   function paintPay() {
     if (!payEl) return;
@@ -692,7 +710,7 @@
       timesDayEl,
       timesEl,
       el('p', { class: 'cart__same', text: 'Everyone in your order starts at the same time.' })]);
-    var typed = { input: function () { paintPay(); } };
+    var typed = { input: function () { if (detailsIn()) track('cart_details', null, true); paintPay(); } };
     formEl = el('form', { class: 'cart__details', 'aria-label': 'Your details', on: { submit: function (e) { e.preventDefault(); pay(); } } }, [
       el('h3', { class: 'cart__details-title', text: 'Your details' }),
       el('label', { for: 'cart-name', class: 'cart__field' }, [el('span', { text: 'Name' }),
@@ -819,6 +837,7 @@
     if (!formEl.reportValidity()) return;
     busy = true; order = null; paintPay();
     if (!asking) say('');
+    track('cart_pay_form', null, true);
     prerunTs(); // no token yet, or an old one: get one while the card is typed
     openCardForm();
     // The hosted form has no "closed" event: Pay works again after a short wait.
@@ -939,6 +958,8 @@
     if (r.pending) { o.lost = true; progress(r); return; } // still running: the status checks carry on
     o.done = true; clearTimeout(o.timer);
     if (r.ok && r.thankYouUrl) return thank(o, r.thankYouUrl);
+    // Why an order ended without a booking, as a group: held, unclear, reversed, or the Worker's stage name.
+    if (!r.nothing && !r.ok && !r.paid) track('cart_pay_refused', { reason: r.held ? 'held' : r.uncertain || r.duplicate || r.unconfirmed ? 'unclear' : r.reversed ? 'reversed' : /^[a-z_]{1,20}$/.test(r.stage || '') ? r.stage : 'other' });
     if (!r.unconfirmed) forget();
     if (r.ok || r.paid || r.held || r.uncertain || r.duplicate || r.unconfirmed) return stop(r.unconfirmed || !r.message ? unconfirmed() : r.message, r.paid ? 'notice' : 'error');
     var refill = r.stage === 'time' || !!r.reversed; // that time is gone: reload the times, keep the message
@@ -998,6 +1019,7 @@
     if (locked()) return; // an order is already under way, or has ended
     if (!res || !res.opaqueData) {
       busy = false; paintPay();
+      track('cart_pay_refused', { reason: 'card_form' });
       var m = res && res.messages && res.messages.message && res.messages.message[0];
       say(m && m.text ? m.text : 'Your card was not accepted. Please check it and try again.', 'error');
       return;
@@ -1007,6 +1029,7 @@
       customer: { name: f.name.value, phone: f.phone.value, email: f.email.value }, opaqueData: res.opaqueData };
     remember(o.id);
     begin(o);
+    track('cart_pay_sent');
     if (!asking) say('');
     takeToken().then(function (token) {
       if (o !== order) return;
@@ -1021,7 +1044,7 @@
         settle(r);
       }, function () { if (o === order) o.lost = true; });
     }, function () { // the robot check did not finish, so the order was never sent
-      if (o === order) settle({ message: 'The robot check did not finish, so nothing was charged. Tap Pay and book to try again.' });
+      if (o === order) settle({ stage: 'robot', message: 'The robot check did not finish, so nothing was charged. Tap Pay and book to try again.' });
     });
   };
   // After a refresh mid-payment (or a tab reopened within 30 min): ask about the saved order.
@@ -1269,6 +1292,7 @@
       restore();
       document.addEventListener('keydown', onKey);
       build();
+      track('cart_open', null, true);
       var saved = savedOrder();
       if (saved) resume(saved); else openLinkedService();
     }).catch(useCalendar);
