@@ -837,6 +837,7 @@
     if (!formEl.reportValidity()) return;
     busy = true; order = null; paintPay();
     if (!asking) say('');
+    track('cart_details', null, true); // autofill can fill the fields with no input event: counted here at the latest
     track('cart_pay_form', null, true);
     prerunTs(); // no token yet, or an old one: get one while the card is typed
     openCardForm();
