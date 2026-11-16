@@ -205,6 +205,19 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 .cart__field{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--ink-muted);}
 .cart__field input{width:100%;min-height:var(--ctl);padding:0 12px;border:1px solid var(--c-field);border-radius:var(--r-ctl);background:var(--surface);color:var(--ink);font-size:16px;}
 .cart__field input:hover{border-color:var(--ink);}
+/* The optional tick for texts (cart.js draws it only when the menu sends textConsent). The whole label is the tap
+   target, 44 px or more: its padding reaches into the gaps around it (negative margin), so one line or three keep the
+   same spacing. The box is drawn like the add-on ticks and sits on the first line of words; the small print lines up
+   under the words, not under the box. Focus uses the cart's ring (.cart :focus-visible). */
+.cart__text-ok{display:flex;flex-direction:column;gap:4px;}
+.cart__check{display:flex;align-items:flex-start;gap:12px;min-height:44px;padding:12px 0;margin:-8px 0;font-size:14px;line-height:20px;color:var(--ink);text-wrap:pretty;cursor:pointer;}
+.cart__check input{-webkit-appearance:none;appearance:none;flex:0 0 22px;width:22px;height:22px;margin:-1px 0 0;border:2px solid var(--c-field);border-radius:4px;
+  background:var(--surface) center/14px 14px no-repeat;cursor:pointer;}
+.cart__check:hover input{border-color:var(--ink);}
+.cart__check input:checked{border-color:var(--brand-orange);background-color:var(--brand-orange);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2.5 7.5l3 3 6-6.5' fill='none' stroke='%23fffdfb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");}
+.cart__text-note{margin:0;padding-left:34px;font-size:13px;line-height:1.4;color:var(--ink-muted);text-wrap:pretty;}
+.cart__text-note a{color:var(--brand-orange-deep);white-space:nowrap;text-decoration:underline;text-underline-offset:2px;}
 
 /* Pay stays at the bottom of the screen: the robot-check box, the line of news, the progress, Pay. */
 .cart__paybox{position:sticky;bottom:0;z-index:1;margin-top:auto;padding:12px var(--g) max(16px,env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--c-line);}
@@ -240,6 +253,7 @@ body.cart-has-bar .m-cta{display:none;} /* J Massage's phone Book and Call bar s
 /* Windows High Contrast drops background colours, and a pressed choice is shown by its background. */
 @media (forced-colors:active){
   .cart__chip[aria-pressed="true"],.cart__day[aria-pressed="true"],.cart__time[aria-pressed="true"]{forced-color-adjust:none;background:Highlight;border-color:Highlight;color:HighlightText;}
+  .cart__check input{-webkit-appearance:auto;appearance:auto;} /* the drawn tick is a background, which is dropped */
 }
 
 @media (min-width:768px){
