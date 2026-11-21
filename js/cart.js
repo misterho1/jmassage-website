@@ -22,7 +22,7 @@
   // Per-site look: each site's button classes and its copy of cart.css.
   var BTN = root.getAttribute('data-btn') || 'btn btn--primary';
   var BTN2 = root.getAttribute('data-btn-secondary') || 'btn btn--secondary';
-  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=11';
+  var CSS = root.getAttribute('data-css') || '/assets/cart.css?v=12';
 
   // Staff preview token: the page's inline loader takes it from #cartpreview= and strips it from
   // the address bar before analytics loads (never in the query string or a referrer).
@@ -711,12 +711,22 @@
       timesEl,
       el('p', { class: 'cart__same', text: 'Everyone in your order starts at the same time.' })]);
     var typed = { input: function () { if (detailsIn()) track('cart_details', null, true); paintPay(); } };
+    // The optional tick for texts, only when the menu sends its words (textConsent). Nothing listens to it:
+    // it never holds up Pay, sends no event and is never stored. Pay reads it once (cartCardResponse).
+    var tc = menu && menu.textConsent;
+    var textOkEl = tc && el('div', { class: 'cart__text-ok' }, [
+      el('label', { for: 'cart-text-ok', class: 'cart__check' }, [
+        el('input', { id: 'cart-text-ok', name: 'textOk', type: 'checkbox', autocomplete: 'off', 'aria-describedby': 'cart-text-note', 'data-version': tc.version }),
+        el('span', { text: tc.label })]),
+      el('p', { id: 'cart-text-note', class: 'cart__text-note' }, [tc.small + ' ',
+        el('a', { href: tc.linkHref, target: '_blank', rel: 'noopener', text: tc.linkText })])]);
     formEl = el('form', { class: 'cart__details', 'aria-label': 'Your details', on: { submit: function (e) { e.preventDefault(); pay(); } } }, [
       el('h3', { class: 'cart__details-title', text: 'Your details' }),
       el('label', { for: 'cart-name', class: 'cart__field' }, [el('span', { text: 'Name' }),
         el('input', { id: 'cart-name', name: 'name', autocomplete: 'name', required: true, on: typed })]),
       el('label', { for: 'cart-phone', class: 'cart__field' }, [el('span', { text: 'Mobile phone' }),
         el('input', { id: 'cart-phone', name: 'phone', type: 'tel', autocomplete: 'tel', inputmode: 'tel', required: true, on: typed })]),
+      textOkEl,
       // data-opinly-no-capture: the Opinly pixel must not read a typed email (site rule).
       el('label', { for: 'cart-email', class: 'cart__field' }, [el('span', { text: 'Email (optional)' }),
         el('input', { id: 'cart-email', name: 'email', type: 'email', autocomplete: 'email', pattern: '[^@\\s]+@[^@\\s]+\\.[^@\\s]+',
@@ -1028,6 +1038,7 @@
     var o = { id: uid(), t0: t0 }, f = formEl.elements;
     var body = { orderId: o.id, spa: SPA, cart: toWorker(), start: start, shownTotal: cartTotal(),
       customer: { name: f.name.value, phone: f.phone.value, email: f.email.value }, opaqueData: res.opaqueData };
+    if (f.textOk && f.textOk.checked) body.textConsent = { version: f.textOk.getAttribute('data-version') };
     remember(o.id);
     begin(o);
     track('cart_pay_sent');
