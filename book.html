@@ -135,7 +135,7 @@
             if (m) history.replaceState(null, '', location.pathname + location.search);
             try { if (m) sessionStorage.setItem('cartpreview', window.__cartPreview); p = !!sessionStorage.getItem('cartpreview'); } catch (e) {}
             p = p || !!m;
-            if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=13'; s.onerror = function () { c.hidden = true; if (window.__showCalendar) window.__showCalendar(); }; document.body.appendChild(s); }
+            if (c && (!c.hidden || p)) { var s = document.createElement('script'); s.src = '/js/cart.js?v=15'; s.onerror = function () { c.hidden = true; if (window.__showCalendar) window.__showCalendar(); }; document.body.appendChild(s); }
           })();
         </script>
         <p style="margin: var(--space-3) auto 0; max-width: 60ch; text-align: center; font-family: var(--type-ui); font-size: var(--type-6); color: var(--ink-muted);">Head spa or foot massage? Those are at our sister spa. <a href="/services/foot-massage-head-spa">See Elite Spa Utah</a>.</p>
