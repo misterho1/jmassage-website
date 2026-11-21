@@ -1260,7 +1260,8 @@
     single: ['single'], 'swedish-massage': ['single', 'swedish'], 'deep-tissue-massage': ['single', 'deep'], 'sports-massage': ['single', 'sports'],
     'ashiatsu-massage': ['single', 'ashiatsu'], 'shiatsu-massage': ['single', 'shiatsu'], 'individual-massage': ['single'], 'chair-massage': ['single'],
     prenatal: ['prenatal'], 'prenatal-massage': ['prenatal'], couples: ['couples'], 'couples-massage': ['couples'], 'couples-spa': ['couplesCombo'],
-    '4hand': ['fourhand'], '4-hands-massage': ['fourhand'], 'head-spa-massage': ['headspa'], 'foot-reflexology-massage': ['reflex'], 'spa-combo': ['combo']
+    '4hand': ['fourhand'], '4-hands-massage': ['fourhand'], 'head-spa-massage': ['headspa'], 'foot-reflexology-massage': ['reflex'], 'spa-combo': ['combo'],
+    'head-to-toes': ['toes'], 'couples-head-to-toes': ['couplesToes']
   };
   function openLinkedService() {
     var q = new URLSearchParams(location.search), to = SERVICE_LINKS[q.get('service')], k = to && kindOf(to[0]);
