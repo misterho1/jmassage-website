@@ -131,7 +131,7 @@
   }
 
   function onKey(e) {
-    if (e.key !== 'Escape' || !box.firstChild) return;
+    if (e.key !== 'Escape' || !box.contains(document.activeElement)) return;
     if (document.querySelector('.site-nav__list--open, .cart-lock')) return; // Esc closes the open menu or cart first
     dismiss();
   }
@@ -178,7 +178,7 @@
     box.appendChild(card);
     place(true);
     requestAnimationFrame(function () { box.classList.add('hh--live'); });
-    timer = setInterval(place, 600); // the chat button, its greeting and the cart bar come and go
+    timer = setInterval(place, 1500); // the chat button, its greeting and the cart bar come and go
     window.addEventListener('resize', onResize);
     document.addEventListener('keydown', onKey, true);
   }
