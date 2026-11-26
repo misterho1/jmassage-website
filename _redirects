@@ -48,3 +48,7 @@ https://www.jmassageslc.com/*   https://jmassageslc.com/:splat   301
 /README.md  /  301
 /goal.md  /  301
 /.gitignore  /  301
+# Internal folders: task notes, build scripts, design docs. None is linked from a page.
+/tasks/*  /  301
+/tools/*  /  301
+/docs/*  /  301
